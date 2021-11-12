@@ -10,8 +10,8 @@ namespace Minimal_Tool_Stock_Calculator
 {
     public partial class CalculationResults : Form
     {
-        List<int> calculatedInts = new List<int>();
-        Form parentCaller = new Form();
+        readonly List<int> calculatedInts = new List<int>();
+        readonly Form parentCaller = new Form();
         public CalculationResults(Form calulationCallingForm, List<int> dummyResults)
         {
             Visible = true;
@@ -31,8 +31,7 @@ namespace Minimal_Tool_Stock_Calculator
         {
             parentCaller.Show();
         }
-
-        private void returnToCalculationScreenButton_Click(object sender, EventArgs e)
+        private void ReturnToCalculationScreenButton_Click(object sender, EventArgs e)
         {
             Close();
             Dispose();

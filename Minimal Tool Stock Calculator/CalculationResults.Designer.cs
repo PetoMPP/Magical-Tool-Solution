@@ -205,7 +205,7 @@ namespace Minimal_Tool_Stock_Calculator
             this.returnToCalculationScreenButton.TabIndex = 8;
             this.returnToCalculationScreenButton.Text = "Powrót do ekranu kalkulacji";
             this.returnToCalculationScreenButton.UseVisualStyleBackColor = false;
-            this.returnToCalculationScreenButton.Click += new System.EventHandler(this.returnToCalculationScreenButton_Click);
+            this.returnToCalculationScreenButton.Click += new System.EventHandler(this.ReturnToCalculationScreenButton_Click);
             // 
             // CalculationResults
             // 

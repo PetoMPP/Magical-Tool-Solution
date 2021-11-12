@@ -24,7 +24,6 @@ namespace Minimal_Tool_Stock_Calculator
         public CalculationWindow(string mode, Form callingForm)
         {
             caller = callingForm;
-            caller.Visible = false;
             InitializeComponent();
             SelectMode(mode);
         }
