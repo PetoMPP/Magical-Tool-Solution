@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSUI", "Minimal Tool Stock Calculator\MTSUI.csproj", "{59BB481B-421B-4CE1-A9C9-585D38FC050E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSUI", "Magical Tool Solution\MTSUI.csproj", "{59BB481B-421B-4CE1-A9C9-585D38FC050E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTSLibrary", "MTSLibrary\MTSLibrary.csproj", "{86E6970C-51AD-426F-8C8B-A5C5EE570ED2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTSLibrary", "MTSLibrary\MTSLibrary.csproj", "{86E6970C-51AD-426F-8C8B-A5C5EE570ED2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

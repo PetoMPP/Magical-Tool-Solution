@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Minimal_Tool_Stock_Calculator
+namespace Magical_Tool_Solution.ToolStockCalculations
 {
     public partial class CalculationResults : Form
     {

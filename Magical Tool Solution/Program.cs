@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static MTSLibrary.Enums;
 
-namespace Minimal_Tool_Stock_Calculator
+namespace Magical_Tool_Solution
 {
     static class Program
     {

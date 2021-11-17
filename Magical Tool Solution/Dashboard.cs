@@ -1,4 +1,7 @@
-﻿using MTSLibrary;
+﻿using Magical_Tool_Solution.BasicToolData;
+using Magical_Tool_Solution.Configuration;
+using Magical_Tool_Solution.ToolStockCalculations;
+using MTSLibrary;
 using MTSLibrary.Connections;
 using MTSLibrary.Models;
 using System;
@@ -9,7 +12,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Minimal_Tool_Stock_Calculator
+namespace Magical_Tool_Solution
 {
     public partial class Dashboard : Form
     {
@@ -33,55 +36,84 @@ namespace Minimal_Tool_Stock_Calculator
                 availableModulesBox.DisplayMember = "Name";
             }
         }
-
-        private void LaunchInNewWindowButton_Click(object sender, EventArgs e)
-        {
-            ProgramModuleModel selectedModule = (ProgramModuleModel)availableModulesBox.SelectedItem;
-            if (selectedModule.Name == "Missing Stock Calculator")
-            {
-                string mode = "missing";
-                CalculationWindow form = new CalculationWindow(mode, this);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Minimal Stock Calculator")
-            {
-                string mode = "minimal";
-                CalculationWindow form = new CalculationWindow(mode, this);
-                form.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Module launching instructions not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-        }
-
         private void LaunchButton_Click(object sender, EventArgs e)
         {
-            ProgramModuleModel selectedModule = (ProgramModuleModel)availableModulesBox.SelectedItem;
-            if (selectedModule.Name == "Missing Stock Calculator")
+            try
             {
-                string mode = "missing";
-                CalculationWindow form = new CalculationWindow(mode, this);
-                form.Visible = true;
+                LaunchModule();
             }
-            else if (selectedModule.Name == "Minimal Stock Calculator")
+            catch (NotSupportedException)
             {
-                string mode = "minimal";
-                CalculationWindow form = new CalculationWindow(mode, this);
-                form.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Module launching instructions not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             Visible = false;
         }
 
-        private void availableSectionsBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void LaunchInNewWindowButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LaunchModule();
+            }
+            catch (NotSupportedException)
+            {
+                return;
+            }
+        }
+        private void LaunchModule()
+        {
+            ProgramModuleModel selectedModule = (ProgramModuleModel)availableModulesBox.SelectedItem;
+            if (selectedModule.Name == "Missing Stock Calculator")
+            {
+                string mode = "missing";
+                CalculationWindow form = new CalculationWindow(mode, this);
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Minimal Stock Calculator")
+            {
+                string mode = "minimal";
+                CalculationWindow form = new CalculationWindow(mode, this);
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Components Data")
+            {
+                BasicDataViewer form = new BasicDataViewer(this, "comp");
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Tool Data")
+            {
+                BasicDataViewer form = new BasicDataViewer(this, "tool");
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Tool List Data")
+            {
+                BasicDataViewer form = new BasicDataViewer(this, "list");
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Tool Classes and Groups")
+            {
+                ClgrConfiguration form = new ClgrConfiguration(this);
+                form.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("Module launching instructions not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new NotSupportedException();
+            }
+        }
+
+        private void AvailableSectionsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             WireUpLists();
+        }
+
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("This will close down the whole application. Confirm?", "Close Application", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                e.Cancel = true;
+                Activate();
+            }
         }
     }
 }

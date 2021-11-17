@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator
+namespace Magical_Tool_Solution.ToolStockCalculations
 {
     partial class CalculationResults
     {
