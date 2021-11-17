@@ -10,11 +10,11 @@ namespace MTSLibrary
         public static CompModel CalculateMinimalStock(this CompModel comp)
         {
             //TODO - get comp used tools and max quantity
-            foreach (ToolModel tool in comp.ToolsUsingItem)
-            {
+            
+            
                 //TODO - nonstandard tools - count usage with max comp in tool
                 //TODO - standards - count usage
-            }
+            
             //TODO - clgr multiplier
             return comp;
         }
