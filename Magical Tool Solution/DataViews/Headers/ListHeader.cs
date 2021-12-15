@@ -11,18 +11,24 @@ namespace Magical_Tool_Solution.DataViews.Headers
 {
     public partial class ListHeader : Form
     {
-        List<Button> viewSwitchingButtons = new List<Button>();
-        Form viewForm;
-        Panel insertionPanel;
-        Form callingForm;
-        Form instance1;
-        Form instance2;
+        private readonly List<Button> viewSwitchingButtons = new();
+        private Form viewForm;
+        private readonly Panel insertionPanel;
+        private readonly Form callingForm;
+        private Form instance1;
+        private Form instance2;
         public ListHeader(Panel targetPanel, Form caller)
         {
             callingForm = caller;
             insertionPanel = targetPanel;
             InitializeComponent();
             viewSwitchingButtons = new List<Button> { viewToolsButton, viewFileManagementButton };
+            PreloadViews();
+        }
+
+        private void PreloadViews()
+        {
+            ViewFileManagementButton_Click(viewFileManagementButton, new EventArgs());
             ViewToolsButton_Click(viewToolsButton, new EventArgs());
         }
 
@@ -66,7 +72,7 @@ namespace Magical_Tool_Solution.DataViews.Headers
         {
             if (instance1 == null)
             {
-                instance1 = new Tools(callingForm);
+                instance1 = new Positions(callingForm);
             }
             ActivateButton((Button)sender, instance1);
             viewSwitcherPanel.Focus();

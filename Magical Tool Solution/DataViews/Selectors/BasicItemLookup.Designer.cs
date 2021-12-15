@@ -158,6 +158,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             this.okButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.okButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.okButton.Enabled = false;
             this.okButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.okButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.okButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -171,6 +172,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // cancelButtonPanel
             // 
@@ -203,6 +205,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             // lookupDataGridView
             // 
+            this.lookupDataGridView.AllowUserToAddRows = false;
             this.lookupDataGridView.AllowUserToDeleteRows = false;
             this.lookupDataGridView.AllowUserToOrderColumns = true;
             this.lookupDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -242,6 +245,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.lookupDataGridView.ShowEditingIcon = false;
             this.lookupDataGridView.Size = new System.Drawing.Size(603, 679);
             this.lookupDataGridView.TabIndex = 12;
+            this.lookupDataGridView.SelectionChanged += new System.EventHandler(this.LookupDataGridView_SelectionChanged);
+            this.lookupDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LookupDataGridView_MouseDoubleClick);
             // 
             // firstColumn
             // 
@@ -285,7 +290,6 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.Name = "BasicItemLookup";
             this.ShowInTaskbar = false;
             this.Text = "BasicItemLookup";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicItemLookup_FormClosed);
             this.searchTextBoxPanel.ResumeLayout(false);
             this.searchTextBox3Panel.ResumeLayout(false);

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Configuration;
-using static MTSLibrary.Enums;
 
 namespace MTSLibrary
 {
@@ -17,12 +16,12 @@ namespace MTSLibrary
         {
             if (db == DatabaseType.TDM)
             {
-                TDMConnector tdm = new TDMConnector();
+                TDMConnector tdm = new();
                 Connection = tdm;
             }
             else if (db == DatabaseType.MTS)
             {
-                MTSConnector mts = new MTSConnector();
+                MTSConnector mts = new();
                 Connection = mts;
             }
         }

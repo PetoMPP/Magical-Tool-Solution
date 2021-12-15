@@ -16,7 +16,7 @@ namespace Magical_Tool_Solution
 {
     public partial class Dashboard : Form
     {
-        List<ProgramSectionModel> programSections = ProgramLogic.GetProgramSections();
+        private readonly List<ProgramSectionModel> programSections = ProgramLogic.GetProgramSections();
         public Dashboard()
         {
             InitializeComponent();
@@ -49,6 +49,7 @@ namespace Magical_Tool_Solution
             Visible = false;
         }
 
+
         private void LaunchInNewWindowButton_Click(object sender, EventArgs e)
         {
             try
@@ -65,34 +66,37 @@ namespace Magical_Tool_Solution
             ProgramModuleModel selectedModule = (ProgramModuleModel)availableModulesBox.SelectedItem;
             if (selectedModule.Name == "Missing Stock Calculator")
             {
-                string mode = "missing";
-                CalculationWindow form = new CalculationWindow(mode, this);
+                CalculationWindow form = new("missing", this);
                 form.Visible = true;
             }
             else if (selectedModule.Name == "Minimal Stock Calculator")
             {
-                string mode = "minimal";
-                CalculationWindow form = new CalculationWindow(mode, this);
+                CalculationWindow form = new("minimal", this);
                 form.Visible = true;
             }
             else if (selectedModule.Name == "Components Data")
             {
-                BasicDataViewer form = new BasicDataViewer(this, "comp");
+                BasicDataViewer form = new(this, ItemType.comp);
                 form.Visible = true;
             }
             else if (selectedModule.Name == "Tool Data")
             {
-                BasicDataViewer form = new BasicDataViewer(this, "tool");
+                BasicDataViewer form = new(this, ItemType.tool);
                 form.Visible = true;
             }
             else if (selectedModule.Name == "Tool List Data")
             {
-                BasicDataViewer form = new BasicDataViewer(this, "list");
+                BasicDataViewer form = new(this, ItemType.list);
                 form.Visible = true;
             }
             else if (selectedModule.Name == "Tool Classes and Groups")
             {
-                ClgrConfiguration form = new ClgrConfiguration(this);
+                ClgrConfiguration form = new(this);
+                form.Visible = true;
+            }
+            else if (selectedModule.Name == "Main Classes Configuration")
+            {
+                MainClassesConfiguration form = new(this);
                 form.Visible = true;
             }
             else

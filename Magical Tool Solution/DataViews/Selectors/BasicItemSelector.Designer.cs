@@ -47,16 +47,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.quantityLabel = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.searchByD2Button = new System.Windows.Forms.Button();
-            this.D2TextBox = new System.Windows.Forms.TextBox();
+            this.d2TextBox = new System.Windows.Forms.TextBox();
             this.D2Label = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchByD1Button = new System.Windows.Forms.Button();
-            this.D1TextBox = new System.Windows.Forms.TextBox();
+            this.d1TextBox = new System.Windows.Forms.TextBox();
             this.D1Label = new System.Windows.Forms.Label();
-            this.compIDPanel = new System.Windows.Forms.Panel();
-            this.searchByIDbutton = new System.Windows.Forms.Button();
-            this.IDTextBox = new System.Windows.Forms.TextBox();
-            this.IDLabel = new System.Windows.Forms.Label();
+            this.compIdPanel = new System.Windows.Forms.Panel();
+            this.searchByIdbutton = new System.Windows.Forms.Button();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.IdLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.positionBox = new System.Windows.Forms.TextBox();
             this.positionLabel = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.compIDPanel.SuspendLayout();
+            this.compIdPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.radioSwitchPanel.SuspendLayout();
             this.SuspendLayout();
@@ -141,6 +141,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // cancelButtonPanel
             // 
@@ -220,8 +221,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchPanelBasic.Controls.Add(this.D2Label);
             this.searchPanelBasic.Controls.Add(this.panel2);
             this.searchPanelBasic.Controls.Add(this.D1Label);
-            this.searchPanelBasic.Controls.Add(this.compIDPanel);
-            this.searchPanelBasic.Controls.Add(this.IDLabel);
+            this.searchPanelBasic.Controls.Add(this.compIdPanel);
+            this.searchPanelBasic.Controls.Add(this.IdLabel);
             this.searchPanelBasic.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchPanelBasic.Location = new System.Drawing.Point(0, 110);
             this.searchPanelBasic.Name = "searchPanelBasic";
@@ -309,7 +310,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // panel6
             // 
             this.panel6.Controls.Add(this.searchByD2Button);
-            this.panel6.Controls.Add(this.D2TextBox);
+            this.panel6.Controls.Add(this.d2TextBox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 138);
             this.panel6.Name = "panel6";
@@ -335,18 +336,18 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchByD2Button.TabIndex = 6;
             this.searchByD2Button.UseVisualStyleBackColor = false;
             // 
-            // D2TextBox
+            // d2TextBox
             // 
-            this.D2TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.D2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.D2TextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.D2TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D2TextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.D2TextBox.Location = new System.Drawing.Point(5, 5);
-            this.D2TextBox.MaxLength = 120;
-            this.D2TextBox.Name = "D2TextBox";
-            this.D2TextBox.Size = new System.Drawing.Size(223, 23);
-            this.D2TextBox.TabIndex = 5;
+            this.d2TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.d2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.d2TextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.d2TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d2TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.d2TextBox.Location = new System.Drawing.Point(5, 5);
+            this.d2TextBox.MaxLength = 120;
+            this.d2TextBox.Name = "d2TextBox";
+            this.d2TextBox.Size = new System.Drawing.Size(223, 23);
+            this.d2TextBox.TabIndex = 5;
             // 
             // D2Label
             // 
@@ -360,12 +361,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.D2Label.Padding = new System.Windows.Forms.Padding(2);
             this.D2Label.Size = new System.Drawing.Size(300, 24);
             this.D2Label.TabIndex = 8;
-            this.D2Label.Text = "<> Manufacturer\'s ID:";
+            this.D2Label.Text = "<> Manufacturer\'s Id:";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.searchByD1Button);
-            this.panel2.Controls.Add(this.D1TextBox);
+            this.panel2.Controls.Add(this.d1TextBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 81);
             this.panel2.Name = "panel2";
@@ -391,18 +392,18 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchByD1Button.TabIndex = 4;
             this.searchByD1Button.UseVisualStyleBackColor = false;
             // 
-            // D1TextBox
+            // d1TextBox
             // 
-            this.D1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.D1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.D1TextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.D1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D1TextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.D1TextBox.Location = new System.Drawing.Point(5, 5);
-            this.D1TextBox.MaxLength = 120;
-            this.D1TextBox.Name = "D1TextBox";
-            this.D1TextBox.Size = new System.Drawing.Size(223, 23);
-            this.D1TextBox.TabIndex = 3;
+            this.d1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.d1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.d1TextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.d1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d1TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.d1TextBox.Location = new System.Drawing.Point(5, 5);
+            this.d1TextBox.MaxLength = 120;
+            this.d1TextBox.Name = "d1TextBox";
+            this.d1TextBox.Size = new System.Drawing.Size(223, 23);
+            this.d1TextBox.TabIndex = 3;
             // 
             // D1Label
             // 
@@ -418,63 +419,64 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.D1Label.TabIndex = 6;
             this.D1Label.Text = "<> Description:";
             // 
-            // compIDPanel
+            // compIdPanel
             // 
-            this.compIDPanel.Controls.Add(this.searchByIDbutton);
-            this.compIDPanel.Controls.Add(this.IDTextBox);
-            this.compIDPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.compIDPanel.Location = new System.Drawing.Point(0, 24);
-            this.compIDPanel.Name = "compIDPanel";
-            this.compIDPanel.Padding = new System.Windows.Forms.Padding(5, 5, 15, 5);
-            this.compIDPanel.Size = new System.Drawing.Size(300, 33);
-            this.compIDPanel.TabIndex = 5;
+            this.compIdPanel.Controls.Add(this.searchByIdbutton);
+            this.compIdPanel.Controls.Add(this.idTextBox);
+            this.compIdPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.compIdPanel.Location = new System.Drawing.Point(0, 24);
+            this.compIdPanel.Name = "compIdPanel";
+            this.compIdPanel.Padding = new System.Windows.Forms.Padding(5, 5, 15, 5);
+            this.compIdPanel.Size = new System.Drawing.Size(300, 33);
+            this.compIdPanel.TabIndex = 5;
             // 
-            // searchByIDbutton
+            // searchByIdbutton
             // 
-            this.searchByIDbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.searchByIDbutton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.searchByIDbutton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.searchByIDbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
-            this.searchByIDbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.searchByIDbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchByIDbutton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchByIDbutton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.searchByIDbutton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
-            this.searchByIDbutton.Location = new System.Drawing.Point(255, 5);
-            this.searchByIDbutton.Margin = new System.Windows.Forms.Padding(8);
-            this.searchByIDbutton.Name = "searchByIDbutton";
-            this.searchByIDbutton.Size = new System.Drawing.Size(30, 23);
-            this.searchByIDbutton.TabIndex = 2;
-            this.searchByIDbutton.UseVisualStyleBackColor = false;
+            this.searchByIdbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.searchByIdbutton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.searchByIdbutton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.searchByIdbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.searchByIdbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.searchByIdbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchByIdbutton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchByIdbutton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.searchByIdbutton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
+            this.searchByIdbutton.Location = new System.Drawing.Point(255, 5);
+            this.searchByIdbutton.Margin = new System.Windows.Forms.Padding(8);
+            this.searchByIdbutton.Name = "searchByIdbutton";
+            this.searchByIdbutton.Size = new System.Drawing.Size(30, 23);
+            this.searchByIdbutton.TabIndex = 2;
+            this.searchByIdbutton.UseVisualStyleBackColor = false;
             // 
-            // IDTextBox
+            // idTextBox
             // 
-            this.IDTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.IDTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IDTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.IDTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.IDTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IDTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.IDTextBox.Location = new System.Drawing.Point(5, 5);
-            this.IDTextBox.MaxLength = 10;
-            this.IDTextBox.Name = "IDTextBox";
-            this.IDTextBox.Size = new System.Drawing.Size(223, 23);
-            this.IDTextBox.TabIndex = 1;
-            this.IDTextBox.WordWrap = false;
+            this.idTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.idTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.idTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.idTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.idTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.idTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.idTextBox.Location = new System.Drawing.Point(5, 5);
+            this.idTextBox.MaxLength = 10;
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(223, 23);
+            this.idTextBox.TabIndex = 1;
+            this.idTextBox.WordWrap = false;
+            this.idTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IdTextBox_KeyDown);
             // 
-            // IDLabel
+            // IdLabel
             // 
-            this.IDLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.IDLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.IDLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IDLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.IDLabel.Location = new System.Drawing.Point(0, 0);
-            this.IDLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.IDLabel.Name = "IDLabel";
-            this.IDLabel.Padding = new System.Windows.Forms.Padding(2);
-            this.IDLabel.Size = new System.Drawing.Size(300, 24);
-            this.IDLabel.TabIndex = 4;
-            this.IDLabel.Text = "<> ID:";
+            this.IdLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.IdLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.IdLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.IdLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.IdLabel.Location = new System.Drawing.Point(0, 0);
+            this.IdLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.IdLabel.Name = "IdLabel";
+            this.IdLabel.Padding = new System.Windows.Forms.Padding(2);
+            this.IdLabel.Size = new System.Drawing.Size(300, 24);
+            this.IdLabel.TabIndex = 4;
+            this.IdLabel.Text = "<> Id:";
             // 
             // panel1
             // 
@@ -537,6 +539,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.toolRadioButton.TabStop = true;
             this.toolRadioButton.Text = "Tool";
             this.toolRadioButton.UseVisualStyleBackColor = true;
+            this.toolRadioButton.CheckedChanged += new System.EventHandler(this.ItemType_CheckedChanged);
             // 
             // compRadioButton
             // 
@@ -550,11 +553,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.compRadioButton.TabStop = true;
             this.compRadioButton.Text = "Component";
             this.compRadioButton.UseVisualStyleBackColor = true;
+            this.compRadioButton.CheckedChanged += new System.EventHandler(this.ItemType_CheckedChanged);
             // 
             // selectItemLabel
             // 
             this.selectItemLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.selectItemLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.selectItemLabel.Enabled = false;
             this.selectItemLabel.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.selectItemLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.selectItemLabel.Location = new System.Drawing.Point(0, 0);
@@ -605,8 +610,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.compIDPanel.ResumeLayout(false);
-            this.compIDPanel.PerformLayout();
+            this.compIdPanel.ResumeLayout(false);
+            this.compIdPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.radioSwitchPanel.ResumeLayout(false);
@@ -636,16 +641,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.Label quantityLabel;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button searchByD2Button;
-        private System.Windows.Forms.TextBox D2TextBox;
+        private System.Windows.Forms.TextBox d2TextBox;
         private System.Windows.Forms.Label D2Label;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button searchByD1Button;
-        private System.Windows.Forms.TextBox D1TextBox;
+        private System.Windows.Forms.TextBox d1TextBox;
         private System.Windows.Forms.Label D1Label;
-        private System.Windows.Forms.Panel compIDPanel;
-        private System.Windows.Forms.Button searchByIDbutton;
-        private System.Windows.Forms.TextBox IDTextBox;
-        private System.Windows.Forms.Label IDLabel;
+        private System.Windows.Forms.Panel compIdPanel;
+        private System.Windows.Forms.Button searchByIdbutton;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.Label IdLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox positionBox;
         private System.Windows.Forms.Label positionLabel;

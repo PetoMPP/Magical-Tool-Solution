@@ -15,11 +15,12 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 {
     public partial class CalculationWindow : Form
     {
-        Form caller;
-        List<CompModel> availableComps = new List<CompModel>();
+        private readonly Form caller;
+        private readonly List<CompModel> availableComps = new();
+
         //List<CompModel> availableComps = GlobalConfig.Connection.GetCompModels();
-        List<CompModel> selectedComps = new List<CompModel>();
-        List<ToolModel> tools = new List<ToolModel>();
+        private readonly List<CompModel> selectedComps = new();
+        private readonly List<ToolModel> tools = new();
         //List<ToolModel> tools = GlobalConfig.Connection.GetToolModels();
         public CalculationWindow(string mode, Form callingForm)
         {
@@ -50,7 +51,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
             {
                 CalculateButton.Click += CalculateButton_CalculateMinimal_Click;
             }
-            
+
         }
 
         private void CalculateButton_CalculateMinimal_Click(object sender, EventArgs e)

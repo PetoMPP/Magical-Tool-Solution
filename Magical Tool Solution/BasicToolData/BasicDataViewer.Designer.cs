@@ -46,16 +46,16 @@ namespace Magical_Tool_Solution.BasicToolData
             this.searchPanelBasic = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.searchByD2Button = new System.Windows.Forms.Button();
-            this.D2TextBox = new System.Windows.Forms.TextBox();
-            this.D2Label = new System.Windows.Forms.Label();
+            this.d2TextBox = new System.Windows.Forms.TextBox();
+            this.d2Label = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.searchByD1Button = new System.Windows.Forms.Button();
-            this.D1TextBox = new System.Windows.Forms.TextBox();
-            this.D1Label = new System.Windows.Forms.Label();
-            this.compIDPanel = new System.Windows.Forms.Panel();
-            this.searchByIDbutton = new System.Windows.Forms.Button();
-            this.IDTextBox = new System.Windows.Forms.TextBox();
-            this.IDLabel = new System.Windows.Forms.Label();
+            this.d1TextBox = new System.Windows.Forms.TextBox();
+            this.d1Label = new System.Windows.Forms.Label();
+            this.compIdPanel = new System.Windows.Forms.Panel();
+            this.searchByIdbutton = new System.Windows.Forms.Button();
+            this.idTextBox = new System.Windows.Forms.TextBox();
+            this.idLabel = new System.Windows.Forms.Label();
             this.searchTextLabel = new System.Windows.Forms.Label();
             this.operationsPanel2 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -75,7 +75,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.saveFormButton = new System.Windows.Forms.Button();
             this.buttonPanel1 = new System.Windows.Forms.Panel();
             this.clearFormButton = new System.Windows.Forms.Button();
-            this.compIDToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.compIdToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.compD1ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.compD2ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.basicDataMainPanel.SuspendLayout();
@@ -88,7 +88,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.searchPanelBasic.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.compIDPanel.SuspendLayout();
+            this.compIdPanel.SuspendLayout();
             this.operationsPanel2.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -246,11 +246,11 @@ namespace Magical_Tool_Solution.BasicToolData
             // searchPanelBasic
             // 
             this.searchPanelBasic.Controls.Add(this.panel6);
-            this.searchPanelBasic.Controls.Add(this.D2Label);
+            this.searchPanelBasic.Controls.Add(this.d2Label);
             this.searchPanelBasic.Controls.Add(this.panel2);
-            this.searchPanelBasic.Controls.Add(this.D1Label);
-            this.searchPanelBasic.Controls.Add(this.compIDPanel);
-            this.searchPanelBasic.Controls.Add(this.IDLabel);
+            this.searchPanelBasic.Controls.Add(this.d1Label);
+            this.searchPanelBasic.Controls.Add(this.compIdPanel);
+            this.searchPanelBasic.Controls.Add(this.idLabel);
             this.searchPanelBasic.Dock = System.Windows.Forms.DockStyle.Left;
             this.searchPanelBasic.Location = new System.Drawing.Point(0, 0);
             this.searchPanelBasic.Name = "searchPanelBasic";
@@ -260,7 +260,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // panel6
             // 
             this.panel6.Controls.Add(this.searchByD2Button);
-            this.panel6.Controls.Add(this.D2TextBox);
+            this.panel6.Controls.Add(this.d2TextBox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 138);
             this.panel6.Name = "panel6";
@@ -287,38 +287,39 @@ namespace Magical_Tool_Solution.BasicToolData
             this.searchByD2Button.UseVisualStyleBackColor = false;
             this.searchByD2Button.Click += new System.EventHandler(this.SearchByD2Button_Click);
             // 
-            // D2TextBox
+            // d2TextBox
             // 
-            this.D2TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.D2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.D2TextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.D2TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D2TextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.D2TextBox.Location = new System.Drawing.Point(5, 5);
-            this.D2TextBox.MaxLength = 120;
-            this.D2TextBox.Name = "D2TextBox";
-            this.D2TextBox.Size = new System.Drawing.Size(223, 23);
-            this.D2TextBox.TabIndex = 5;
-            this.D2TextBox.Tag = "TextBox";
+            this.d2TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.d2TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.d2TextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.d2TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d2TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.d2TextBox.Location = new System.Drawing.Point(5, 5);
+            this.d2TextBox.MaxLength = 120;
+            this.d2TextBox.Name = "d2TextBox";
+            this.d2TextBox.Size = new System.Drawing.Size(223, 23);
+            this.d2TextBox.TabIndex = 5;
+            this.d2TextBox.Tag = "TextBox";
+            this.d2TextBox.TextChanged += new System.EventHandler(this.CompD2TextBox_TextChanged);
             // 
-            // D2Label
+            // d2Label
             // 
-            this.D2Label.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.D2Label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.D2Label.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D2Label.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.D2Label.Location = new System.Drawing.Point(0, 114);
-            this.D2Label.Margin = new System.Windows.Forms.Padding(0);
-            this.D2Label.Name = "D2Label";
-            this.D2Label.Padding = new System.Windows.Forms.Padding(2);
-            this.D2Label.Size = new System.Drawing.Size(284, 24);
-            this.D2Label.TabIndex = 8;
-            this.D2Label.Text = "<> Manufacturer\'s ID:";
+            this.d2Label.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.d2Label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.d2Label.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d2Label.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.d2Label.Location = new System.Drawing.Point(0, 114);
+            this.d2Label.Margin = new System.Windows.Forms.Padding(0);
+            this.d2Label.Name = "d2Label";
+            this.d2Label.Padding = new System.Windows.Forms.Padding(2);
+            this.d2Label.Size = new System.Drawing.Size(284, 24);
+            this.d2Label.TabIndex = 8;
+            this.d2Label.Text = "<> Manufacturer\'s Id:";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.searchByD1Button);
-            this.panel2.Controls.Add(this.D1TextBox);
+            this.panel2.Controls.Add(this.d1TextBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 81);
             this.panel2.Name = "panel2";
@@ -345,93 +346,97 @@ namespace Magical_Tool_Solution.BasicToolData
             this.searchByD1Button.UseVisualStyleBackColor = false;
             this.searchByD1Button.Click += new System.EventHandler(this.SearchByD1Button_Click);
             // 
-            // D1TextBox
+            // d1TextBox
             // 
-            this.D1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.D1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.D1TextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.D1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D1TextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.D1TextBox.Location = new System.Drawing.Point(5, 5);
-            this.D1TextBox.MaxLength = 120;
-            this.D1TextBox.Name = "D1TextBox";
-            this.D1TextBox.Size = new System.Drawing.Size(223, 23);
-            this.D1TextBox.TabIndex = 3;
-            this.D1TextBox.Tag = "TextBox";
+            this.d1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.d1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.d1TextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.d1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d1TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.d1TextBox.Location = new System.Drawing.Point(5, 5);
+            this.d1TextBox.MaxLength = 120;
+            this.d1TextBox.Name = "d1TextBox";
+            this.d1TextBox.Size = new System.Drawing.Size(223, 23);
+            this.d1TextBox.TabIndex = 3;
+            this.d1TextBox.Tag = "TextBox";
+            this.d1TextBox.TextChanged += new System.EventHandler(this.CompD1TextBox_TextChanged);
             // 
-            // D1Label
+            // d1Label
             // 
-            this.D1Label.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.D1Label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.D1Label.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.D1Label.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.D1Label.Location = new System.Drawing.Point(0, 57);
-            this.D1Label.Margin = new System.Windows.Forms.Padding(0);
-            this.D1Label.Name = "D1Label";
-            this.D1Label.Padding = new System.Windows.Forms.Padding(2);
-            this.D1Label.Size = new System.Drawing.Size(284, 24);
-            this.D1Label.TabIndex = 6;
-            this.D1Label.Text = "<> Description:";
+            this.d1Label.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.d1Label.Dock = System.Windows.Forms.DockStyle.Top;
+            this.d1Label.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.d1Label.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.d1Label.Location = new System.Drawing.Point(0, 57);
+            this.d1Label.Margin = new System.Windows.Forms.Padding(0);
+            this.d1Label.Name = "d1Label";
+            this.d1Label.Padding = new System.Windows.Forms.Padding(2);
+            this.d1Label.Size = new System.Drawing.Size(284, 24);
+            this.d1Label.TabIndex = 6;
+            this.d1Label.Text = "<> Description:";
             // 
-            // compIDPanel
+            // compIdPanel
             // 
-            this.compIDPanel.Controls.Add(this.searchByIDbutton);
-            this.compIDPanel.Controls.Add(this.IDTextBox);
-            this.compIDPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.compIDPanel.Location = new System.Drawing.Point(0, 24);
-            this.compIDPanel.Name = "compIDPanel";
-            this.compIDPanel.Padding = new System.Windows.Forms.Padding(5, 5, 15, 5);
-            this.compIDPanel.Size = new System.Drawing.Size(284, 33);
-            this.compIDPanel.TabIndex = 5;
+            this.compIdPanel.Controls.Add(this.searchByIdbutton);
+            this.compIdPanel.Controls.Add(this.idTextBox);
+            this.compIdPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.compIdPanel.Location = new System.Drawing.Point(0, 24);
+            this.compIdPanel.Name = "compIdPanel";
+            this.compIdPanel.Padding = new System.Windows.Forms.Padding(5, 5, 15, 5);
+            this.compIdPanel.Size = new System.Drawing.Size(284, 33);
+            this.compIdPanel.TabIndex = 5;
             // 
-            // searchByIDbutton
+            // searchByIdbutton
             // 
-            this.searchByIDbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.searchByIDbutton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.searchByIDbutton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.searchByIDbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
-            this.searchByIDbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.searchByIDbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.searchByIDbutton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchByIDbutton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.searchByIDbutton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
-            this.searchByIDbutton.Location = new System.Drawing.Point(239, 5);
-            this.searchByIDbutton.Margin = new System.Windows.Forms.Padding(8);
-            this.searchByIDbutton.Name = "searchByIDbutton";
-            this.searchByIDbutton.Size = new System.Drawing.Size(30, 23);
-            this.searchByIDbutton.TabIndex = 2;
-            this.searchByIDbutton.UseVisualStyleBackColor = false;
-            this.searchByIDbutton.Click += new System.EventHandler(this.SearchByIDbutton_Click);
+            this.searchByIdbutton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.searchByIdbutton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.searchByIdbutton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.searchByIdbutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.searchByIdbutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.searchByIdbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.searchByIdbutton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchByIdbutton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.searchByIdbutton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
+            this.searchByIdbutton.Location = new System.Drawing.Point(239, 5);
+            this.searchByIdbutton.Margin = new System.Windows.Forms.Padding(8);
+            this.searchByIdbutton.Name = "searchByIdbutton";
+            this.searchByIdbutton.Size = new System.Drawing.Size(30, 23);
+            this.searchByIdbutton.TabIndex = 2;
+            this.searchByIdbutton.UseVisualStyleBackColor = false;
+            this.searchByIdbutton.Click += new System.EventHandler(this.SearchByIdbutton_Click);
             // 
-            // IDTextBox
+            // idTextBox
             // 
-            this.IDTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.IDTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.IDTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.IDTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.IDTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IDTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.IDTextBox.Location = new System.Drawing.Point(5, 5);
-            this.IDTextBox.MaxLength = 10;
-            this.IDTextBox.Name = "IDTextBox";
-            this.IDTextBox.Size = new System.Drawing.Size(223, 23);
-            this.IDTextBox.TabIndex = 1;
-            this.IDTextBox.Tag = "TextBox";
-            this.IDTextBox.WordWrap = false;
+            this.idTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.idTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.idTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.idTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.idTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.idTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.idTextBox.Location = new System.Drawing.Point(5, 5);
+            this.idTextBox.MaxLength = 10;
+            this.idTextBox.Name = "idTextBox";
+            this.idTextBox.Size = new System.Drawing.Size(223, 23);
+            this.idTextBox.TabIndex = 1;
+            this.idTextBox.Tag = "TextBox";
+            this.idTextBox.WordWrap = false;
+            this.idTextBox.TextChanged += new System.EventHandler(this.CompIdTextBox_TextChanged);
+            this.idTextBox.DoubleClick += new System.EventHandler(this.IdTextBox_DoubleClick);
+            this.idTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IdTextBox_KeyPress);
             // 
-            // IDLabel
+            // idLabel
             // 
-            this.IDLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.IDLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.IDLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.IDLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.IDLabel.Location = new System.Drawing.Point(0, 0);
-            this.IDLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.IDLabel.Name = "IDLabel";
-            this.IDLabel.Padding = new System.Windows.Forms.Padding(2);
-            this.IDLabel.Size = new System.Drawing.Size(284, 24);
-            this.IDLabel.TabIndex = 4;
-            this.IDLabel.Text = "<> ID:";
+            this.idLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.idLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.idLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.idLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.idLabel.Location = new System.Drawing.Point(0, 0);
+            this.idLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.idLabel.Name = "idLabel";
+            this.idLabel.Padding = new System.Windows.Forms.Padding(2);
+            this.idLabel.Size = new System.Drawing.Size(284, 24);
+            this.idLabel.TabIndex = 4;
+            this.idLabel.Text = "<> Id:";
             // 
             // searchTextLabel
             // 
@@ -472,6 +477,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // 
             this.extrasButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.extrasButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.extrasButton.Enabled = false;
             this.extrasButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.extrasButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.extrasButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -500,6 +506,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // 
             this.usageButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.usageButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.usageButton.Enabled = false;
             this.usageButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.usageButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.usageButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -528,6 +535,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // 
             this.copyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.copyButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.copyButton.Enabled = false;
             this.copyButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.copyButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.copyButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -541,6 +549,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.copyButton.TabIndex = 11;
             this.copyButton.Text = "Copy To New";
             this.copyButton.UseVisualStyleBackColor = false;
+            this.copyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // panel5
             // 
@@ -569,6 +578,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.deleteButton.TabIndex = 9;
             this.deleteButton.Text = "Delete Opened";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // operationsPanel1
             // 
@@ -596,6 +606,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // 
             this.viewStockButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.viewStockButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewStockButton.Enabled = false;
             this.viewStockButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.viewStockButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.viewStockButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -637,6 +648,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.createFormButton.TabIndex = 12;
             this.createFormButton.Text = "Create New";
             this.createFormButton.UseVisualStyleBackColor = false;
+            this.createFormButton.Click += new System.EventHandler(this.CreateFormButton_Click);
             // 
             // buttonPanel2
             // 
@@ -696,9 +708,9 @@ namespace Magical_Tool_Solution.BasicToolData
             this.clearFormButton.UseVisualStyleBackColor = false;
             this.clearFormButton.Click += new System.EventHandler(this.ClearFormButton_Click);
             // 
-            // compIDToolTip
+            // compIdToolTip
             // 
-            this.compIDToolTip.AutomaticDelay = 0;
+            this.compIdToolTip.AutomaticDelay = 0;
             // 
             // compD1ToolTip
             // 
@@ -731,8 +743,8 @@ namespace Magical_Tool_Solution.BasicToolData
             this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.compIDPanel.ResumeLayout(false);
-            this.compIDPanel.PerformLayout();
+            this.compIdPanel.ResumeLayout(false);
+            this.compIdPanel.PerformLayout();
             this.operationsPanel2.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
@@ -765,16 +777,16 @@ namespace Magical_Tool_Solution.BasicToolData
         private System.Windows.Forms.Panel searchPanelBasic;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button searchByD2Button;
-        private System.Windows.Forms.TextBox D2TextBox;
-        private System.Windows.Forms.Label D2Label;
+        private System.Windows.Forms.TextBox d2TextBox;
+        private System.Windows.Forms.Label d2Label;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button searchByD1Button;
-        private System.Windows.Forms.TextBox D1TextBox;
-        private System.Windows.Forms.Label D1Label;
-        private System.Windows.Forms.Panel compIDPanel;
-        private System.Windows.Forms.Button searchByIDbutton;
-        private System.Windows.Forms.TextBox IDTextBox;
-        private System.Windows.Forms.Label IDLabel;
+        private System.Windows.Forms.TextBox d1TextBox;
+        private System.Windows.Forms.Label d1Label;
+        private System.Windows.Forms.Panel compIdPanel;
+        private System.Windows.Forms.Button searchByIdbutton;
+        private System.Windows.Forms.TextBox idTextBox;
+        private System.Windows.Forms.Label idLabel;
         private System.Windows.Forms.Label searchTextLabel;
         private System.Windows.Forms.Panel operationsPanel2;
         private System.Windows.Forms.Panel panel8;
@@ -794,7 +806,7 @@ namespace Magical_Tool_Solution.BasicToolData
         private System.Windows.Forms.Button saveFormButton;
         private System.Windows.Forms.Panel buttonPanel1;
         private System.Windows.Forms.Button clearFormButton;
-        private System.Windows.Forms.ToolTip compIDToolTip;
+        private System.Windows.Forms.ToolTip compIdToolTip;
         private System.Windows.Forms.ToolTip compD1ToolTip;
         private System.Windows.Forms.ToolTip compD2ToolTip;
     }

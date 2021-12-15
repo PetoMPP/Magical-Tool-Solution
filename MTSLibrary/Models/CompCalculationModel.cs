@@ -6,7 +6,7 @@ namespace MTSLibrary.Models
 {
     public class CompCalculationModel
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
         public List<ToolModel> ToolsUsingItem { get; set; }
         public int MaxQuantityInTool { get; set; }
         public int TotalListsWithComp { get; set; }
@@ -15,14 +15,12 @@ namespace MTSLibrary.Models
         public int ActualStock { get; set; }
         public int MissingStock { get; set; }
         public SupplierModel Supplier { get; set; }
-        public string DisplayName
-        {
-            get
-            {
-                string output = $"ID: {ID}";
+        public string DisplayName {
+            get {
+                string output = $"Id: {Id}";
                 if (MinimalStock != -1)
                 {
-                    output += $", Min: { MinimalStock}";
+                    output += $", Min: {MinimalStock}";
                 }
                 if (ActualStock != -1)
                 {

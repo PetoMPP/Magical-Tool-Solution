@@ -29,6 +29,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.editorLabelPanel = new System.Windows.Forms.Panel();
             this.selectorLabel = new System.Windows.Forms.Label();
             this.bottomEditorPanel = new System.Windows.Forms.Panel();
@@ -40,10 +42,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.applyButton = new System.Windows.Forms.Button();
             this.editorMainPanel = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.customComboBox1 = new Magical_Tool_Solution.CustomControls.CustomComboBox();
+            this.valueTypesComboBox = new Magical_Tool_Solution.CustomControls.CustomComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.descTextBox = new System.Windows.Forms.TextBox();
             this.d1Label = new System.Windows.Forms.Label();
             this.viewingNamePanel = new System.Windows.Forms.Panel();
             this.viewingNameTextBox = new System.Windows.Forms.TextBox();
@@ -56,9 +58,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionLabel = new System.Windows.Forms.Label();
             this.basicParameterLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.selectedGroupsPanel = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.classIdTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.classD1TextBox = new System.Windows.Forms.TextBox();
             this.selectedGroupsLabel = new System.Windows.Forms.Label();
-            this.featuresPanel = new System.Windows.Forms.Panel();
-            this.selectedGroupsListBox = new System.Windows.Forms.CheckedListBox();
+            this.enabledGroupsDataGridView = new System.Windows.Forms.DataGridView();
+            this.enabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.groupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editorLabelPanel.SuspendLayout();
             this.bottomEditorPanel.SuspendLayout();
             this.okButtonPanel.SuspendLayout();
@@ -71,7 +80,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.idPanel.SuspendLayout();
             this.positionPanel.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.featuresPanel.SuspendLayout();
+            this.selectedGroupsPanel.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enabledGroupsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // editorLabelPanel
@@ -135,6 +146,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // cancelButtonPanel
             // 
@@ -213,7 +225,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.customComboBox1);
+            this.panel6.Controls.Add(this.valueTypesComboBox);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel6.Location = new System.Drawing.Point(0, 283);
             this.panel6.Name = "panel6";
@@ -221,17 +233,17 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.panel6.Size = new System.Drawing.Size(300, 33);
             this.panel6.TabIndex = 38;
             // 
-            // customComboBox1
+            // valueTypesComboBox
             // 
-            this.customComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.customComboBox1.BorderColor = System.Drawing.SystemColors.WindowFrame;
-            this.customComboBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.customComboBox1.ForeColor = System.Drawing.SystemColors.Window;
-            this.customComboBox1.FormattingEnabled = true;
-            this.customComboBox1.Location = new System.Drawing.Point(5, 5);
-            this.customComboBox1.Name = "customComboBox1";
-            this.customComboBox1.Size = new System.Drawing.Size(223, 23);
-            this.customComboBox1.TabIndex = 0;
+            this.valueTypesComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.valueTypesComboBox.BorderColor = System.Drawing.SystemColors.WindowFrame;
+            this.valueTypesComboBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.valueTypesComboBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.valueTypesComboBox.FormattingEnabled = true;
+            this.valueTypesComboBox.Location = new System.Drawing.Point(5, 5);
+            this.valueTypesComboBox.Name = "valueTypesComboBox";
+            this.valueTypesComboBox.Size = new System.Drawing.Size(223, 23);
+            this.valueTypesComboBox.TabIndex = 0;
             // 
             // label4
             // 
@@ -249,7 +261,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Controls.Add(this.descTextBox);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 226);
             this.panel5.Name = "panel5";
@@ -257,18 +269,18 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.panel5.Size = new System.Drawing.Size(300, 33);
             this.panel5.TabIndex = 36;
             // 
-            // textBox3
+            // descTextBox
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox3.Location = new System.Drawing.Point(5, 5);
-            this.textBox3.MaxLength = 120;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(223, 23);
-            this.textBox3.TabIndex = 5;
+            this.descTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.descTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.descTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.descTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.descTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.descTextBox.Location = new System.Drawing.Point(5, 5);
+            this.descTextBox.MaxLength = 120;
+            this.descTextBox.Name = "descTextBox";
+            this.descTextBox.Size = new System.Drawing.Size(223, 23);
+            this.descTextBox.TabIndex = 5;
             // 
             // d1Label
             // 
@@ -356,7 +368,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.idLabel.Padding = new System.Windows.Forms.Padding(2);
             this.idLabel.Size = new System.Drawing.Size(300, 24);
             this.idLabel.TabIndex = 31;
-            this.idLabel.Text = "Parameter ID:";
+            this.idLabel.Text = "Parameter Id:";
             // 
             // positionPanel
             // 
@@ -411,13 +423,76 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.featuresPanel);
+            this.panel1.Controls.Add(this.selectedGroupsPanel);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.selectedGroupsLabel);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(300, 49);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(300, 352);
             this.panel1.TabIndex = 6;
+            // 
+            // selectedGroupsPanel
+            // 
+            this.selectedGroupsPanel.Controls.Add(this.enabledGroupsDataGridView);
+            this.selectedGroupsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectedGroupsPanel.Location = new System.Drawing.Point(0, 64);
+            this.selectedGroupsPanel.Name = "selectedGroupsPanel";
+            this.selectedGroupsPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.selectedGroupsPanel.Size = new System.Drawing.Size(300, 288);
+            this.selectedGroupsPanel.TabIndex = 32;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.classIdTextBox);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.classD1TextBox);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 31);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(5);
+            this.panel2.Size = new System.Drawing.Size(300, 33);
+            this.panel2.TabIndex = 31;
+            // 
+            // classIdTextBox
+            // 
+            this.classIdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.classIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.classIdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.classIdTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.classIdTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.classIdTextBox.Location = new System.Drawing.Point(95, 5);
+            this.classIdTextBox.MaxLength = 120;
+            this.classIdTextBox.Name = "classIdTextBox";
+            this.classIdTextBox.Size = new System.Drawing.Size(52, 23);
+            this.classIdTextBox.TabIndex = 30;
+            // 
+            // label1
+            // 
+            this.label1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(5, 5);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(2);
+            this.label1.Size = new System.Drawing.Size(90, 23);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "Active Class:";
+            // 
+            // classD1TextBox
+            // 
+            this.classD1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.classD1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.classD1TextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.classD1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.classD1TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.classD1TextBox.Location = new System.Drawing.Point(150, 5);
+            this.classD1TextBox.MaxLength = 120;
+            this.classD1TextBox.Name = "classD1TextBox";
+            this.classD1TextBox.Size = new System.Drawing.Size(145, 23);
+            this.classD1TextBox.TabIndex = 6;
             // 
             // selectedGroupsLabel
             // 
@@ -433,26 +508,71 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.selectedGroupsLabel.TabIndex = 16;
             this.selectedGroupsLabel.Text = "Activate Parameter For Groups:";
             // 
-            // featuresPanel
+            // enabledGroupsDataGridView
             // 
-            this.featuresPanel.Controls.Add(this.selectedGroupsListBox);
-            this.featuresPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.featuresPanel.Location = new System.Drawing.Point(0, 31);
-            this.featuresPanel.Name = "featuresPanel";
-            this.featuresPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.featuresPanel.Size = new System.Drawing.Size(300, 321);
-            this.featuresPanel.TabIndex = 17;
+            this.enabledGroupsDataGridView.AllowUserToAddRows = false;
+            this.enabledGroupsDataGridView.AllowUserToDeleteRows = false;
+            this.enabledGroupsDataGridView.AllowUserToOrderColumns = true;
+            this.enabledGroupsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.enabledGroupsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.enabledGroupsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.enabledGroupsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.enabledGroupsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.enabled,
+            this.groupId,
+            this.groupName});
+            this.enabledGroupsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.enabledGroupsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.enabledGroupsDataGridView.EnableHeadersVisualStyles = false;
+            this.enabledGroupsDataGridView.Location = new System.Drawing.Point(5, 5);
+            this.enabledGroupsDataGridView.Name = "enabledGroupsDataGridView";
+            this.enabledGroupsDataGridView.RowHeadersVisible = false;
+            this.enabledGroupsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.enabledGroupsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.enabledGroupsDataGridView.RowTemplate.Height = 25;
+            this.enabledGroupsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.enabledGroupsDataGridView.ShowCellToolTips = false;
+            this.enabledGroupsDataGridView.ShowEditingIcon = false;
+            this.enabledGroupsDataGridView.Size = new System.Drawing.Size(290, 278);
+            this.enabledGroupsDataGridView.TabIndex = 9;
             // 
-            // selectedGroupsListBox
+            // enabled
             // 
-            this.selectedGroupsListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.selectedGroupsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedGroupsListBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.selectedGroupsListBox.FormattingEnabled = true;
-            this.selectedGroupsListBox.Location = new System.Drawing.Point(5, 5);
-            this.selectedGroupsListBox.Name = "selectedGroupsListBox";
-            this.selectedGroupsListBox.Size = new System.Drawing.Size(290, 311);
-            this.selectedGroupsListBox.TabIndex = 18;
+            this.enabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.enabled.HeaderText = "Parameter Enabled";
+            this.enabled.Name = "enabled";
+            // 
+            // groupId
+            // 
+            this.groupId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.groupId.HeaderText = "Group ID";
+            this.groupId.MaxInputLength = 5;
+            this.groupId.Name = "groupId";
+            this.groupId.ReadOnly = true;
+            this.groupId.Width = 5;
+            // 
+            // groupName
+            // 
+            this.groupName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
+            this.groupName.HeaderText = "Group Name";
+            this.groupName.Name = "groupName";
+            this.groupName.ReadOnly = true;
+            this.groupName.Width = 5;
             // 
             // ParameterEditor
             // 
@@ -470,7 +590,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ParameterEditor";
-            this.TopMost = true;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ParameterEditor_FormClosed);
             this.editorLabelPanel.ResumeLayout(false);
             this.bottomEditorPanel.ResumeLayout(false);
             this.okButtonPanel.ResumeLayout(false);
@@ -487,7 +607,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionPanel.ResumeLayout(false);
             this.positionPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.featuresPanel.ResumeLayout(false);
+            this.selectedGroupsPanel.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enabledGroupsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -513,7 +636,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox descTextBox;
         private System.Windows.Forms.Label d1Label;
         private System.Windows.Forms.Panel viewingNamePanel;
         private System.Windows.Forms.TextBox viewingNameTextBox;
@@ -521,8 +644,15 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.Panel idPanel;
         private System.Windows.Forms.TextBox idTextBox;
         private System.Windows.Forms.Label idLabel;
-        private CustomControls.CustomComboBox customComboBox1;
-        private System.Windows.Forms.Panel featuresPanel;
-        private System.Windows.Forms.CheckedListBox selectedGroupsListBox;
+        private CustomControls.CustomComboBox valueTypesComboBox;
+        private System.Windows.Forms.Panel selectedGroupsPanel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox classD1TextBox;
+        private System.Windows.Forms.TextBox classIdTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView enabledGroupsDataGridView;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn enabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn groupId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
     }
 }

@@ -34,9 +34,12 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
             this.parametersPanel = new System.Windows.Forms.Panel();
             this.parametersGridPanel = new System.Windows.Forms.Panel();
             this.parametersDataGridView = new System.Windows.Forms.DataGridView();
-            this.parameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ParameterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ParameterValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ParameterDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValueType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parametersLabelPanel = new System.Windows.Forms.Panel();
             this.parametersLabel = new System.Windows.Forms.Label();
             this.parametersPanel.SuspendLayout();
@@ -69,6 +72,7 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
             // 
             // parametersDataGridView
             // 
+            this.parametersDataGridView.AllowUserToAddRows = false;
             this.parametersDataGridView.AllowUserToDeleteRows = false;
             this.parametersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.parametersDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -83,9 +87,12 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
             this.parametersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.parametersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.parametersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.parameterName,
-            this.parameterValue,
-            this.parameterDescription});
+            this.Position,
+            this.ParameterId,
+            this.ParameterName,
+            this.ParameterValue,
+            this.ParameterDescription,
+            this.ValueType});
             this.parametersDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.parametersDataGridView.EnableHeadersVisualStyles = false;
             this.parametersDataGridView.Location = new System.Drawing.Point(0, 0);
@@ -106,29 +113,46 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
             this.parametersDataGridView.Size = new System.Drawing.Size(784, 387);
             this.parametersDataGridView.TabIndex = 5;
             // 
-            // parameterName
+            // Position
             // 
-            this.parameterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterName.Frozen = true;
-            this.parameterName.HeaderText = "Parameter";
-            this.parameterName.Name = "parameterName";
-            this.parameterName.ReadOnly = true;
-            this.parameterName.Width = 102;
+            this.Position.Frozen = true;
+            this.Position.HeaderText = "Position";
+            this.Position.Name = "Position";
             // 
-            // parameterValue
+            // ParameterId
             // 
-            this.parameterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterValue.Frozen = true;
-            this.parameterValue.HeaderText = "Value";
-            this.parameterValue.Name = "parameterValue";
-            this.parameterValue.Width = 72;
+            this.ParameterId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ParameterId.Frozen = true;
+            this.ParameterId.HeaderText = "Parameter Id";
+            this.ParameterId.Name = "ParameterId";
+            this.ParameterId.Width = 109;
             // 
-            // parameterDescription
+            // ParameterName
             // 
-            this.parameterDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.parameterDescription.HeaderText = "Description";
-            this.parameterDescription.Name = "parameterDescription";
-            this.parameterDescription.ReadOnly = true;
+            this.ParameterName.Frozen = true;
+            this.ParameterName.HeaderText = "Parameter Name";
+            this.ParameterName.Name = "ParameterName";
+            // 
+            // ParameterValue
+            // 
+            this.ParameterValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ParameterValue.Frozen = true;
+            this.ParameterValue.HeaderText = "Value";
+            this.ParameterValue.Name = "ParameterValue";
+            this.ParameterValue.Width = 72;
+            // 
+            // ParameterDescription
+            // 
+            this.ParameterDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ParameterDescription.Frozen = true;
+            this.ParameterDescription.HeaderText = "Description";
+            this.ParameterDescription.Name = "ParameterDescription";
+            this.ParameterDescription.Width = 108;
+            // 
+            // ValueType
+            // 
+            this.ValueType.HeaderText = "Value Type";
+            this.ValueType.Name = "ValueType";
             // 
             // parametersLabelPanel
             // 
@@ -177,10 +201,13 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
         private System.Windows.Forms.Panel parametersPanel;
         private System.Windows.Forms.Panel parametersGridPanel;
         private System.Windows.Forms.DataGridView parametersDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterDescription;
         private System.Windows.Forms.Panel parametersLabelPanel;
         private System.Windows.Forms.Label parametersLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ParameterId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ParameterName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ParameterValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ParameterDescription;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValueType;
     }
 }

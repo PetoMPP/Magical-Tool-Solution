@@ -1,7 +1,7 @@
 ﻿
 namespace Magical_Tool_Solution.DataViews
 {
-    partial class Tools
+    partial class Positions
     {
         /// <summary>
         /// Required designer variable.
@@ -33,14 +33,14 @@ namespace Magical_Tool_Solution.DataViews
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.componentsPanel = new System.Windows.Forms.Panel();
             this.positionsDataGridView = new System.Windows.Forms.DataGridView();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentD1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentsLabelPanel = new System.Windows.Forms.Panel();
             this.toolsLabel = new System.Windows.Forms.Label();
+            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.componentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.positionsDataGridView)).BeginInit();
             this.componentsLabelPanel.SuspendLayout();
@@ -59,6 +59,7 @@ namespace Magical_Tool_Solution.DataViews
             // 
             // positionsDataGridView
             // 
+            this.positionsDataGridView.AllowUserToAddRows = false;
             this.positionsDataGridView.AllowUserToDeleteRows = false;
             this.positionsDataGridView.AllowUserToOrderColumns = true;
             this.positionsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -75,10 +76,10 @@ namespace Magical_Tool_Solution.DataViews
             this.positionsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.positionsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.position,
-            this.componentID,
-            this.toolID,
-            this.componentD1,
-            this.componentD2,
+            this.componentId,
+            this.toolId,
+            this.desc1,
+            this.desc2,
             this.quantity});
             this.positionsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.positionsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -103,57 +104,6 @@ namespace Magical_Tool_Solution.DataViews
             this.positionsDataGridView.TabIndex = 8;
             this.positionsDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PositionsDataGridView_MouseDoubleClick);
             // 
-            // position
-            // 
-            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.position.HeaderText = "Position";
-            this.position.Name = "position";
-            this.position.Width = 87;
-            // 
-            // componentID
-            // 
-            this.componentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentID.HeaderText = "Component ID";
-            this.componentID.MaxInputLength = 10;
-            this.componentID.Name = "componentID";
-            this.componentID.ReadOnly = true;
-            this.componentID.Width = 120;
-            // 
-            // toolID
-            // 
-            this.toolID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.toolID.HeaderText = "Tool ID";
-            this.toolID.MaxInputLength = 10;
-            this.toolID.Name = "toolID";
-            this.toolID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.toolID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.toolID.Width = 45;
-            // 
-            // componentD1
-            // 
-            this.componentD1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD1.HeaderText = "Description";
-            this.componentD1.MaxInputLength = 120;
-            this.componentD1.Name = "componentD1";
-            this.componentD1.Width = 108;
-            // 
-            // componentD2
-            // 
-            this.componentD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD2.HeaderText = "Manufacturer\'s ID";
-            this.componentD2.MaxInputLength = 120;
-            this.componentD2.Name = "componentD2";
-            this.componentD2.ReadOnly = true;
-            this.componentD2.Width = 137;
-            // 
-            // quantity
-            // 
-            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MaxInputLength = 10;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            // 
             // componentsLabelPanel
             // 
             this.componentsLabelPanel.Controls.Add(this.toolsLabel);
@@ -175,6 +125,57 @@ namespace Magical_Tool_Solution.DataViews
             this.toolsLabel.Size = new System.Drawing.Size(784, 47);
             this.toolsLabel.TabIndex = 5;
             this.toolsLabel.Text = "Tool List Positions:";
+            // 
+            // position
+            // 
+            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.position.HeaderText = "Position";
+            this.position.Name = "position";
+            this.position.Width = 87;
+            // 
+            // componentId
+            // 
+            this.componentId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.componentId.HeaderText = "Component Id";
+            this.componentId.MaxInputLength = 10;
+            this.componentId.Name = "componentId";
+            this.componentId.ReadOnly = true;
+            this.componentId.Width = 128;
+            // 
+            // toolId
+            // 
+            this.toolId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.toolId.HeaderText = "Tool Id";
+            this.toolId.MaxInputLength = 10;
+            this.toolId.Name = "toolId";
+            this.toolId.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.toolId.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.toolId.Width = 61;
+            // 
+            // desc1
+            // 
+            this.desc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.desc1.HeaderText = "Description";
+            this.desc1.MaxInputLength = 120;
+            this.desc1.Name = "desc1";
+            this.desc1.Width = 108;
+            // 
+            // desc2
+            // 
+            this.desc2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.desc2.HeaderText = "Manufacturer\'s Id";
+            this.desc2.MaxInputLength = 120;
+            this.desc2.Name = "desc2";
+            this.desc2.ReadOnly = true;
+            this.desc2.Width = 135;
+            // 
+            // quantity
+            // 
+            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.MaxInputLength = 10;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
             // 
             // Tools
             // 
@@ -200,13 +201,13 @@ namespace Magical_Tool_Solution.DataViews
 
         private System.Windows.Forms.Panel componentsPanel;
         private System.Windows.Forms.DataGridView positionsDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn toolID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentD1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentD2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
         private System.Windows.Forms.Panel componentsLabelPanel;
         private System.Windows.Forms.Label toolsLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn position;
+        private System.Windows.Forms.DataGridViewTextBoxColumn componentId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn toolId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
     }
 }

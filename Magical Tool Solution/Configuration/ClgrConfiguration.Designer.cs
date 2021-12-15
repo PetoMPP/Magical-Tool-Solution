@@ -29,15 +29,15 @@ namespace Magical_Tool_Solution.Configuration
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.moduleNameLabel = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.clgrPanel = new System.Windows.Forms.Panel();
             this.componentsPanel = new System.Windows.Forms.Panel();
-            this.positionsDataGridView = new System.Windows.Forms.DataGridView();
+            this.clgrParametersDataGridView = new System.Windows.Forms.DataGridView();
             this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parameterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parameterDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parameterDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parameterValueType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,7 +53,7 @@ namespace Magical_Tool_Solution.Configuration
             this.bottomPanel.SuspendLayout();
             this.clgrPanel.SuspendLayout();
             this.componentsPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.positionsDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).BeginInit();
             this.topPanel.SuspendLayout();
             this.topRightPanel.SuspendLayout();
             this.topLeftPanel.SuspendLayout();
@@ -93,7 +93,7 @@ namespace Magical_Tool_Solution.Configuration
             // 
             // componentsPanel
             // 
-            this.componentsPanel.Controls.Add(this.positionsDataGridView);
+            this.componentsPanel.Controls.Add(this.clgrParametersDataGridView);
             this.componentsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.componentsPanel.Location = new System.Drawing.Point(0, 0);
             this.componentsPanel.Name = "componentsPanel";
@@ -101,51 +101,52 @@ namespace Magical_Tool_Solution.Configuration
             this.componentsPanel.Size = new System.Drawing.Size(1084, 391);
             this.componentsPanel.TabIndex = 2;
             // 
-            // positionsDataGridView
+            // clgrParametersDataGridView
             // 
-            this.positionsDataGridView.AllowUserToDeleteRows = false;
-            this.positionsDataGridView.AllowUserToOrderColumns = true;
-            this.positionsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.positionsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.positionsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.positionsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.positionsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clgrParametersDataGridView.AllowUserToAddRows = false;
+            this.clgrParametersDataGridView.AllowUserToDeleteRows = false;
+            this.clgrParametersDataGridView.AllowUserToOrderColumns = true;
+            this.clgrParametersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.clgrParametersDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.clgrParametersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.clgrParametersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clgrParametersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.position,
-            this.parameterID,
+            this.parameterId,
             this.parameterDisplayName,
             this.parameterDescription,
             this.parameterValueType,
             this.groupsUsage});
-            this.positionsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.positionsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.positionsDataGridView.EnableHeadersVisualStyles = false;
-            this.positionsDataGridView.Location = new System.Drawing.Point(8, 8);
-            this.positionsDataGridView.Name = "positionsDataGridView";
-            this.positionsDataGridView.RowHeadersVisible = false;
-            this.positionsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.positionsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.positionsDataGridView.RowTemplate.Height = 25;
-            this.positionsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.positionsDataGridView.ShowCellToolTips = false;
-            this.positionsDataGridView.ShowEditingIcon = false;
-            this.positionsDataGridView.Size = new System.Drawing.Size(1068, 375);
-            this.positionsDataGridView.TabIndex = 8;
-            this.positionsDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PositionsDataGridView_MouseDoubleClick);
+            this.clgrParametersDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clgrParametersDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.clgrParametersDataGridView.EnableHeadersVisualStyles = false;
+            this.clgrParametersDataGridView.Location = new System.Drawing.Point(8, 8);
+            this.clgrParametersDataGridView.Name = "clgrParametersDataGridView";
+            this.clgrParametersDataGridView.RowHeadersVisible = false;
+            this.clgrParametersDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.clgrParametersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.clgrParametersDataGridView.RowTemplate.Height = 25;
+            this.clgrParametersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.clgrParametersDataGridView.ShowCellToolTips = false;
+            this.clgrParametersDataGridView.ShowEditingIcon = false;
+            this.clgrParametersDataGridView.Size = new System.Drawing.Size(1068, 375);
+            this.clgrParametersDataGridView.TabIndex = 8;
+            this.clgrParametersDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PositionsDataGridView_MouseDoubleClick);
             // 
             // position
             // 
@@ -154,15 +155,15 @@ namespace Magical_Tool_Solution.Configuration
             this.position.Name = "position";
             this.position.Width = 87;
             // 
-            // parameterID
+            // parameterId
             // 
-            this.parameterID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterID.HeaderText = "Parameter ID";
-            this.parameterID.MaxInputLength = 20;
-            this.parameterID.MinimumWidth = 120;
-            this.parameterID.Name = "parameterID";
-            this.parameterID.ReadOnly = true;
-            this.parameterID.Width = 120;
+            this.parameterId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.parameterId.HeaderText = "Parameter Id";
+            this.parameterId.MaxInputLength = 20;
+            this.parameterId.MinimumWidth = 120;
+            this.parameterId.Name = "parameterId";
+            this.parameterId.ReadOnly = true;
+            this.parameterId.Width = 120;
             // 
             // parameterDisplayName
             // 
@@ -173,7 +174,7 @@ namespace Magical_Tool_Solution.Configuration
             this.parameterDisplayName.Name = "parameterDisplayName";
             this.parameterDisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.parameterDisplayName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.parameterDisplayName.Width = 125;
+            this.parameterDisplayName.Width = 126;
             // 
             // parameterDescription
             // 
@@ -198,7 +199,7 @@ namespace Magical_Tool_Solution.Configuration
             this.groupsUsage.MinimumWidth = 150;
             this.groupsUsage.Name = "groupsUsage";
             this.groupsUsage.ReadOnly = true;
-            this.groupsUsage.Width = 150;
+            this.groupsUsage.Width = 174;
             // 
             // configureClgrParametersLabel
             // 
@@ -324,7 +325,7 @@ namespace Magical_Tool_Solution.Configuration
             this.bottomPanel.ResumeLayout(false);
             this.clgrPanel.ResumeLayout(false);
             this.componentsPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.positionsDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).EndInit();
             this.topPanel.ResumeLayout(false);
             this.topRightPanel.ResumeLayout(false);
             this.topLeftPanel.ResumeLayout(false);
@@ -346,9 +347,9 @@ namespace Magical_Tool_Solution.Configuration
         private System.Windows.Forms.ListBox groupsListBox;
         private System.Windows.Forms.Panel clgrPanel;
         private System.Windows.Forms.Panel componentsPanel;
-        private System.Windows.Forms.DataGridView positionsDataGridView;
+        private System.Windows.Forms.DataGridView clgrParametersDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parameterId;
         private System.Windows.Forms.DataGridViewTextBoxColumn parameterDisplayName;
         private System.Windows.Forms.DataGridViewTextBoxColumn parameterDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn parameterValueType;

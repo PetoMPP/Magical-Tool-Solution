@@ -4,12 +4,23 @@ using System.Text;
 
 namespace MTSLibrary
 {
-    public class Enums
+    public enum DatabaseType
     {
-        public enum DatabaseType
-        {
-            TDM,
-            MTS
-        }
+        TDM,
+        MTS
+    }
+    public enum ItemType
+    {
+        comp,
+        tool,
+        list,
+        toolClass,
+        toolGroup,
+        mainClass
+    }
+    public enum CreatingType
+    {
+        updating,
+        creating
     }
 }

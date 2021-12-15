@@ -31,6 +31,7 @@ namespace Magical_Tool_Solution
         {
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.availableSectionsBox = new System.Windows.Forms.ListBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.availableModulesBox = new System.Windows.Forms.ListBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -38,7 +39,6 @@ namespace Magical_Tool_Solution
             this.launchInNewWindowButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.launchButton = new System.Windows.Forms.Button();
-            this.availableSectionsBox = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -67,6 +67,22 @@ namespace Magical_Tool_Solution
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(280, 379);
             this.panel1.TabIndex = 10;
+            // 
+            // availableSectionsBox
+            // 
+            this.availableSectionsBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.availableSectionsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.availableSectionsBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.availableSectionsBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.availableSectionsBox.ForeColor = System.Drawing.Color.White;
+            this.availableSectionsBox.FormattingEnabled = true;
+            this.availableSectionsBox.IntegralHeight = false;
+            this.availableSectionsBox.ItemHeight = 32;
+            this.availableSectionsBox.Location = new System.Drawing.Point(0, 0);
+            this.availableSectionsBox.Name = "availableSectionsBox";
+            this.availableSectionsBox.Size = new System.Drawing.Size(280, 379);
+            this.availableSectionsBox.TabIndex = 8;
+            this.availableSectionsBox.SelectedIndexChanged += new System.EventHandler(this.AvailableSectionsBox_SelectedIndexChanged);
             // 
             // panel2
             // 
@@ -161,22 +177,6 @@ namespace Magical_Tool_Solution
             this.launchButton.Text = "Uruchom moduł";
             this.launchButton.UseVisualStyleBackColor = false;
             this.launchButton.Click += new System.EventHandler(this.LaunchButton_Click);
-            // 
-            // availableSectionsBox
-            // 
-            this.availableSectionsBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.availableSectionsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.availableSectionsBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.availableSectionsBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.availableSectionsBox.ForeColor = System.Drawing.Color.White;
-            this.availableSectionsBox.FormattingEnabled = true;
-            this.availableSectionsBox.IntegralHeight = false;
-            this.availableSectionsBox.ItemHeight = 32;
-            this.availableSectionsBox.Location = new System.Drawing.Point(0, 0);
-            this.availableSectionsBox.Name = "availableSectionsBox";
-            this.availableSectionsBox.Size = new System.Drawing.Size(280, 379);
-            this.availableSectionsBox.TabIndex = 8;
-            this.availableSectionsBox.SelectedIndexChanged += new System.EventHandler(this.AvailableSectionsBox_SelectedIndexChanged);
             // 
             // Dashboard
             // 

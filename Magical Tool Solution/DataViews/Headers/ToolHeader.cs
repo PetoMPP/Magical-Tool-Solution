@@ -1,4 +1,5 @@
 ﻿using Minimal_Tool_Stock_Calculator.DataViews;
+using MTSLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,20 +12,27 @@ namespace Magical_Tool_Solution.DataViews.Headers
 {
     public partial class ToolHeader : Form
     {
-        List<Button> viewSwitchingButtons = new List<Button>();
-        Form viewForm;
-        Panel insertionPanel;
-        Form callingForm;
-        Form instance1;
-        Form instance2;
+        private readonly List<Button> viewSwitchingButtons = new();
+        private Form viewForm;
+        private readonly Panel insertionPanel;
+        private readonly Form callingForm;
+        private Form instance1;
+        private Form instance2;
         public ToolHeader(Panel targetPanel, Form caller)
         {
             callingForm = caller;
             insertionPanel = targetPanel;
             InitializeComponent();
             viewSwitchingButtons = new List<Button> { viewParametersButton, viewComponentsButton };
+            PreloadViews();
+        }
+
+        private void PreloadViews()
+        {
+            ViewComponentsButton_Click(viewComponentsButton, new EventArgs());
             ViewParametersButton_Click(viewParametersButton, new EventArgs());
         }
+
         private void ActivateButton(Button callingButton, Form childForm)
         {
             foreach (Button button in viewSwitchingButtons)
@@ -50,7 +58,7 @@ namespace Magical_Tool_Solution.DataViews.Headers
         {
             if (viewForm != null)
             {
-                viewForm.Close();
+                viewForm.Hide();
             }
             viewForm = childForm;
             childForm.TopLevel = false;
@@ -65,7 +73,7 @@ namespace Magical_Tool_Solution.DataViews.Headers
         {
             if (instance1 == null)
             {
-                instance1 = new Parameters("tool");
+                instance1 = new Parameters(ItemType.tool);
             }
             ActivateButton((Button)sender, instance1);
             viewSwitcherPanel.Focus();

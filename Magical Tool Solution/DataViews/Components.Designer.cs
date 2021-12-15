@@ -33,14 +33,14 @@ namespace Magical_Tool_Solution.DataViews
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.componentsPanel = new System.Windows.Forms.Panel();
             this.componentsDataGridView = new System.Windows.Forms.DataGridView();
-            this.componentsLabelPanel = new System.Windows.Forms.Panel();
-            this.componentsLabel = new System.Windows.Forms.Label();
             this.keyComp = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.componentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentD1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.componentsLabelPanel = new System.Windows.Forms.Panel();
+            this.componentsLabel = new System.Windows.Forms.Label();
             this.componentsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.componentsDataGridView)).BeginInit();
             this.componentsLabelPanel.SuspendLayout();
@@ -59,6 +59,7 @@ namespace Magical_Tool_Solution.DataViews
             // 
             // componentsDataGridView
             // 
+            this.componentsDataGridView.AllowUserToAddRows = false;
             this.componentsDataGridView.AllowUserToDeleteRows = false;
             this.componentsDataGridView.AllowUserToOrderColumns = true;
             this.componentsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
@@ -76,7 +77,7 @@ namespace Magical_Tool_Solution.DataViews
             this.componentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.keyComp,
             this.position,
-            this.componentID,
+            this.componentId,
             this.componentD1,
             this.componentD2,
             this.quantity});
@@ -103,6 +104,57 @@ namespace Magical_Tool_Solution.DataViews
             this.componentsDataGridView.TabIndex = 8;
             this.componentsDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ComponentsDataGridView_MouseDoubleClick);
             // 
+            // keyComp
+            // 
+            this.keyComp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.keyComp.HeaderText = "Key Component";
+            this.keyComp.Name = "keyComp";
+            this.keyComp.Width = 108;
+            // 
+            // position
+            // 
+            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.position.HeaderText = "Position";
+            this.position.MaxInputLength = 5;
+            this.position.Name = "position";
+            this.position.ReadOnly = true;
+            this.position.Width = 87;
+            // 
+            // componentId
+            // 
+            this.componentId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.componentId.HeaderText = "Component Id";
+            this.componentId.MaxInputLength = 10;
+            this.componentId.Name = "componentId";
+            this.componentId.ReadOnly = true;
+            this.componentId.Width = 118;
+            // 
+            // componentD1
+            // 
+            this.componentD1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.componentD1.HeaderText = "Description";
+            this.componentD1.MaxInputLength = 120;
+            this.componentD1.Name = "componentD1";
+            this.componentD1.ReadOnly = true;
+            this.componentD1.Width = 108;
+            // 
+            // componentD2
+            // 
+            this.componentD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.componentD2.HeaderText = "Manufacturer\'s Id";
+            this.componentD2.MaxInputLength = 120;
+            this.componentD2.Name = "componentD2";
+            this.componentD2.ReadOnly = true;
+            this.componentD2.Width = 135;
+            // 
+            // quantity
+            // 
+            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.MaxInputLength = 10;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            // 
             // componentsLabelPanel
             // 
             this.componentsLabelPanel.Controls.Add(this.componentsLabel);
@@ -124,57 +176,6 @@ namespace Magical_Tool_Solution.DataViews
             this.componentsLabel.Size = new System.Drawing.Size(784, 47);
             this.componentsLabel.TabIndex = 5;
             this.componentsLabel.Text = "Tool\'s Components:";
-            // 
-            // keyComp
-            // 
-            this.keyComp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.keyComp.HeaderText = "Key Component";
-            this.keyComp.Name = "keyComp";
-            this.keyComp.Width = 119;
-            // 
-            // position
-            // 
-            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.position.HeaderText = "Position";
-            this.position.MaxInputLength = 5;
-            this.position.Name = "position";
-            this.position.ReadOnly = true;
-            this.position.Width = 87;
-            // 
-            // componentID
-            // 
-            this.componentID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentID.HeaderText = "Component ID";
-            this.componentID.MaxInputLength = 10;
-            this.componentID.Name = "componentID";
-            this.componentID.ReadOnly = true;
-            this.componentID.Width = 130;
-            // 
-            // componentD1
-            // 
-            this.componentD1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD1.HeaderText = "Description";
-            this.componentD1.MaxInputLength = 120;
-            this.componentD1.Name = "componentD1";
-            this.componentD1.ReadOnly = true;
-            this.componentD1.Width = 108;
-            // 
-            // componentD2
-            // 
-            this.componentD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD2.HeaderText = "Manufacturer\'s ID";
-            this.componentD2.MaxInputLength = 120;
-            this.componentD2.Name = "componentD2";
-            this.componentD2.ReadOnly = true;
-            this.componentD2.Width = 137;
-            // 
-            // quantity
-            // 
-            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MaxInputLength = 10;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
             // 
             // Components
             // 
@@ -203,7 +204,7 @@ namespace Magical_Tool_Solution.DataViews
         private System.Windows.Forms.Label componentsLabel;
         private System.Windows.Forms.DataGridViewCheckBoxColumn keyComp;
         private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn componentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn componentD1;
         private System.Windows.Forms.DataGridViewTextBoxColumn componentD2;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;

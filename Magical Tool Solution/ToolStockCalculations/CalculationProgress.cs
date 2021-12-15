@@ -15,12 +15,12 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 {
     public partial class CalculationProgress : Form
     {
-        readonly Form caller;
-        List<CompModel> calculatedComps = new List<CompModel>();
-        List<int> dummyResults = new List<int>();
-        Task calculationTask;
-        static CancellationTokenSource tokenSource = new CancellationTokenSource();
-        CancellationToken ct = tokenSource.Token;
+        private readonly Form caller;
+        private readonly List<CompModel> calculatedComps = new();
+        private readonly List<int> dummyResults = new();
+        private readonly Task calculationTask;
+        private static CancellationTokenSource tokenSource = new();
+        private readonly CancellationToken ct = tokenSource.Token;
         public CalculationProgress(string mode, List<CompModel> comps, Form callingForm)
         {
             tokenSource = new CancellationTokenSource();
@@ -43,7 +43,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 
         private async Task DummyFunctionAsync(CancellationToken ct)
         {
-            List<int> output = new List<int>();
+            List<int> output = new();
             int itemValue = 0;
             List<int> data = GenerateDummyData();
             ClearOutputWindow();
@@ -78,7 +78,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
         {
             progressBar.PerformStep();
             double percProgress = (double)progressBar.Value / progressBar.Maximum * 100;
-            percProgress =  Math.Round(percProgress, 2);
+            percProgress = Math.Round(percProgress, 2);
             progressLabel.Text = $"{item}   {percProgress}% {progressBar.Value}/{progressBar.Maximum}";
         }
 
@@ -91,9 +91,9 @@ namespace Magical_Tool_Solution.ToolStockCalculations
             progressLabel.Text = $"<item>   {percProgress}% {currItem}/{allItems}";
         }
 
-        private List<int> GenerateDummyData()
+        private static List<int> GenerateDummyData()
         {
-            List<int> data = new List<int>();
+            List<int> data = new();
             for (int i = 10; i < 16; i++)
             {
                 data.Add(i);
@@ -147,7 +147,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 
         private async Task<List<CompModel>> CalculateCompsAsync(List<CompModel> comps, string mode)
         {
-            List<CompModel> output = new List<CompModel>();
+            List<CompModel> output = new();
             progressBar.Maximum = comps.Count;
             int percProgress = 0;
             int currItem = 0;
@@ -163,7 +163,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 
         private CompModel CalculateSingleComp(string mode, CompModel comp)
         {
-            CompModel output = new CompModel();
+            CompModel output = new();
             if (mode == "missing")
             {
                 output = CalculationLogic.CalculateMissingStock(comp);
@@ -176,13 +176,13 @@ namespace Magical_Tool_Solution.ToolStockCalculations
         }
 
         private void Calculate(string mode, List<CompModel> comps)
-        {   
+        {
             //TODO - progress bar setup
             if (mode == "missing")
             {
                 foreach (CompModel comp in comps)
                 {
-                    CalculationLogic.CalculateMissingStock(comp); 
+                    CalculationLogic.CalculateMissingStock(comp);
                     //TODO - progress bar step
                 }
             }

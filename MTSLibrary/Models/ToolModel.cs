@@ -6,11 +6,15 @@ namespace MTSLibrary.Models
 {
     public class ToolModel
     {
-        public string ID { get; set; }
-        public int QuantityCTX { get; set; }
-        public int QuantityDMF { get; set; }
-        public int QuantityFMS { get; set; }
-        public int QuantityDatron { get; set; }
-        public List<CompUsageModel> UsedComps { get; set; }
+        public string Id { get; set; }
+        public string Desc1 { get; set; }
+        public string Desc2 { get; set; }
+        public string ToolClassId { get; set; }
+        public string ToolGroupId { get; set; }
+        public string MachineInterface { get; set; }
+        public string DataStatus { get; set; }
+        public SuitabilityModel Suitability { get; set; }
+        public List<ParameterModel> Parameters { get; set; }
+        public List<ToolComponentModel> Components { get; set; }
     }
 }

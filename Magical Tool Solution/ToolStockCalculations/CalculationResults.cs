@@ -10,8 +10,8 @@ namespace Magical_Tool_Solution.ToolStockCalculations
 {
     public partial class CalculationResults : Form
     {
-        readonly List<int> calculatedInts = new List<int>();
-        readonly Form parentCaller = new Form();
+        private readonly List<int> calculatedInts = new();
+        private readonly Form parentCaller = new();
         public CalculationResults(Form calulationCallingForm, List<int> dummyResults)
         {
             Visible = true;

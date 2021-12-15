@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MTSLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,18 +11,25 @@ namespace Minimal_Tool_Stock_Calculator.DataViews.Headers
 {
     public partial class ComponentHeader : Form
     {
-        List<Button> viewSwitchingButtons = new List<Button>();
-        Form viewForm;
-        Panel insertionPanel;
-        Form instance1;
-        Form instance2;
+        private readonly List<Button> viewSwitchingButtons = new();
+        private Form viewForm;
+        private readonly Panel insertionPanel;
+        private Form instance1;
+        private Form instance2;
         public ComponentHeader(Panel targetPanel)
         {
             insertionPanel = targetPanel;
             InitializeComponent();
             viewSwitchingButtons = new List<Button> { viewParametersButton, viewConnectionsButton };
+            PreloadViews();
+        }
+
+        private void PreloadViews()
+        {
+            ViewConnectionsButton_Click(viewConnectionsButton, new EventArgs());
             ViewParametersButton_Click(viewParametersButton, new EventArgs());
         }
+
         private void ActivateButton(Button callingButton, Form childForm)
         {
             foreach (Button button in viewSwitchingButtons)
@@ -62,7 +70,7 @@ namespace Minimal_Tool_Stock_Calculator.DataViews.Headers
         {
             if (instance1 == null)
             {
-                instance1 = new Parameters("comp");
+                instance1 = new Parameters(ItemType.comp);
             }
             ActivateButton((Button)sender, instance1);
             viewSwitcherPanel.Focus();

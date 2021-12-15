@@ -39,6 +39,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.applyButtonPanel = new System.Windows.Forms.Panel();
             this.applyButton = new System.Windows.Forms.Button();
             this.leftEditorPanel = new System.Windows.Forms.Panel();
+            this.mainClassPanel = new System.Windows.Forms.Panel();
+            this.mainClassIdD1Panel = new System.Windows.Forms.Panel();
+            this.mainD1TextBox = new System.Windows.Forms.TextBox();
+            this.mainIdTextBox = new System.Windows.Forms.TextBox();
+            this.mainClassLabel = new System.Windows.Forms.Label();
             this.idD1Panel = new System.Windows.Forms.Panel();
             this.browseButton = new System.Windows.Forms.Button();
             this.d1TextBox = new System.Windows.Forms.TextBox();
@@ -73,6 +78,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.cancelButtonPanel.SuspendLayout();
             this.applyButtonPanel.SuspendLayout();
             this.leftEditorPanel.SuspendLayout();
+            this.mainClassPanel.SuspendLayout();
+            this.mainClassIdD1Panel.SuspendLayout();
             this.idD1Panel.SuspendLayout();
             this.rightEditorPanel.SuspendLayout();
             this.classModeCheckBoxPanel.SuspendLayout();
@@ -143,6 +150,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = false;
+            this.okButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // cancelButtonPanel
             // 
@@ -171,6 +179,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // applyButtonPanel
             // 
@@ -199,9 +208,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.applyButton.TabIndex = 9;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = false;
+            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // leftEditorPanel
             // 
+            this.leftEditorPanel.Controls.Add(this.mainClassPanel);
             this.leftEditorPanel.Controls.Add(this.idD1Panel);
             this.leftEditorPanel.Controls.Add(this.idD1Label);
             this.leftEditorPanel.Controls.Add(this.basicDataLabel);
@@ -211,13 +222,77 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.leftEditorPanel.Size = new System.Drawing.Size(300, 352);
             this.leftEditorPanel.TabIndex = 4;
             // 
+            // mainClassPanel
+            // 
+            this.mainClassPanel.Controls.Add(this.mainClassIdD1Panel);
+            this.mainClassPanel.Controls.Add(this.mainClassLabel);
+            this.mainClassPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainClassPanel.Location = new System.Drawing.Point(0, 92);
+            this.mainClassPanel.Name = "mainClassPanel";
+            this.mainClassPanel.Size = new System.Drawing.Size(300, 59);
+            this.mainClassPanel.TabIndex = 18;
+            // 
+            // mainClassIdD1Panel
+            // 
+            this.mainClassIdD1Panel.Controls.Add(this.mainD1TextBox);
+            this.mainClassIdD1Panel.Controls.Add(this.mainIdTextBox);
+            this.mainClassIdD1Panel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainClassIdD1Panel.Location = new System.Drawing.Point(0, 24);
+            this.mainClassIdD1Panel.Name = "mainClassIdD1Panel";
+            this.mainClassIdD1Panel.Padding = new System.Windows.Forms.Padding(5, 5, 35, 5);
+            this.mainClassIdD1Panel.Size = new System.Drawing.Size(300, 33);
+            this.mainClassIdD1Panel.TabIndex = 18;
+            // 
+            // mainD1TextBox
+            // 
+            this.mainD1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.mainD1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainD1TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.mainD1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mainD1TextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.mainD1TextBox.Location = new System.Drawing.Point(69, 5);
+            this.mainD1TextBox.MaxLength = 10;
+            this.mainD1TextBox.Name = "mainD1TextBox";
+            this.mainD1TextBox.Size = new System.Drawing.Size(159, 23);
+            this.mainD1TextBox.TabIndex = 3;
+            this.mainD1TextBox.WordWrap = false;
+            // 
+            // mainIdTextBox
+            // 
+            this.mainIdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.mainIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainIdTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.mainIdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.mainIdTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mainIdTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.mainIdTextBox.Location = new System.Drawing.Point(5, 5);
+            this.mainIdTextBox.MaxLength = 10;
+            this.mainIdTextBox.Name = "mainIdTextBox";
+            this.mainIdTextBox.Size = new System.Drawing.Size(58, 23);
+            this.mainIdTextBox.TabIndex = 2;
+            this.mainIdTextBox.WordWrap = false;
+            // 
+            // mainClassLabel
+            // 
+            this.mainClassLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.mainClassLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.mainClassLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mainClassLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.mainClassLabel.Location = new System.Drawing.Point(0, 0);
+            this.mainClassLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.mainClassLabel.Name = "mainClassLabel";
+            this.mainClassLabel.Padding = new System.Windows.Forms.Padding(2);
+            this.mainClassLabel.Size = new System.Drawing.Size(300, 24);
+            this.mainClassLabel.TabIndex = 17;
+            this.mainClassLabel.Text = "<> Class Id and Description:";
+            // 
             // idD1Panel
             // 
             this.idD1Panel.Controls.Add(this.browseButton);
             this.idD1Panel.Controls.Add(this.d1TextBox);
             this.idD1Panel.Controls.Add(this.idTextBox);
             this.idD1Panel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.idD1Panel.Location = new System.Drawing.Point(0, 48);
+            this.idD1Panel.Location = new System.Drawing.Point(0, 59);
             this.idD1Panel.Name = "idD1Panel";
             this.idD1Panel.Padding = new System.Windows.Forms.Padding(5, 5, 35, 5);
             this.idD1Panel.Size = new System.Drawing.Size(300, 33);
@@ -276,13 +351,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.idD1Label.Dock = System.Windows.Forms.DockStyle.Top;
             this.idD1Label.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.idD1Label.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.idD1Label.Location = new System.Drawing.Point(0, 24);
+            this.idD1Label.Location = new System.Drawing.Point(0, 35);
             this.idD1Label.Margin = new System.Windows.Forms.Padding(0);
             this.idD1Label.Name = "idD1Label";
             this.idD1Label.Padding = new System.Windows.Forms.Padding(2);
             this.idD1Label.Size = new System.Drawing.Size(300, 24);
             this.idD1Label.TabIndex = 16;
-            this.idD1Label.Text = "<> ID and Description:";
+            this.idD1Label.Text = "<> Id and Description:";
             // 
             // basicDataLabel
             // 
@@ -294,7 +369,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.basicDataLabel.Margin = new System.Windows.Forms.Padding(0);
             this.basicDataLabel.Name = "basicDataLabel";
             this.basicDataLabel.Padding = new System.Windows.Forms.Padding(2);
-            this.basicDataLabel.Size = new System.Drawing.Size(300, 24);
+            this.basicDataLabel.Size = new System.Drawing.Size(300, 35);
             this.basicDataLabel.TabIndex = 14;
             this.basicDataLabel.Text = "Basic <> Data:";
             // 
@@ -322,7 +397,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.classModeCheckBoxPanel.Controls.Add(this.enableToolsCheckBox);
             this.classModeCheckBoxPanel.Controls.Add(this.enableComponentsCheckBox);
             this.classModeCheckBoxPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.classModeCheckBoxPanel.Location = new System.Drawing.Point(0, 260);
+            this.classModeCheckBoxPanel.Location = new System.Drawing.Point(0, 271);
             this.classModeCheckBoxPanel.Name = "classModeCheckBoxPanel";
             this.classModeCheckBoxPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.classModeCheckBoxPanel.Size = new System.Drawing.Size(300, 29);
@@ -331,6 +406,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // enableToolsCheckBox
             // 
             this.enableToolsCheckBox.AutoSize = true;
+            this.enableToolsCheckBox.Checked = true;
+            this.enableToolsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.enableToolsCheckBox.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableToolsCheckBox.ForeColor = System.Drawing.Color.White;
             this.enableToolsCheckBox.Location = new System.Drawing.Point(174, 3);
@@ -343,6 +420,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // enableComponentsCheckBox
             // 
             this.enableComponentsCheckBox.AutoSize = true;
+            this.enableComponentsCheckBox.Checked = true;
+            this.enableComponentsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.enableComponentsCheckBox.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableComponentsCheckBox.ForeColor = System.Drawing.Color.White;
             this.enableComponentsCheckBox.Location = new System.Drawing.Point(36, 3);
@@ -358,7 +437,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.classModeLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.classModeLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.classModeLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.classModeLabel.Location = new System.Drawing.Point(0, 236);
+            this.classModeLabel.Location = new System.Drawing.Point(0, 247);
             this.classModeLabel.Margin = new System.Windows.Forms.Padding(0);
             this.classModeLabel.Name = "classModeLabel";
             this.classModeLabel.Padding = new System.Windows.Forms.Padding(2);
@@ -371,7 +450,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.holdingComponentsRadioSwitchPanel.Controls.Add(this.disableHoldingComponentsRadioButton);
             this.holdingComponentsRadioSwitchPanel.Controls.Add(this.enableHoldingComponentsRadioButton);
             this.holdingComponentsRadioSwitchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.holdingComponentsRadioSwitchPanel.Location = new System.Drawing.Point(0, 207);
+            this.holdingComponentsRadioSwitchPanel.Location = new System.Drawing.Point(0, 218);
             this.holdingComponentsRadioSwitchPanel.Name = "holdingComponentsRadioSwitchPanel";
             this.holdingComponentsRadioSwitchPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.holdingComponentsRadioSwitchPanel.Size = new System.Drawing.Size(300, 29);
@@ -386,13 +465,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.disableHoldingComponentsRadioButton.Name = "disableHoldingComponentsRadioButton";
             this.disableHoldingComponentsRadioButton.Size = new System.Drawing.Size(71, 23);
             this.disableHoldingComponentsRadioButton.TabIndex = 1;
-            this.disableHoldingComponentsRadioButton.TabStop = true;
             this.disableHoldingComponentsRadioButton.Text = "Disable";
             this.disableHoldingComponentsRadioButton.UseVisualStyleBackColor = true;
             // 
             // enableHoldingComponentsRadioButton
             // 
             this.enableHoldingComponentsRadioButton.AutoSize = true;
+            this.enableHoldingComponentsRadioButton.Checked = true;
             this.enableHoldingComponentsRadioButton.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableHoldingComponentsRadioButton.ForeColor = System.Drawing.SystemColors.Control;
             this.enableHoldingComponentsRadioButton.Location = new System.Drawing.Point(36, 3);
@@ -409,7 +488,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.holdingComponentsLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.holdingComponentsLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.holdingComponentsLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.holdingComponentsLabel.Location = new System.Drawing.Point(0, 183);
+            this.holdingComponentsLabel.Location = new System.Drawing.Point(0, 194);
             this.holdingComponentsLabel.Margin = new System.Windows.Forms.Padding(0);
             this.holdingComponentsLabel.Name = "holdingComponentsLabel";
             this.holdingComponentsLabel.Padding = new System.Windows.Forms.Padding(2);
@@ -422,7 +501,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.insertsRadioSwitchPanel.Controls.Add(this.disableInsertsRadioButton);
             this.insertsRadioSwitchPanel.Controls.Add(this.enableInsertsRadioButton);
             this.insertsRadioSwitchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.insertsRadioSwitchPanel.Location = new System.Drawing.Point(0, 154);
+            this.insertsRadioSwitchPanel.Location = new System.Drawing.Point(0, 165);
             this.insertsRadioSwitchPanel.Name = "insertsRadioSwitchPanel";
             this.insertsRadioSwitchPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.insertsRadioSwitchPanel.Size = new System.Drawing.Size(300, 29);
@@ -437,13 +516,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.disableInsertsRadioButton.Name = "disableInsertsRadioButton";
             this.disableInsertsRadioButton.Size = new System.Drawing.Size(71, 23);
             this.disableInsertsRadioButton.TabIndex = 1;
-            this.disableInsertsRadioButton.TabStop = true;
             this.disableInsertsRadioButton.Text = "Disable";
             this.disableInsertsRadioButton.UseVisualStyleBackColor = true;
             // 
             // enableInsertsRadioButton
             // 
             this.enableInsertsRadioButton.AutoSize = true;
+            this.enableInsertsRadioButton.Checked = true;
             this.enableInsertsRadioButton.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableInsertsRadioButton.ForeColor = System.Drawing.SystemColors.Control;
             this.enableInsertsRadioButton.Location = new System.Drawing.Point(36, 3);
@@ -460,7 +539,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.insertsLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.insertsLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.insertsLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.insertsLabel.Location = new System.Drawing.Point(0, 130);
+            this.insertsLabel.Location = new System.Drawing.Point(0, 141);
             this.insertsLabel.Margin = new System.Windows.Forms.Padding(0);
             this.insertsLabel.Name = "insertsLabel";
             this.insertsLabel.Padding = new System.Windows.Forms.Padding(2);
@@ -473,7 +552,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.machineHolderInterfaceRadioSwitchPanel.Controls.Add(this.disableMachineHolderInterfaceRadioButton);
             this.machineHolderInterfaceRadioSwitchPanel.Controls.Add(this.enableMachineHolderInterfaceRadioButton);
             this.machineHolderInterfaceRadioSwitchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.machineHolderInterfaceRadioSwitchPanel.Location = new System.Drawing.Point(0, 101);
+            this.machineHolderInterfaceRadioSwitchPanel.Location = new System.Drawing.Point(0, 112);
             this.machineHolderInterfaceRadioSwitchPanel.Name = "machineHolderInterfaceRadioSwitchPanel";
             this.machineHolderInterfaceRadioSwitchPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.machineHolderInterfaceRadioSwitchPanel.Size = new System.Drawing.Size(300, 29);
@@ -488,13 +567,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.disableMachineHolderInterfaceRadioButton.Name = "disableMachineHolderInterfaceRadioButton";
             this.disableMachineHolderInterfaceRadioButton.Size = new System.Drawing.Size(71, 23);
             this.disableMachineHolderInterfaceRadioButton.TabIndex = 1;
-            this.disableMachineHolderInterfaceRadioButton.TabStop = true;
             this.disableMachineHolderInterfaceRadioButton.Text = "Disable";
             this.disableMachineHolderInterfaceRadioButton.UseVisualStyleBackColor = true;
             // 
             // enableMachineHolderInterfaceRadioButton
             // 
             this.enableMachineHolderInterfaceRadioButton.AutoSize = true;
+            this.enableMachineHolderInterfaceRadioButton.Checked = true;
             this.enableMachineHolderInterfaceRadioButton.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableMachineHolderInterfaceRadioButton.ForeColor = System.Drawing.SystemColors.Control;
             this.enableMachineHolderInterfaceRadioButton.Location = new System.Drawing.Point(36, 3);
@@ -511,7 +590,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.machineHolderInterfaceLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.machineHolderInterfaceLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.machineHolderInterfaceLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.machineHolderInterfaceLabel.Location = new System.Drawing.Point(0, 77);
+            this.machineHolderInterfaceLabel.Location = new System.Drawing.Point(0, 88);
             this.machineHolderInterfaceLabel.Margin = new System.Windows.Forms.Padding(0);
             this.machineHolderInterfaceLabel.Name = "machineHolderInterfaceLabel";
             this.machineHolderInterfaceLabel.Padding = new System.Windows.Forms.Padding(2);
@@ -524,7 +603,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.suitabilityRadioSwitchPanel.Controls.Add(this.disableSuitabilityRadioButton);
             this.suitabilityRadioSwitchPanel.Controls.Add(this.enableSuitabilityRadioButton);
             this.suitabilityRadioSwitchPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.suitabilityRadioSwitchPanel.Location = new System.Drawing.Point(0, 48);
+            this.suitabilityRadioSwitchPanel.Location = new System.Drawing.Point(0, 59);
             this.suitabilityRadioSwitchPanel.Name = "suitabilityRadioSwitchPanel";
             this.suitabilityRadioSwitchPanel.Padding = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.suitabilityRadioSwitchPanel.Size = new System.Drawing.Size(300, 29);
@@ -539,13 +618,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.disableSuitabilityRadioButton.Name = "disableSuitabilityRadioButton";
             this.disableSuitabilityRadioButton.Size = new System.Drawing.Size(71, 23);
             this.disableSuitabilityRadioButton.TabIndex = 1;
-            this.disableSuitabilityRadioButton.TabStop = true;
             this.disableSuitabilityRadioButton.Text = "Disable";
             this.disableSuitabilityRadioButton.UseVisualStyleBackColor = true;
             // 
             // enableSuitabilityRadioButton
             // 
             this.enableSuitabilityRadioButton.AutoSize = true;
+            this.enableSuitabilityRadioButton.Checked = true;
             this.enableSuitabilityRadioButton.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.enableSuitabilityRadioButton.ForeColor = System.Drawing.SystemColors.Control;
             this.enableSuitabilityRadioButton.Location = new System.Drawing.Point(36, 3);
@@ -562,7 +641,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.suitabilityEnabledLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.suitabilityEnabledLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.suitabilityEnabledLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.suitabilityEnabledLabel.Location = new System.Drawing.Point(0, 24);
+            this.suitabilityEnabledLabel.Location = new System.Drawing.Point(0, 35);
             this.suitabilityEnabledLabel.Margin = new System.Windows.Forms.Padding(0);
             this.suitabilityEnabledLabel.Name = "suitabilityEnabledLabel";
             this.suitabilityEnabledLabel.Padding = new System.Windows.Forms.Padding(2);
@@ -580,7 +659,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.activeFeaturesLabel.Margin = new System.Windows.Forms.Padding(0);
             this.activeFeaturesLabel.Name = "activeFeaturesLabel";
             this.activeFeaturesLabel.Padding = new System.Windows.Forms.Padding(2);
-            this.activeFeaturesLabel.Size = new System.Drawing.Size(300, 24);
+            this.activeFeaturesLabel.Size = new System.Drawing.Size(300, 35);
             this.activeFeaturesLabel.TabIndex = 15;
             this.activeFeaturesLabel.Text = "Active Features:";
             // 
@@ -608,6 +687,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.cancelButtonPanel.ResumeLayout(false);
             this.applyButtonPanel.ResumeLayout(false);
             this.leftEditorPanel.ResumeLayout(false);
+            this.mainClassPanel.ResumeLayout(false);
+            this.mainClassIdD1Panel.ResumeLayout(false);
+            this.mainClassIdD1Panel.PerformLayout();
             this.idD1Panel.ResumeLayout(false);
             this.idD1Panel.PerformLayout();
             this.rightEditorPanel.ResumeLayout(false);
@@ -665,5 +747,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.CheckBox enableComponentsCheckBox;
         private System.Windows.Forms.Label classModeLabel;
         private System.Windows.Forms.Button browseButton;
+        private System.Windows.Forms.Panel mainClassPanel;
+        private System.Windows.Forms.Panel mainClassIdD1Panel;
+        private System.Windows.Forms.TextBox mainD1TextBox;
+        private System.Windows.Forms.TextBox mainIdTextBox;
+        private System.Windows.Forms.Label mainClassLabel;
     }
 }

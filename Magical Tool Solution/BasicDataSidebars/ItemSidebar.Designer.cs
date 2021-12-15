@@ -767,6 +767,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.clgrSelectorButton.Size = new System.Drawing.Size(35, 33);
             this.clgrSelectorButton.TabIndex = 1;
             this.clgrSelectorButton.UseVisualStyleBackColor = false;
+            this.clgrSelectorButton.Click += new System.EventHandler(this.ClgrSelectorButton_Click);
             // 
             // panel2
             // 

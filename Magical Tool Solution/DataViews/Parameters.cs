@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MTSLibrary;
+using MTSLibrary.Connections;
+using MTSLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,19 +13,22 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
 {
     public partial class Parameters : Form
     {
-        public Parameters(string mode)
+        private readonly ItemType _itemType;
+
+        public Parameters(ItemType itemType)
         {
             InitializeComponent();
-            AdjustUI(mode);
+            AdjustUI();
+            _itemType = itemType;
         }
 
-        private void AdjustUI(string mode)
+        private void AdjustUI()
         {
-            if (mode == "comp")
+            if (_itemType == ItemType.comp)
             {
                 parametersLabel.Text = "Component Parameters:";
             }
-            else if (mode == "tool")
+            else if (_itemType == ItemType.tool)
             {
                 parametersLabel.Text = "Tool Parameters:";
             }

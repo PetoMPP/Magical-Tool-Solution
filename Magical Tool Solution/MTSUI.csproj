@@ -1,11 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Magical_Tool_Solution</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BasicDataSidebars\ItemSidebar.cs~RF53285105.TMP" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MTSLibrary\MTSLibrary.csproj" />
