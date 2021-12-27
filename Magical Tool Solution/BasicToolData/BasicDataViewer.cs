@@ -455,8 +455,8 @@ namespace Magical_Tool_Solution.BasicToolData
         private ListModel CreateListModelFromFormData() => new()
         {
             Id = idTextBox.Text,
-            Desc1 = d1TextBox.Text,
-            Desc2 = d2TextBox.Text,
+            Description1 = d1TextBox.Text,
+            Description2 = d2TextBox.Text,
             MachineId = _machineBox.Text,
             MachineGroupId = _machineGroupBox.Text,
             MaterialId = _materialBox.Text,
@@ -464,7 +464,7 @@ namespace Magical_Tool_Solution.BasicToolData
             CreatorName = _createdByBox.Text,
             LastModifiedName = _modifiedByBox.Text,
             OwnerName = _responsibleBox.Text,
-            Tools = GetListPositions()
+            ListPositions = GetListPositions()
         };
 
         private List<ListPositionModel> GetListPositions()
@@ -476,45 +476,28 @@ namespace Magical_Tool_Solution.BasicToolData
             List<ListPositionModel> output = new();
             foreach (DataGridViewRow row in _positionsDataGridView.Rows)
             {
-                ListPositionModel model = new();
-                foreach (DataGridViewCell cell in row.Cells)
+                ListPositionModel model = new()
                 {
-                    if (cell.OwningColumn.Name == "position")
+                    Position = int.Parse(row.Cells["position"].Value.ToString()),
+                    Quantity = int.Parse(row.Cells["quantity"].Value.ToString())
+                };
+                if (!string.IsNullOrEmpty(row.Cells["componentId"].Value.ToString()))
+                {
+                    model.BasicComp = new()
                     {
-                        if (cell.Value == null)
-                        {
-                            break;
-                        }
-                        model.Position = int.Parse(cell.Value.ToString());
-                    }
-                    else if (cell.OwningColumn.Name == "componentId")
+                        Id = row.Cells["componentId"].Value.ToString(),
+                        Description1 = row.Cells["desc1"].Value.ToString(),
+                        Description2 = row.Cells["desc2"].Value.ToString()
+                    };
+                }
+                else
+                {
+                    model.BasicTool = new()
                     {
-                        if (cell.Value.ToString() != "")
-                        {
-                            model.Comp = new CompModel { Id = cell.Value.ToString() };
-                        }
-
-                    }
-                    else if (cell.OwningColumn.Name == "toolId")
-                    {
-                        if (cell.Value.ToString() != "")
-                        {
-                            model.Tool = new ToolModel { Id = cell.Value.ToString() };
-                        }
-                    }
-                    //Unnecessary data for database update/insert query
-                    //else if (cell.OwningColumn.Name == "componentD1")
-                    //{
-                    //    model.Description = cell.Value.ToString();
-                    //}
-                    //else if (cell.OwningColumn.Name == "componentD2")
-                    //{
-                    //    model.ValueType = cell.Value.ToString();
-                    //}
-                    else if (cell.OwningColumn.Name == "quantity")
-                    {
-                        model.Quantity = int.Parse(cell.Value.ToString());
-                    }
+                        Id = row.Cells["toolId"].Value.ToString(),
+                        Description1 = row.Cells["desc1"].Value.ToString(),
+                        Description2 = row.Cells["desc2"].Value.ToString()
+                    };
                 }
                 output.Add(model);
             }
@@ -525,11 +508,11 @@ namespace Magical_Tool_Solution.BasicToolData
         private ToolModel CreateToolModelFromFormData() => new()
         {
             Id = idTextBox.Text,
-            Desc1 = d1TextBox.Text,
-            Desc2 = d2TextBox.Text,
+            Description1 = d1TextBox.Text,
+            Description2 = d2TextBox.Text,
             ToolClassId = _toolClassIdBox.Text,
             ToolGroupId = _toolGroupIdBox.Text,
-            MachineInterface = _modeSpecificBox.Text,
+            MachineInterfaceId = _modeSpecificBox.Text,
             DataStatus = _statusBox.Text,
             Suitability = GetSuitability(),
             Parameters = GetParameters(),
@@ -545,39 +528,18 @@ namespace Magical_Tool_Solution.BasicToolData
             List<ToolComponentModel> output = new();
             foreach (DataGridViewRow row in _componentsDataGridView.Rows)
             {
-                ToolComponentModel model = new();
-                foreach (DataGridViewCell cell in row.Cells)
+                ToolComponentModel model = new()
                 {
-                    if (cell.OwningColumn.Name == "keyComp")
+                    IsKey = bool.Parse(row.Cells["keyComp"].Value.ToString()),
+                    Position = int.Parse(row.Cells["position"].Value.ToString()),
+                    BasicComp = new()
                     {
-                        if (cell.Value == null)
-                        {
-                            break;
-                        }
-                        model.IsKey = bool.Parse(cell.Value.ToString());
-                    }
-                    else if (cell.OwningColumn.Name == "position")
-                    {
-                        model.Position = int.Parse(cell.Value.ToString());
-                    }
-                    else if (cell.OwningColumn.Name == "componentId")
-                    {
-                        model.Comp.Id = cell.Value.ToString();
-                    }
-                    //Unnecessary data for database update/insert query
-                    //else if (cell.OwningColumn.Name == "componentD1")
-                    //{
-                    //    model.Description = cell.Value.ToString();
-                    //}
-                    //else if (cell.OwningColumn.Name == "componentD2")
-                    //{
-                    //    model.ValueType = cell.Value.ToString();
-                    //}
-                    else if (cell.OwningColumn.Name == "quantity")
-                    {
-                        model.Quantity = int.Parse(cell.Value.ToString());
-                    }
-                }
+                        Id = row.Cells["componentId"].Value.ToString(),
+                        Description1 = row.Cells["componentD1"].Value.ToString(),
+                        Description2 = row.Cells["componentD2"].Value.ToString()
+                    },
+                    Quantity = int.Parse(row.Cells["quantity"].Value.ToString())
+                };
                 output.Add(model);
             }
             return output;
@@ -587,11 +549,11 @@ namespace Magical_Tool_Solution.BasicToolData
         private CompModel CreateCompModelFromFormData() => new()
         {
             Id = idTextBox.Text,
-            Desc1 = d1TextBox.Text,
-            Desc2 = d2TextBox.Text,
+            Description1 = d1TextBox.Text,
+            Description2 = d2TextBox.Text,
             ToolClassId = _toolClassIdBox.Text,
             ToolGroupId = _toolGroupIdBox.Text,
-            Manufacturer = new ManufacturerModel { Id = GlobalConfig.Connection.GetManufacturerIdByName(_modeSpecificBox.Text), Name = _modeSpecificBox.Text },
+            ManufacturerName = _modeSpecificBox.Text,
             DataStatus = _statusBox.Text,
             Suitability = GetSuitability(),
             Parameters = GetParameters()
@@ -616,37 +578,21 @@ namespace Magical_Tool_Solution.BasicToolData
             List<ParameterModel> output = new();
             foreach (DataGridViewRow row in _parametersDataGridView.Rows)
             {
-                ParameterModel model = new();
-                foreach (DataGridViewCell cell in row.Cells)
+                ParameterModel model = new()
                 {
-                    if (cell.OwningColumn.Name == "Position")
-                    {
-                        if (cell.Value == null)
-                        {
-                            break;
-                        }
-                        model.Position = int.Parse(cell.Value.ToString());
-                    }
-                    else if (cell.OwningColumn.Name == "ParameterId")
-                    {
-                        model.ParameterId = cell.Value.ToString();
-                    }
-                    else if (cell.OwningColumn.Name == "ParameterName")
-                    {
-                        model.Name = cell.Value.ToString();
-                    }
-                    else if (cell.OwningColumn.Name == "ParameterDescription")
-                    {
-                        model.Description = cell.Value.ToString();
-                    }
-                    else if (cell.OwningColumn.Name == "ValueType")
-                    {
-                        model.ValueType = cell.Value.ToString();
-                    }
-                    else if (cell.OwningColumn.Name == "ParameterValue")
-                    {
-                        model.Value = cell.Value.ToString();
-                    }
+                    Position = int.Parse(row.Cells["Position"].Value.ToString()),
+                    ParameterId = row.Cells["ParameterId"].Value.ToString(),
+                    Name = row.Cells["ParameterName"].Value.ToString(),
+                    Description = row.Cells["ParameterDescription"].Value.ToString(),
+                    DataValueType = (DataValueType)Enum.Parse(typeof(DataValueType), row.Cells["ValueType"].Value.ToString())
+                };
+                if (model.DataValueType == DataValueType.Numeric)
+                {
+                    model.NumericValue = double.Parse(row.Cells["Value"].Value.ToString());
+                }
+                else
+                {
+                    model.TextValue = row.Cells["Value"].Value.ToString();
                 }
                 output.Add(model);
             }
@@ -703,9 +649,9 @@ namespace Magical_Tool_Solution.BasicToolData
         private void LoadListModelData(ListModel model)
         {
             idTextBox.Text = model.Id;
-            d1TextBox.Text = model.Desc1;
-            d2TextBox.Text = model.Desc2;
-            LoadListPositions(model.Tools);
+            d1TextBox.Text = model.Description1;
+            d2TextBox.Text = model.Description2;
+            LoadListPositions(model.ListPositions);
             _machineBox.Text = model.MachineId;
             _machineGroupBox.Text = model.MachineGroupId;
             _materialBox.Text = model.MaterialId;
@@ -726,16 +672,16 @@ namespace Magical_Tool_Solution.BasicToolData
         {
             //Insert all data acquired into controls
             idTextBox.Text = model.Id;
-            d1TextBox.Text = model.Desc1;
-            d2TextBox.Text = model.Desc2;
+            d1TextBox.Text = model.Description1;
+            d2TextBox.Text = model.Description2;
             LoadSuitability(model.Suitability);
             LoadParameters(model.Parameters);
             LoadComponents(model.Components);
             _toolClassIdBox.Text = model.ToolClassId;
             _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
             _toolGroupIdBox.Text = model.ToolGroupId;
-            _toolGroupD1Box.Text = GlobalConfig.Connection.GetGroupNameById(model.ToolGroupId);
-            _modeSpecificBox.Text = model.MachineInterface;
+            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameById(model.ToolGroupId);
+            _modeSpecificBox.Text = model.MachineInterfaceId;
             _statusBox.Text = model.DataStatus;
         }
 
@@ -749,15 +695,15 @@ namespace Magical_Tool_Solution.BasicToolData
         {
             //Insert all data acquired into controls
             idTextBox.Text = model.Id;
-            d1TextBox.Text = model.Desc1;
-            d2TextBox.Text = model.Desc2;
+            d1TextBox.Text = model.Description1;
+            d2TextBox.Text = model.Description2;
             LoadSuitability(model.Suitability);
             LoadParameters(model.Parameters);
             _toolClassIdBox.Text = model.ToolClassId;
             _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
             _toolGroupIdBox.Text = model.ToolGroupId;
-            _toolGroupD1Box.Text = GlobalConfig.Connection.GetGroupNameById(model.ToolGroupId);
-            _modeSpecificBox.Text = model.Manufacturer.Name;
+            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameById(model.ToolGroupId);
+            _modeSpecificBox.Text = model.ManufacturerName;
             _statusBox.Text = model.DataStatus;
         }
 
@@ -791,8 +737,8 @@ namespace Magical_Tool_Solution.BasicToolData
 
         public void LoadClGr(ToolGroupModel model)
         {
-            _toolClassIdBox.Text = model.ParentClassId;
-            _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ParentClassId);
+            _toolClassIdBox.Text = model.ToolClassId;
+            _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
             _toolGroupIdBox.Text = model.Id;
             _toolGroupD1Box.Text = model.Name;
         }

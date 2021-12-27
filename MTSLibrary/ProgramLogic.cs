@@ -108,9 +108,9 @@ namespace MTSLibrary
                 errorMessage += GlobalConfig.Connection.ValidateMaterial(list.MaterialId);
             }
             // Validate Tools
-            if (list.Tools.Count != 0)
+            if (list.ListPositions.Count != 0)
             {
-                errorMessage += GlobalConfig.Connection.ValidateListPositions(list.Tools);
+                errorMessage += GlobalConfig.Connection.ValidateListPositions(list.ListPositions);
             }
 
             return errorMessage;
@@ -137,14 +137,12 @@ namespace MTSLibrary
                 }
             }
             // Validate CLGR in db
-            errorMessage += GlobalConfig.Connection.ValidateClassGroupId(tool.ToolGroupId);
+            errorMessage += GlobalConfig.Connection.ValidateClassGroupId(tool.ToolClassId, tool.ToolGroupId);
             // Validate machine interface
-            if (tool.MachineInterface != "")
+            if (tool.MachineInterfaceId != "")
             {
-                errorMessage += GlobalConfig.Connection.ValidateMachineInterface(tool.MachineInterface);
+                errorMessage += GlobalConfig.Connection.ValidateMachineInterfaceId(tool.MachineInterfaceId);
             }
-            // Comps and tools validate parameter values (Data Types verification should be done in front)
-            errorMessage += GlobalConfig.Connection.ValidateParameters(tool.Parameters);
             // tools and list validate positions (probably obsolete)
             errorMessage += GlobalConfig.Connection.ValidateToolComponents(tool.Components);
             return errorMessage;
@@ -171,15 +169,12 @@ namespace MTSLibrary
                 }
             }
             // Validate CLGR in db
-            errorMessage += GlobalConfig.Connection.ValidateClassGroupId(comp.ToolGroupId);
+            errorMessage += GlobalConfig.Connection.ValidateClassGroupId(comp.ToolClassId, comp.ToolGroupId);
             // Validate Manufacturer
-            if (comp.Manufacturer.Name != "")
+            if (comp.ManufacturerName != "")
             {
-                errorMessage += GlobalConfig.Connection.ValidateManufacturer(comp.Manufacturer.Name);
+                errorMessage += GlobalConfig.Connection.ValidateManufacturerName(comp.ManufacturerName);
             }
-            // Comps and tools validate parameter values
-            errorMessage += GlobalConfig.Connection.ValidateParameters(comp.Parameters);
-            // tools and list validate positions (probably obsolete)     
             return errorMessage;
         }
         #endregion

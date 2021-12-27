@@ -65,8 +65,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             {
                 idTextBox.Text = _toolGroupModel.Id;
                 d1TextBox.Text = _toolGroupModel.Name;
-                mainIdTextBox.Text = _toolGroupModel.ParentClassId;
-                mainD1TextBox.Text = GlobalConfig.Connection.GetClassNameById(_toolGroupModel.ParentClassId);
+                mainIdTextBox.Text = _toolGroupModel.ToolClassId;
+                mainD1TextBox.Text = GlobalConfig.Connection.GetClassNameById(_toolGroupModel.ToolClassId);
                 if (_toolGroupModel.SuitabilityEnabled)
                 {
                     enableSuitabilityRadioButton.Checked = true;
@@ -263,7 +263,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 {
                     Id = idTextBox.Text,
                     Name = d1TextBox.Text,
-                    ParentClassId = mainIdTextBox.Text
+                    ToolClassId = mainIdTextBox.Text
                 };
                 if (enableSuitabilityRadioButton.Checked)
                 {

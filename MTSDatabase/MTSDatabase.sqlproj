@@ -22,6 +22,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -45,6 +46,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunSqlCodeAnalysis>True</RunSqlCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -62,5 +64,36 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Comps.sql" />
+    <Build Include="dbo\Tables\Manufacturers.sql" />
+    <Build Include="dbo\Tables\ManufacturerSuppliers.sql" />
+    <Build Include="dbo\Tables\Suppliers.sql" />
+    <Build Include="dbo\Tables\ContactPeople.sql" />
+    <Build Include="dbo\Tables\CompSuitability.sql" />
+    <Build Include="dbo\Tables\CompParameters.sql" />
+    <Build Include="dbo\Tables\Tools.sql" />
+    <Build Include="dbo\Tables\ToolSuitability.sql" />
+    <Build Include="dbo\Tables\MachineInterfaces.sql" />
+    <Build Include="dbo\Tables\ToolParameters.sql" />
+    <Build Include="dbo\Tables\ToolComponents.sql" />
+    <Build Include="dbo\Tables\Machines.sql" />
+    <Build Include="dbo\Tables\MachineGroups.sql" />
+    <Build Include="dbo\Tables\MachineMachineGroups.sql" />
+    <Build Include="dbo\Tables\Materials.sql" />
+    <Build Include="dbo\Tables\MainClasses.sql" />
+    <Build Include="dbo\Tables\ToolClasses.sql" />
+    <Build Include="dbo\Tables\ToolGroups.sql" />
+    <Build Include="dbo\Tables\ToolClassParameters.sql" />
+    <Build Include="dbo\Tables\ToolClassParameterGroups.sql" />
+    <Build Include="dbo\Tables\Lists.sql" />
+    <Build Include="dbo\Tables\ListPositions.sql" />
+    <Build Include="dbo\Tables\DataValueTypes.sql" />
+    <Build Include="dbo\Tables\DataStatuses.sql" />
+    <Build Include="dbo\StoredProcedures\spToolGroups_ValidateIdToolClassId.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="MTSDatabase.refactorlog" />
   </ItemGroup>
 </Project>

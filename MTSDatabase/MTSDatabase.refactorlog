@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="fe453d7e-52d1-4dda-9581-18e42239c249" ChangeDateTime="12/20/2021 15:48:37">
+    <Property Name="ElementName" Value="[dbo].[Lists].[MachineGroup]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Lists]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MachineGroupId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2c1bee72-bc69-41de-8883-fe2783c03269" ChangeDateTime="12/20/2021 16:14:38">
+    <Property Name="ElementName" Value="[dbo].[ToolClassParameters].[ClassId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ToolClassParameters]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ToolClassId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6cf3707-94ae-4415-a9a4-25ebe35f3fdf" ChangeDateTime="12/20/2021 16:26:22">
+    <Property Name="ElementName" Value="[dbo].[ToolGroups].[ClassId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ToolGroups]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ToolClassId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="dd371c40-9193-4994-ae63-95ef379a9796" ChangeDateTime="12/20/2021 16:31:19">
+    <Property Name="ElementName" Value="[dbo].[Tools].[MachineInterface]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tools]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MachineInterfaceId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d9825b51-63c0-4967-beb6-ebb12f3911da" ChangeDateTime="12/20/2021 18:32:19">
+    <Property Name="ElementName" Value="[dbo].[ToolClassParameters].[Desc]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ToolClassParameters]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Description" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="af7ce335-cf89-4955-8b59-a49acb5fb79f" ChangeDateTime="12/20/2021 20:10:56">
+    <Property Name="ElementName" Value="[dbo].[Comps].[ManufacturerId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Comps]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ManufacturerName" />
+  </Operation>
+</Operations>

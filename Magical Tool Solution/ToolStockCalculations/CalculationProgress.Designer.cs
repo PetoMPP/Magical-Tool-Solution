@@ -115,7 +115,7 @@ namespace Magical_Tool_Solution.ToolStockCalculations
             this.closeButton.TabIndex = 8;
             this.closeButton.Text = "Wróć";
             this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // cancelButton
             // 

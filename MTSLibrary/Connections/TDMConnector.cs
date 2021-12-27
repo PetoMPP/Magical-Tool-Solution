@@ -7,7 +7,7 @@ namespace MTSLibrary.Connections
 {
     public class TDMConnector : IDataConnection
     {
-        public void CreateClGrParameter(ClgrParameterModel model)
+        public void CreateClGrParameter(ToolClassParameterModel model)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +67,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public List<ToolClassModel> GetClassesList()
+        public List<ToolClassModel> GetToolClassesList()
         {
             throw new NotImplementedException();
         }
@@ -92,7 +92,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public string GetGroupNameById(string toolGroupId) => throw new NotImplementedException();
+        public string GetToolGroupNameById(string toolGroupId) => throw new NotImplementedException();
 
         public ListModel GetListModelById(string listId)
         {
@@ -118,7 +118,7 @@ namespace MTSLibrary.Connections
 
         public List<ToolClassModel> GetUnallocatedToolClasses() => throw new NotImplementedException();
 
-        public List<string> GetValueTypes()
+        public List<string> GetDataValueTypes()
         {
             throw new NotImplementedException();
         }
@@ -128,7 +128,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public void UpdateClGrParameter(ClgrParameterModel model)
+        public void UpdateToolClassParameter(ToolClassParameterModel model)
         {
             throw new NotImplementedException();
         }
@@ -190,7 +190,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public string ValidateMachineInterface(string machineInterface)
+        public string ValidateMachineInterfaceId(string machineInterface)
         {
             throw new NotImplementedException();
         }
@@ -200,7 +200,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public string ValidateManufacturer(string name)
+        public string ValidateManufacturerName(string name)
         {
             throw new NotImplementedException();
         }
@@ -234,5 +234,8 @@ namespace MTSLibrary.Connections
         {
             throw new NotImplementedException();
         }
+
+        BasicCompModel IDataConnection.GetBasicCompModelById(string text) => throw new NotImplementedException();
+        BasicToolModel IDataConnection.GetBasicToolModelById(string text) => throw new NotImplementedException();
     }
 }

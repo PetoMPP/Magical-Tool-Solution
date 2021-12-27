@@ -8,8 +8,8 @@ namespace Magical_Tool_Solution.Interfaces
         void UpdateToolClass(ToolClassModel model);
         void AddToolGroup(ToolGroupModel model);
         void UpdateToolGroup(ToolGroupModel model);
-        void AddClGrParameter(ClgrParameterModel model);
-        void UpdateClGrParameter(ClgrParameterModel model);
+        void AddClGrParameter(ToolClassParameterModel model);
+        void UpdateClGrParameter(ToolClassParameterModel model);
         bool ValidateToolClassId(string id);
         bool ValidateToolGroup(ToolGroupModel model);
     }

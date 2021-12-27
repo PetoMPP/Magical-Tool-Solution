@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[ContactPeople]
+(
+	[Id] VARCHAR(20) NOT NULL PRIMARY KEY,
+	[FirstName] NVARCHAR(60) NOT NULL,
+	[LastName] NVARCHAR(60) NOT NULL,
+	[EmailAddress] VARCHAR(120) NULL 
+)

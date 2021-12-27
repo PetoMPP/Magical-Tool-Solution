@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[DataValueTypes]
+(
+	[Name] NVARCHAR(120) NOT NULL PRIMARY KEY,
+)

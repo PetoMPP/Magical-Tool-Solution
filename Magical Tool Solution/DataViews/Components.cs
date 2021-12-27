@@ -27,9 +27,9 @@ namespace Magical_Tool_Solution.DataViews
             DataGridViewRow row = componentsDataGridView.Rows[rowIndex];
             row.Cells["keyComp"].Value = model.IsKey;
             row.Cells["position"].Value = model.Position;
-            row.Cells["componentId"].Value = model.Comp.Id;
-            row.Cells["componentD1"].Value = model.Comp.Desc1;
-            row.Cells["componentD2"].Value = model.Comp.Desc2;
+            row.Cells["componentId"].Value = model.BasicComp.Id;
+            row.Cells["componentD1"].Value = model.BasicComp.Description1;
+            row.Cells["componentD2"].Value = model.BasicComp.Description2;
             row.Cells["quantity"].Value = model.Quantity;
         }
 
@@ -94,15 +94,15 @@ namespace Magical_Tool_Solution.DataViews
                 else
                 {
                     ToolComponentModel model = new();
-                    model.Comp = new CompModel();
+                    model.BasicComp = new BasicCompModel();
                     DataGridViewRow row = componentsDataGridView
                         .Rows[componentsDataGridView.HitTest(e.X, e.Y)
                         .RowIndex];
                     model.IsKey = bool.Parse(row.Cells["keyComp"].Value.ToString());
                     model.Position = int.Parse(row.Cells["position"].Value.ToString());
-                    model.Comp.Id = row.Cells["componentId"].Value.ToString();
-                    model.Comp.Desc1 = row.Cells["componentD1"].Value.ToString();
-                    model.Comp.Desc2 = row.Cells["componentD2"].Value.ToString();
+                    model.BasicComp.Id = row.Cells["componentId"].Value.ToString();
+                    model.BasicComp.Description1 = row.Cells["componentD1"].Value.ToString();
+                    model.BasicComp.Description2 = row.Cells["componentD2"].Value.ToString();
                     model.Quantity = int.Parse(row.Cells["quantity"].Value.ToString());
                     Form form = new BasicItemSelector(ItemType.comp, CreatingType.updating, parentCallingForm, model, this);
                     form.Visible = true;

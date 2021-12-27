@@ -23,4 +23,9 @@ namespace MTSLibrary
         updating,
         creating
     }
+    public enum DataValueType
+    {
+        Text,
+        Numeric
+    }
 }

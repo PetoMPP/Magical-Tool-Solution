@@ -26,17 +26,17 @@ namespace Magical_Tool_Solution.DataViews
             int rowIndex = positionsDataGridView.Rows.Add();
             DataGridViewRow row = positionsDataGridView.Rows[rowIndex];
             row.Cells["position"].Value = model.Position;
-            if (model.Comp != null)
+            if (model.BasicComp != null)
             {
-                row.Cells["componentId"].Value = model.Comp.Id;
-                row.Cells["desc1"].Value = model.Comp.Desc1;
-                row.Cells["desc2"].Value = model.Comp.Desc2;
+                row.Cells["componentId"].Value = model.BasicComp.Id;
+                row.Cells["desc1"].Value = model.BasicComp.Description1;
+                row.Cells["desc2"].Value = model.BasicComp.Description2;
             }
-            else if (model.Tool != null)
+            else if (model.BasicTool != null)
             {
-                row.Cells["toolId"].Value = model.Tool.Id;
-                row.Cells["desc1"].Value = model.Tool.Desc1;
-                row.Cells["desc2"].Value = model.Tool.Desc2;
+                row.Cells["toolId"].Value = model.BasicTool.Id;
+                row.Cells["desc1"].Value = model.BasicTool.Description1;
+                row.Cells["desc2"].Value = model.BasicTool.Description2;
             }
             row.Cells["quantity"].Value = model.Quantity;
         }
@@ -94,21 +94,21 @@ namespace Magical_Tool_Solution.DataViews
                 model.Quantity = int.Parse(row.Cells["quantity"].Value.ToString());
                 if (row.Cells["componentId"].Value.ToString() != "")
                 {
-                    model.Comp = new CompModel
+                    model.BasicComp = new BasicCompModel
                     {
                         Id = row.Cells["componentId"].Value.ToString(),
-                        Desc1 = row.Cells["desc1"].Value.ToString(),
-                        Desc2 = row.Cells["desc2"].Value.ToString()
+                        Description1 = row.Cells["desc1"].Value.ToString(),
+                        Description2 = row.Cells["desc2"].Value.ToString()
                     };
                     itemType = ItemType.comp;
                 }
                 if (row.Cells["toolId"].Value.ToString() != "")
                 {
-                    model.Tool = new ToolModel
+                    model.BasicTool = new BasicToolModel
                     {
                         Id = row.Cells["toolId"].Value.ToString(),
-                        Desc1 = row.Cells["desc1"].Value.ToString(),
-                        Desc2 = row.Cells["desc2"].Value.ToString()
+                        Description1 = row.Cells["desc1"].Value.ToString(),
+                        Description2 = row.Cells["desc2"].Value.ToString()
                     };
                     itemType = ItemType.tool;
                 }

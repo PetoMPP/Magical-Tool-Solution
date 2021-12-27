@@ -16,6 +16,7 @@ namespace Magical_Tool_Solution.Configuration
     {
         private readonly Form callingForm;
         private List<ToolClassModel> toolClasses;
+        private ToolClassModel _selectedClass;
         public ClgrConfiguration(Form caller)
         {
             callingForm = caller;
@@ -25,7 +26,7 @@ namespace Magical_Tool_Solution.Configuration
         }
 
         private void LoadClassesData() =>
-            toolClasses = GlobalConfig.Connection.GetClassesList();
+            toolClasses = GlobalConfig.Connection.GetToolClassesList();
 
         private void WireUpListsAndParameters()
         {
@@ -38,11 +39,11 @@ namespace Magical_Tool_Solution.Configuration
             clgrParametersDataGridView.DataSource = null;
             if (classesListBox.SelectedItem != null)
             {
-                ToolClassModel selectedClass = (ToolClassModel)classesListBox.SelectedItem;
-                groupsListBox.DataSource = selectedClass.ToolGroups;
+                _selectedClass = (ToolClassModel)classesListBox.SelectedItem;
+                groupsListBox.DataSource = _selectedClass.ToolGroups;
                 groupsListBox.DisplayMember = "Name";
                 //load parameters datagrid
-                DataTable table = ProgramLogic.CreateDataTableFromListOfModels(selectedClass.ClgrParameters);
+                DataTable table = ProgramLogic.CreateDataTableFromListOfModels(_selectedClass.ToolClassParameters);
                 clgrParametersDataGridView.DataSource = table;
             }
         }
@@ -92,28 +93,29 @@ namespace Magical_Tool_Solution.Configuration
             if (clgrParametersDataGridView.HitTest(e.X, e.Y) == DataGridView.HitTestInfo.Nowhere)
             {
                 //new parameter editor
-                Form form = new ParameterEditor(CreatingType.creating, new ClgrParameterModel(), (ToolClassModel)classesListBox.SelectedItem, this, this);
+                Form form = new ParameterEditor(CreatingType.creating, new ToolClassParameterModel(), (ToolClassModel)classesListBox.SelectedItem, this, this);
                 form.Visible = true;
             }
             else if (clgrParametersDataGridView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.Cell)
             {
                 //create model for selected item
-                ClgrParameterModel model = GenerateClgrParameterModelFromLocation(e);
+                ToolClassParameterModel model = GenerateClgrParameterModelFromLocation(e);
                 //update parameter
                 Form form = new ParameterEditor(CreatingType.updating, model, (ToolClassModel)classesListBox.SelectedItem, this, this);
                 form.Visible = true;
             }
         }
 
-        private ClgrParameterModel GenerateClgrParameterModelFromLocation(MouseEventArgs e)
+        private ToolClassParameterModel GenerateClgrParameterModelFromLocation(MouseEventArgs e)
         {
-            ClgrParameterModel model = new();
             DataGridViewRow row = clgrParametersDataGridView.Rows[clgrParametersDataGridView.HitTest(e.X, e.Y).RowIndex];
+            ToolClassParameterModel model = new();
+            model.Id = row.Cells["parameterId"].Value.ToString();
+            model.ToolClassId = _selectedClass.Id;
             model.Position = int.Parse(row.Cells["position"].Value.ToString());
-            model.ParameterId = row.Cells["parameterId"].Value.ToString();
             model.Name = row.Cells["parameterDisplayName"].Value.ToString();
             model.Description = row.Cells["parameterDescription"].Value.ToString();
-            model.ValueType = row.Cells["parameterValueType"].Value.ToString();
+            model.DataValueType = row.Cells["parameterValueType"].Value.ToString();
             // TODO - fix this shit logic
             model.AssignedGroupsIds = (List<string>)row.Cells["groupsUsage"].Value;
             return model;
@@ -147,16 +149,16 @@ namespace Magical_Tool_Solution.Configuration
             WireUpListsAndParameters();
         }
 
-        public void AddClGrParameter(ClgrParameterModel model)
+        public void AddClGrParameter(ToolClassParameterModel model)
         {
             GlobalConfig.Connection.CreateClGrParameter(model);
             LoadClassesData();
             WireUpListsAndParameters();
         }
 
-        public void UpdateClGrParameter(ClgrParameterModel model)
+        public void UpdateClGrParameter(ToolClassParameterModel model)
         {
-            GlobalConfig.Connection.UpdateClGrParameter(model);
+            GlobalConfig.Connection.UpdateToolClassParameter(model);
             LoadClassesData();
             WireUpListsAndParameters();
         }
@@ -165,6 +167,6 @@ namespace Magical_Tool_Solution.Configuration
             GlobalConfig.Connection.ValidateToolClassId(id);
 
         public bool ValidateToolGroup(ToolGroupModel model) =>
-            GlobalConfig.Connection.ValidateToolGroupIdInClass(model.Id, model.ParentClassId);
+            GlobalConfig.Connection.ValidateToolGroupIdInClass(model.Id, model.ToolClassId);
     }
 }

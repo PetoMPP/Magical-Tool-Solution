@@ -48,11 +48,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 ToolComponentModel comp = (ToolComponentModel)model;
                 positionBox.Text = comp.Position.ToString();
                 quantityBox.Text = comp.Quantity.ToString();
-                if (comp.Comp != null)
+                if (comp.BasicComp != null)
                 {
-                    idTextBox.Text = comp.Comp.Id;
-                    d1TextBox.Text = comp.Comp.Desc1;
-                    d2TextBox.Text = comp.Comp.Desc2;
+                    idTextBox.Text = comp.BasicComp.Id;
+                    d1TextBox.Text = comp.BasicComp.Description1;
+                    d2TextBox.Text = comp.BasicComp.Description2;
                 }
             }
             else if (model.GetType() == typeof(ListPositionModel))
@@ -61,17 +61,17 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 ListPositionModel listPosition = (ListPositionModel)model;
                 positionBox.Text = listPosition.Position.ToString();
                 quantityBox.Text = listPosition.Quantity.ToString();
-                if (listPosition.Comp != null)
+                if (listPosition.BasicComp != null)
                 {
-                    idTextBox.Text = listPosition.Comp.Id;
-                    d1TextBox.Text = listPosition.Comp.Desc1;
-                    d2TextBox.Text = listPosition.Comp.Desc2;
+                    idTextBox.Text = listPosition.BasicComp.Id;
+                    d1TextBox.Text = listPosition.BasicComp.Description1;
+                    d2TextBox.Text = listPosition.BasicComp.Description2;
                 }
-                else if (listPosition.Tool != null)
+                else if (listPosition.BasicTool != null)
                 {
-                    idTextBox.Text = listPosition.Tool.Id;
-                    d1TextBox.Text = listPosition.Tool.Desc1;
-                    d2TextBox.Text = listPosition.Tool.Desc2;
+                    idTextBox.Text = listPosition.BasicTool.Id;
+                    d1TextBox.Text = listPosition.BasicTool.Description1;
+                    d2TextBox.Text = listPosition.BasicTool.Description2;
                 }
             }
         }
@@ -195,21 +195,21 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             if (_itemType == ItemType.comp)
             {
                 //create model with comp model
-                model.Comp = new CompModel
+                model.BasicComp = new BasicCompModel
                 {
                     Id = idTextBox.Text,
-                    Desc1 = d1TextBox.Text,
-                    Desc2 = d2TextBox.Text
+                    Description1 = d1TextBox.Text,
+                    Description2 = d2TextBox.Text
                 };
             }
             else if (_itemType == ItemType.tool)
             {
                 //create model with tool model
-                model.Tool = new ToolModel
+                model.BasicTool = new BasicToolModel
                 {
                     Id = idTextBox.Text,
-                    Desc1 = d1TextBox.Text,
-                    Desc2 = d2TextBox.Text
+                    Description1 = d1TextBox.Text,
+                    Description2 = d2TextBox.Text
                 };
             }
             return model;
@@ -220,11 +220,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
             ToolComponentModel model = new()
             {
-                Comp = new CompModel
+                BasicComp = new BasicCompModel
                 {
                     Id = idTextBox.Text,
-                    Desc1 = d1TextBox.Text,
-                    Desc2 = d2TextBox.Text
+                    Description1 = d1TextBox.Text,
+                    Description2 = d2TextBox.Text
                 },
                 Position = int.Parse(positionBox.Text),
                 Quantity = int.Parse(quantityBox.Text)
@@ -281,7 +281,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         {
                             Position = int.Parse(positionBox.Text),
                             Quantity = int.Parse(quantityBox.Text),
-                            Comp = GlobalConfig.Connection.GetBasicCompModelById(idTextBox.Text)
+                            BasicComp = GlobalConfig.Connection.GetBasicCompModelById(idTextBox.Text)
                         });
                     }
                     else
@@ -298,7 +298,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         {
                             Position = int.Parse(positionBox.Text),
                             Quantity = int.Parse(quantityBox.Text),
-                            Tool = GlobalConfig.Connection.GetBasicToolModelById(idTextBox.Text)
+                            BasicTool = GlobalConfig.Connection.GetBasicToolModelById(idTextBox.Text)
                         });
                     }
                     else

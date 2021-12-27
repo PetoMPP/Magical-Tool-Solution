@@ -10,6 +10,6 @@ namespace MTSLibrary.Models
         public string Name { get; set; }
         public string MainClassId { get; set; }
         public List<ToolGroupModel> ToolGroups { get; set; }
-        public List<ClgrParameterModel> ClgrParameters { get; set; }
+        public List<ToolClassParameterModel> ToolClassParameters { get; set; }
     }
 }

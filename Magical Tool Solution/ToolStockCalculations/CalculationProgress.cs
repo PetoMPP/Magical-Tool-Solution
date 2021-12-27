@@ -233,16 +233,15 @@ w zależności od ilości wybranych komponentów obliczanie może chwilę zają�
             FormClosed += RestoreCaller;
             calculationOutputBox.Text += $"Przerwano operację.{Environment.NewLine}";
         }
-
-        private void closeButton_Click(object sender, EventArgs e)
+        private void ShowResultsButton_Click(object sender, EventArgs e)
         {
+            _ = new CalculationResults(caller, dummyResults);
             Close();
             Dispose();
         }
 
-        private void ShowResultsButton_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
-            _ = new CalculationResults(caller, dummyResults);
             Close();
             Dispose();
         }

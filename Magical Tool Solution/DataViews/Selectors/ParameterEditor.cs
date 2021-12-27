@@ -15,12 +15,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
     public partial class ParameterEditor : Form
     {
         private readonly CreatingType _creatingType;
-        private ClgrParameterModel _model;
+        private ToolClassParameterModel _model;
         private readonly ToolClassModel _activeClass;
         private readonly Form _callingForm;
         private readonly IClGr _clGr;
 
-        public ParameterEditor(CreatingType creatingType, ClgrParameterModel model, ToolClassModel activeClass, Form caller, IClGr clGr)
+        public ParameterEditor(CreatingType creatingType, ToolClassParameterModel model, ToolClassModel activeClass, Form caller, IClGr clGr)
         {
             _creatingType = creatingType;
             _model = model;
@@ -35,10 +35,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private void LoadDataToUI()
         {
             positionBox.Text = _model.Position.ToString();
-            idTextBox.Text = _model.ParameterId;
+            idTextBox.Text = _model.Id;
             viewingNameTextBox.Text = _model.Name;
             descTextBox.Text = _model.Description;
-            valueTypesComboBox.SelectedItem = _model.ValueType;
+            valueTypesComboBox.SelectedItem = _model.DataValueType;
             classIdTextBox.Text = _activeClass.Id;
             classD1TextBox.Text = _activeClass.Name;
             enabledGroupsDataGridView.DataSource = null;
@@ -67,7 +67,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 table.Rows.Add(values);
             }
             //mark enabled groups
-            List<string> enabledGroupsIds = GlobalConfig.Connection.GetEnabledGroupsIdsByClassIdAndParameterId(_activeClass.Id, _model.ParameterId);
+            List<string> enabledGroupsIds = GlobalConfig.Connection.GetEnabledGroupsIdsByClassIdAndParameterId(_activeClass.Id, _model.Id);
             foreach (DataRow row in table.Rows)
             {
                 if (enabledGroupsIds.Any(i => i == row.ItemArray[1].ToString()))
@@ -91,10 +91,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 idTextBox.Enabled = false;
             }
             valueTypesComboBox.DataSource = null;
-            valueTypesComboBox.DataSource = GlobalConfig.Connection.GetValueTypes();
+            valueTypesComboBox.DataSource = GlobalConfig.Connection.GetDataValueTypes();
         }
 
-        private void ParameterEditor_FormClosed(object sender, FormClosedEventArgs e) => _callingForm.Enabled = true;
+        private void ParameterEditor_FormClosed(object sender, FormClosedEventArgs e)
+            => _callingForm.Enabled = true;
 
         private void OkButton_Click(object sender, EventArgs e)
         {
@@ -102,13 +103,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             if (_creatingType == CreatingType.creating)
             {
                 //validate position
-                if (_activeClass.ClgrParameters.Any(p => p.Position == _model.Position))
+                if (_activeClass.ToolClassParameters.Any(p => p.Position == _model.Position))
                 {
                     MessageBox.Show("Position already in use.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 //validate Id
-                if (_activeClass.ClgrParameters.Any(p => p.ParameterId == _model.ParameterId))
+                if (_activeClass.ToolClassParameters.Any(p => p.Id == _model.Id))
                 {
                     MessageBox.Show("Parameter ID already in use.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -121,15 +122,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             }
         }
 
-        private ClgrParameterModel CreateModelFromUI()
+        private ToolClassParameterModel CreateModelFromUI()
         {
-            ClgrParameterModel model = new()
+            ToolClassParameterModel model = new()
             {
                 Position = int.Parse(positionBox.Text),
-                ParameterId = idTextBox.Text,
+                Id = idTextBox.Text,
+                ToolClassId = classIdTextBox.Text,
                 Name = viewingNameTextBox.Text,
                 Description = descTextBox.Text,
-                ValueType = valueTypesComboBox.SelectedValue.ToString()
+                DataValueType = valueTypesComboBox.SelectedValue.ToString()
             };
             List<string> selectedGroupsIds = new();
             foreach (DataGridViewRow row in enabledGroupsDataGridView.Rows)
