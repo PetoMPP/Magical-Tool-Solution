@@ -12,11 +12,4 @@ namespace MTSLibrary.Models
         public double NumericValue { get; set; }
         public string TextValue { get; set; }
     }
-    //internal class ParameterModelMap : EntityMap<ParameterModel>
-    //{
-    //    internal ParameterModelMap()
-    //    {
-    //        Map(p => p.ParameterId).ToColumn("Id");
-    //    }
-    //}
 }

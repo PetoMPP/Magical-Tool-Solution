@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[spMainClasses_GetNameById]
+	@Id VARCHAR(20)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT Name
+	FROM MainClasses
+	WHERE Id = @Id
+END

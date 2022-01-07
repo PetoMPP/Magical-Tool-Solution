@@ -29,7 +29,7 @@ namespace MTSLibrary.Models
     {
         public bool Equals(ListPositionModel x, ListPositionModel y)
         {
-            if (Object.ReferenceEquals(x, y))
+            if (ReferenceEquals(x, y))
             {
                 return true;
             }

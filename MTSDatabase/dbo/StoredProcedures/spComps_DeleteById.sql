@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE [dbo].[spComps_DeleteById]
+	@Id VARCHAR(20)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DELETE FROM Comps
+	WHERE Id = @Id
+END

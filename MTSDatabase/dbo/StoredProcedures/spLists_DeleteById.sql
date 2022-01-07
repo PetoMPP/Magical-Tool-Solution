@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE [dbo].[spLists_DeleteById]
+	@Id VARCHAR(20)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DELETE FROM Lists
+	WHERE Id = @Id
+END

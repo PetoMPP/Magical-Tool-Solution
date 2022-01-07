@@ -4,14 +4,15 @@
 	@result int output
 AS
 BEGIN
-IF EXISTS (SELECT * FROM ToolGroups 
-	WHERE ToolClassId = @ToolClassId AND Id = @ToolGroupId)
-	BEGIN
-	SET @result = 1
-	END
-ELSE
-	BEGIN
-	SET @result = 0
-	END
+	SET NOCOUNT ON
+	IF EXISTS (SELECT * FROM ToolGroups 
+		WHERE ToolClassId = @ToolClassId AND Id = @ToolGroupId)
+		BEGIN
+			SET @result = 1
+		END
+	ELSE
+		BEGIN
+			SET @result = 0
+		END
 RETURN @result
 END

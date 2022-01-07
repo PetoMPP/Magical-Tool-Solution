@@ -61,7 +61,7 @@ namespace Magical_Tool_Solution.Configuration
         private void AllocateClass()
         {
             ToolClassModel toolClass = (ToolClassModel)allocatedClassesListBox.SelectedItem;
-            GlobalConfig.Connection.SetMainClassIdByClassId(_mainClassModel.Id, toolClass.Id);
+            GlobalConfig.Connection.SetMainClassIdById(_mainClassModel.Id, toolClass.Id);
             WireUpLists();
         }
 
@@ -94,7 +94,7 @@ namespace Magical_Tool_Solution.Configuration
         private void UnallocateClass()
         {
             ToolClassModel toolClass = (ToolClassModel)allocatedClassesListBox.SelectedItem;
-            GlobalConfig.Connection.SetMainClassIdByClassId(null, toolClass.Id);
+            GlobalConfig.Connection.SetMainClassIdById(null, toolClass.Id);
             WireUpLists();
         }
 

@@ -12,19 +12,10 @@ namespace MTSLibrary.Connections
 {
     internal class MTSConnector : IDataConnection
     {
+        // TODO - Move error strings to Program Logic Class
         private static string GetConnectionString() =>
             ConfigurationManager.ConnectionStrings["MTSDatabase"].ConnectionString;
-        private static int GetBitValueFromBool(bool boolean)
-        {
-            if (boolean)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
+        private static int GetBitValueFromBool(bool boolean) => boolean == true ? 1 : 0;
         public void CreateClGrParameter(ToolClassParameterModel model)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
@@ -61,7 +52,7 @@ namespace MTSLibrary.Connections
             dp.Add("@Description2", comp.Description2);
             dp.Add("@ToolClassId", comp.ToolClassId);
             dp.Add("@ToolGroupId", comp.ToolGroupId);
-            dp.Add("@ManufacturerId", comp.ManufacturerName);
+            dp.Add("@ManufacturerName", comp.ManufacturerName);
             dp.Add("@DataStatus", comp.DataStatus);
             cnxn.Execute("dbo.spComps_Insert", dp, commandType: CommandType.StoredProcedure);
             // insert suitability
@@ -80,7 +71,6 @@ namespace MTSLibrary.Connections
             // insert parameters
             foreach (ParameterModel pm in comp.Parameters)
             {
-
                 dp = new();
                 dp.Add("@CompId", comp.Id);
                 dp.Add("@ParameterId", pm.ParameterId);
@@ -142,6 +132,7 @@ namespace MTSLibrary.Connections
 
         public void CreateMainClass(MainClassModel model)
         {
+            // TODO - Make basic main class model class for this sp
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             // insert basic data
             DynamicParameters dp = new();
@@ -283,7 +274,7 @@ namespace MTSLibrary.Connections
         public BasicToolModel GetBasicToolModelById(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            return cnxn.Query<BasicToolModel>("dbo.spTools_GetById", new { @Id = id }, commandType: CommandType.StoredProcedure).First();
+            return cnxn.Query<BasicToolModel>("dbo.spTools_GetBasicDataById", new { @Id = id }, commandType: CommandType.StoredProcedure).First();
         }
 
         public List<ToolClassModel> GetToolClassesList()
@@ -291,7 +282,7 @@ namespace MTSLibrary.Connections
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             // TODO - 2 stored procedures for tool classes
             // 1 - id name main class id
-            List<ToolClassModel> models = cnxn.Query<ToolClassModel>("dbo.spGetToolClasses", commandType: CommandType.StoredProcedure).ToList();
+            List<ToolClassModel> models = cnxn.Query<ToolClassModel>("dbo.spToolClasses_GetAll", commandType: CommandType.StoredProcedure).ToList();
             List<ToolClassParameterModel> clgrParameters = new();
             foreach (ToolClassModel model in models)
             {
@@ -319,7 +310,7 @@ namespace MTSLibrary.Connections
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             // TODO - 2 stored procedures for tool classes
             // 1 - id name main class id
-            ToolClassModel model = cnxn.Query<ToolClassModel>("dbo.spGetToolClassById", new { @Id = id }, commandType: CommandType.StoredProcedure).First();
+            ToolClassModel model = cnxn.Query<ToolClassModel>("dbo.spToolClasses_GetById", new { @Id = id }, commandType: CommandType.StoredProcedure).First();
             List<ToolClassParameterModel> clgrParameters = new();
             model.ToolGroups = cnxn.Query<ToolGroupModel>
                     ("dbo.spToolGroups_GetByToolClassId",
@@ -360,12 +351,9 @@ namespace MTSLibrary.Connections
             // TODO - Figure out joined tables for this query!
             // get parameters data from class
             // get parameters value from comps all in one stored procedure
-            //FluentMapper.Initialize(config =>
-            //config.AddMap(new ParameterModelMap())
-            //);
             model.Parameters = cnxn.Query<ParameterModel>(
                 "dbo.spGetCompParameters_ByCompIdToolClassId",
-                new { CompId = id, @ToolClassId = model.ToolClassId },
+                new { @CompId = id, @ToolClassId = model.ToolClassId },
                 commandType: CommandType.StoredProcedure)
                 .ToList();
 
@@ -375,7 +363,7 @@ namespace MTSLibrary.Connections
         public List<string> GetEnabledGroupsIdsByClassIdAndParameterId(string classId, string parameterId)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            return cnxn.Query<string>("dbo.spToolClassParameterGroups_GetGroupsByClassIdParameterId",
+            return cnxn.Query<string>("dbo.spToolClassParameterGroups_GetToolGroupIdsByToolClassIdParameterId",
                 new { @ClassId = classId, @ParameterId = parameterId },
                 commandType: CommandType.StoredProcedure)
                 .ToList();
@@ -401,11 +389,38 @@ namespace MTSLibrary.Connections
             return model;
         }
 
-        private static List<ListPositionModel> GetListPositionsByListId(string id, IDbConnection cnxn) => cnxn.Query<ListPositionModel>
-                ("dbo.ListPositions_GetByListId",
+        private List<ListPositionModel> GetListPositionsByListId(string id, IDbConnection cnxn)
+        {
+            // List of ListPositions with ListId, Position and Quantity
+            List<ListPositionModel> output = cnxn.Query<ListPositionModel>
+                ("dbo.spListPositions_GetByListId",
                 new { @ListId = id },
                 commandType: CommandType.StoredProcedure)
                 .ToList();
+            string compId;
+            string toolId;
+            // Add Basic Comps/Tools to models
+            foreach (ListPositionModel lp in output)
+            {
+                compId = cnxn.Query<string>("dbo.spListPositions_GetCompIdByListIdPosition",
+                new { @ListId = id , @Position = lp.Position},
+                commandType: CommandType.StoredProcedure)
+                .First();
+                toolId = cnxn.Query<string>("dbo.spListPositions_GetToolIdByListIdPosition",
+                new { @ListId = id, @Position = lp.Position },
+                commandType: CommandType.StoredProcedure)
+                .First();
+                if (compId != null)
+                {
+                    lp.BasicComp = GetBasicCompModelById(compId);
+                }
+                else
+                {
+                    lp.BasicTool = GetBasicToolModelById(toolId);
+                }
+            }
+            return output;
+        }
 
         public List<MainClassModel> GetMainClassesList()
         {
@@ -416,13 +431,13 @@ namespace MTSLibrary.Connections
                 .ToList();
             foreach (MainClassModel model in models)
             {
-                List<ToolClassModel> tcs = cnxn.Query<ToolClassModel>
-                    ("dbo.spToolClasses_GetClassIdsByMainClassId",
+                List<string> tcIds = cnxn.Query<string>
+                    ("dbo.spToolClasses_GetIdsByMainClassId",
                     new { @MainClassId = model.Id })
                     .ToList();
-                foreach (ToolClassModel tc in tcs)
+                foreach (string id in tcIds)
                 {
-                    model.ToolClasses.Add(GetToolClassById(tc.Id));
+                    model.ToolClasses.Add(GetToolClassById(id));
                 }
             }
             return models;
@@ -454,24 +469,26 @@ namespace MTSLibrary.Connections
             // TODO - Figure out joined tables for this query!
             // get parameters data from class
             // get parameters value from comps all in one stored procedure
-            //FluentMapper.Initialize(config =>
-            //config.AddMap(new ParameterModelMap())
-            //);
             model.Parameters = cnxn.Query<ParameterModel>(
                 "dbo.spGetToolParameters_ByCompIdToolClassId",
-                new { ToolId = id, @ToolClassId = model.ToolClassId },
+                new { @ToolId = id, @ToolClassId = model.ToolClassId },
                 commandType: CommandType.StoredProcedure)
                 .ToList();
-            // get components
-            List<ToolComponentModel> tcms = cnxn.Query<ToolComponentModel>(
+            // get list of comps without compmodel
+            List<ToolComponentModel> tcs = cnxn.Query<ToolComponentModel>(
                 "dbo.spToolComponents_GetByToolId",
                 new { @ToolId = id },
                 commandType: CommandType.StoredProcedure)
                 .ToList();
-            // TODO - check this risky logic (mapping issue /\)
-            foreach (ToolComponentModel tcm in tcms)
+            // get comp model for every component
+            string compId;
+            foreach (ToolComponentModel tc in tcs)
             {
-                tcm.BasicComp = GetBasicCompModelById(tcm.BasicComp.Id);
+                compId = cnxn.Query<string>("dbo.spToolComponents_GetCompIdByToolIdPosition",
+                new { @ToolId = id, @Position = tc.Position },
+                commandType: CommandType.StoredProcedure)
+                .First();
+                tc.BasicComp = GetBasicCompModelById(compId);
             }
             return model;
         }
@@ -487,11 +504,11 @@ namespace MTSLibrary.Connections
                 .ToList();
         }
 
-        public void SetMainClassIdByClassId(string mainClassId, string toolClassId)
+        public void SetMainClassIdById(string mainClassId, string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             cnxn.Execute("dbo.spToolClasses_UpdateMainClassIdById",
-                new { @MainClassId = mainClassId, @ToolClassId = toolClassId },
+                new { @MainClassId = mainClassId, @Id = id },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -587,7 +604,9 @@ namespace MTSLibrary.Connections
             dp.Add("@CreatorName", model.CreatorName);
             dp.Add("@LastModifiedName", model.LastModifiedName);
             dp.Add("@OwnerName", model.OwnerName);
+            cnxn.Execute("dbo.spLists_UpdateById", dp, commandType: CommandType.StoredProcedure);
             // update positions
+            // get current positions
             List<ListPositionModel> currentPositions = GetListPositionsByListId(model.Id, cnxn);
             // insert new
             List<ListPositionModel> newPositions = model.ListPositions.Except(currentPositions,
@@ -644,7 +663,7 @@ namespace MTSLibrary.Connections
                 }
                 cnxn.Execute("dbo.spListPostions_Update", dp, commandType: CommandType.StoredProcedure);
             }
-            // delete unused
+            // delete obsolete
             List<ListPositionModel> obsoletePositions = currentPositions.Except(model.ListPositions,
                 new ListPositionModelPositionComparer()).ToList();
             foreach (ListPositionModel lp in obsoletePositions)
@@ -736,7 +755,7 @@ namespace MTSLibrary.Connections
                 dp.Add("@IsKey", GetBitValueFromBool(tc.IsKey));
                 cnxn.Execute("dbo.spToolComponents_Update", dp, commandType: CommandType.StoredProcedure);
             }
-            // delete obsolete\
+            // delete obsolete
             List<ToolComponentModel> obsoleteComponents = currentComponents.Except(model.Components,
                 new ToolComponentModelPositionComparer())
                 .ToList();
@@ -744,13 +763,12 @@ namespace MTSLibrary.Connections
             {
                 dp = new();
                 dp.Add("@ToolId", model.Id);
-                dp.Add("@CompId", tc.BasicComp.Id);
                 dp.Add("@Position", tc.Position);
                 cnxn.Execute("dbo.spToolComponents_Delete", dp, commandType: CommandType.StoredProcedure);
             }
         }
 
-        private List<ToolComponentModel> GetToolComponentsByToolId(string id, IDbConnection cnxn) =>
+        private static List<ToolComponentModel> GetToolComponentsByToolId(string id, IDbConnection cnxn) =>
             cnxn.Query<ToolComponentModel>("dbo.spToolComponents_GetByToolId", new { @ToolId = id }, commandType: CommandType.StoredProcedure).ToList();
 
         public void UpdateToolClass(ToolClassModel model)
@@ -857,7 +875,7 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            if(!cnxn.ExecuteScalar<bool>("dbo.spLists_ValidateId",
+            if(!cnxn.ExecuteScalar<bool>("dbo.spMachineInterfaces_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure))
             {
@@ -891,7 +909,7 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            if (!cnxn.ExecuteScalar<bool>("dbo.spMainClasses_ValidateId",
+            if (!cnxn.ExecuteScalar<bool>("dbo.spMaterials_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure))
             {

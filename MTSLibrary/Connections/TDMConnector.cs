@@ -123,7 +123,7 @@ namespace MTSLibrary.Connections
             throw new NotImplementedException();
         }
 
-        public void SetMainClassIdByClassId(string mainClassId, string toolClassId)
+        public void SetMainClassIdById(string mainClassId, string toolClassId)
         {
             throw new NotImplementedException();
         }

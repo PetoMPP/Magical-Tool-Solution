@@ -9,7 +9,6 @@ namespace MTSLibrary
 {
     public class GlobalConfig
     {
-        //TODO - Connection to DB
         public static IDataConnection Connection { get; private set; }
 
         public static void InitializeConnections(DatabaseType db)
@@ -25,13 +24,7 @@ namespace MTSLibrary
                 Connection = mts;
             }
         }
-        public static string CnxnValue(string name)
-        {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
-        }
-        public static string AppKeyLookup(string key)
-        {
-            return ConfigurationManager.AppSettings[key];
-        }
+        public static string CnxnValue(string name) => ConfigurationManager.ConnectionStrings[name].ConnectionString;
+        public static string AppKeyLookup(string key) => ConfigurationManager.AppSettings[key];
     }
 }

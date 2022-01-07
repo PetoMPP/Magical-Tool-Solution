@@ -43,7 +43,7 @@ namespace MTSLibrary.Connections
         void CreateClGrParameter(ToolClassParameterModel model);
         void UpdateToolClassParameter(ToolClassParameterModel model);
         bool ValidateToolClassId(string id);
-        void SetMainClassIdByClassId(string mainClassId, string toolClassId);
+        void SetMainClassIdById(string mainClassId, string toolClassId);
         bool ValidateToolGroupIdInClass(string id, string parentClassId);
         string GetClassNameById(string parentClassId);
         List<string> GetEnabledGroupsIdsByClassIdAndParameterId(string classId, string parameterId);

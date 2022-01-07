@@ -5,7 +5,7 @@
 	[Quantity] INT NOT NULL DEFAULT 1,
 	[Position] INT NOT NULL,
 	[IsKey] BIT NOT NULL,
-	PRIMARY KEY ([ToolId], [CompId], [Position]), 
+	PRIMARY KEY ([ToolId], [Position]), 
     CONSTRAINT [FK_ToolComponents_Tools] FOREIGN KEY ([ToolId]) REFERENCES [Tools]([Id]),
     CONSTRAINT [FK_ToolComponents_Comps] FOREIGN KEY ([CompId]) REFERENCES [Comps]([Id])
 )

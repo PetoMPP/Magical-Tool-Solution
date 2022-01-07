@@ -152,7 +152,8 @@ namespace MTSLibrary
             string errorMessage = "";
             if (comp.Id == "")
             {
-                errorMessage += "Id field cannot be empty!\n";
+                // Without Id all next checks are broken
+                return "Id field cannot be empty!\n";
             }
             if (creatingType == CreatingType.creating)
             {

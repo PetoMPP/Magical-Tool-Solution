@@ -271,7 +271,12 @@ namespace Magical_Tool_Solution.BasicToolData
             }
         }
         private void IdTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        => LoadDataToUI();
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                LoadDataToUI();
+            }
+        }
         private void IdTextBox_DoubleClick(object sender, EventArgs e)
         => LoadDataToUI();
         private void CopyButton_Click(object sender, EventArgs e)

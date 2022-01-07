@@ -18,8 +18,8 @@ namespace Magical_Tool_Solution
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Dashboard());
             GlobalConfig.InitializeConnections(DatabaseType.MTS);
+            Application.Run(new Dashboard());
         }
     }
 }

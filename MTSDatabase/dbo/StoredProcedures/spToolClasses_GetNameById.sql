@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[spToolClasses_GetNameById]
+	@Id VARCHAR(20)
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT Name
+	FROM ToolClasses
+	WHERE Id = @Id
+END

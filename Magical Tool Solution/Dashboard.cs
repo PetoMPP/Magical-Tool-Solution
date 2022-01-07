@@ -106,10 +106,7 @@ namespace Magical_Tool_Solution
             }
         }
 
-        private void AvailableSectionsBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            WireUpLists();
-        }
+        private void AvailableSectionsBox_SelectedIndexChanged(object sender, EventArgs e) => WireUpLists();
 
         private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
         {
