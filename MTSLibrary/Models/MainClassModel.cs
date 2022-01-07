@@ -6,6 +6,12 @@ namespace MTSLibrary.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string DisplayName {
+            get 
+            {
+                return $"{Id}, {Name}";
+            }
+        }
         public List<ToolClassModel> ToolClasses { get; set; }
     }
 }

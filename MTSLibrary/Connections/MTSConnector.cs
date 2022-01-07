@@ -433,7 +433,8 @@ namespace MTSLibrary.Connections
             {
                 List<string> tcIds = cnxn.Query<string>
                     ("dbo.spToolClasses_GetIdsByMainClassId",
-                    new { @MainClassId = model.Id })
+                    new { @MainClassId = model.Id },
+                    commandType: CommandType.StoredProcedure)
                     .ToList();
                 foreach (string id in tcIds)
                 {
@@ -801,8 +802,12 @@ namespace MTSLibrary.Connections
         public string ValidateClassGroupId(string toolClassId, string toolGroupId)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@ToolClassId", toolClassId);
+            dp.Add("@ToolGroupId", toolGroupId);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             if (!cnxn.ExecuteScalar<bool>("dbo.spToolGroups_ValidateIdToolClassId",
-                new { @ToolClassId = toolClassId, @ToolGroupId = toolGroupId}, 
+                dp, 
                 commandType: CommandType.StoredProcedure))
             {
                 return "Invalid Tool Class/Group\n";
@@ -812,15 +817,21 @@ namespace MTSLibrary.Connections
         public bool ValidateCompId(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spComps_ValidateId",
-                new { @Id = id },
+                dp,
                 commandType: CommandType.StoredProcedure);
         }
         public bool ValidateListId(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spLists_ValidateId",
-                new { @Id = id },
+                dp,
                 commandType: CommandType.StoredProcedure);
         }
         public string ValidateListPositions(List<ListPositionModel> tools)
@@ -854,17 +865,27 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            if (!cnxn.ExecuteScalar<bool>("dbo.spMachines_ValidateId", new { @Id = machineId }, commandType: CommandType.StoredProcedure))
+            DynamicParameters dp = new();
+            dp.Add("@Id", machineId);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
+            if (!cnxn.ExecuteScalar<bool>("dbo.spMachines_ValidateId", dp, commandType: CommandType.StoredProcedure))
             {
                 errorMessage += $"Machine with Id: {machineId} doesn't exist\n";
             }
-            if (!cnxn.ExecuteScalar<bool>("dbo.spMachineGroups_ValidateId", new { @Id = machineGroupId }, commandType: CommandType.StoredProcedure))
+            dp = new();
+            dp.Add("@Id", machineGroupId);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
+            if (!cnxn.ExecuteScalar<bool>("dbo.spMachineGroups_ValidateId", dp, commandType: CommandType.StoredProcedure))
             {
                 errorMessage += $"Machine Group with Id: {machineGroupId} doesn't exist\n";
             }
-            if (!cnxn.ExecuteScalar<bool>("dbo.spMachineMachineGroups_ValidateMachineIdMachineGroupId", new
-                                          { @MachineId = machineId, @MachineGroupId = machineGroupId},
-                                          commandType: CommandType.StoredProcedure))
+            dp = new();
+            dp.Add("@MachineId", machineId);
+            dp.Add("@MachineGroupId", machineGroupId);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
+            if (!cnxn.ExecuteScalar<bool>("dbo.spMachineMachineGroups_ValidateMachineIdMachineGroupId", 
+                                            dp,
+                                            commandType: CommandType.StoredProcedure))
             {
                 errorMessage += $"Machine with Id: {machineId} is not allocated to Machine group with Id: {machineGroupId}\n";
             }
@@ -875,7 +896,10 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            if(!cnxn.ExecuteScalar<bool>("dbo.spMachineInterfaces_ValidateId",
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
+            if (!cnxn.ExecuteScalar<bool>("dbo.spMachineInterfaces_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure))
             {
@@ -883,12 +907,14 @@ namespace MTSLibrary.Connections
             }
             return errorMessage;
         }
-
         public bool ValidateMainClassId(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spMainClasses_ValidateId",
-                new { @Id = id },
+                dp,
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -896,8 +922,11 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Name", name);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             if (!cnxn.ExecuteScalar<bool>("dbo.spManufacturers_ValidateName",
-                new { @Name = name },
+                dp,
                 commandType: CommandType.StoredProcedure))
             {
                 errorMessage += $"Manufacturer with Name: {name} doesn't exists\n";
@@ -909,6 +938,9 @@ namespace MTSLibrary.Connections
         {
             string errorMessage = "";
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             if (!cnxn.ExecuteScalar<bool>("dbo.spMaterials_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure))
@@ -921,6 +953,9 @@ namespace MTSLibrary.Connections
         public bool ValidateToolClassId(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spToolClasses_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure);
@@ -940,6 +975,10 @@ namespace MTSLibrary.Connections
         public bool ValidateToolGroupIdInClass(string id, string toolClassId)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@ToolClassId", toolClassId);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spToolGroups_ValidateIdToolClassId",
                 new { @Id = id , @ToolClassId = toolClassId},
                 commandType: CommandType.StoredProcedure);
@@ -948,9 +987,18 @@ namespace MTSLibrary.Connections
         public bool ValidateToolId(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@Id", id);
+            dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spTools_ValidateId",
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure);
+        }
+
+        public void DeleteMainClassById(string id)
+        {
+            using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            cnxn.Execute("dbo.spMainClasses_DeleteById", new { @Id = id }, commandType: CommandType.StoredProcedure);
         }
     }
 }

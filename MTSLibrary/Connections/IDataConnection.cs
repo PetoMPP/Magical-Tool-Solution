@@ -52,5 +52,6 @@ namespace MTSLibrary.Connections
         void UpdateMainClass(MainClassModel model);
         string GetToolGroupNameById(string toolGroupId);
         string GetManufacturerIdByName(string name);
+        void DeleteMainClassById(string id);
     }
 }

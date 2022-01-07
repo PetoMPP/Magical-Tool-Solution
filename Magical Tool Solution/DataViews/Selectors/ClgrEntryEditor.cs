@@ -59,7 +59,14 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 idTextBox.Text = _toolClassModel.Id;
                 d1TextBox.Text = _toolClassModel.Name;
                 mainIdTextBox.Text = _toolClassModel.MainClassId;
-                mainD1TextBox.Text = GlobalConfig.Connection.GetMainClassNameById(_toolClassModel.MainClassId);
+                if (_toolClassModel.MainClassId != null)
+                {
+                    mainD1TextBox.Text = GlobalConfig.Connection.GetMainClassNameById(_toolClassModel.MainClassId); 
+                }
+                else
+                {
+                    mainD1TextBox.Text = null;
+                }
             }
             else if (_itemType == ItemType.toolGroup)
             {

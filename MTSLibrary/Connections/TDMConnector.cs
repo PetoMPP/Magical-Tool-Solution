@@ -237,5 +237,6 @@ namespace MTSLibrary.Connections
 
         BasicCompModel IDataConnection.GetBasicCompModelById(string text) => throw new NotImplementedException();
         BasicToolModel IDataConnection.GetBasicToolModelById(string text) => throw new NotImplementedException();
+        public void DeleteMainClassById(string id) => throw new NotImplementedException();
     }
 }

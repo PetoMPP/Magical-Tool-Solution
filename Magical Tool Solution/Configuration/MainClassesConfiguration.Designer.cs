@@ -29,6 +29,7 @@ namespace Magical_Tool_Solution.Configuration
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.moduleNameLabel = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.mainClassesListBox = new System.Windows.Forms.ListBox();
@@ -44,11 +45,14 @@ namespace Magical_Tool_Solution.Configuration
             this.bottomLeftPanel = new System.Windows.Forms.Panel();
             this.allocatedClassesListBox = new System.Windows.Forms.ListBox();
             this.allocatedClassesLabel = new System.Windows.Forms.Label();
+            this.mainClassesListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteMainClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topPanel.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.bottomRightPanel.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
             this.bottomLeftPanel.SuspendLayout();
+            this.mainClassesListBoxContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // moduleNameLabel
@@ -78,6 +82,7 @@ namespace Magical_Tool_Solution.Configuration
             // 
             this.mainClassesListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.mainClassesListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainClassesListBox.ContextMenuStrip = this.mainClassesListBoxContextMenuStrip;
             this.mainClassesListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainClassesListBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mainClassesListBox.ForeColor = System.Drawing.Color.White;
@@ -263,6 +268,21 @@ namespace Magical_Tool_Solution.Configuration
             this.allocatedClassesLabel.TabIndex = 8;
             this.allocatedClassesLabel.Text = "Alocated Classes";
             // 
+            // mainClassesListBoxContextMenuStrip
+            // 
+            this.mainClassesListBoxContextMenuStrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.mainClassesListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteMainClassToolStripMenuItem});
+            this.mainClassesListBoxContextMenuStrip.Name = "mainClassesListBoxContextMenuStrip";
+            this.mainClassesListBoxContextMenuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // deleteMainClassToolStripMenuItem
+            // 
+            this.deleteMainClassToolStripMenuItem.Name = "deleteMainClassToolStripMenuItem";
+            this.deleteMainClassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteMainClassToolStripMenuItem.Text = "Delete Main Class";
+            this.deleteMainClassToolStripMenuItem.Click += new System.EventHandler(this.DeleteMainClassToolStripMenuItem_Click);
+            // 
             // MainClassesConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -282,6 +302,7 @@ namespace Magical_Tool_Solution.Configuration
             this.bottomRightPanel.ResumeLayout(false);
             this.buttonsPanel.ResumeLayout(false);
             this.bottomLeftPanel.ResumeLayout(false);
+            this.mainClassesListBoxContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -303,5 +324,7 @@ namespace Magical_Tool_Solution.Configuration
         private System.Windows.Forms.Panel bottomLeftPanel;
         private System.Windows.Forms.ListBox allocatedClassesListBox;
         private System.Windows.Forms.Label allocatedClassesLabel;
+        private System.Windows.Forms.ContextMenuStrip mainClassesListBoxContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteMainClassToolStripMenuItem;
     }
 }

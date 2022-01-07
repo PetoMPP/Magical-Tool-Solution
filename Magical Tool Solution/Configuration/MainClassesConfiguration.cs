@@ -23,6 +23,16 @@ namespace Magical_Tool_Solution.Configuration
             WireUpLists();
         }
 
+        private void WireUpContextMenu()
+        {
+            if (_mainClassModel != null)
+            {
+                deleteMainClassToolStripMenuItem.Enabled = true;
+                return;
+            }
+            deleteMainClassToolStripMenuItem.Enabled = false;
+        }
+
         private void WireUpLists()
         {
             LoadMainClasses();
@@ -33,6 +43,7 @@ namespace Magical_Tool_Solution.Configuration
                 LoadAllocatedClasses();
                 LoadUnallocatedClasses();
             }
+            WireUpContextMenu();
         }
 
         private void LoadUnallocatedClasses()
@@ -51,6 +62,7 @@ namespace Magical_Tool_Solution.Configuration
         {
             mainClassesListBox.DataSource = null;
             mainClassesListBox.DataSource = GlobalConfig.Connection.GetMainClassesList();
+            mainClassesListBox.DisplayMember = "DisplayName";
         }
 
         private void MainClassesConfiguration_FormClosed(object sender, FormClosedEventArgs e) =>
@@ -117,12 +129,13 @@ namespace Magical_Tool_Solution.Configuration
                 MainClassModel model = (MainClassModel)mainClassesListBox.SelectedItem;
                 Form form = new ClgrEntryEditor(
                     ItemType.mainClass,
-                    CreatingType.creating,
+                    CreatingType.updating,
                     model,
                     this,
                     this);
                 form.Visible = true;
             }
+            Enabled = false;
         }
 
         public bool ValidateMainClassId(string id) => GlobalConfig.Connection.ValidateMainClassId(id);
@@ -136,6 +149,16 @@ namespace Magical_Tool_Solution.Configuration
         public void UpdateMainClass(MainClassModel model)
         {
             GlobalConfig.Connection.UpdateMainClass(model);
+            WireUpLists();
+        }
+
+        private void DeleteMainClassToolStripMenuItem_Click(object sender, EventArgs e) => DeleteSelectedMainClass();
+        private void DeleteSelectedMainClass()
+        {
+            if (MessageBox.Show($"Are you sure you want to delete {_mainClassModel.Name}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            {
+                GlobalConfig.Connection.DeleteMainClassById(_mainClassModel.Id);
+            }
             WireUpLists();
         }
     }

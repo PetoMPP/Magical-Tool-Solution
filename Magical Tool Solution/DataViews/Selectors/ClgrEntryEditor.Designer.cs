@@ -247,11 +247,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             this.mainD1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.mainD1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mainD1TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.mainD1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mainD1TextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.mainD1TextBox.Location = new System.Drawing.Point(69, 5);
-            this.mainD1TextBox.MaxLength = 10;
+            this.mainD1TextBox.MaxLength = 120;
             this.mainD1TextBox.Name = "mainD1TextBox";
             this.mainD1TextBox.Size = new System.Drawing.Size(159, 23);
             this.mainD1TextBox.TabIndex = 3;
@@ -261,12 +260,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             this.mainIdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.mainIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mainIdTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.mainIdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.mainIdTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mainIdTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.mainIdTextBox.Location = new System.Drawing.Point(5, 5);
-            this.mainIdTextBox.MaxLength = 10;
+            this.mainIdTextBox.MaxLength = 20;
             this.mainIdTextBox.Name = "mainIdTextBox";
             this.mainIdTextBox.Size = new System.Drawing.Size(58, 23);
             this.mainIdTextBox.TabIndex = 2;
@@ -320,11 +318,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             this.d1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.d1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.d1TextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.d1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.d1TextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.d1TextBox.Location = new System.Drawing.Point(69, 5);
-            this.d1TextBox.MaxLength = 10;
+            this.d1TextBox.MaxLength = 120;
             this.d1TextBox.Name = "d1TextBox";
             this.d1TextBox.Size = new System.Drawing.Size(159, 23);
             this.d1TextBox.TabIndex = 3;
@@ -334,12 +331,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             // 
             this.idTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.idTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.idTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.idTextBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.idTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.idTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.idTextBox.Location = new System.Drawing.Point(5, 5);
-            this.idTextBox.MaxLength = 10;
+            this.idTextBox.MaxLength = 20;
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(58, 23);
             this.idTextBox.TabIndex = 2;

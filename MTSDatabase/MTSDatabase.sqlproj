@@ -169,6 +169,7 @@
     <Build Include="dbo\StoredProcedures\spMaterials_ValidateId.sql" />
     <Build Include="dbo\StoredProcedures\spToolClasses_ValidateId.sql" />
     <Build Include="dbo\StoredProcedures\spTools_ValidateId.sql" />
+    <Build Include="dbo\StoredProcedures\spMainClasses_DeleteById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MTSDatabase.refactorlog" />
