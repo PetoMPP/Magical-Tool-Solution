@@ -33,6 +33,8 @@ namespace Magical_Tool_Solution.Configuration
             this.moduleNameLabel = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.mainClassesListBox = new System.Windows.Forms.ListBox();
+            this.mainClassesListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteMainClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainClassesLabel = new System.Windows.Forms.Label();
             this.allocateClassesLabel = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
@@ -40,19 +42,17 @@ namespace Magical_Tool_Solution.Configuration
             this.unallocatedClassesListBox = new System.Windows.Forms.ListBox();
             this.unallocatedClassesLabel = new System.Windows.Forms.Label();
             this.buttonsPanel = new System.Windows.Forms.Panel();
-            this.moveSelectedToSelected = new System.Windows.Forms.Button();
-            this.moveSelectedToAvailable = new System.Windows.Forms.Button();
+            this.unallocateClassButton = new System.Windows.Forms.Button();
+            this.allocateClassButton = new System.Windows.Forms.Button();
             this.bottomLeftPanel = new System.Windows.Forms.Panel();
             this.allocatedClassesListBox = new System.Windows.Forms.ListBox();
             this.allocatedClassesLabel = new System.Windows.Forms.Label();
-            this.mainClassesListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteMainClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.topPanel.SuspendLayout();
+            this.mainClassesListBoxContextMenuStrip.SuspendLayout();
             this.bottomPanel.SuspendLayout();
             this.bottomRightPanel.SuspendLayout();
             this.buttonsPanel.SuspendLayout();
             this.bottomLeftPanel.SuspendLayout();
-            this.mainClassesListBoxContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // moduleNameLabel
@@ -89,14 +89,26 @@ namespace Magical_Tool_Solution.Configuration
             this.mainClassesListBox.FormattingEnabled = true;
             this.mainClassesListBox.IntegralHeight = false;
             this.mainClassesListBox.ItemHeight = 32;
-            this.mainClassesListBox.Items.AddRange(new object[] {
-            "one",
-            "two"});
             this.mainClassesListBox.Location = new System.Drawing.Point(0, 42);
             this.mainClassesListBox.Name = "mainClassesListBox";
             this.mainClassesListBox.Size = new System.Drawing.Size(1084, 270);
             this.mainClassesListBox.TabIndex = 8;
             this.mainClassesListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainClassesListBox_MouseDoubleClick);
+            // 
+            // mainClassesListBoxContextMenuStrip
+            // 
+            this.mainClassesListBoxContextMenuStrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.mainClassesListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteMainClassToolStripMenuItem});
+            this.mainClassesListBoxContextMenuStrip.Name = "mainClassesListBoxContextMenuStrip";
+            this.mainClassesListBoxContextMenuStrip.Size = new System.Drawing.Size(168, 26);
+            // 
+            // deleteMainClassToolStripMenuItem
+            // 
+            this.deleteMainClassToolStripMenuItem.Name = "deleteMainClassToolStripMenuItem";
+            this.deleteMainClassToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.deleteMainClassToolStripMenuItem.Text = "Delete Main Class";
+            this.deleteMainClassToolStripMenuItem.Click += new System.EventHandler(this.DeleteMainClassToolStripMenuItem_Click);
             // 
             // mainClassesLabel
             // 
@@ -155,9 +167,6 @@ namespace Magical_Tool_Solution.Configuration
             this.unallocatedClassesListBox.FormattingEnabled = true;
             this.unallocatedClassesListBox.IntegralHeight = false;
             this.unallocatedClassesListBox.ItemHeight = 32;
-            this.unallocatedClassesListBox.Items.AddRange(new object[] {
-            "one",
-            "two"});
             this.unallocatedClassesListBox.Location = new System.Drawing.Point(0, 30);
             this.unallocatedClassesListBox.Margin = new System.Windows.Forms.Padding(6);
             this.unallocatedClassesListBox.Name = "unallocatedClassesListBox";
@@ -180,8 +189,8 @@ namespace Magical_Tool_Solution.Configuration
             // 
             // buttonsPanel
             // 
-            this.buttonsPanel.Controls.Add(this.moveSelectedToSelected);
-            this.buttonsPanel.Controls.Add(this.moveSelectedToAvailable);
+            this.buttonsPanel.Controls.Add(this.unallocateClassButton);
+            this.buttonsPanel.Controls.Add(this.allocateClassButton);
             this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonsPanel.Location = new System.Drawing.Point(500, 0);
             this.buttonsPanel.MinimumSize = new System.Drawing.Size(84, 0);
@@ -189,41 +198,43 @@ namespace Magical_Tool_Solution.Configuration
             this.buttonsPanel.Size = new System.Drawing.Size(84, 445);
             this.buttonsPanel.TabIndex = 20;
             // 
-            // moveSelectedToSelected
+            // unallocateClassButton
             // 
-            this.moveSelectedToSelected.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.moveSelectedToSelected.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.moveSelectedToSelected.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
-            this.moveSelectedToSelected.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.moveSelectedToSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveSelectedToSelected.Font = new System.Drawing.Font("Webdings", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.moveSelectedToSelected.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.moveSelectedToSelected.Location = new System.Drawing.Point(12, 166);
-            this.moveSelectedToSelected.Margin = new System.Windows.Forms.Padding(6);
-            this.moveSelectedToSelected.Name = "moveSelectedToSelected";
-            this.moveSelectedToSelected.Size = new System.Drawing.Size(60, 60);
-            this.moveSelectedToSelected.TabIndex = 9;
-            this.moveSelectedToSelected.Text = "4";
-            this.moveSelectedToSelected.UseVisualStyleBackColor = false;
-            this.moveSelectedToSelected.Click += new System.EventHandler(this.MoveSelectedToSelected_Click);
+            this.unallocateClassButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.unallocateClassButton.Enabled = false;
+            this.unallocateClassButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.unallocateClassButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.unallocateClassButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.unallocateClassButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.unallocateClassButton.Font = new System.Drawing.Font("Webdings", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.unallocateClassButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.unallocateClassButton.Location = new System.Drawing.Point(12, 166);
+            this.unallocateClassButton.Margin = new System.Windows.Forms.Padding(6);
+            this.unallocateClassButton.Name = "unallocateClassButton";
+            this.unallocateClassButton.Size = new System.Drawing.Size(60, 60);
+            this.unallocateClassButton.TabIndex = 9;
+            this.unallocateClassButton.Text = "4";
+            this.unallocateClassButton.UseVisualStyleBackColor = false;
+            this.unallocateClassButton.Click += new System.EventHandler(this.MoveSelectedToSelected_Click);
             // 
-            // moveSelectedToAvailable
+            // allocateClassButton
             // 
-            this.moveSelectedToAvailable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.moveSelectedToAvailable.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.moveSelectedToAvailable.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
-            this.moveSelectedToAvailable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.moveSelectedToAvailable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.moveSelectedToAvailable.Font = new System.Drawing.Font("Webdings", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.moveSelectedToAvailable.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.moveSelectedToAvailable.Location = new System.Drawing.Point(12, 246);
-            this.moveSelectedToAvailable.Margin = new System.Windows.Forms.Padding(6);
-            this.moveSelectedToAvailable.Name = "moveSelectedToAvailable";
-            this.moveSelectedToAvailable.Size = new System.Drawing.Size(60, 60);
-            this.moveSelectedToAvailable.TabIndex = 10;
-            this.moveSelectedToAvailable.Text = "3";
-            this.moveSelectedToAvailable.UseVisualStyleBackColor = false;
-            this.moveSelectedToAvailable.Click += new System.EventHandler(this.MoveSelectedToAvailable_Click);
+            this.allocateClassButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.allocateClassButton.Enabled = false;
+            this.allocateClassButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.allocateClassButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.allocateClassButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.allocateClassButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.allocateClassButton.Font = new System.Drawing.Font("Webdings", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.allocateClassButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.allocateClassButton.Location = new System.Drawing.Point(12, 246);
+            this.allocateClassButton.Margin = new System.Windows.Forms.Padding(6);
+            this.allocateClassButton.Name = "allocateClassButton";
+            this.allocateClassButton.Size = new System.Drawing.Size(60, 60);
+            this.allocateClassButton.TabIndex = 10;
+            this.allocateClassButton.Text = "3";
+            this.allocateClassButton.UseVisualStyleBackColor = false;
+            this.allocateClassButton.Click += new System.EventHandler(this.MoveSelectedToAvailable_Click);
             // 
             // bottomLeftPanel
             // 
@@ -245,9 +256,6 @@ namespace Magical_Tool_Solution.Configuration
             this.allocatedClassesListBox.FormattingEnabled = true;
             this.allocatedClassesListBox.IntegralHeight = false;
             this.allocatedClassesListBox.ItemHeight = 32;
-            this.allocatedClassesListBox.Items.AddRange(new object[] {
-            "one",
-            "two"});
             this.allocatedClassesListBox.Location = new System.Drawing.Point(0, 30);
             this.allocatedClassesListBox.Margin = new System.Windows.Forms.Padding(6);
             this.allocatedClassesListBox.Name = "allocatedClassesListBox";
@@ -268,21 +276,6 @@ namespace Magical_Tool_Solution.Configuration
             this.allocatedClassesLabel.TabIndex = 8;
             this.allocatedClassesLabel.Text = "Alocated Classes";
             // 
-            // mainClassesListBoxContextMenuStrip
-            // 
-            this.mainClassesListBoxContextMenuStrip.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.mainClassesListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteMainClassToolStripMenuItem});
-            this.mainClassesListBoxContextMenuStrip.Name = "mainClassesListBoxContextMenuStrip";
-            this.mainClassesListBoxContextMenuStrip.Size = new System.Drawing.Size(181, 48);
-            // 
-            // deleteMainClassToolStripMenuItem
-            // 
-            this.deleteMainClassToolStripMenuItem.Name = "deleteMainClassToolStripMenuItem";
-            this.deleteMainClassToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.deleteMainClassToolStripMenuItem.Text = "Delete Main Class";
-            this.deleteMainClassToolStripMenuItem.Click += new System.EventHandler(this.DeleteMainClassToolStripMenuItem_Click);
-            // 
             // MainClassesConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -298,11 +291,11 @@ namespace Magical_Tool_Solution.Configuration
             this.Text = "MainClassesConfiguration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainClassesConfiguration_FormClosed);
             this.topPanel.ResumeLayout(false);
+            this.mainClassesListBoxContextMenuStrip.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);
             this.bottomRightPanel.ResumeLayout(false);
             this.buttonsPanel.ResumeLayout(false);
             this.bottomLeftPanel.ResumeLayout(false);
-            this.mainClassesListBoxContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -319,8 +312,8 @@ namespace Magical_Tool_Solution.Configuration
         private System.Windows.Forms.ListBox unallocatedClassesListBox;
         private System.Windows.Forms.Label unallocatedClassesLabel;
         private System.Windows.Forms.Panel buttonsPanel;
-        private System.Windows.Forms.Button moveSelectedToSelected;
-        private System.Windows.Forms.Button moveSelectedToAvailable;
+        private System.Windows.Forms.Button unallocateClassButton;
+        private System.Windows.Forms.Button allocateClassButton;
         private System.Windows.Forms.Panel bottomLeftPanel;
         private System.Windows.Forms.ListBox allocatedClassesListBox;
         private System.Windows.Forms.Label allocatedClassesLabel;

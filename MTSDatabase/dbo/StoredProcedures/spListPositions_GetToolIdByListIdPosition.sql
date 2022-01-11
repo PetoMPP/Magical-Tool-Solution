@@ -4,7 +4,7 @@
 AS
 BEGIN
 	SET NOCOUNT ON
-	SELECT Toolid
+	SELECT ToolId
 	FROM ListPositions
 	WHERE ListId = @ListId AND Position = @Position
 END	

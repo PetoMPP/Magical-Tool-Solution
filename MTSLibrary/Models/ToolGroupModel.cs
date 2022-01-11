@@ -11,5 +11,6 @@
         public bool HoldingOtherComponentsEnabled { get; set; }
         public bool EnabledInComps { get; set; }
         public bool EnabledInTools { get; set; }
+        public string DisplayName { get { return $"{Id} - {Name}"; } }
     }
 }

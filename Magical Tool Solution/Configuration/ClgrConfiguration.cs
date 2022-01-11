@@ -33,18 +33,26 @@ namespace Magical_Tool_Solution.Configuration
             //populate classes
             classesListBox.DataSource = null;
             classesListBox.DataSource = toolClasses;
-            classesListBox.DisplayMember = "Name";
+            classesListBox.DisplayMember = "DisplayName";
             //populate groups
             groupsListBox.DataSource = null;
             clgrParametersDataGridView.DataSource = null;
             if (classesListBox.SelectedItem != null)
             {
                 _selectedClass = (ToolClassModel)classesListBox.SelectedItem;
-                groupsListBox.DataSource = _selectedClass.ToolGroups;
-                groupsListBox.DisplayMember = "Name";
+                WireUpGroupsListBox();
                 //load parameters datagrid
                 DataTable table = ProgramLogic.CreateDataTableFromListOfModels(_selectedClass.ToolClassParameters);
                 clgrParametersDataGridView.DataSource = table;
+            }
+        }
+
+        private void WireUpGroupsListBox()
+        {
+            if (_selectedClass != null)
+            {
+                groupsListBox.DataSource = _selectedClass.ToolGroups;
+                groupsListBox.DisplayMember = "DisplayName"; 
             }
         }
 
@@ -74,8 +82,9 @@ namespace Magical_Tool_Solution.Configuration
         {
             if (groupsListBox.IndexFromPoint(e.Location) == ListBox.NoMatches)
             {
-                //open new group editor 
-                Form form = new ClgrEntryEditor(ItemType.toolGroup, CreatingType.creating, new ToolGroupModel(), this, this);
+                //open new group editor
+                ToolClassModel selectedClassModel = (ToolClassModel)classesListBox.SelectedItem;
+                Form form = new ClgrEntryEditor(ItemType.toolGroup, CreatingType.creating, new ToolGroupModel { ToolClassId = selectedClassModel.Id}, this, this);
                 form.Visible = true;
             }
             else
@@ -168,5 +177,11 @@ namespace Magical_Tool_Solution.Configuration
 
         public bool ValidateToolGroup(ToolGroupModel model) =>
             GlobalConfig.Connection.ValidateToolGroupIdInClass(model.Id, model.ToolClassId);
+
+        private void ClassesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedClass = (ToolClassModel)classesListBox.SelectedItem;
+            WireUpGroupsListBox();
+        }
     }
 }

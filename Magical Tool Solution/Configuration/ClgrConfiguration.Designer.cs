@@ -174,7 +174,7 @@ namespace Magical_Tool_Solution.Configuration
             this.parameterDisplayName.Name = "parameterDisplayName";
             this.parameterDisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.parameterDisplayName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.parameterDisplayName.Width = 126;
+            this.parameterDisplayName.Width = 125;
             // 
             // parameterDescription
             // 
@@ -199,7 +199,7 @@ namespace Magical_Tool_Solution.Configuration
             this.groupsUsage.MinimumWidth = 150;
             this.groupsUsage.Name = "groupsUsage";
             this.groupsUsage.ReadOnly = true;
-            this.groupsUsage.Width = 174;
+            this.groupsUsage.Width = 150;
             // 
             // configureClgrParametersLabel
             // 
@@ -245,9 +245,6 @@ namespace Magical_Tool_Solution.Configuration
             this.groupsListBox.FormattingEnabled = true;
             this.groupsListBox.IntegralHeight = false;
             this.groupsListBox.ItemHeight = 32;
-            this.groupsListBox.Items.AddRange(new object[] {
-            "tits",
-            "ass"});
             this.groupsListBox.Location = new System.Drawing.Point(0, 42);
             this.groupsListBox.Name = "groupsListBox";
             this.groupsListBox.Size = new System.Drawing.Size(534, 324);
@@ -288,13 +285,11 @@ namespace Magical_Tool_Solution.Configuration
             this.classesListBox.FormattingEnabled = true;
             this.classesListBox.IntegralHeight = false;
             this.classesListBox.ItemHeight = 32;
-            this.classesListBox.Items.AddRange(new object[] {
-            "one",
-            "two"});
             this.classesListBox.Location = new System.Drawing.Point(0, 42);
             this.classesListBox.Name = "classesListBox";
             this.classesListBox.Size = new System.Drawing.Size(550, 324);
             this.classesListBox.TabIndex = 7;
+            this.classesListBox.SelectedIndexChanged += new System.EventHandler(this.ClassesListBox_SelectedIndexChanged);
             this.classesListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassesListBox_MouseDoubleClick);
             // 
             // classesLabel

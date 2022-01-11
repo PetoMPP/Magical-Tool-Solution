@@ -192,7 +192,7 @@ namespace Magical_Tool_Solution.BasicToolData
 
         private void ClearFormButton_Click(object sender, EventArgs e)
         {
-            IEnumerable<Control> textBoxes = GetAllControls(this, typeof(TextBox));
+            IEnumerable<Control> textBoxes = UserInterfaceLogic.GetAllControls(this, typeof(TextBox));
             foreach (Control textBox in textBoxes)
             {
                 textBox.Text = "";
@@ -319,16 +319,6 @@ namespace Magical_Tool_Solution.BasicToolData
             compD1ToolTip.SetToolTip(d1TextBox, d1TextBox.Text);
             compD2ToolTip.SetToolTip(d2TextBox, d2TextBox.Text);
         }
-        private IEnumerable<Control> GetAllControls(Control control, Type type)
-        {
-            IEnumerable<Control> controls = control.Controls.Cast<Control>();
-            return controls.SelectMany(x => GetAllControls(x, type)).Concat(controls).Where(y => y.GetType() == type);
-        }
-        private IEnumerable<Control> GetAllControls(Control control)
-        {
-            IEnumerable<Control> controls = control.Controls.Cast<Control>();
-            return controls.SelectMany(x => GetAllControls(x)).Concat(controls);
-        }
         private void DeleteEntryById(string id)
         {
             if (id == "")
@@ -418,7 +408,7 @@ namespace Magical_Tool_Solution.BasicToolData
         #region Data acquiring
         private void WireUpControls()
         {
-            List<Control> subControls = GetAllControls(sideForm).ToList();
+            List<Control> subControls = UserInterfaceLogic.GetAllControls(sideForm).ToList();
             _statusBox = (TextBox)subControls.First(c => c.Name == "statusBox");
             if (_itemType == ItemType.comp || _itemType == ItemType.tool)
             {
@@ -434,12 +424,12 @@ namespace Magical_Tool_Solution.BasicToolData
                 _toolGroupIdBox = (TextBox)subControls.First(c => c.Name == "toolGroupIdBox");
                 _toolGroupD1Box = (TextBox)subControls.First(c => c.Name == "toolGroupD1Box");
                 _modeSpecificBox = (TextBox)subControls.First(c => c.Name == "modeSpecificBox");
-                _parametersDataGridView = (DataGridView)GetAllControls(selectedViewPanel, typeof(DataGridView))
+                _parametersDataGridView = (DataGridView)UserInterfaceLogic.GetAllControls(selectedViewPanel, typeof(DataGridView))
                 .Where(dg => dg.Name == "parametersDataGridView")
                 .FirstOrDefault();
                 if (_itemType == ItemType.tool)
                 {
-                    _componentsDataGridView = (DataGridView)GetAllControls(selectedViewPanel, typeof(DataGridView))
+                    _componentsDataGridView = (DataGridView)UserInterfaceLogic.GetAllControls(selectedViewPanel, typeof(DataGridView))
                 .Where(dg => dg.Name == "componentsDataGridView")
                 .FirstOrDefault();
                 }
@@ -452,7 +442,7 @@ namespace Magical_Tool_Solution.BasicToolData
                 _createdByBox = (TextBox)subControls.First(c => c.Name == "createdByBox");
                 _modifiedByBox = (TextBox)subControls.First(c => c.Name == "modifiedByBox");
                 _responsibleBox = (TextBox)subControls.First(c => c.Name == "responsibleBox");
-                _positionsDataGridView = (DataGridView)GetAllControls(selectedViewPanel, typeof(DataGridView))
+                _positionsDataGridView = (DataGridView)UserInterfaceLogic.GetAllControls(selectedViewPanel, typeof(DataGridView))
                 .Where(dg => dg.Name == "positionsDataGridView")
                 .FirstOrDefault();
             }

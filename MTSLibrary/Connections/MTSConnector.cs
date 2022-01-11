@@ -288,11 +288,13 @@ namespace MTSLibrary.Connections
             {
                 model.ToolGroups = cnxn.Query<ToolGroupModel>
                     ("dbo.spToolGroups_GetByToolClassId",
-                    new { @ToolClassId = model.Id })
+                    new { @ToolClassId = model.Id },
+                    commandType: CommandType.StoredProcedure)
                     .ToList();
                 model.ToolClassParameters = cnxn.Query<ToolClassParameterModel>
                     ("dbo.spToolClassParameters_GetByToolClassId",
-                    new { @ToolClassId = model.Id })
+                    new { @ToolClassId = model.Id },
+                    commandType: CommandType.StoredProcedure)
                     .ToList();
                 foreach (ToolClassParameterModel tcpm in model.ToolClassParameters)
                 {
@@ -447,7 +449,7 @@ namespace MTSLibrary.Connections
         public string GetMainClassNameById(string id)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            return cnxn.Query<string>("dbo.spMainClasses_GetNameById", new { @Id = id }, commandType: CommandType.StoredProcedure).First();
+            return cnxn.Query<string>("dbo.spMainClasses_GetNameById", new { @Id = id }, commandType: CommandType.StoredProcedure).FirstOrDefault();
         }
 
         public string GetManufacturerIdByName(string id)
@@ -957,7 +959,7 @@ namespace MTSLibrary.Connections
             dp.Add("@Id", id);
             dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spToolClasses_ValidateId",
-                new { @Id = id },
+                dp,
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -980,7 +982,7 @@ namespace MTSLibrary.Connections
             dp.Add("@ToolClassId", toolClassId);
             dp.Add("@result", 0, DbType.Int32, ParameterDirection.Output);
             return cnxn.ExecuteScalar<bool>("dbo.spToolGroups_ValidateIdToolClassId",
-                new { @Id = id , @ToolClassId = toolClassId},
+                dp,
                 commandType: CommandType.StoredProcedure);
         }
 

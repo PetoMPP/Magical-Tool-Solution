@@ -2,6 +2,7 @@
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -73,7 +74,14 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 idTextBox.Text = _toolGroupModel.Id;
                 d1TextBox.Text = _toolGroupModel.Name;
                 mainIdTextBox.Text = _toolGroupModel.ToolClassId;
-                mainD1TextBox.Text = GlobalConfig.Connection.GetClassNameById(_toolGroupModel.ToolClassId);
+                if (_toolGroupModel.ToolClassId != null)
+                {
+                    mainD1TextBox.Text = GlobalConfig.Connection.GetClassNameById(_toolGroupModel.ToolClassId);
+                }
+                else
+                {
+                    mainD1TextBox.Text = null;
+                }
                 if (_toolGroupModel.SuitabilityEnabled)
                 {
                     enableSuitabilityRadioButton.Checked = true;
@@ -164,6 +172,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     selectorLabel.Text = "Modify selected Class";
                     idTextBox.Enabled = false;
                     browseButton.Enabled = false;
+                    applyButton.Enabled = false;
                 }
             }
             else if (_itemType == ItemType.toolGroup)
@@ -182,6 +191,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     selectorLabel.Text = "Modify selected Group";
                     idTextBox.Enabled = false;
                     browseButton.Enabled = false;
+                    applyButton.Enabled = false;
                 }
             }
             else if (_itemType == ItemType.mainClass)
@@ -214,6 +224,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     selectorLabel.Text = "Modify selected Main Class";
                     idTextBox.Enabled = false;
                     browseButton.Enabled = false;
+                    applyButton.Enabled = false;
                 }
             }
         }
@@ -361,6 +372,19 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
-        => CreateAndSendModel();
+        {
+            CreateAndSendModel();
+            ClearFields();
+        }
+
+        private void ClearFields()
+        {
+            List<Control> visibleTextboxes = UserInterfaceLogic.GetAllControls(this, typeof(TextBox))
+                .Where(t => t.Visible == true && t.Enabled == true).ToList();
+            foreach (Control t in visibleTextboxes)
+            {
+                t.Text = "";
+            }
+        }
     }
 }

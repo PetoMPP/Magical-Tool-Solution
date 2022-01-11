@@ -11,5 +11,6 @@ namespace MTSLibrary.Models
         public string MainClassId { get; set; }
         public List<ToolGroupModel> ToolGroups { get; set; }
         public List<ToolClassParameterModel> ToolClassParameters { get; set; }
+        public string DisplayName { get { return $"{Id} - {Name}"; } }
     }
 }

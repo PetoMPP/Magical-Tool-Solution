@@ -72,7 +72,7 @@ namespace Magical_Tool_Solution.Configuration
 
         private void AllocateClass()
         {
-            ToolClassModel toolClass = (ToolClassModel)allocatedClassesListBox.SelectedItem;
+            ToolClassModel toolClass = (ToolClassModel)unallocatedClassesListBox.SelectedItem;
             GlobalConfig.Connection.SetMainClassIdById(_mainClassModel.Id, toolClass.Id);
             WireUpLists();
         }
@@ -81,11 +81,11 @@ namespace Magical_Tool_Solution.Configuration
         {
             if (allocatedClassesListBox.SelectedItem != null)
             {
-                moveSelectedToAvailable.Enabled = true;
+                unallocateClassButton.Enabled = true;
             }
             else
             {
-                moveSelectedToAvailable.Enabled = false;
+                unallocateClassButton.Enabled = false;
             }
         }
 
@@ -93,11 +93,11 @@ namespace Magical_Tool_Solution.Configuration
         {
             if (unallocatedClassesListBox.SelectedItem != null)
             {
-                moveSelectedToSelected.Enabled = true;
+                allocateClassButton.Enabled = true;
             }
             else
             {
-                moveSelectedToSelected.Enabled = false;
+                allocateClassButton.Enabled = false;
             }
         }
 
