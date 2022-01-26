@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MTSLibrary.Models
 {
@@ -13,5 +14,7 @@ namespace MTSLibrary.Models
             }
         }
         public List<ToolClassModel> ToolClasses { get; set; }
+
+        public static explicit operator MainClassModel(BasicMainClassModel model) => new() { Id = model.Id, Name = model.Name };
     }
 }

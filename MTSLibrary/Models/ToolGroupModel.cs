@@ -12,5 +12,6 @@
         public bool EnabledInComps { get; set; }
         public bool EnabledInTools { get; set; }
         public string DisplayName { get { return $"{Id} - {Name}"; } }
+        public static explicit operator BasicToolGroupModel(ToolGroupModel model) => new() { Id = model.Id, Name = model.Name };
     }
 }

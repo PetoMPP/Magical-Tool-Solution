@@ -12,5 +12,6 @@ namespace MTSLibrary.Models
         public List<ToolGroupModel> ToolGroups { get; set; }
         public List<ToolClassParameterModel> ToolClassParameters { get; set; }
         public string DisplayName { get { return $"{Id} - {Name}"; } }
+        public static explicit operator BasicToolClassModel(ToolClassModel model) => new() { Id = model.Id, Name = model.Name };
     }
 }

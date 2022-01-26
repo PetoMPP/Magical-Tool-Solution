@@ -168,7 +168,7 @@ namespace Magical_Tool_Solution.BasicToolData
         private void SearchByIdbutton_Click(object sender, EventArgs e)
         {
             string[] columnNames = GetColumnsFromMode();
-            Form form = new BasicItemLookup(this, this, columnNames, 0);
+            Form form = new BasicLookup(this, this, columnNames, 0, _itemType);
             form.Visible = true;
             Enabled = false;
         }
@@ -177,7 +177,7 @@ namespace Magical_Tool_Solution.BasicToolData
         private void SearchByD1Button_Click(object sender, EventArgs e)
         {
             string[] columnNames = GetColumnsFromMode();
-            Form form = new BasicItemLookup(this, this, columnNames, 1);
+            Form form = new BasicLookup(this, this, columnNames, 1, _itemType);
             form.Visible = true;
             Enabled = false;
         }
@@ -185,7 +185,7 @@ namespace Magical_Tool_Solution.BasicToolData
         private void SearchByD2Button_Click(object sender, EventArgs e)
         {
             string[] columnNames = GetColumnsFromMode();
-            Form form = new BasicItemLookup(this, this, columnNames, 2);
+            Form form = new BasicLookup(this, this, columnNames, 2, _itemType);
             form.Visible = true;
             Enabled = false;
         }

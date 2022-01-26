@@ -29,6 +29,7 @@ namespace Magical_Tool_Solution.Configuration
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.moduleNameLabel = new System.Windows.Forms.Label();
@@ -36,19 +37,17 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrPanel = new System.Windows.Forms.Panel();
             this.componentsPanel = new System.Windows.Forms.Panel();
             this.clgrParametersDataGridView = new System.Windows.Forms.DataGridView();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.parameterValueType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupsUsage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.configureClgrParametersLabel = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.topRightPanel = new System.Windows.Forms.Panel();
             this.groupsListBox = new System.Windows.Forms.ListBox();
+            this.groupsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupsLabel = new System.Windows.Forms.Label();
             this.topLeftPanel = new System.Windows.Forms.Panel();
             this.classesListBox = new System.Windows.Forms.ListBox();
+            this.classesContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolClassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classesLabel = new System.Windows.Forms.Label();
             this.bottomPanel.SuspendLayout();
             this.clgrPanel.SuspendLayout();
@@ -56,7 +55,9 @@ namespace Magical_Tool_Solution.Configuration
             ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).BeginInit();
             this.topPanel.SuspendLayout();
             this.topRightPanel.SuspendLayout();
+            this.groupsContextMenuStrip.SuspendLayout();
             this.topLeftPanel.SuspendLayout();
+            this.classesContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // moduleNameLabel
@@ -118,18 +119,12 @@ namespace Magical_Tool_Solution.Configuration
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.clgrParametersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.clgrParametersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.clgrParametersDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.position,
-            this.parameterId,
-            this.parameterDisplayName,
-            this.parameterDescription,
-            this.parameterValueType,
-            this.groupsUsage});
             this.clgrParametersDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clgrParametersDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.clgrParametersDataGridView.EnableHeadersVisualStyles = false;
             this.clgrParametersDataGridView.Location = new System.Drawing.Point(8, 8);
             this.clgrParametersDataGridView.Name = "clgrParametersDataGridView";
+            this.clgrParametersDataGridView.ReadOnly = true;
             this.clgrParametersDataGridView.RowHeadersVisible = false;
             this.clgrParametersDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -147,59 +142,6 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrParametersDataGridView.Size = new System.Drawing.Size(1068, 375);
             this.clgrParametersDataGridView.TabIndex = 8;
             this.clgrParametersDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PositionsDataGridView_MouseDoubleClick);
-            // 
-            // position
-            // 
-            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.position.HeaderText = "Position";
-            this.position.Name = "position";
-            this.position.Width = 87;
-            // 
-            // parameterId
-            // 
-            this.parameterId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterId.HeaderText = "Parameter Id";
-            this.parameterId.MaxInputLength = 20;
-            this.parameterId.MinimumWidth = 120;
-            this.parameterId.Name = "parameterId";
-            this.parameterId.ReadOnly = true;
-            this.parameterId.Width = 120;
-            // 
-            // parameterDisplayName
-            // 
-            this.parameterDisplayName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterDisplayName.HeaderText = "Parameter Viewing Name";
-            this.parameterDisplayName.MaxInputLength = 10;
-            this.parameterDisplayName.MinimumWidth = 125;
-            this.parameterDisplayName.Name = "parameterDisplayName";
-            this.parameterDisplayName.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.parameterDisplayName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.parameterDisplayName.Width = 125;
-            // 
-            // parameterDescription
-            // 
-            this.parameterDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.parameterDescription.HeaderText = "Description";
-            this.parameterDescription.Name = "parameterDescription";
-            this.parameterDescription.ReadOnly = true;
-            // 
-            // parameterValueType
-            // 
-            this.parameterValueType.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.parameterValueType.HeaderText = "Value Type";
-            this.parameterValueType.MaxInputLength = 120;
-            this.parameterValueType.Name = "parameterValueType";
-            this.parameterValueType.Width = 96;
-            // 
-            // groupsUsage
-            // 
-            this.groupsUsage.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.groupsUsage.HeaderText = "Groups Using Parameter";
-            this.groupsUsage.MaxInputLength = 120;
-            this.groupsUsage.MinimumWidth = 150;
-            this.groupsUsage.Name = "groupsUsage";
-            this.groupsUsage.ReadOnly = true;
-            this.groupsUsage.Width = 150;
             // 
             // configureClgrParametersLabel
             // 
@@ -230,15 +172,16 @@ namespace Magical_Tool_Solution.Configuration
             this.topRightPanel.Controls.Add(this.groupsListBox);
             this.topRightPanel.Controls.Add(this.groupsLabel);
             this.topRightPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.topRightPanel.Location = new System.Drawing.Point(550, 0);
+            this.topRightPanel.Location = new System.Drawing.Point(542, 0);
             this.topRightPanel.Name = "topRightPanel";
-            this.topRightPanel.Size = new System.Drawing.Size(534, 366);
+            this.topRightPanel.Size = new System.Drawing.Size(542, 366);
             this.topRightPanel.TabIndex = 1;
             // 
             // groupsListBox
             // 
             this.groupsListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.groupsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.groupsListBox.ContextMenuStrip = this.groupsContextMenuStrip;
             this.groupsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupsListBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupsListBox.ForeColor = System.Drawing.Color.White;
@@ -247,9 +190,24 @@ namespace Magical_Tool_Solution.Configuration
             this.groupsListBox.ItemHeight = 32;
             this.groupsListBox.Location = new System.Drawing.Point(0, 42);
             this.groupsListBox.Name = "groupsListBox";
-            this.groupsListBox.Size = new System.Drawing.Size(534, 324);
+            this.groupsListBox.Size = new System.Drawing.Size(542, 324);
             this.groupsListBox.TabIndex = 8;
             this.groupsListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.GroupsListBox_MouseDoubleClick);
+            this.groupsListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GroupsListBox_MouseDown);
+            // 
+            // groupsContextMenuStrip
+            // 
+            this.groupsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolGroupToolStripMenuItem});
+            this.groupsContextMenuStrip.Name = "groupsContextMenuStrip";
+            this.groupsContextMenuStrip.Size = new System.Drawing.Size(169, 26);
+            // 
+            // deleteToolGroupToolStripMenuItem
+            // 
+            this.deleteToolGroupToolStripMenuItem.Name = "deleteToolGroupToolStripMenuItem";
+            this.deleteToolGroupToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.deleteToolGroupToolStripMenuItem.Text = "Delete Tool Group";
+            this.deleteToolGroupToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolGroupToolStripMenuItem_Click);
             // 
             // groupsLabel
             // 
@@ -260,7 +218,7 @@ namespace Magical_Tool_Solution.Configuration
             this.groupsLabel.Location = new System.Drawing.Point(0, 0);
             this.groupsLabel.Name = "groupsLabel";
             this.groupsLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.groupsLabel.Size = new System.Drawing.Size(534, 42);
+            this.groupsLabel.Size = new System.Drawing.Size(542, 42);
             this.groupsLabel.TabIndex = 6;
             this.groupsLabel.Text = "Select Group (Double Click to Create/Edit)";
             // 
@@ -272,13 +230,14 @@ namespace Magical_Tool_Solution.Configuration
             this.topLeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.topLeftPanel.Location = new System.Drawing.Point(0, 0);
             this.topLeftPanel.Name = "topLeftPanel";
-            this.topLeftPanel.Size = new System.Drawing.Size(550, 366);
+            this.topLeftPanel.Size = new System.Drawing.Size(542, 366);
             this.topLeftPanel.TabIndex = 0;
             // 
             // classesListBox
             // 
             this.classesListBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.classesListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.classesListBox.ContextMenuStrip = this.classesContextMenuStrip;
             this.classesListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.classesListBox.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.classesListBox.ForeColor = System.Drawing.Color.White;
@@ -287,10 +246,25 @@ namespace Magical_Tool_Solution.Configuration
             this.classesListBox.ItemHeight = 32;
             this.classesListBox.Location = new System.Drawing.Point(0, 42);
             this.classesListBox.Name = "classesListBox";
-            this.classesListBox.Size = new System.Drawing.Size(550, 324);
+            this.classesListBox.Size = new System.Drawing.Size(542, 324);
             this.classesListBox.TabIndex = 7;
             this.classesListBox.SelectedIndexChanged += new System.EventHandler(this.ClassesListBox_SelectedIndexChanged);
             this.classesListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ClassesListBox_MouseDoubleClick);
+            this.classesListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClassesListBox_MouseDown);
+            // 
+            // classesContextMenuStrip
+            // 
+            this.classesContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolClassToolStripMenuItem});
+            this.classesContextMenuStrip.Name = "classesContextMenuStrip";
+            this.classesContextMenuStrip.Size = new System.Drawing.Size(163, 26);
+            // 
+            // deleteToolClassToolStripMenuItem
+            // 
+            this.deleteToolClassToolStripMenuItem.Name = "deleteToolClassToolStripMenuItem";
+            this.deleteToolClassToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.deleteToolClassToolStripMenuItem.Text = "Delete Tool Class";
+            this.deleteToolClassToolStripMenuItem.Click += new System.EventHandler(this.DeleteToolClassToolStripMenuItem_Click);
             // 
             // classesLabel
             // 
@@ -301,7 +275,7 @@ namespace Magical_Tool_Solution.Configuration
             this.classesLabel.Location = new System.Drawing.Point(0, 0);
             this.classesLabel.Name = "classesLabel";
             this.classesLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.classesLabel.Size = new System.Drawing.Size(550, 42);
+            this.classesLabel.Size = new System.Drawing.Size(542, 42);
             this.classesLabel.TabIndex = 5;
             this.classesLabel.Text = "Select Class (Double Click to Create/Edit)";
             // 
@@ -317,13 +291,16 @@ namespace Magical_Tool_Solution.Configuration
             this.Name = "ClgrConfiguration";
             this.Text = "ClgrConfiguration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ClgrConfiguration_FormClosed);
+            this.Resize += new System.EventHandler(this.ClgrConfiguration_Resize);
             this.bottomPanel.ResumeLayout(false);
             this.clgrPanel.ResumeLayout(false);
             this.componentsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).EndInit();
             this.topPanel.ResumeLayout(false);
             this.topRightPanel.ResumeLayout(false);
+            this.groupsContextMenuStrip.ResumeLayout(false);
             this.topLeftPanel.ResumeLayout(false);
+            this.classesContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -343,11 +320,9 @@ namespace Magical_Tool_Solution.Configuration
         private System.Windows.Forms.Panel clgrPanel;
         private System.Windows.Forms.Panel componentsPanel;
         private System.Windows.Forms.DataGridView clgrParametersDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterDisplayName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterValueType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn groupsUsage;
+        private System.Windows.Forms.ContextMenuStrip classesContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolClassToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip groupsContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolGroupToolStripMenuItem;
     }
 }

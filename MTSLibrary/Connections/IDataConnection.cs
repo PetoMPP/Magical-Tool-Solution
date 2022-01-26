@@ -44,14 +44,28 @@ namespace MTSLibrary.Connections
         void UpdateToolClassParameter(ToolClassParameterModel model);
         bool ValidateToolClassId(string id);
         void SetMainClassIdById(string mainClassId, string toolClassId);
+        List<BasicCompModel> GetBasicCompModels();
         bool ValidateToolGroupIdInClass(string id, string parentClassId);
         string GetClassNameById(string parentClassId);
         List<string> GetEnabledGroupsIdsByClassIdAndParameterId(string classId, string parameterId);
+        List<BasicToolModel> GetBasicToolModels();
         bool ValidateMainClassId(string id);
         void CreateMainClass(MainClassModel model);
         void UpdateMainClass(MainClassModel model);
         string GetToolGroupNameById(string toolGroupId);
+        List<BasicListModel> GetBasicListModels();
         string GetManufacturerIdByName(string name);
         void DeleteMainClassById(string id);
+        ToolClassModel GetToolClassById(string id);
+        ToolGroupModel GetToolGroupById(string id);
+        List<BasicToolClassModel> GetBasicToolClassModels();
+        int GetToolClassParameterNextPositionByToolClassId(string id);
+        void UnallocateToolClasses(string id);
+        List<BasicToolGroupModel> GetBasicToolGroupsModels();
+        List<BasicMainClassModel> GetBasicMainClassModels();
+        void DeleteToolGroupsByToolClassId(string id);
+        void DeleteToolClassParametersByToolClassId(string id);
+        void DeleteToolClassById(string id);
+        void DeleteToolGroupByIdToolClassId(string id, string toolClassId);
     }
 }

@@ -171,6 +171,19 @@
     <Build Include="dbo\StoredProcedures\spTools_ValidateId.sql" />
     <Build Include="dbo\StoredProcedures\spMainClasses_DeleteById.sql" />
     <Build Include="dbo\StoredProcedures\spToolGroups_Update.sql" />
+    <Build Include="dbo\StoredProcedures\spToolGroups_GetById.sql" />
+    <Build Include="dbo\StoredProcedures\spToolClassParameters_GetNextPositionByToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolClasses_DeleteMainClassByMainClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spComps_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spTools_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spLists_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spToolClasses_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spToolGroups_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spMainClasses_GetBasicData.sql" />
+    <Build Include="dbo\StoredProcedures\spToolGroups_DeleteByToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolClassParameters_DeleteByToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolClasses_DeleteById.sql" />
+    <Build Include="dbo\StoredProcedures\spToolGroups_DeleteById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MTSDatabase.refactorlog" />

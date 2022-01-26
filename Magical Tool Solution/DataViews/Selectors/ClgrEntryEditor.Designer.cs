@@ -313,6 +313,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.browseButton.Size = new System.Drawing.Size(30, 23);
             this.browseButton.TabIndex = 8;
             this.browseButton.UseVisualStyleBackColor = false;
+            this.browseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
             // d1TextBox
             // 

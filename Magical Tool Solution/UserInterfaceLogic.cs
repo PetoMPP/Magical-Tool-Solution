@@ -19,5 +19,28 @@ namespace Magical_Tool_Solution
             IEnumerable<Control> controls = control.Controls.Cast<Control>();
             return controls.SelectMany(x => GetAllControls(x)).Concat(controls);
         }
+        public static void HandleRightClick(ListBox listBox, MouseEventArgs e, Action contextMenuRefresh)
+        {
+            if (listBox.IndexFromPoint(e.Location) == ListBox.NoMatches)
+            {
+                listBox.ClearSelected();
+            }
+            else
+            {
+                listBox.SelectedIndex = listBox.IndexFromPoint(e.Location);
+            }
+            contextMenuRefresh();
+        }
+        public static void HandleRightClick(ListBox listBox, MouseEventArgs e)
+        {
+            if (listBox.IndexFromPoint(e.Location) == ListBox.NoMatches)
+            {
+                listBox.ClearSelected();
+            }
+            else
+            {
+                listBox.SelectedIndex = listBox.IndexFromPoint(e.Location);
+            }
+        }
     }
 }

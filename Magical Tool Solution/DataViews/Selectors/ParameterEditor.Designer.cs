@@ -29,8 +29,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.editorLabelPanel = new System.Windows.Forms.Panel();
             this.selectorLabel = new System.Windows.Forms.Label();
             this.bottomEditorPanel = new System.Windows.Forms.Panel();
@@ -59,15 +59,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.basicParameterLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.selectedGroupsPanel = new System.Windows.Forms.Panel();
+            this.enabledGroupsDataGridView = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.classIdTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.classD1TextBox = new System.Windows.Forms.TextBox();
             this.selectedGroupsLabel = new System.Windows.Forms.Label();
-            this.enabledGroupsDataGridView = new System.Windows.Forms.DataGridView();
-            this.enabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.groupId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editorLabelPanel.SuspendLayout();
             this.bottomEditorPanel.SuspendLayout();
             this.okButtonPanel.SuspendLayout();
@@ -81,8 +78,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.selectedGroupsPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enabledGroupsDataGridView)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // editorLabelPanel
@@ -175,6 +172,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // applyButtonPanel
             // 
@@ -203,6 +201,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.applyButton.TabIndex = 9;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = false;
+            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // editorMainPanel
             // 
@@ -442,6 +441,45 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.selectedGroupsPanel.Size = new System.Drawing.Size(300, 288);
             this.selectedGroupsPanel.TabIndex = 32;
             // 
+            // enabledGroupsDataGridView
+            // 
+            this.enabledGroupsDataGridView.AllowUserToAddRows = false;
+            this.enabledGroupsDataGridView.AllowUserToDeleteRows = false;
+            this.enabledGroupsDataGridView.AllowUserToOrderColumns = true;
+            this.enabledGroupsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.enabledGroupsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.enabledGroupsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.enabledGroupsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.enabledGroupsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.enabledGroupsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.enabledGroupsDataGridView.EnableHeadersVisualStyles = false;
+            this.enabledGroupsDataGridView.Location = new System.Drawing.Point(5, 5);
+            this.enabledGroupsDataGridView.Name = "enabledGroupsDataGridView";
+            this.enabledGroupsDataGridView.RowHeadersVisible = false;
+            this.enabledGroupsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.enabledGroupsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.enabledGroupsDataGridView.RowTemplate.Height = 25;
+            this.enabledGroupsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.enabledGroupsDataGridView.ShowCellToolTips = false;
+            this.enabledGroupsDataGridView.ShowEditingIcon = false;
+            this.enabledGroupsDataGridView.Size = new System.Drawing.Size(290, 278);
+            this.enabledGroupsDataGridView.TabIndex = 9;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.classIdTextBox);
@@ -459,6 +497,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.classIdTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.classIdTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.classIdTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.classIdTextBox.Enabled = false;
             this.classIdTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.classIdTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.classIdTextBox.Location = new System.Drawing.Point(95, 5);
@@ -486,6 +525,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.classD1TextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.classD1TextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.classD1TextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.classD1TextBox.Enabled = false;
             this.classD1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.classD1TextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.classD1TextBox.Location = new System.Drawing.Point(150, 5);
@@ -507,72 +547,6 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.selectedGroupsLabel.Size = new System.Drawing.Size(300, 31);
             this.selectedGroupsLabel.TabIndex = 16;
             this.selectedGroupsLabel.Text = "Activate Parameter For Groups:";
-            // 
-            // enabledGroupsDataGridView
-            // 
-            this.enabledGroupsDataGridView.AllowUserToAddRows = false;
-            this.enabledGroupsDataGridView.AllowUserToDeleteRows = false;
-            this.enabledGroupsDataGridView.AllowUserToOrderColumns = true;
-            this.enabledGroupsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.enabledGroupsDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.enabledGroupsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.enabledGroupsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.enabledGroupsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.enabled,
-            this.groupId,
-            this.groupName});
-            this.enabledGroupsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.enabledGroupsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.enabledGroupsDataGridView.EnableHeadersVisualStyles = false;
-            this.enabledGroupsDataGridView.Location = new System.Drawing.Point(5, 5);
-            this.enabledGroupsDataGridView.Name = "enabledGroupsDataGridView";
-            this.enabledGroupsDataGridView.RowHeadersVisible = false;
-            this.enabledGroupsDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.enabledGroupsDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.enabledGroupsDataGridView.RowTemplate.Height = 25;
-            this.enabledGroupsDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.enabledGroupsDataGridView.ShowCellToolTips = false;
-            this.enabledGroupsDataGridView.ShowEditingIcon = false;
-            this.enabledGroupsDataGridView.Size = new System.Drawing.Size(290, 278);
-            this.enabledGroupsDataGridView.TabIndex = 9;
-            // 
-            // enabled
-            // 
-            this.enabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.enabled.HeaderText = "Parameter Enabled";
-            this.enabled.Name = "enabled";
-            // 
-            // groupId
-            // 
-            this.groupId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.groupId.HeaderText = "Group ID";
-            this.groupId.MaxInputLength = 5;
-            this.groupId.Name = "groupId";
-            this.groupId.ReadOnly = true;
-            this.groupId.Width = 5;
-            // 
-            // groupName
-            // 
-            this.groupName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            this.groupName.HeaderText = "Group Name";
-            this.groupName.Name = "groupName";
-            this.groupName.ReadOnly = true;
-            this.groupName.Width = 5;
             // 
             // ParameterEditor
             // 
@@ -608,9 +582,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.selectedGroupsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.enabledGroupsDataGridView)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.enabledGroupsDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -651,8 +625,5 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.TextBox classIdTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView enabledGroupsDataGridView;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn enabled;
-        private System.Windows.Forms.DataGridViewTextBoxColumn groupId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn groupName;
     }
 }

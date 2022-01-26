@@ -67,12 +67,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 table.Rows.Add(values);
             }
             //mark enabled groups
-            List<string> enabledGroupsIds = GlobalConfig.Connection.GetEnabledGroupsIdsByClassIdAndParameterId(_activeClass.Id, _model.Id);
             foreach (DataRow row in table.Rows)
             {
-                if (enabledGroupsIds.Any(i => i == row.ItemArray[1].ToString()))
+                if (_model.AssignedGroupsIds.Any(i => i == row.ItemArray[1].ToString()))
                 {
-                    row.ItemArray[0] = true;
+                    row[0] = true;
                 }
             }
             return table;
@@ -100,6 +99,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private void OkButton_Click(object sender, EventArgs e)
         {
             _model = CreateModelFromUI();
+            if (_model == null)
+            {
+                return;
+            }
+            SendModel();
+            Close();
+        }
+
+        private void SendModel()
+        {
             if (_creatingType == CreatingType.creating)
             {
                 //validate position
@@ -124,6 +133,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private ToolClassParameterModel CreateModelFromUI()
         {
+            string errorMessage = ValidateUI();
+            if (errorMessage.Length > 0)
+            {
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             ToolClassParameterModel model = new()
             {
                 Position = int.Parse(positionBox.Text),
@@ -143,6 +158,40 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             }
             model.AssignedGroupsIds = selectedGroupsIds;
             return model;
+        }
+
+        private string ValidateUI()
+        {
+            string errorMessage = string.Empty;
+            if (string.IsNullOrWhiteSpace(positionBox.Text))
+            {
+                errorMessage += "Position field cannot be empty!\n";
+            }
+            if (string.IsNullOrWhiteSpace(idTextBox.Text))
+            {
+                errorMessage += "Id field cannot be empty!\n";
+            }
+            if (string.IsNullOrWhiteSpace(viewingNameTextBox.Text))
+            {
+                errorMessage += "Parameter viewing name cannot be empty!\n";
+            }
+            if (valueTypesComboBox.SelectedItem == null)
+            {
+                errorMessage += "Value Type must be specified!\n";
+            }
+            return errorMessage;
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e) => Close();
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            _model = CreateModelFromUI();
+            if (_model == null)
+            {
+                return;
+            }
+            SendModel();
         }
     }
 }

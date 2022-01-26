@@ -36,26 +36,37 @@ namespace Magical_Tool_Solution.Configuration
         private void WireUpLists()
         {
             LoadMainClasses();
-            _mainClassModel = null;
+            WireUpClassesLists();
+        }
+        private void WireUpLists(int index)
+        {
+            LoadMainClasses();
+            mainClassesListBox.SelectedIndex = index;
+            WireUpClassesLists();
+        }
+
+        private void WireUpClassesLists()
+        {
             if (mainClassesListBox.SelectedItem != null)
             {
                 _mainClassModel = (MainClassModel)mainClassesListBox.SelectedItem;
                 LoadAllocatedClasses();
-                LoadUnallocatedClasses();
             }
-            WireUpContextMenu();
+            LoadUnallocatedClasses();
         }
 
         private void LoadUnallocatedClasses()
         {
-            allocatedClassesListBox.DataSource = null;
-            allocatedClassesListBox.DataSource = GlobalConfig.Connection.GetUnallocatedToolClasses();
+            unallocatedClassesListBox.DataSource = null;
+            unallocatedClassesListBox.DataSource = GlobalConfig.Connection.GetUnallocatedToolClasses();
+            unallocatedClassesListBox.DisplayMember = "DisplayName";
         }
 
         private void LoadAllocatedClasses()
         {
             allocatedClassesListBox.DataSource = null;
             allocatedClassesListBox.DataSource = _mainClassModel.ToolClasses;
+            allocatedClassesListBox.DisplayMember = "DisplayName";
         }
 
         private void LoadMainClasses()
@@ -74,7 +85,7 @@ namespace Magical_Tool_Solution.Configuration
         {
             ToolClassModel toolClass = (ToolClassModel)unallocatedClassesListBox.SelectedItem;
             GlobalConfig.Connection.SetMainClassIdById(_mainClassModel.Id, toolClass.Id);
-            WireUpLists();
+            WireUpLists(mainClassesListBox.SelectedIndex);
         }
 
         private void AllocatedClassesListBox_SelectedValueChanged(object sender, EventArgs e)
@@ -91,7 +102,7 @@ namespace Magical_Tool_Solution.Configuration
 
         private void UnallocatedClassesListBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (unallocatedClassesListBox.SelectedItem != null)
+            if (unallocatedClassesListBox.SelectedItem != null && mainClassesListBox.SelectedItem != null)
             {
                 allocateClassButton.Enabled = true;
             }
@@ -107,7 +118,7 @@ namespace Magical_Tool_Solution.Configuration
         {
             ToolClassModel toolClass = (ToolClassModel)allocatedClassesListBox.SelectedItem;
             GlobalConfig.Connection.SetMainClassIdById(null, toolClass.Id);
-            WireUpLists();
+            WireUpLists(mainClassesListBox.SelectedIndex);
         }
 
         private void MainClassesListBox_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -155,11 +166,31 @@ namespace Magical_Tool_Solution.Configuration
         private void DeleteMainClassToolStripMenuItem_Click(object sender, EventArgs e) => DeleteSelectedMainClass();
         private void DeleteSelectedMainClass()
         {
-            if (MessageBox.Show($"Are you sure you want to delete {_mainClassModel.Name}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+            if (MessageBox.Show($"Are you sure you want to delete {_mainClassModel.DisplayName}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
+                if (_mainClassModel.ToolClasses.Count > 0)
+                {
+                    GlobalConfig.Connection.UnallocateToolClasses(_mainClassModel.Id);
+                }
                 GlobalConfig.Connection.DeleteMainClassById(_mainClassModel.Id);
             }
             WireUpLists();
+        }
+
+        private void MainClassesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _mainClassModel = (MainClassModel)mainClassesListBox.SelectedItem;
+            WireUpClassesLists();
+        }
+
+        private void MainClassesListBox_MouseDown(object sender, MouseEventArgs e) => UserInterfaceLogic.HandleRightClick(mainClassesListBox, e, WireUpContextMenu);
+
+        private void MainClassesConfiguration_Resize(object sender, EventArgs e)
+        {
+            // set widths of bottom listboxes to fit nicely
+            int listBoxWidth = (int)Math.Round((decimal)(bottomPanel.Width - buttonsPanel.Width) / 2);
+            bottomLeftPanel.Width = listBoxWidth;
+            bottomRightPanel.Width = listBoxWidth;
         }
     }
 }

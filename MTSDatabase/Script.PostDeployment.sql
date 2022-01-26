@@ -9,3 +9,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+IF NOT (EXISTS (SELECT Name FROM DataValueTypes WHERE Name = 'Numeric' OR Name = 'Text'))
+    BEGIN
+        INSERT INTO DataValueTypes
+        VALUES ('Numeric'), ('Text')
+    END

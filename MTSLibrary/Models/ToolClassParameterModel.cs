@@ -13,5 +13,20 @@ namespace MTSLibrary.Models
         public string Description { get; set; }
         public string DataValueType { get; set; }
         public List<string> AssignedGroupsIds { get; set; }
+        public string AssignedGroupsIdDisplayString { get 
+            {
+                StringBuilder stringBuilder = new();
+                if (AssignedGroupsIds.Count == 0)
+                {
+                    return "No Groups Assigned";
+                }
+                foreach (string id in AssignedGroupsIds)
+                {
+                    stringBuilder.Append(id + ", ");
+                }
+                stringBuilder.Remove(stringBuilder.Length - 2, 2);
+                return stringBuilder.ToString();
+            } 
+        }
     }
 }

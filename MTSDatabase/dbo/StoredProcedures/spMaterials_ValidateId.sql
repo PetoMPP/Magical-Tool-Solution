@@ -1,17 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[spMaterials_ValidateId]
-	@Id nvarchar(120),
-	@result int output
+	@Id nvarchar(120)
 AS
 BEGIN
 	SET NOCOUNT ON
 	IF EXISTS (SELECT * FROM Materials 
 		WHERE Id = @Id)
 		BEGIN
-			SET @result = 1
+			SELECT 1
 		END
 	ELSE
 		BEGIN
-			SET @result = 0
+			SELECT 0
 		END
-RETURN @result
 END

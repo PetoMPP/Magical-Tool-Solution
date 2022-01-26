@@ -1,7 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spMachineMachineGroups_ValidateMachineIdMachineGroupId]
 	@MachineId varchar(20),
-	@MachineGroupId varchar(20),
-	@result int output
+	@MachineGroupId varchar(20)
 AS
 BEGIN
 	SET NOCOUNT ON
@@ -9,11 +8,10 @@ BEGIN
 		WHERE MachineId = @MachineId AND 
 		MachineGroupId = @MachineGroupId)
 		BEGIN
-			SET @result = 1
+			SELECT 1
 		END
 	ELSE
 		BEGIN
-			SET @result = 0
+			SELECT 0
 		END
-RETURN @result
 END

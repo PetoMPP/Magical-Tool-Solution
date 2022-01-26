@@ -14,12 +14,11 @@ BEGIN
 	UPDATE ToolGroups
 	SET
 	Name = @Name,
-	ToolClassId = @ToolClassId,
 	SuitabilityEnabled = @SuitabilityEnabled,
 	MachineInterfaceEnabled = @MachineInterfaceEnabled,
 	InsertsEnabled = @InsertsEnabled,
 	HoldingOtherComponentsEnabled = @HoldingOtherComponentsEnabled,
 	EnabledInComps = @EnabledInComps,
 	EnabledInTools = @EnabledInTools
-	WHERE Id = @Id
+	WHERE Id = @Id AND ToolClassId = @ToolClassId
 END

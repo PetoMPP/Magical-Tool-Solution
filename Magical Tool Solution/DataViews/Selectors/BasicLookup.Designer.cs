@@ -1,7 +1,7 @@
 ﻿
 namespace Magical_Tool_Solution.DataViews.Selectors
 {
-    partial class BasicItemLookup
+    partial class BasicLookup
     {
         /// <summary>
         /// Required designer variable.
@@ -44,9 +44,6 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.cancelButtonPanel = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.lookupDataGridView = new System.Windows.Forms.DataGridView();
-            this.firstColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.secondColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.thirdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchTextBoxPanel.SuspendLayout();
             this.searchTextBox3Panel.SuspendLayout();
             this.searchTextBox2Panel.SuspendLayout();
@@ -220,15 +217,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.lookupDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.lookupDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.lookupDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.firstColumn,
-            this.secondColumn,
-            this.thirdColumn});
             this.lookupDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lookupDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.lookupDataGridView.EnableHeadersVisualStyles = false;
             this.lookupDataGridView.Location = new System.Drawing.Point(0, 33);
             this.lookupDataGridView.Name = "lookupDataGridView";
+            this.lookupDataGridView.ReadOnly = true;
             this.lookupDataGridView.RowHeadersVisible = false;
             this.lookupDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -246,36 +240,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.lookupDataGridView.Size = new System.Drawing.Size(603, 679);
             this.lookupDataGridView.TabIndex = 12;
             this.lookupDataGridView.SelectionChanged += new System.EventHandler(this.LookupDataGridView_SelectionChanged);
-            this.lookupDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LookupDataGridView_MouseDoubleClick);
+            this.lookupDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.LookupDataGridViewISelectItem_MouseDoubleClick);
             // 
-            // firstColumn
-            // 
-            this.firstColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.firstColumn.HeaderText = "#1 col";
-            this.firstColumn.MaxInputLength = 5;
-            this.firstColumn.Name = "firstColumn";
-            this.firstColumn.ReadOnly = true;
-            this.firstColumn.Width = 200;
-            // 
-            // secondColumn
-            // 
-            this.secondColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.secondColumn.HeaderText = "#2 col";
-            this.secondColumn.MaxInputLength = 10;
-            this.secondColumn.Name = "secondColumn";
-            this.secondColumn.ReadOnly = true;
-            this.secondColumn.Width = 200;
-            // 
-            // thirdColumn
-            // 
-            this.thirdColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.thirdColumn.HeaderText = "#3 col";
-            this.thirdColumn.MaxInputLength = 120;
-            this.thirdColumn.Name = "thirdColumn";
-            this.thirdColumn.ReadOnly = true;
-            this.thirdColumn.Width = 200;
-            // 
-            // BasicItemLookup
+            // BasicLookup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -287,10 +254,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "BasicItemLookup";
+            this.Name = "BasicLookup";
             this.ShowInTaskbar = false;
             this.Text = "BasicItemLookup";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicItemLookup_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicLookup_FormClosed);
             this.searchTextBoxPanel.ResumeLayout(false);
             this.searchTextBox3Panel.ResumeLayout(false);
             this.searchTextBox3Panel.PerformLayout();
@@ -317,9 +284,6 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         private System.Windows.Forms.TextBox searchCol1TextBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView lookupDataGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn firstColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn secondColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn thirdColumn;
         private System.Windows.Forms.Panel okButtonPanel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Panel cancelButtonPanel;

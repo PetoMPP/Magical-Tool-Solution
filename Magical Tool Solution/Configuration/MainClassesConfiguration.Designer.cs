@@ -92,8 +92,11 @@ namespace Magical_Tool_Solution.Configuration
             this.mainClassesListBox.Location = new System.Drawing.Point(0, 42);
             this.mainClassesListBox.Name = "mainClassesListBox";
             this.mainClassesListBox.Size = new System.Drawing.Size(1084, 270);
+            this.mainClassesListBox.Sorted = true;
             this.mainClassesListBox.TabIndex = 8;
+            this.mainClassesListBox.SelectedIndexChanged += new System.EventHandler(this.MainClassesListBox_SelectedIndexChanged);
             this.mainClassesListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainClassesListBox_MouseDoubleClick);
+            this.mainClassesListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MainClassesListBox_MouseDown);
             // 
             // mainClassesListBoxContextMenuStrip
             // 
@@ -290,6 +293,7 @@ namespace Magical_Tool_Solution.Configuration
             this.Name = "MainClassesConfiguration";
             this.Text = "MainClassesConfiguration";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainClassesConfiguration_FormClosed);
+            this.Resize += new System.EventHandler(this.MainClassesConfiguration_Resize);
             this.topPanel.ResumeLayout(false);
             this.mainClassesListBoxContextMenuStrip.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);

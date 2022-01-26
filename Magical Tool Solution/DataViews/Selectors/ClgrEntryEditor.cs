@@ -12,16 +12,16 @@ using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
 {
-    public partial class ClgrEntryEditor : Form
+    public partial class ClgrEntryEditor : Form, ISelectToolClass, ISelectToolGroup, ISelectMainClass
     {
         private readonly ItemType _itemType;
         private readonly CreatingType _creatingType;
         private readonly Form callingForm;
         private readonly IClGr _clGr;
         private readonly IMainClass _mainClass;
-        private readonly ToolClassModel _toolClassModel;
-        private readonly ToolGroupModel _toolGroupModel;
-        private readonly MainClassModel _mainClassModel;
+        private ToolClassModel _toolClassModel;
+        private ToolGroupModel _toolGroupModel;
+        private MainClassModel _mainClassModel;
 
         public ClgrEntryEditor(ItemType itemType, CreatingType creatingType, object model, Form caller, IClGr clGr)
         {
@@ -60,13 +60,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 idTextBox.Text = _toolClassModel.Id;
                 d1TextBox.Text = _toolClassModel.Name;
                 mainIdTextBox.Text = _toolClassModel.MainClassId;
+                mainD1TextBox.Text = null;
                 if (_toolClassModel.MainClassId != null)
                 {
                     mainD1TextBox.Text = GlobalConfig.Connection.GetMainClassNameById(_toolClassModel.MainClassId); 
-                }
-                else
-                {
-                    mainD1TextBox.Text = null;
                 }
             }
             else if (_itemType == ItemType.toolGroup)
@@ -82,54 +79,21 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 {
                     mainD1TextBox.Text = null;
                 }
-                if (_toolGroupModel.SuitabilityEnabled)
-                {
-                    enableSuitabilityRadioButton.Checked = true;
-                }
-                else
-                {
-                    disableSuitabilityRadioButton.Checked = true;
-                }
-                if (_toolGroupModel.MachineInterfaceEnabled)
-                {
-                    enableMachineHolderInterfaceRadioButton.Checked = true;
-                }
-                else
-                {
-                    disableMachineHolderInterfaceRadioButton.Checked = true;
-                }
-                if (_toolGroupModel.InsertsEnabled)
-                {
-                    enableInsertsRadioButton.Checked = true;
-                }
-                else
-                {
-                    disableInsertsRadioButton.Checked = true;
-                }
-                if (_toolGroupModel.HoldingOtherComponentsEnabled)
-                {
-                    enableHoldingComponentsRadioButton.Checked = true;
-                }
-                else
-                {
-                    disableHoldingComponentsRadioButton.Checked = true;
-                }
-                if (_toolGroupModel.EnabledInComps)
-                {
-                    enableComponentsCheckBox.Checked = true;
-                }
-                else
-                {
-                    enableComponentsCheckBox.Checked = false;
-                }
-                if (_toolGroupModel.EnabledInTools)
-                {
-                    enableToolsCheckBox.Checked = true;
-                }
-                else
-                {
-                    enableToolsCheckBox.Checked = false;
-                }
+                enableSuitabilityRadioButton.Checked = _toolGroupModel.SuitabilityEnabled;
+                disableSuitabilityRadioButton.Checked = !_toolGroupModel.SuitabilityEnabled;
+
+                enableMachineHolderInterfaceRadioButton.Checked = _toolGroupModel.MachineInterfaceEnabled;
+                disableMachineHolderInterfaceRadioButton.Checked = !_toolGroupModel.MachineInterfaceEnabled;
+
+                enableInsertsRadioButton.Checked = _toolGroupModel.InsertsEnabled;
+                disableInsertsRadioButton.Checked = !_toolGroupModel.InsertsEnabled;
+
+                enableHoldingComponentsRadioButton.Checked = _toolGroupModel.HoldingOtherComponentsEnabled;
+                disableHoldingComponentsRadioButton.Checked = !_toolGroupModel.HoldingOtherComponentsEnabled;
+
+                enableComponentsCheckBox.Checked = _toolGroupModel.EnabledInComps;
+
+                enableToolsCheckBox.Checked = _toolGroupModel.EnabledInTools;
             }
             else if (_itemType == ItemType.mainClass)
             {
@@ -235,146 +199,114 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void OkButton_Click(object sender, EventArgs e)
         {
-            CreateAndSendModel();
-            Close();
+            if (CreateAndSendModel())
+            {
+                Close();
+            }
         }
 
-        private void CreateAndSendModel()
+        private bool CreateAndSendModel()
         {
+            if (string.IsNullOrWhiteSpace(idTextBox.Text))
+            {
+                MessageBox.Show("Id cannot be empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             //Determine which model
-            if (_itemType == ItemType.toolClass)
+            switch (_itemType)
             {
-                //create model
-                ToolClassModel model = new()
-                {
-                    Id = idTextBox.Text,
-                    Name = d1TextBox.Text,
-                    MainClassId = mainIdTextBox.Text
-                };
-                //updating doesnt affect allocated groups
-                //send to interface
-                if (_creatingType == CreatingType.creating)
-                {
-                    //validate if id is taken for all classes
-                    if (_clGr.ValidateToolClassId(model.Id))
+                case ItemType.toolClass:
+                    //create model
+                    ToolClassModel tc = new()
                     {
-                        MessageBox.Show("Tool Class Id is already used by another class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    _clGr.AddToolClass(model);
-                }
-                else if (_creatingType == CreatingType.updating)
-                {
-                    _clGr.UpdateToolClass(model);
-                }
-            }
-            else if (_itemType == ItemType.toolGroup)
-            {
-                //validate if is enabled to anything
-                if (!enableComponentsCheckBox.Checked && !enableToolsCheckBox.Checked)
-                {
-                    MessageBox.Show("Tool Group has to be enabled for at least one item type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                //create model
-                ToolGroupModel model = new()
-                {
-                    Id = idTextBox.Text,
-                    Name = d1TextBox.Text,
-                    ToolClassId = mainIdTextBox.Text
-                };
-                if (enableSuitabilityRadioButton.Checked)
-                {
-                    model.SuitabilityEnabled = true;
-                }
-                else
-                {
-                    model.SuitabilityEnabled = false;
-                }
-                if (enableMachineHolderInterfaceRadioButton.Checked)
-                {
-                    model.MachineInterfaceEnabled = true;
-                }
-                else
-                {
-                    model.MachineInterfaceEnabled = false;
-                }
-                if (enableInsertsRadioButton.Checked)
-                {
-                    model.InsertsEnabled = true;
-                }
-                else
-                {
-                    model.InsertsEnabled = false;
-                }
-                if (enableHoldingComponentsRadioButton.Checked)
-                {
-                    model.HoldingOtherComponentsEnabled = true;
-                }
-                else
-                {
-                    model.HoldingOtherComponentsEnabled = false;
-                }
-                if (enableComponentsCheckBox.Checked)
-                {
-                    model.EnabledInComps = true;
-                }
-                else
-                {
-                    model.EnabledInComps = false;
-                }
-                if (enableToolsCheckBox.Checked)
-                {
-                    model.EnabledInTools = true;
-                }
-                else
-                {
-                    model.EnabledInTools = false;
-                }
-                //send to interface
-                if (_creatingType == CreatingType.creating)
-                {
-                    //validate if id is taken for groups in class
-                    if (_clGr.ValidateToolGroup(model))
+                        Id = idTextBox.Text,
+                        Name = d1TextBox.Text,
+                        MainClassId = mainIdTextBox.Text
+                    };
+                    //updating doesnt affect allocated groups
+                    //send to interface
+                    if (_creatingType == CreatingType.creating)
                     {
-                        MessageBox.Show("Tool Group Id is already used by another group in this class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        //validate if id is taken for all classes
+                        if (_clGr.ValidateToolClassId(tc.Id))
+                        {
+                            MessageBox.Show("Tool Class Id is already used by another class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                        _clGr.AddToolClass(tc);
                     }
-                    _clGr.AddToolGroup(model);
-                }
-                else if (_creatingType == CreatingType.updating)
-                {
-                    _clGr.UpdateToolGroup(model);
-                }
-            }
-            else if (_itemType == ItemType.mainClass)
-            {
-                MainClassModel model = new()
-                {
-                    Id = idTextBox.Text,
-                    Name = d1TextBox.Text
-                };
-                if (_creatingType == CreatingType.creating)
-                {
-                    //validate if id is taken
-                    if (_mainClass.ValidateMainClassId(model.Id))
+                    else if (_creatingType == CreatingType.updating)
                     {
-                        MessageBox.Show("Main Class Id is already used by another class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        _clGr.UpdateToolClass(tc);
                     }
-                    _mainClass.AddMainClass(model);
-                }
-                else if (_creatingType == CreatingType.updating)
-                {
-                    _mainClass.UpdateMainClass(model);
-                }
-            }
+                    break;
+                case ItemType.toolGroup:
+                    //validate if is enabled to anything
+                    if (!enableComponentsCheckBox.Checked && !enableToolsCheckBox.Checked)
+                    {
+                        MessageBox.Show("Tool Group has to be enabled for at least one item type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    //create model
+                    ToolGroupModel tg = new()
+                    {
+                        Id = idTextBox.Text,
+                        Name = d1TextBox.Text,
+                        ToolClassId = mainIdTextBox.Text,
+                        SuitabilityEnabled = enableSuitabilityRadioButton.Checked,
+                        MachineInterfaceEnabled = enableMachineHolderInterfaceRadioButton.Checked,
+                        InsertsEnabled = enableInsertsRadioButton.Checked,
+                        HoldingOtherComponentsEnabled = enableHoldingComponentsRadioButton.Checked,
+                        EnabledInComps = enableComponentsCheckBox.Checked,
+                        EnabledInTools = enableToolsCheckBox.Checked
+                    };
+                    //send to interface
+                    if (_creatingType == CreatingType.creating)
+                    {
+                        //validate if id is taken for groups in class
+                        if (_clGr.ValidateToolGroup(tg))
+                        {
+                            MessageBox.Show("Tool Group Id is already used by another group in this class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                        _clGr.AddToolGroup(tg);
+                    }
+                    else if (_creatingType == CreatingType.updating)
+                    {
+                        _clGr.UpdateToolGroup(tg);
+                    }
+                    break;
+                case ItemType.mainClass:
+                    MainClassModel mc = new()
+                    {
+                        Id = idTextBox.Text,
+                        Name = d1TextBox.Text
+                    };
+                    if (_creatingType == CreatingType.creating)
+                    {
+                        //validate if id is taken
+                        if (_mainClass.ValidateMainClassId(mc.Id))
+                        {
+                            MessageBox.Show("Main Class Id is already used by another class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                        _mainClass.AddMainClass(mc);
+                    }
+                    else if (_creatingType == CreatingType.updating)
+                    {
+                        _mainClass.UpdateMainClass(mc);
+                    }
+                    break;
+            };
+            return true;
         }
 
         private void ApplyButton_Click(object sender, EventArgs e)
         {
-            CreateAndSendModel();
-            ClearFields();
+            if (CreateAndSendModel())
+            {
+                ClearFields(); 
+            }
         }
 
         private void ClearFields()
@@ -385,6 +317,57 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             {
                 t.Text = "";
             }
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            Form form = new();
+            if (_itemType == ItemType.toolClass)
+            {
+                form = new BasicLookup((ISelectToolClass)this, this, new string[] { "Tool Class ID", "Class Description" }, 0, _itemType);
+            }
+            else if (_itemType == ItemType.toolGroup)
+            {
+                form = new BasicLookup((ISelectToolGroup)this, this, new string[] { "Tool Group ID", "Group Description" }, 0, _itemType);
+            }
+            else if (_itemType == ItemType.mainClass)
+            {
+                form = new BasicLookup((ISelectMainClass)this, this, new string[] { "Main Class ID", "Main Class Description" }, 0, _itemType);
+            }
+            form.Show();
+            Enabled = false;
+        }
+
+        public void LoadSelectedToolClass(string id)
+        {
+            _toolClassModel = GlobalConfig.Connection.GetToolClassById(id);
+            LoadModelToUI();
+        }
+        public void LoadSelectedToolGroup(string id)
+        {
+            _toolGroupModel = GlobalConfig.Connection.GetToolGroupById(id);
+            LoadModelToUI();
+        }
+
+        public void LoadSelectedBasicToolClass(BasicToolClassModel model)
+        {
+            _toolClassModel = (ToolClassModel)model;
+            LoadModelToUI();
+        }
+
+        public void LoadSelectedBasicToolGroup(BasicToolGroupModel model)
+        {
+            // it has to perserve tool class from before calling lookup
+            ToolGroupModel toolGroup = (ToolGroupModel)model;
+            toolGroup.ToolClassId = _toolGroupModel.ToolClassId;
+            _toolGroupModel = toolGroup;
+            LoadModelToUI();
+        }
+
+        public void LoadSelectedBasicMainClass(BasicMainClassModel model)
+        {
+            _mainClassModel = (MainClassModel)model;
+            LoadModelToUI();
         }
     }
 }

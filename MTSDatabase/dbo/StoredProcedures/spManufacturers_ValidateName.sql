@@ -1,17 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[spManufacturers_ValidateName]
-	@Name nvarchar(120),
-	@result int output
+	@Name nvarchar(120)
 AS
 BEGIN
 	SET NOCOUNT ON
 	IF EXISTS (SELECT * FROM MainClasses 
 		WHERE Name = @Name)
 		BEGIN
-			SET @result = 1
+			SELECT 1
 		END
 	ELSE
 		BEGIN
-			SET @result = 0
+			SELECT 0
 		END
-RETURN @result
 END
