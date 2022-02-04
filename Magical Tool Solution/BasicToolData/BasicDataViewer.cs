@@ -18,12 +18,13 @@ using MTSLibrary.Models;
 
 namespace Magical_Tool_Solution.BasicToolData
 {
-    public partial class BasicDataViewer : Form, ISelectItem, ISelectClGr
+    public partial class BasicDataViewer : Form, ISelectItem, ISelectClGr, ISelectComponent, ISelectPosition
     {
         private readonly Form caller;
         private Form headerForm;
         private Form sideForm;
         private readonly ItemType _itemType;
+        private ToolGroupModel _toolGroup;
 
         //External Controls
         //View Form
@@ -33,6 +34,7 @@ namespace Magical_Tool_Solution.BasicToolData
         //Side Form both
         private TextBox _statusBox;
         //Side Form item
+        private Panel _materialSuitabilityPanel;
         private Label _pMaterialLabel;
         private Label _mMaterialLabel;
         private Label _kMaterialLabel;
@@ -60,7 +62,16 @@ namespace Magical_Tool_Solution.BasicToolData
             AdjustUI();
             WireUpToolTips();
             WireUpControls();
-            //Why?
+            if (_itemType == ItemType.tool)
+            {
+                // Load Components Table
+                LoadComponents(); 
+            }
+            if (_itemType == ItemType.list)
+            {
+                LoadListPositions();
+            }
+            // Why?
             idTextBox.Text = null;
         }
 
@@ -112,11 +123,11 @@ namespace Magical_Tool_Solution.BasicToolData
             }
             else if (_itemType == ItemType.tool)
             {
-                headerForm = new ToolHeader(selectedViewPanel, this);
+                headerForm = new ToolHeader(selectedViewPanel, this, this);
             }
             else if (_itemType == ItemType.list)
             {
-                headerForm = new ListHeader(selectedViewPanel, this);
+                headerForm = new ListHeader(selectedViewPanel, this, this);
             }
             else
             {
@@ -126,6 +137,7 @@ namespace Magical_Tool_Solution.BasicToolData
             viewSwitcherPanel.Controls.Add(headerForm);
             headerForm.BringToFront();
             headerForm.Show();
+            WireUpControls();
         }
 
         private void CreateSidePanel()
@@ -150,6 +162,7 @@ namespace Magical_Tool_Solution.BasicToolData
             sidePanel.Controls.Add(sideForm);
             sideForm.BringToFront();
             sideForm.Show();
+            WireUpControls();
         }
         #endregion
         #region Events
@@ -167,7 +180,7 @@ namespace Magical_Tool_Solution.BasicToolData
 
         private void SearchByIdbutton_Click(object sender, EventArgs e)
         {
-            string[] columnNames = GetColumnsFromMode();
+            string[] columnNames = UserInterfaceLogic.GetColumnsFromMode(_itemType);
             Form form = new BasicLookup(this, this, columnNames, 0, _itemType);
             form.Visible = true;
             Enabled = false;
@@ -176,7 +189,7 @@ namespace Magical_Tool_Solution.BasicToolData
 
         private void SearchByD1Button_Click(object sender, EventArgs e)
         {
-            string[] columnNames = GetColumnsFromMode();
+            string[] columnNames = UserInterfaceLogic.GetColumnsFromMode(_itemType);
             Form form = new BasicLookup(this, this, columnNames, 1, _itemType);
             form.Visible = true;
             Enabled = false;
@@ -184,7 +197,7 @@ namespace Magical_Tool_Solution.BasicToolData
 
         private void SearchByD2Button_Click(object sender, EventArgs e)
         {
-            string[] columnNames = GetColumnsFromMode();
+            string[] columnNames = UserInterfaceLogic.GetColumnsFromMode(_itemType);
             Form form = new BasicLookup(this, this, columnNames, 2, _itemType);
             form.Visible = true;
             Enabled = false;
@@ -195,10 +208,19 @@ namespace Magical_Tool_Solution.BasicToolData
             IEnumerable<Control> textBoxes = UserInterfaceLogic.GetAllControls(this, typeof(TextBox));
             foreach (Control textBox in textBoxes)
             {
-                textBox.Text = "";
+                textBox.Text = string.Empty;
             }
             CreateSidePanel();
             CreateViewPanel();
+            if (_itemType == ItemType.tool)
+            {
+                // Load Components Table
+                LoadComponents();
+            }
+            if (_itemType == ItemType.list)
+            {
+                LoadListPositions();
+            }
         }
         private void SaveFormButton_Click(object sender, EventArgs e)
         {
@@ -208,7 +230,10 @@ namespace Magical_Tool_Solution.BasicToolData
                 MessageBoxIcon.Exclamation)
                 == DialogResult.OK)
             {
-                SaveFormData();
+                if (SaveFormData())
+                {
+                    MessageBox.Show($"The {_itemType} was saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -256,6 +281,7 @@ namespace Magical_Tool_Solution.BasicToolData
                 // Reload Form
                 LoadSelectedItem(list.Id);
             }
+            MessageBox.Show($"{_itemType} was created successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -268,6 +294,7 @@ namespace Magical_Tool_Solution.BasicToolData
                 == DialogResult.OK)
             {
                 DeleteEntryById(idTextBox.Text);
+                ClearFormButton_Click(sender, e);
             }
         }
         private void IdTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -290,29 +317,9 @@ namespace Magical_Tool_Solution.BasicToolData
                 }
             }
         }
-
-
-
-
         #endregion
         #region Utility methods
-        private string[] GetColumnsFromMode()
-        {
-            string[] output = Array.Empty<string>();
-            if (_itemType == ItemType.comp)
-            {
-                output = new string[] { "Component Id", "Component Description", "Comp. Manufacturer's Id" };
-            }
-            else if (_itemType == ItemType.tool)
-            {
-                output = new string[] { "Tool Id", "Tool Description", "Lead Comp. Manufacturer's Id" };
-            }
-            else if (_itemType == ItemType.list)
-            {
-                output = new string[] { "Tool List Id", "Tool List Description", "Part Number" };
-            }
-            return output;
-        }
+        
         private void WireUpToolTips()
         {
             compIdToolTip.SetToolTip(idTextBox, idTextBox.Text);
@@ -331,17 +338,41 @@ namespace Magical_Tool_Solution.BasicToolData
             }
             if (_itemType == ItemType.comp)
             {
+                if (!GlobalConfig.Connection.ValidateCompId(id))
+                {
+                    MessageBox.Show("Id not found!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return;
+                }
                 GlobalConfig.Connection.DeleteCompById(id);
             }
             else if (_itemType == ItemType.tool)
             {
+                if (!GlobalConfig.Connection.ValidateToolId(id))
+                {
+                    MessageBox.Show("Id not found!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return;
+                }
                 GlobalConfig.Connection.DeleteToolById(id);
             }
             else if (_itemType == ItemType.list)
             {
+                if (!GlobalConfig.Connection.ValidateListId(id))
+                {
+                    MessageBox.Show("Id not found!",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return;
+                }
                 GlobalConfig.Connection.DeleteListById(id);
             }
-
+            MessageBox.Show($"{_itemType} was deleted successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private bool SaveFormData()
         {
@@ -413,6 +444,7 @@ namespace Magical_Tool_Solution.BasicToolData
             if (_itemType == ItemType.comp || _itemType == ItemType.tool)
             {
                 //wire up controls
+                _materialSuitabilityPanel = (Panel)subControls.First(c => c.Name == "materialSuitabilityPanel");
                 _pMaterialLabel = (Label)subControls.First(c => c.Name == "pMaterialLabel");
                 _mMaterialLabel = (Label)subControls.First(c => c.Name == "mMaterialLabel");
                 _kMaterialLabel = (Label)subControls.First(c => c.Name == "kMaterialLabel");
@@ -420,7 +452,7 @@ namespace Magical_Tool_Solution.BasicToolData
                 _sMaterialLabel = (Label)subControls.First(c => c.Name == "sMaterialLabel");
                 _hMaterialLabel = (Label)subControls.First(c => c.Name == "hMaterialLabel");
                 _toolClassIdBox = (TextBox)subControls.First(c => c.Name == "toolClassIdBox");
-                _toolClassD1Box = (TextBox)subControls.First(c => c.Name == "toolGroupD1Box");
+                _toolClassD1Box = (TextBox)subControls.First(c => c.Name == "toolClassD1Box");
                 _toolGroupIdBox = (TextBox)subControls.First(c => c.Name == "toolGroupIdBox");
                 _toolGroupD1Box = (TextBox)subControls.First(c => c.Name == "toolGroupD1Box");
                 _modeSpecificBox = (TextBox)subControls.First(c => c.Name == "modeSpecificBox");
@@ -466,7 +498,7 @@ namespace Magical_Tool_Solution.BasicToolData
         {
             if (_positionsDataGridView.Rows.Count == 0)
             {
-                return null;
+                return new List<ListPositionModel>();
             }
             List<ListPositionModel> output = new();
             foreach (DataGridViewRow row in _positionsDataGridView.Rows)
@@ -509,8 +541,8 @@ namespace Magical_Tool_Solution.BasicToolData
             ToolGroupId = _toolGroupIdBox.Text,
             MachineInterfaceId = _modeSpecificBox.Text,
             DataStatus = _statusBox.Text,
-            Suitability = GetSuitability(),
-            Parameters = GetParameters(),
+            Suitability = GetSuitabilityFromUI(),
+            Parameters = GetParametersFromUI(),
             Components = GetComponents()
         };
 
@@ -550,11 +582,11 @@ namespace Magical_Tool_Solution.BasicToolData
             ToolGroupId = _toolGroupIdBox.Text,
             ManufacturerName = _modeSpecificBox.Text,
             DataStatus = _statusBox.Text,
-            Suitability = GetSuitability(),
-            Parameters = GetParameters()
+            Suitability = GetSuitabilityFromUI(),
+            Parameters = GetParametersFromUI()
         };
 
-        private SuitabilityModel GetSuitability() => new()
+        private SuitabilityModel GetSuitabilityFromUI() => new()
         {
             PSuitability = int.Parse(_pMaterialLabel.Tag.ToString()),
             MSuitability = int.Parse(_mMaterialLabel.Tag.ToString()),
@@ -564,7 +596,7 @@ namespace Magical_Tool_Solution.BasicToolData
             HSuitability = int.Parse(_hMaterialLabel.Tag.ToString()),
         };
 
-        private List<ParameterModel> GetParameters()
+        private List<ParameterModel> GetParametersFromUI()
         {
             if (_parametersDataGridView.Rows.Count == 0)
             {
@@ -577,13 +609,16 @@ namespace Magical_Tool_Solution.BasicToolData
                 {
                     Position = int.Parse(row.Cells["Position"].Value.ToString()),
                     ParameterId = row.Cells["ParameterId"].Value.ToString(),
-                    Name = row.Cells["ParameterName"].Value.ToString(),
-                    Description = row.Cells["ParameterDescription"].Value.ToString(),
-                    DataValueType = (DataValueType)Enum.Parse(typeof(DataValueType), row.Cells["ValueType"].Value.ToString())
+                    Name = row.Cells["Name"].Value.ToString(),
+                    Description = row.Cells["Description"].Value.ToString(),
+                    DataValueType = (DataValueType)Enum.Parse(typeof(DataValueType), row.Cells["DataValueType"].Value.ToString())
                 };
                 if (model.DataValueType == DataValueType.Numeric)
                 {
-                    model.NumericValue = double.Parse(row.Cells["Value"].Value.ToString());
+                    if (!string.IsNullOrWhiteSpace(row.Cells["Value"].Value.ToString()))
+                    {
+                        model.NumericValue = double.Parse(row.Cells["Value"].Value.ToString());
+                    }
                 }
                 else
                 {
@@ -597,6 +632,10 @@ namespace Magical_Tool_Solution.BasicToolData
         #region Data loading
         private void LoadDataToUI()
         {
+            if (string.IsNullOrWhiteSpace(idTextBox.Text))
+            {
+                return;
+            }
             //working mode determination
             if (_itemType == ItemType.comp)
             {
@@ -616,7 +655,7 @@ namespace Magical_Tool_Solution.BasicToolData
             {
                 //Verify item id
                 string toolId = idTextBox.Text;
-                if (GlobalConfig.Connection.ValidateToolId(toolId))
+                if (!GlobalConfig.Connection.ValidateToolId(toolId))
                 {
                     MessageBox.Show($"No tool with Id of {toolId}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -630,7 +669,7 @@ namespace Magical_Tool_Solution.BasicToolData
             {
                 //Verify item id
                 string listId = idTextBox.Text;
-                if (GlobalConfig.Connection.ValidateListId(listId))
+                if (!GlobalConfig.Connection.ValidateListId(listId))
                 {
                     MessageBox.Show($"No tool list with Id of {listId}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -657,10 +696,94 @@ namespace Magical_Tool_Solution.BasicToolData
 
         }
 
-        private void LoadListPositions(List<ListPositionModel> tools)
+        private void LoadListPositions(List<ListPositionModel> tools = null)
         {
             _positionsDataGridView.DataSource = null;
-            _positionsDataGridView.DataSource = ProgramLogic.CreateDataTableFromListOfModels(tools);
+            _positionsDataGridView.DataSource = CreateListPositionsDataTable(tools);
+            ConfigurePositionsDataGrid();
+        }
+
+        private DataTable CreateListPositionsDataTable(List<ListPositionModel> tools = null)
+        {
+            DataTable table = new();
+            // Create Columns
+            DataColumn[] dataColumns = new[]
+            {
+                new DataColumn("position", typeof(int)),
+                new DataColumn("componentId", typeof(string)),
+                new DataColumn("toolId", typeof(string)),
+                new DataColumn("itemId", typeof(string)),
+                new DataColumn("desc1", typeof(string)),
+                new DataColumn("desc2", typeof(string)),
+                new DataColumn("quantity", typeof(int)),
+            };
+            table.Columns.AddRange(dataColumns);
+            if (tools != null)
+            {
+                foreach (ListPositionModel lp in tools)
+                {
+                    DataRow row;
+                    row = table.NewRow();
+                    row["position"] = lp.Position;
+                    if (lp.BasicComp != null)
+                    {
+                        row["componentId"] = lp.BasicComp.Id;
+                        row["itemId"] = lp.BasicComp.Id;
+                        row["desc1"] = lp.BasicComp.Description1;
+                        row["desc2"] = lp.BasicComp.Description2; 
+                    }
+                    else if (lp.BasicTool != null)
+                    {
+                        row["toolId"] = lp.BasicTool.Id;
+                        row["itemId"] = lp.BasicTool.Id;
+                        row["desc1"] = lp.BasicTool.Description1;
+                        row["desc2"] = lp.BasicTool.Description2;
+                    }
+                    row["quantity"] = lp.Quantity;
+                    table.Rows.Add(row);
+                }
+            }
+            return table;
+        }
+
+        private void ConfigurePositionsDataGrid()
+        {
+            //    new DataColumn("position", typeof(int)),
+            //    new DataColumn("componentId", typeof(string)),
+            //    new DataColumn("toolId", typeof(string)),
+            //    new DataColumn("itemId", typeof(string)),
+            //    new DataColumn("desc1", typeof(string)),
+            //    new DataColumn("desc2", typeof(string)),
+            //    new DataColumn("quantity", typeof(int)),
+            _positionsDataGridView.AllowUserToResizeRows = false;
+
+            _positionsDataGridView.Columns["position"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _positionsDataGridView.Columns["position"].HeaderText = "Position";
+            _positionsDataGridView.Columns["position"].DisplayIndex = 0;
+            _positionsDataGridView.Columns["position"].ReadOnly = true;
+
+            _positionsDataGridView.Columns["itemId"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _positionsDataGridView.Columns["itemId"].HeaderText = "ID";
+            _positionsDataGridView.Columns["itemId"].DisplayIndex = 1;
+            _positionsDataGridView.Columns["itemId"].ReadOnly = true;
+
+            _positionsDataGridView.Columns["desc1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _positionsDataGridView.Columns["desc1"].HeaderText = "Description 1";
+            _positionsDataGridView.Columns["desc1"].DisplayIndex = 2;
+            _positionsDataGridView.Columns["desc1"].ReadOnly = true;
+
+            _positionsDataGridView.Columns["desc2"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _positionsDataGridView.Columns["desc2"].HeaderText = "Description 2";
+            _positionsDataGridView.Columns["desc2"].DisplayIndex = 3;
+            _positionsDataGridView.Columns["desc2"].ReadOnly = true;
+
+            _positionsDataGridView.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _positionsDataGridView.Columns["quantity"].HeaderText = "Quantity";
+            _positionsDataGridView.Columns["quantity"].DisplayIndex = 4;
+            _positionsDataGridView.Columns["quantity"].ReadOnly = true;
+
+            _positionsDataGridView.Columns["componentId"].Visible = false;
+            _positionsDataGridView.Columns["toolId"].Visible = false;
         }
 
         private void LoadToolModelData(ToolModel model)
@@ -675,15 +798,51 @@ namespace Magical_Tool_Solution.BasicToolData
             _toolClassIdBox.Text = model.ToolClassId;
             _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
             _toolGroupIdBox.Text = model.ToolGroupId;
-            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameById(model.ToolGroupId);
+            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameByIdToolClassId(model.ToolGroupId, model.ToolClassId);
             _modeSpecificBox.Text = model.MachineInterfaceId;
             _statusBox.Text = model.DataStatus;
+            _toolGroup = GlobalConfig.Connection.GetToolGroupByIdToolClassId(model.ToolGroupId, model.ToolClassId);
+            LoadToolGroupConfiguration();
         }
 
-        private void LoadComponents(List<ToolComponentModel> components)
+        private void LoadComponents(List<ToolComponentModel> components = null)
         {
             _componentsDataGridView.DataSource = null;
-            _componentsDataGridView.DataSource = ProgramLogic.CreateDataTableFromListOfModels(components);
+            _componentsDataGridView.DataSource = CreateComponentsDataTable(components);
+            ConfigureComponentsDataGrid();
+        }
+
+
+        private static DataTable CreateComponentsDataTable(List<ToolComponentModel> components = null)
+        {
+            DataTable table = new();
+            // Create Columns
+            DataColumn[] dataColumns = new[] 
+            { 
+                new DataColumn("keyComp", typeof(bool)),
+                new DataColumn("position", typeof(int)),
+                new DataColumn("componentId", typeof(string)),
+                new DataColumn("componentD1", typeof(string)),
+                new DataColumn("componentD2", typeof(string)),
+                new DataColumn("quantity", typeof(int)),
+            };
+            table.Columns.AddRange(dataColumns);
+            if (components != null)
+            {
+                foreach (ToolComponentModel tc in components)
+                {
+                    DataRow row;
+                    row = table.NewRow();
+                    row["keyComp"] = tc.IsKey;
+                    row["position"] = tc.Position;
+                    row["componentId"] = tc.BasicComp.Id;
+                    row["componentD1"] = tc.BasicComp.Description1;
+                    row["componentD2"] = tc.BasicComp.Description2;
+                    row["quantity"] = tc.Quantity;
+                    table.Rows.Add(row);
+                } 
+            }
+            return table;
         }
 
         private void LoadCompModelData(CompModel model)
@@ -692,20 +851,95 @@ namespace Magical_Tool_Solution.BasicToolData
             idTextBox.Text = model.Id;
             d1TextBox.Text = model.Description1;
             d2TextBox.Text = model.Description2;
-            LoadSuitability(model.Suitability);
             LoadParameters(model.Parameters);
+            LoadSuitability(model.Suitability);
             _toolClassIdBox.Text = model.ToolClassId;
             _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
             _toolGroupIdBox.Text = model.ToolGroupId;
-            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameById(model.ToolGroupId);
+            _toolGroupD1Box.Text = GlobalConfig.Connection.GetToolGroupNameByIdToolClassId(model.ToolGroupId, model.ToolClassId);
             _modeSpecificBox.Text = model.ManufacturerName;
             _statusBox.Text = model.DataStatus;
+            _toolGroup = GlobalConfig.Connection.GetToolGroupByIdToolClassId(model.ToolGroupId, model.ToolClassId);
+            LoadToolGroupConfiguration();
         }
 
         private void LoadParameters(List<ParameterModel> parameters)
         {
             _parametersDataGridView.DataSource = null;
             _parametersDataGridView.DataSource = ProgramLogic.CreateDataTableFromListOfModels(parameters);
+            ConfigureParametersDataGrid();
+        }
+
+        private void ConfigureParametersDataGrid()
+        {
+            _parametersDataGridView.AllowUserToResizeRows = false;
+
+            _parametersDataGridView.Columns["Position"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _parametersDataGridView.Columns["Position"].DisplayIndex = 0;
+            _parametersDataGridView.Columns["Position"].ReadOnly = true;
+
+            _parametersDataGridView.Columns["ParameterId"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _parametersDataGridView.Columns["ParameterId"].HeaderText = "ID";
+            _parametersDataGridView.Columns["ParameterId"].DisplayIndex = 1;
+            _parametersDataGridView.Columns["ParameterId"].ReadOnly = true;
+
+            _parametersDataGridView.Columns["Value"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _parametersDataGridView.Columns["Value"].DisplayIndex = 2;
+
+            _parametersDataGridView.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _parametersDataGridView.Columns["Name"].HeaderText = "Parameter Name";
+            _parametersDataGridView.Columns["Name"].DisplayIndex = 3;
+            _parametersDataGridView.Columns["Name"].ReadOnly = true;
+
+            _parametersDataGridView.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _parametersDataGridView.Columns["Description"].DisplayIndex = 4;
+            _parametersDataGridView.Columns["Description"].ReadOnly = true;
+
+            _parametersDataGridView.Columns["DataValueType"].Visible = false;
+            _parametersDataGridView.Columns["NumericValue"].Visible = false;
+            _parametersDataGridView.Columns["TextValue"].Visible = false;
+
+            // clear 0's
+            foreach (DataGridViewRow row in _parametersDataGridView.Rows)
+            {
+                if (row.Cells["Value"].Value.ToString() == "0")
+                {
+                    row.Cells["Value"].Value = string.Empty;
+                }
+            }
+        }
+        private void ConfigureComponentsDataGrid()
+        {
+            _componentsDataGridView.AllowUserToResizeRows = false;
+
+            _componentsDataGridView.Columns["keyComp"].HeaderText = "Is key Component?";
+            _componentsDataGridView.Columns["keyComp"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _componentsDataGridView.Columns["keyComp"].ReadOnly = true;
+
+            _componentsDataGridView.Columns["position"].HeaderText = "Position";
+            _componentsDataGridView.Columns["position"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _componentsDataGridView.Columns["position"].ReadOnly = true;
+
+            _componentsDataGridView.Columns["componentId"].HeaderText = "Component ID";
+            _componentsDataGridView.Columns["componentId"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _componentsDataGridView.Columns["componentId"].ReadOnly = true;
+
+            _componentsDataGridView.Columns["componentD1"].HeaderText = "Component Description";
+            _componentsDataGridView.Columns["componentD1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            _componentsDataGridView.Columns["componentD1"].ReadOnly = true;
+            _componentsDataGridView.Columns["componentD1"].Resizable = DataGridViewTriState.False;
+
+            _componentsDataGridView.Columns["componentD2"].HeaderText = "Component Order Code";
+            _componentsDataGridView.Columns["componentD2"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _componentsDataGridView.Columns["componentD2"].ReadOnly = true;
+
+            _componentsDataGridView.Columns["quantity"].HeaderText = "Quantity";
+            _componentsDataGridView.Columns["quantity"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            _componentsDataGridView.Columns["quantity"].ReadOnly = true;
+            foreach (DataGridViewRow row in _componentsDataGridView.Rows)
+            {
+                row.Cells["keyComp"].ReadOnly = true;
+            }
         }
 
         private void LoadSuitability(SuitabilityModel suitability)
@@ -719,6 +953,7 @@ namespace Magical_Tool_Solution.BasicToolData
             sidePanel.Controls.Add(sideForm);
             sideForm.BringToFront();
             sideForm.Show();
+            WireUpControls();
         }
 
         #endregion
@@ -732,10 +967,153 @@ namespace Magical_Tool_Solution.BasicToolData
 
         public void LoadClGr(ToolGroupModel model)
         {
-            _toolClassIdBox.Text = model.ToolClassId;
-            _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(model.ToolClassId);
-            _toolGroupIdBox.Text = model.Id;
-            _toolGroupD1Box.Text = model.Name;
+            _toolGroup = model;
+            _toolClassIdBox.Text = _toolGroup.ToolClassId;
+            _toolClassD1Box.Text = GlobalConfig.Connection.GetClassNameById(_toolGroup.ToolClassId);
+            _toolGroupIdBox.Text = _toolGroup.Id;
+            _toolGroupD1Box.Text = _toolGroup.Name;
+            LoadToolGroupConfiguration();
+            List<ParameterModel> parameters = GetCompParameters();
+            LoadParameters(parameters);
+        }
+
+
+        private List<ParameterModel> GetCompParameters()
+        {
+            List<ParameterModel> parameters = GlobalConfig.Connection.GetParametersByToolClassIdToolGroupId(_toolClassIdBox.Text, _toolGroupIdBox.Text);
+
+            if (string.IsNullOrWhiteSpace(idTextBox.Text))
+            {
+                // Get list of parameters with values
+                List<ParameterModel> parameterValues = GlobalConfig.Connection.GetCompParametersById(idTextBox.Text);
+                foreach (ParameterModel pv in parameterValues)
+                {
+                    parameters.Where(p => p.ParameterId == pv.ParameterId).First().NumericValue = pv.NumericValue;
+                    parameters.Where(p => p.ParameterId == pv.ParameterId).First().TextValue = pv.TextValue;
+                }
+            }
+
+            return parameters;
+        }
+
+        private void LoadToolGroupConfiguration()
+        {
+            // apply group config
+            // public bool SuitabilityEnabled { get; set; }
+            _materialSuitabilityPanel.Visible = _toolGroup.SuitabilityEnabled;
+            // public bool MachineInterfaceEnabled { get; set; }
+            ;
+            // public bool InsertsEnabled { get; set; }
+            ;
+        }
+
+        public void AddToolComponent(ToolComponentModel model)
+        {
+            // This method has to get existing tool components, add provided to those and load them back to datagrid
+            List<ToolComponentModel> toolComponents = GetComponents();
+            if (toolComponents == null)
+            {
+                toolComponents = new();
+            }
+            toolComponents.Add(model);
+            LoadComponents(toolComponents);
+        }
+
+
+        public void DeleteToolComponent(int position)
+        {
+            List<ToolComponentModel> toolComponents = GetComponents();
+            toolComponents.Remove(toolComponents.Where(tc => tc.Position == position).First());
+            LoadComponents(toolComponents);
+        }
+
+        public void AddPosition(ListPositionModel model)
+        {
+            // This method has to get existing position, add provided to those and load them back to datagrid
+            List<ListPositionModel> listPositions = GetListPositions();
+            if (listPositions == null)
+            {
+                listPositions = new();
+            }
+            listPositions.Add(model);
+            LoadListPositions(listPositions);
+        }
+
+        public void UpdateToolComponent(ToolComponentModel model)
+        {
+            // This method has to get existing components, replace edited by model provided and load them back to datagrid
+            List<ToolComponentModel> toolComponents = GetComponents();
+            // get index of updated component
+            int index = toolComponents.FindIndex(tc => tc.Position == model.Position);
+            // IsKey is not provided by model and should be taken from replaced component
+            model.IsKey = toolComponents[index].IsKey;
+            // remove component
+            toolComponents.RemoveAt(index);
+            // add updated model
+            toolComponents.Insert(index, model);
+            LoadComponents(toolComponents);
+        }
+
+        public void AddListPosition(ListPositionModel model)
+        {
+            // This method has to get existing positions, add provided to those and load them back to datagrid
+            List<ListPositionModel> listPositions = GetListPositions();
+            if (listPositions == null)
+            {
+                listPositions = new();
+            }
+            listPositions.Add(model);
+            LoadListPositions(listPositions);
+        }
+
+        public bool IsListPositionPositionNumberInUse(int position)
+        {
+            if (_positionsDataGridView.RowCount > 0)
+            {
+                foreach (DataGridViewRow row in _positionsDataGridView.Rows)
+                {
+                    if (int.Parse(row.Cells["position"].Value.ToString()) == position)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public void DeleteListPosition(ListPositionModel model)
+        {
+            List<ListPositionModel> listPositions = GetListPositions();
+            listPositions.Remove(listPositions.Where(lp => lp.Position == model.Position).First());
+            LoadListPositions();
+        }
+
+        public void UpdateListPosition(ListPositionModel model)
+        {
+            // This method has to get existing list positions, replace edited by model provided and load them back to datagrid
+            List<ListPositionModel> listPositions = GetListPositions();
+            // get index of updated position
+            int index = listPositions.FindIndex(lp => lp.Position == model.Position);
+            // remove position
+            listPositions.RemoveAt(index);
+            // add updated model
+            listPositions.Insert(index, model);
+            LoadListPositions(listPositions);
+        }
+
+        public bool IsToolComponentPositionNumberInUse(int position)
+        {
+            if (_componentsDataGridView.RowCount > 0)
+            {
+                foreach (DataGridViewRow row in _componentsDataGridView.Rows)
+                {
+                    if (int.Parse(row.Cells["position"].Value.ToString()) == position)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

@@ -199,6 +199,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.applyButton.TabIndex = 9;
             this.applyButton.Text = "Apply";
             this.applyButton.UseVisualStyleBackColor = false;
+            this.applyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // leftSelectorPanel
             // 
@@ -335,6 +336,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchByD2Button.Size = new System.Drawing.Size(30, 23);
             this.searchByD2Button.TabIndex = 6;
             this.searchByD2Button.UseVisualStyleBackColor = false;
+            this.searchByD2Button.Click += new System.EventHandler(this.SearchByD2Button_Click);
             // 
             // d2TextBox
             // 
@@ -391,6 +393,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchByD1Button.Size = new System.Drawing.Size(30, 23);
             this.searchByD1Button.TabIndex = 4;
             this.searchByD1Button.UseVisualStyleBackColor = false;
+            this.searchByD1Button.Click += new System.EventHandler(this.SearchByD1Button_Click);
             // 
             // d1TextBox
             // 
@@ -447,6 +450,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.searchByIdbutton.Size = new System.Drawing.Size(30, 23);
             this.searchByIdbutton.TabIndex = 2;
             this.searchByIdbutton.UseVisualStyleBackColor = false;
+            this.searchByIdbutton.Click += new System.EventHandler(this.SearchByIdbutton_Click);
             // 
             // idTextBox
             // 
@@ -595,7 +599,6 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "BasicItemSelector";
-            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BasicItemSelector_FormClosed);
             this.labelPanel.ResumeLayout(false);
             this.bottomPanel.ResumeLayout(false);

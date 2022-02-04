@@ -306,14 +306,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.mainClassListBox.FormattingEnabled = true;
             this.mainClassListBox.IntegralHeight = false;
             this.mainClassListBox.ItemHeight = 32;
-            this.mainClassListBox.Items.AddRange(new object[] {
-            "tits",
-            "ass"});
             this.mainClassListBox.Location = new System.Drawing.Point(0, 66);
             this.mainClassListBox.Name = "mainClassListBox";
             this.mainClassListBox.Size = new System.Drawing.Size(201, 646);
             this.mainClassListBox.TabIndex = 15;
-            this.mainClassListBox.SelectedIndexChanged += new System.EventHandler(this.ListUpdate);
+            this.mainClassListBox.SelectedIndexChanged += new System.EventHandler(this.MainClassListBox_SelectedIndexChanged);
             // 
             // toolClassListBox
             // 
@@ -325,14 +322,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.toolClassListBox.FormattingEnabled = true;
             this.toolClassListBox.IntegralHeight = false;
             this.toolClassListBox.ItemHeight = 32;
-            this.toolClassListBox.Items.AddRange(new object[] {
-            "tits",
-            "ass"});
             this.toolClassListBox.Location = new System.Drawing.Point(201, 66);
             this.toolClassListBox.Name = "toolClassListBox";
             this.toolClassListBox.Size = new System.Drawing.Size(201, 646);
             this.toolClassListBox.TabIndex = 16;
-            this.toolClassListBox.SelectedIndexChanged += new System.EventHandler(this.ListUpdate);
+            this.toolClassListBox.SelectedIndexChanged += new System.EventHandler(this.ToolClassListBox_SelectedIndexChanged);
             // 
             // toolGroupListBox
             // 
@@ -344,14 +338,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.toolGroupListBox.FormattingEnabled = true;
             this.toolGroupListBox.IntegralHeight = false;
             this.toolGroupListBox.ItemHeight = 32;
-            this.toolGroupListBox.Items.AddRange(new object[] {
-            "tits",
-            "ass"});
             this.toolGroupListBox.Location = new System.Drawing.Point(402, 66);
             this.toolGroupListBox.Name = "toolGroupListBox";
             this.toolGroupListBox.Size = new System.Drawing.Size(201, 646);
             this.toolGroupListBox.TabIndex = 17;
-            this.toolGroupListBox.SelectedIndexChanged += new System.EventHandler(this.ListUpdate);
+            this.toolGroupListBox.SelectedIndexChanged += new System.EventHandler(this.ToolGroupListBox_SelectedIndexChanged);
+            this.toolGroupListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ToolGroupListBox_MouseDoubleClick);
             // 
             // ClgrSelector
             // 

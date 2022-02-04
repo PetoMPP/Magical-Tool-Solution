@@ -315,26 +315,15 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 .Where(t => t.Visible == true && t.Enabled == true).ToList();
             foreach (Control t in visibleTextboxes)
             {
-                t.Text = "";
+                t.Text = string.Empty;
             }
         }
 
         private void BrowseButton_Click(object sender, EventArgs e)
         {
-            Form form = new();
-            if (_itemType == ItemType.toolClass)
-            {
-                form = new BasicLookup((ISelectToolClass)this, this, new string[] { "Tool Class ID", "Class Description" }, 0, _itemType);
-            }
-            else if (_itemType == ItemType.toolGroup)
-            {
-                form = new BasicLookup((ISelectToolGroup)this, this, new string[] { "Tool Group ID", "Group Description" }, 0, _itemType);
-            }
-            else if (_itemType == ItemType.mainClass)
-            {
-                form = new BasicLookup((ISelectMainClass)this, this, new string[] { "Main Class ID", "Main Class Description" }, 0, _itemType);
-            }
-            form.Show();
+            string[] columnNames = UserInterfaceLogic.GetColumnsFromMode(_itemType);
+            Form form = new BasicLookup((ISelectToolGroup)this, this, columnNames, 0, _itemType);
+            form.Visible = true;
             Enabled = false;
         }
 
@@ -343,9 +332,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             _toolClassModel = GlobalConfig.Connection.GetToolClassById(id);
             LoadModelToUI();
         }
-        public void LoadSelectedToolGroup(string id)
+        public void LoadSelectedToolGroup(string id, string toolClassId)
         {
-            _toolGroupModel = GlobalConfig.Connection.GetToolGroupById(id);
+            _toolGroupModel = GlobalConfig.Connection.GetToolGroupByIdToolClassId(id, toolClassId);
             LoadModelToUI();
         }
 

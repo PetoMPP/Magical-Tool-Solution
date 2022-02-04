@@ -391,7 +391,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
 
         private void ClgrSelectorButton_Click(object sender, EventArgs e)
         {
-            Form form = new ClgrSelector(callingForm, _selectClGr);
+            Form form = new ClgrSelector(callingForm, _selectClGr, _itemType);
             form.Visible = true;
             callingForm.Enabled = false;
         }

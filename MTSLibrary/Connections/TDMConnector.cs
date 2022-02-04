@@ -41,7 +41,7 @@ namespace MTSLibrary.Connections
 
         public List<string> GetEnabledGroupsIdsByClassIdAndParameterId(string id, string parameterId) => throw new NotImplementedException();
 
-        public string GetToolGroupNameById(string toolGroupId) => throw new NotImplementedException();
+        public string GetToolGroupNameByIdToolClassId(string toolGroupId) => throw new NotImplementedException();
 
         public ListModel GetListModelById(string listId) => throw new NotImplementedException();
 
@@ -107,7 +107,7 @@ namespace MTSLibrary.Connections
         BasicToolModel IDataConnection.GetBasicToolModelById(string text) => throw new NotImplementedException();
         public void DeleteMainClassById(string id) => throw new NotImplementedException();
         public ToolClassModel GetToolClassById(string id) => throw new NotImplementedException();
-        public ToolGroupModel GetToolGroupById(string id) => throw new NotImplementedException();
+        public ToolGroupModel GetToolGroupByIdToolClassId(string id) => throw new NotImplementedException();
         public int GetToolClassParameterNextPositionByToolClassId(string id) => throw new NotImplementedException();
         public void UnallocateToolClasses(string id) => throw new NotImplementedException();
         public List<BasicCompModel> GetBasicCompModels() => throw new NotImplementedException();
@@ -120,5 +120,10 @@ namespace MTSLibrary.Connections
         public void DeleteToolClassParametersByToolClassId(string id) => throw new NotImplementedException();
         public void DeleteToolClassById(string id) => throw new NotImplementedException();
         public void DeleteToolGroupByIdToolClassId(string id, string toolClassId) => throw new NotImplementedException();
+        public List<ToolClassParameterModel> GetToolClassParametersByToolClassIdToolGroupId(string text1, string text2) => throw new NotImplementedException();
+        public List<ParameterModel> GetParametersByToolClassIdToolGroupId(string toolClassId, string toolGroupId) => throw new NotImplementedException();
+        public List<ParameterModel> GetCompParametersById(string id) => throw new NotImplementedException();
+        public string GetToolGroupNameByIdToolClassId(string toolGroupId, string toolClassId) => throw new NotImplementedException();
+        public ToolGroupModel GetToolGroupByIdToolClassId(string id, string toolClassId) => throw new NotImplementedException();
     }
 }

@@ -28,5 +28,13 @@ namespace MTSLibrary.Models
                 return stringBuilder.ToString();
             } 
         }
+        public static explicit operator ParameterModel(ToolClassParameterModel model) => new() 
+        { 
+            Position = model.Position,
+            ParameterId = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            DataValueType = Enum.Parse<DataValueType>(model.DataValueType)
+        };
     }
 }

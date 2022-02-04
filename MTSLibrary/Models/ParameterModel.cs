@@ -11,5 +11,15 @@ namespace MTSLibrary.Models
         public DataValueType DataValueType { get; set; }
         public double NumericValue { get; set; }
         public string TextValue { get; set; }
+        public string Value { get 
+                {
+                return DataValueType switch
+                {
+                    DataValueType.Text => TextValue,
+                    DataValueType.Numeric => NumericValue.ToString(),
+                    _ => null,
+                };
+            }
+        }
     }
 }

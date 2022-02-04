@@ -11,18 +11,19 @@ using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
 {
-    public partial class BasicItemSelector : Form
+    public partial class BasicItemSelector : Form, ISelectItem
     {
         private readonly Form callingForm;
 
         //ISelectComponent or ISelectPosition
-        private readonly object callingIForm;
+        private readonly ISelectComponent _selectComponent;
+        private readonly ISelectPosition _selectPosition;
         private ItemType _itemType;
         private readonly CreatingType _creatingType;
-        public BasicItemSelector(ItemType itemType, CreatingType creatingType, Form caller, ToolComponentModel model, ISelectComponent iCaller)
+        public BasicItemSelector(ItemType itemType, CreatingType creatingType, Form caller, ToolComponentModel model, ISelectComponent selectComponent)
         {
             callingForm = caller;
-            callingIForm = iCaller;
+            _selectComponent = selectComponent;
             _itemType = itemType;
             _creatingType = creatingType;
             InitializeComponent();
@@ -30,10 +31,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             LoadSelectedModelToUI(model);
         }
 
-        public BasicItemSelector(ItemType itemType, CreatingType creatingType, Form caller, ListPositionModel model, ISelectPosition iCaller)
+        public BasicItemSelector(ItemType itemType, CreatingType creatingType, Form caller, ListPositionModel model, ISelectPosition selectPosition)
         {
             callingForm = caller;
-            callingIForm = iCaller;
+            _selectPosition = selectPosition;
             _itemType = itemType;
             _creatingType = creatingType;
             InitializeComponent();
@@ -54,8 +55,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     d1TextBox.Text = comp.BasicComp.Description1;
                     d2TextBox.Text = comp.BasicComp.Description2;
                 }
+                return;
             }
-            else if (model.GetType() == typeof(ListPositionModel))
+            if (model.GetType() == typeof(ListPositionModel))
             {
                 //do list position stuff
                 ListPositionModel listPosition = (ListPositionModel)model;
@@ -73,19 +75,36 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     d1TextBox.Text = listPosition.BasicTool.Description1;
                     d2TextBox.Text = listPosition.BasicTool.Description2;
                 }
+                return;
+            }
+            if (model.GetType() == typeof(BasicCompModel))
+            {
+                BasicCompModel basicComp = (BasicCompModel)model;
+                idTextBox.Text = basicComp.Id;
+                d1TextBox.Text = basicComp.Description1;
+                d2TextBox.Text = basicComp.Description2;
+                return;
+            }
+            if (model.GetType() == typeof(BasicToolModel))
+            {
+                BasicToolModel basicTool = (BasicToolModel)model;
+                idTextBox.Text = basicTool.Id;
+                d1TextBox.Text = basicTool.Description1;
+                d2TextBox.Text = basicTool.Description2;
+                return;
             }
         }
 
         private void AdjustUI()
         {
-            if (callingIForm.GetType() == typeof(ISelectComponent))
+            if (_selectComponent != null)
             {
                 selectorLabel.Text = "Select Component";
                 IdLabel.Text = "Component Id:";
                 D1Label.Text = "Component Description";
                 D2Label.Text = "Component Manufacturer's Id:";
             }
-            else if (callingIForm.GetType() == typeof(ISelectPosition))
+            else if (_selectPosition != null)
             {
                 selectorLabel.Text = "Select Tool or Component";
                 radioSwitchPanel.Visible = true;
@@ -152,37 +171,69 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void OkButton_Click(object sender, EventArgs e)
         {
+            switch (_creatingType)
+            {
+                case CreatingType.updating:
+                    UpdateSelectedItem();
+                    break;
+                case CreatingType.creating:
+                    AddSelectedItem();
+                    break;
+            }
+            Close();
+        }
+
+        private void UpdateSelectedItem()
+        {
             //validate id
             if (!ValidateItemId())
             {
                 return;
             }
-            if (_creatingType == CreatingType.creating)
-            {
-                if (IsPositionNumberInUse())
-                {
-                    MessageBox.Show("Position number already in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
             // determine which model shall be created
-            if (callingIForm.GetType() == typeof(ISelectComponent))
+            if (_selectComponent != null)
             {
-                ISelectComponent caller = (ISelectComponent)callingIForm;
                 //create tool comp model from form data
                 ToolComponentModel model = CreateToolComponentModel();
                 //send model to interface
-                caller.AddComponent(model);
+                _selectComponent.UpdateToolComponent(model);
             }
-            else if (callingIForm.GetType() == typeof(ISelectPosition))
+            else if (_selectPosition != null)
             {
-                ISelectPosition caller = (ISelectPosition)callingIForm;
                 //create position model
                 ListPositionModel model = CreateListPositionModel();
                 //send model to interface
-                caller.AddPosition(model);
+                _selectPosition.UpdateListPosition(model);
             }
-            Close();
+        }
+
+        private void AddSelectedItem()
+        {
+            //validate id
+            if (!ValidateItemId())
+            {
+                return;
+            }
+            if (IsPositionNumberInUse())
+            {
+                MessageBox.Show("Position number already in use", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            // determine which model shall be created
+            if (_selectComponent != null)
+            {
+                //create tool comp model from form data
+                ToolComponentModel model = CreateToolComponentModel();
+                //send model to interface
+                _selectComponent.AddToolComponent(model);
+            }
+            else if (_selectPosition != null)
+            {
+                //create position model
+                ListPositionModel model = CreateListPositionModel();
+                //send model to interface
+                _selectPosition.AddListPosition(model);
+            }
         }
 
         private ListPositionModel CreateListPositionModel()
@@ -234,15 +285,13 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private bool IsPositionNumberInUse()
         {
-            if (callingIForm.GetType() == typeof(ISelectComponent))
+            if (_selectComponent != null)
             {
-                ISelectComponent caller = (ISelectComponent)callingIForm;
-                return caller.IsPositionNumberInUse(int.Parse(positionBox.Text));
+                return _selectComponent.IsToolComponentPositionNumberInUse(int.Parse(positionBox.Text));
             }
-            else if (callingIForm.GetType() == typeof(ISelectPosition))
+            else if (_selectPosition != null)
             {
-                ISelectPosition caller = (ISelectPosition)callingIForm;
-                return caller.IsPositionNumberInUse(int.Parse(positionBox.Text));
+                return _selectPosition.IsListPositionPositionNumberInUse(int.Parse(positionBox.Text));
             }
             throw new Exception("Unsupported class type");
         }
@@ -321,6 +370,45 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 _itemType = ItemType.tool;
             }
             AdjustUI();
+        }
+
+        private void SearchByIdbutton_Click(object sender, EventArgs e) => OpenSearchWindow(0);
+
+        private void OpenSearchWindow(int leadColumn)
+        {
+            string[] columnNames = UserInterfaceLogic.GetColumnsFromMode(_itemType);
+            Form form = new BasicLookup(this, this, columnNames, leadColumn, _itemType);
+            form.Visible = true;
+            Enabled = false;
+        }
+
+        public void LoadSelectedItem(string itemId)
+        {
+            switch (_itemType)
+            {
+                case ItemType.comp:
+                    LoadSelectedModelToUI(GlobalConfig.Connection.GetBasicCompModelById(itemId));
+                    break;
+                case ItemType.tool:
+                    LoadSelectedModelToUI(GlobalConfig.Connection.GetBasicToolModelById(itemId));
+                    break;
+            }
+        }
+
+        private void SearchByD1Button_Click(object sender, EventArgs e) => OpenSearchWindow(1);
+
+        private void SearchByD2Button_Click(object sender, EventArgs e) => OpenSearchWindow(2);
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            // Add selected
+            AddSelectedItem();
+            // Clear fields keeping the type and getting next pos number
+            positionBox.Text = (int.Parse(positionBox.Text) + 1).ToString();
+            quantityBox.Text = "1";
+            idTextBox.Text = string.Empty;
+            d1TextBox.Text = string.Empty;
+            d2TextBox.Text = string.Empty;
         }
     }
 }

@@ -52,12 +52,12 @@ namespace MTSLibrary.Connections
         bool ValidateMainClassId(string id);
         void CreateMainClass(MainClassModel model);
         void UpdateMainClass(MainClassModel model);
-        string GetToolGroupNameById(string toolGroupId);
+        string GetToolGroupNameByIdToolClassId(string toolGroupId, string toolClassId);
         List<BasicListModel> GetBasicListModels();
         string GetManufacturerIdByName(string name);
         void DeleteMainClassById(string id);
         ToolClassModel GetToolClassById(string id);
-        ToolGroupModel GetToolGroupById(string id);
+        ToolGroupModel GetToolGroupByIdToolClassId(string id, string toolClassId);
         List<BasicToolClassModel> GetBasicToolClassModels();
         int GetToolClassParameterNextPositionByToolClassId(string id);
         void UnallocateToolClasses(string id);
@@ -67,5 +67,7 @@ namespace MTSLibrary.Connections
         void DeleteToolClassParametersByToolClassId(string id);
         void DeleteToolClassById(string id);
         void DeleteToolGroupByIdToolClassId(string id, string toolClassId);
+        List<ParameterModel> GetParametersByToolClassIdToolGroupId(string toolClassId, string toolGroupId);
+        List<ParameterModel> GetCompParametersById(string id);
     }
 }

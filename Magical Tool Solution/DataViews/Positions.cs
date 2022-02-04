@@ -12,49 +12,52 @@ using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews
 {
-    public partial class Positions : Form, ISelectPosition
+    public partial class Positions : Form
     {
         private readonly Form parentCallingForm;
-        public Positions(Form caller)
+        private readonly ISelectPosition _selectPosition;
+
+        public Positions(Form caller, ISelectPosition selectPosition)
         {
             parentCallingForm = caller;
+            _selectPosition = selectPosition;
             InitializeComponent();
         }
 
-        public void AddPosition(ListPositionModel model)
-        {
-            int rowIndex = positionsDataGridView.Rows.Add();
-            DataGridViewRow row = positionsDataGridView.Rows[rowIndex];
-            row.Cells["position"].Value = model.Position;
-            if (model.BasicComp != null)
-            {
-                row.Cells["componentId"].Value = model.BasicComp.Id;
-                row.Cells["desc1"].Value = model.BasicComp.Description1;
-                row.Cells["desc2"].Value = model.BasicComp.Description2;
-            }
-            else if (model.BasicTool != null)
-            {
-                row.Cells["toolId"].Value = model.BasicTool.Id;
-                row.Cells["desc1"].Value = model.BasicTool.Description1;
-                row.Cells["desc2"].Value = model.BasicTool.Description2;
-            }
-            row.Cells["quantity"].Value = model.Quantity;
-        }
+        //public void AddPosition(ListPositionModel model)
+        //{
+        //    int rowIndex = positionsDataGridView.Rows.Add();
+        //    DataGridViewRow row = positionsDataGridView.Rows[rowIndex];
+        //    row.Cells["position"].Value = model.Position;
+        //    if (model.BasicComp != null)
+        //    {
+        //        row.Cells["componentId"].Value = model.BasicComp.Id;
+        //        row.Cells["desc1"].Value = model.BasicComp.Description1;
+        //        row.Cells["desc2"].Value = model.BasicComp.Description2;
+        //    }
+        //    else if (model.BasicTool != null)
+        //    {
+        //        row.Cells["toolId"].Value = model.BasicTool.Id;
+        //        row.Cells["desc1"].Value = model.BasicTool.Description1;
+        //        row.Cells["desc2"].Value = model.BasicTool.Description2;
+        //    }
+        //    row.Cells["quantity"].Value = model.Quantity;
+        //}
 
-        public bool IsPositionNumberInUse(int position)
-        {
-            if (positionsDataGridView.RowCount > 0)
-            {
-                foreach (DataGridViewRow row in positionsDataGridView.Rows)
-                {
-                    if ((int)row.Cells["position"].Value == position)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
+        //public bool IsPositionNumberInUse(int position)
+        //{
+        //    if (positionsDataGridView.RowCount > 0)
+        //    {
+        //        foreach (DataGridViewRow row in positionsDataGridView.Rows)
+        //        {
+        //            if ((int)row.Cells["position"].Value == position)
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
 
         private void PositionsDataGridView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -77,7 +80,7 @@ namespace Magical_Tool_Solution.DataViews
                     }
                 }
                 ListPositionModel model = new() { Position = nextPositionPosition, Quantity = 1 };
-                Form form = new BasicItemSelector(ItemType.tool, CreatingType.creating, parentCallingForm, model, this);
+                Form form = new BasicItemSelector(ItemType.tool, CreatingType.creating, parentCallingForm, model, _selectPosition);
                 form.Visible = true;
                 form.BringToFront();
                 form.Focus();
@@ -90,9 +93,9 @@ namespace Magical_Tool_Solution.DataViews
                 DataGridViewRow row = positionsDataGridView
                     .Rows[positionsDataGridView.HitTest(e.X, e.Y)
                     .RowIndex];
-                model.Position = int.Parse(row.Cells["postion"].Value.ToString());
+                model.Position = int.Parse(row.Cells["position"].Value.ToString());
                 model.Quantity = int.Parse(row.Cells["quantity"].Value.ToString());
-                if (row.Cells["componentId"].Value.ToString() != "")
+                if (!string.IsNullOrWhiteSpace(row.Cells["componentId"].Value.ToString()))
                 {
                     model.BasicComp = new BasicCompModel
                     {
@@ -102,7 +105,7 @@ namespace Magical_Tool_Solution.DataViews
                     };
                     itemType = ItemType.comp;
                 }
-                if (row.Cells["toolId"].Value.ToString() != "")
+                if (!string.IsNullOrWhiteSpace(row.Cells["toolId"].Value.ToString()))
                 {
                     model.BasicTool = new BasicToolModel
                     {
@@ -116,12 +119,13 @@ namespace Magical_Tool_Solution.DataViews
                     CreatingType.updating,
                     parentCallingForm,
                     model,
-                    this);
+                    _selectPosition);
                 form.Visible = true;
                 form.BringToFront();
                 form.Focus();
                 parentCallingForm.Enabled = false;
             }
         }
+
     }
 }

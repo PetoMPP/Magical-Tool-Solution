@@ -32,7 +32,7 @@ namespace MTSLibrary.Models
             }
             return x.Position == y.Position;
         }
-        public int GetHashCode([DisallowNull] ToolComponentModel obj) => throw new System.NotImplementedException();
+        public int GetHashCode([DisallowNull] ToolComponentModel obj) => obj.Position;
     }
     internal class ToolComponentModelComparer : IEqualityComparer<ToolComponentModel>
     {
@@ -51,6 +51,7 @@ namespace MTSLibrary.Models
                 && x.IsKey == y.IsKey
                 && x.BasicComp.Id == y.BasicComp.Id;
         }
-        public int GetHashCode([DisallowNull] ToolComponentModel obj) => throw new System.NotImplementedException();
+        public int GetHashCode([DisallowNull] ToolComponentModel obj) => 
+            obj.Position.GetHashCode() ^ obj.Quantity.GetHashCode() ^ obj.IsKey.GetHashCode() ^ obj.BasicComp.Id.GetHashCode();
     }
 }

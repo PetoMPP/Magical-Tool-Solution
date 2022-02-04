@@ -5,5 +5,5 @@ BEGIN
 	SET NOCOUNT ON
 	SELECT Id
 	FROM ToolClasses
-	WHERE MainClassId = @MainClassId
+	WHERE ISNULL(MainClassId, '') = @MainClassId
 END

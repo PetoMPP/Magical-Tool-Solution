@@ -81,7 +81,11 @@ namespace MTSLibrary
             string errorMessage = "";
             if (list.Id == "")
             {
-                errorMessage += "Id field cannot be empty!\n";
+                return "Id field cannot be empty!\n";
+            }
+            if (list.Description1 == "")
+            {
+                return "Description 1 field cannot be empty!\n";
             }
             if (creatingType == CreatingType.creating)
             {
@@ -120,7 +124,11 @@ namespace MTSLibrary
             string errorMessage = "";
             if (tool.Id == "")
             {
-                errorMessage += "Id field cannot be empty!\n";
+                return "Id field cannot be empty!\n";
+            }
+            if (tool.Description1 == "")
+            {
+                return "Description 1 field cannot be empty!\n";
             }
             if (creatingType == CreatingType.creating)
             {
@@ -154,6 +162,10 @@ namespace MTSLibrary
             {
                 // Without Id all next checks are broken
                 return "Id field cannot be empty!\n";
+            }
+            if (comp.Description1 == "")
+            {
+                return "Description 1 field cannot be empty!\n";
             }
             if (creatingType == CreatingType.creating)
             {

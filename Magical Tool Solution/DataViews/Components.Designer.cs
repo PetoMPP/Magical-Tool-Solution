@@ -29,20 +29,18 @@ namespace Magical_Tool_Solution.DataViews
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.componentsPanel = new System.Windows.Forms.Panel();
             this.componentsDataGridView = new System.Windows.Forms.DataGridView();
-            this.keyComp = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentD1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.componentD2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.componentsMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteComponentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componentsLabelPanel = new System.Windows.Forms.Panel();
             this.componentsLabel = new System.Windows.Forms.Label();
             this.componentsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.componentsDataGridView)).BeginInit();
+            this.componentsMenuStrip.SuspendLayout();
             this.componentsLabelPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,13 +72,7 @@ namespace Magical_Tool_Solution.DataViews
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.componentsDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.componentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.componentsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.keyComp,
-            this.position,
-            this.componentId,
-            this.componentD1,
-            this.componentD2,
-            this.quantity});
+            this.componentsDataGridView.ContextMenuStrip = this.componentsMenuStrip;
             this.componentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.componentsDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.componentsDataGridView.EnableHeadersVisualStyles = false;
@@ -102,58 +94,23 @@ namespace Magical_Tool_Solution.DataViews
             this.componentsDataGridView.ShowEditingIcon = false;
             this.componentsDataGridView.Size = new System.Drawing.Size(784, 387);
             this.componentsDataGridView.TabIndex = 8;
+            this.componentsDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ComponentsDataGridView_CellContentClick);
             this.componentsDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.ComponentsDataGridView_MouseDoubleClick);
+            this.componentsDataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ComponentsDataGridView_MouseDown);
             // 
-            // keyComp
+            // componentsMenuStrip
             // 
-            this.keyComp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.keyComp.HeaderText = "Key Component";
-            this.keyComp.Name = "keyComp";
-            this.keyComp.Width = 108;
+            this.componentsMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteComponentToolStripMenuItem});
+            this.componentsMenuStrip.Name = "componentsMenuStrip";
+            this.componentsMenuStrip.Size = new System.Drawing.Size(175, 26);
             // 
-            // position
+            // deleteComponentToolStripMenuItem
             // 
-            this.position.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.position.HeaderText = "Position";
-            this.position.MaxInputLength = 5;
-            this.position.Name = "position";
-            this.position.ReadOnly = true;
-            this.position.Width = 87;
-            // 
-            // componentId
-            // 
-            this.componentId.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentId.HeaderText = "Component Id";
-            this.componentId.MaxInputLength = 10;
-            this.componentId.Name = "componentId";
-            this.componentId.ReadOnly = true;
-            this.componentId.Width = 118;
-            // 
-            // componentD1
-            // 
-            this.componentD1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD1.HeaderText = "Description";
-            this.componentD1.MaxInputLength = 120;
-            this.componentD1.Name = "componentD1";
-            this.componentD1.ReadOnly = true;
-            this.componentD1.Width = 108;
-            // 
-            // componentD2
-            // 
-            this.componentD2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.componentD2.HeaderText = "Manufacturer\'s Id";
-            this.componentD2.MaxInputLength = 120;
-            this.componentD2.Name = "componentD2";
-            this.componentD2.ReadOnly = true;
-            this.componentD2.Width = 135;
-            // 
-            // quantity
-            // 
-            this.quantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MaxInputLength = 10;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
+            this.deleteComponentToolStripMenuItem.Name = "deleteComponentToolStripMenuItem";
+            this.deleteComponentToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.deleteComponentToolStripMenuItem.Text = "Delete Component";
+            this.deleteComponentToolStripMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DeleteComponentToolStripMenuItem_MouseDown);
             // 
             // componentsLabelPanel
             // 
@@ -191,6 +148,7 @@ namespace Magical_Tool_Solution.DataViews
             this.Text = "Components";
             this.componentsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.componentsDataGridView)).EndInit();
+            this.componentsMenuStrip.ResumeLayout(false);
             this.componentsLabelPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -202,11 +160,7 @@ namespace Magical_Tool_Solution.DataViews
         private System.Windows.Forms.DataGridView componentsDataGridView;
         private System.Windows.Forms.Panel componentsLabelPanel;
         private System.Windows.Forms.Label componentsLabel;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn keyComp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn position;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentD1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn componentD2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.ContextMenuStrip componentsMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteComponentToolStripMenuItem;
     }
 }

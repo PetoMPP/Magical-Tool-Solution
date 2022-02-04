@@ -122,6 +122,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.materialSuitabilityPanel.Name = "materialSuitabilityPanel";
             this.materialSuitabilityPanel.Size = new System.Drawing.Size(362, 190);
             this.materialSuitabilityPanel.TabIndex = 18;
+            this.materialSuitabilityPanel.Visible = false;
             // 
             // suitabliltyChartPanel
             // 

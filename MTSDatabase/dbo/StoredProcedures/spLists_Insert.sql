@@ -1,14 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[spLists_Insert]
 	@Id VARCHAR(20),
 	@Description1 NVARCHAR(120),
-	@Description2 NVARCHAR(120),
-	@MachineId VARCHAR(20),
-	@MachineGroupId VARCHAR(20),
-	@MaterialId VARCHAR(20),
-	@DataStatus NVARCHAR(120),
-	@CreatorName NVARCHAR(120),
-	@LastModifiedName NVARCHAR(120),
-	@OwnerName NVARCHAR(120)
+	@Description2 NVARCHAR(120) = NULL,
+	@MachineId VARCHAR(20) = NULL,
+	@MachineGroupId VARCHAR(20) = NULL,
+	@MaterialId VARCHAR(20) = NULL,
+	@DataStatus NVARCHAR(120) = NULL,
+	@CreatorName NVARCHAR(120) = NULL,
+	@LastModifiedName NVARCHAR(120) = NULL,
+	@OwnerName NVARCHAR(120) = NULL
 AS
 BEGIN
 	SET NOCOUNT ON

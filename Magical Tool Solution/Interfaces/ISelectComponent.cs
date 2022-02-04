@@ -7,7 +7,9 @@ namespace Magical_Tool_Solution.Interfaces
 {
     public interface ISelectComponent
     {
-        public void AddComponent(ToolComponentModel model);
-        public bool IsPositionNumberInUse(int position);
+        public void AddToolComponent(ToolComponentModel model);
+        public bool IsToolComponentPositionNumberInUse(int position);
+        public void DeleteToolComponent(int position);
+        public void UpdateToolComponent(ToolComponentModel model);
     }
 }

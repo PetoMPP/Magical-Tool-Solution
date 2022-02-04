@@ -1,4 +1,5 @@
-﻿using Minimal_Tool_Stock_Calculator.DataViews;
+﻿using Magical_Tool_Solution.Interfaces;
+using Minimal_Tool_Stock_Calculator.DataViews;
 using MTSLibrary;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,13 @@ namespace Magical_Tool_Solution.DataViews.Headers
         private Form viewForm;
         private readonly Panel insertionPanel;
         private readonly Form callingForm;
+        private readonly ISelectComponent _selectComponent;
         private Form instance1;
         private Form instance2;
-        public ToolHeader(Panel targetPanel, Form caller)
+        public ToolHeader(Panel targetPanel, Form caller, ISelectComponent selectComponent)
         {
             callingForm = caller;
+            _selectComponent = selectComponent;
             insertionPanel = targetPanel;
             InitializeComponent();
             viewSwitchingButtons = new List<Button> { viewParametersButton, viewComponentsButton };
@@ -83,7 +86,7 @@ namespace Magical_Tool_Solution.DataViews.Headers
         {
             if (instance2 == null)
             {
-                instance2 = new Components(callingForm);
+                instance2 = new Components(callingForm, _selectComponent);
             }
             ActivateButton((Button)sender, instance2);
             viewSwitcherPanel.Focus();

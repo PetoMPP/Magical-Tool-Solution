@@ -7,7 +7,9 @@ namespace Magical_Tool_Solution.Interfaces
 {
     public interface ISelectPosition
     {
-        public void AddPosition(ListPositionModel model);
-        public bool IsPositionNumberInUse(int position);
+        public void AddListPosition(ListPositionModel model);
+        public bool IsListPositionPositionNumberInUse(int position);
+        public void DeleteListPosition(ListPositionModel model);
+        public void UpdateListPosition(ListPositionModel model);
     }
 }

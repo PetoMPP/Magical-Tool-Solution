@@ -11,7 +11,6 @@ BEGIN
 	SET 
 	CompId = @CompId,
 	Quantity = @Quantity,
-	Position = @Position,
 	IsKey = @IsKey
-	WHERE ToolId = @ToolId
+	WHERE ToolId = @ToolId AND Position = @Position
 END

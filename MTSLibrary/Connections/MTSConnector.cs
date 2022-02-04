@@ -50,11 +50,20 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", comp.Id);
             dp.Add("@Description1", comp.Description1);
-            dp.Add("@Description2", comp.Description2);
+            if (!string.IsNullOrWhiteSpace(comp.Description2))
+            {
+                dp.Add("@Description2", comp.Description2); 
+            }
             dp.Add("@ToolClassId", comp.ToolClassId);
             dp.Add("@ToolGroupId", comp.ToolGroupId);
-            dp.Add("@ManufacturerName", comp.ManufacturerName);
-            dp.Add("@DataStatus", comp.DataStatus);
+            if (!string.IsNullOrWhiteSpace(comp.ManufacturerName))
+            {
+                dp.Add("@ManufacturerName", comp.ManufacturerName); 
+            }
+            if (!string.IsNullOrWhiteSpace(comp.DataStatus))
+            {
+                dp.Add("@DataStatus", comp.DataStatus); 
+            }
             cnxn.Execute("dbo.spComps_Insert", dp, commandType: CommandType.StoredProcedure);
             // insert suitability
             if (comp.Suitability != null)
@@ -70,23 +79,26 @@ namespace MTSLibrary.Connections
                 cnxn.Execute("dbo.spCompSuitability_Insert", dp, commandType: CommandType.StoredProcedure); 
             }
             // insert parameters
-            foreach (ParameterModel pm in comp.Parameters)
+            if (comp.Parameters != null)
             {
-                dp = new();
-                dp.Add("@CompId", comp.Id);
-                dp.Add("@ParameterId", pm.ParameterId);
-                // determine type
-                if (pm.DataValueType == DataValueType.Text)
+                foreach (ParameterModel pm in comp.Parameters)
                 {
-                    dp.Add("@TextValue", pm.TextValue);
-                    dp.Add("@NumericValue", null);
-                }
-                else
-                {
-                    dp.Add("@TextValue", null);
-                    dp.Add("@NumericValue", pm.NumericValue);
-                }
-                cnxn.Execute("dbo.spCompParameters_Insert", dp, commandType: CommandType.StoredProcedure);
+                    dp = new();
+                    dp.Add("@CompId", comp.Id);
+                    dp.Add("@ParameterId", pm.ParameterId);
+                    // determine type
+                    if (pm.DataValueType == DataValueType.Text)
+                    {
+                        dp.Add("@TextValue", pm.TextValue);
+                        dp.Add("@NumericValue", null);
+                    }
+                    else
+                    {
+                        dp.Add("@TextValue", null);
+                        dp.Add("@NumericValue", pm.NumericValue);
+                    }
+                    cnxn.Execute("dbo.spCompParameters_Insert", dp, commandType: CommandType.StoredProcedure);
+                } 
             }
         }
 
@@ -97,14 +109,38 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", list.Id);
             dp.Add("@Description1", list.Description1);
-            dp.Add("@Description2", list.Description2);
-            dp.Add("@MachineId", list.MachineId);
-            dp.Add("@MachineGroupId", list.MachineGroupId);
-            dp.Add("@MaterialId", list.MaterialId);
-            dp.Add("@DataStatus", list.DataStatus);
-            dp.Add("@CreatorName", list.CreatorName);
-            dp.Add("@LastModifiedName", list.LastModifiedName);
-            dp.Add("@OwnerName", list.OwnerName);
+            if (!string.IsNullOrWhiteSpace(list.Description2))
+            {
+                dp.Add("@Description2", list.Description2); 
+            }
+            if (!string.IsNullOrWhiteSpace(list.MachineId))
+            {
+                dp.Add("@MachineId", list.MachineId); 
+            }
+            if (!string.IsNullOrWhiteSpace(list.MachineGroupId))
+            {
+                dp.Add("@MachineGroupId", list.MachineGroupId);
+            }
+            if (!string.IsNullOrWhiteSpace(list.MaterialId))
+            {
+                dp.Add("@MaterialId", list.MaterialId);
+            }
+            if (!string.IsNullOrWhiteSpace(list.DataStatus))
+            {
+                dp.Add("@DataStatus", list.DataStatus);
+            }
+            if (!string.IsNullOrWhiteSpace(list.CreatorName))
+            {
+                dp.Add("@CreatorName", list.CreatorName);
+            }
+            if (!string.IsNullOrWhiteSpace(list.LastModifiedName))
+            {
+                dp.Add("@LastModifiedName", list.LastModifiedName);
+            }
+            if (!string.IsNullOrWhiteSpace(list.OwnerName))
+            {
+                dp.Add("@OwnerName", list.OwnerName);
+            }
             cnxn.Execute("dbo.spLists_Insert", dp, commandType: CommandType.StoredProcedure);
             // insert list positions
             if (list.ListPositions != null)
@@ -150,11 +186,20 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", tool.Id);
             dp.Add("@Description1", tool.Description1);
-            dp.Add("@Description2", tool.Description2);
+            if (!string.IsNullOrWhiteSpace(tool.Description2))
+            {
+                dp.Add("@Description2", tool.Description2); 
+            }
             dp.Add("@ToolClassId", tool.ToolClassId);
             dp.Add("@ToolGroupId", tool.ToolGroupId);
-            dp.Add("@MachineInterfaceId", tool.MachineInterfaceId);
-            dp.Add("@DataStatus", tool.DataStatus);
+            if (!string.IsNullOrWhiteSpace(tool.MachineInterfaceId))
+            {
+                dp.Add("@MachineInterfaceId", tool.MachineInterfaceId); 
+            }
+            if (!string.IsNullOrWhiteSpace(tool.DataStatus))
+            {
+                dp.Add("@DataStatus", tool.DataStatus);
+            }
             cnxn.Execute("dbo.spTools_Insert", dp, commandType: CommandType.StoredProcedure);
             // insert suitability
             if (tool.Suitability != null)
@@ -374,12 +419,12 @@ namespace MTSLibrary.Connections
                 .ToList();
         }
 
-        public string GetToolGroupNameById(string id)
+        public string GetToolGroupNameByIdToolClassId(string id, string toolClassId)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             return cnxn.Query<string>
                 ("dbo.spToolGroups_GetNameById",
-                new { @Id = id },
+                new { @Id = id, @ToolClassId = toolClassId },
                 commandType: CommandType.StoredProcedure)
                 .First();
         }
@@ -488,16 +533,20 @@ namespace MTSLibrary.Connections
                 commandType: CommandType.StoredProcedure)
                 .ToList();
             // get comp model for every component
-            string compId;
             foreach (ToolComponentModel tc in tcs)
             {
-                compId = cnxn.Query<string>("dbo.spToolComponents_GetCompIdByToolIdPosition",
-                new { @ToolId = id, @Position = tc.Position },
-                commandType: CommandType.StoredProcedure)
-                .First();
-                tc.BasicComp = GetBasicCompModelById(compId);
+                tc.BasicComp = GetBasicCompModelById(GetCompIdByToolIdPosition(id, cnxn, tc));
             }
+            model.Components = tcs;
             return model;
+        }
+
+        private static string GetCompIdByToolIdPosition(string toolId, IDbConnection cnxn, ToolComponentModel toolComponent)
+        {
+            return cnxn.Query<string>("dbo.spToolComponents_GetCompIdByToolIdPosition",
+                            new { @ToolId = toolId, @Position = toolComponent.Position },
+                            commandType: CommandType.StoredProcedure)
+                            .First();
         }
 
         public List<ToolClassModel> GetUnallocatedToolClasses() =>
@@ -567,15 +616,24 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", model.Id);
             dp.Add("@Description1", model.Description1);
-            dp.Add("@Description2", model.Description2);
+            if (!string.IsNullOrWhiteSpace(model.Description2))
+            {
+                dp.Add("@Description2", model.Description2); 
+            }
             dp.Add("@ToolClassId", model.ToolClassId);
             dp.Add("@ToolGroupId", model.ToolGroupId);
-            dp.Add("@ManufacturerName", model.ManufacturerName);
-            dp.Add("@DataStatus", model.DataStatus);
+            if (!string.IsNullOrWhiteSpace(model.ManufacturerName))
+            {
+                dp.Add("@ManufacturerName", model.ManufacturerName); 
+            }
+            if (!string.IsNullOrWhiteSpace(model.DataStatus))
+            {
+                dp.Add("@DataStatus", model.DataStatus);
+            }
             cnxn.Execute("dbo.spComps_UpdateById", dp, commandType: CommandType.StoredProcedure);
             // update suitability
             dp = new();
-            dp.Add("@Id", model.Id);
+            dp.Add("@CompId", model.Id);
             dp.Add("@PSuitability", model.Suitability.PSuitability);
             dp.Add("@MSuitability", model.Suitability.MSuitability);
             dp.Add("@KSuitability", model.Suitability.KSuitability);
@@ -584,14 +642,17 @@ namespace MTSLibrary.Connections
             dp.Add("@HSuitability", model.Suitability.HSuitability);
             cnxn.Execute("dbo.spCompSuitability_UpdateById", dp, commandType: CommandType.StoredProcedure);
             // update parameter values
-            foreach (ParameterModel p in model.Parameters)
+            if (model.Parameters != null)
             {
-                dp = new();
-                dp.Add("@Id", model.Id);
-                dp.Add("@ParameterId", p.ParameterId);
-                dp.Add("@NumericValue", p.NumericValue);
-                dp.Add("@TextValue", p.TextValue);
-                cnxn.Execute("dbo.spCompParameters_UpdateById", dp, commandType: CommandType.StoredProcedure);
+                foreach (ParameterModel p in model.Parameters)
+                {
+                    dp = new();
+                    dp.Add("@Id", model.Id);
+                    dp.Add("@ParameterId", p.ParameterId);
+                    dp.Add("@NumericValue", p.NumericValue);
+                    dp.Add("@TextValue", p.TextValue);
+                    cnxn.Execute("dbo.spCompParameters_UpdateById", dp, commandType: CommandType.StoredProcedure);
+                } 
             }
 
         }
@@ -603,14 +664,38 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", model.Id);
             dp.Add("@Description1", model.Description1);
-            dp.Add("@Description2", model.Description2);
-            dp.Add("@MachineId", model.MachineId);
-            dp.Add("@MachineGroupId", model.MachineGroupId);
-            dp.Add("@MaterialId", model.MaterialId);
-            dp.Add("@DataStatus", model.DataStatus);
-            dp.Add("@CreatorName", model.CreatorName);
-            dp.Add("@LastModifiedName", model.LastModifiedName);
-            dp.Add("@OwnerName", model.OwnerName);
+            if (!string.IsNullOrWhiteSpace(model.Description2))
+            {
+                dp.Add("@Description2", model.Description2); 
+            }
+            if (!string.IsNullOrWhiteSpace(model.MachineId))
+            {
+                dp.Add("@MachineId", model.MachineId);
+            }
+            if (!string.IsNullOrWhiteSpace(model.MachineGroupId))
+            {
+                dp.Add("@MachineGroupId", model.MachineGroupId); 
+            }
+            if (!string.IsNullOrWhiteSpace(model.MaterialId))
+            {
+                dp.Add("@MaterialId", model.MaterialId);
+            }
+            if (!string.IsNullOrWhiteSpace(model.DataStatus))
+            {
+                dp.Add("@DataStatus", model.DataStatus); 
+            }
+            if (!string.IsNullOrWhiteSpace(model.CreatorName))
+            {
+                dp.Add("@CreatorName", model.CreatorName);
+            }
+            if (!string.IsNullOrWhiteSpace(model.LastModifiedName))
+            {
+                dp.Add("@LastModifiedName", model.LastModifiedName);
+            }
+            if (!string.IsNullOrWhiteSpace(model.OwnerName))
+            {
+                dp.Add("@OwnerName", model.OwnerName); 
+            }
             cnxn.Execute("dbo.spLists_UpdateById", dp, commandType: CommandType.StoredProcedure);
             // update positions
             // get current positions
@@ -624,23 +709,16 @@ namespace MTSLibrary.Connections
                 dp = new();
                 dp.Add("@ListId", model.Id);
                 dp.Add("@Position", lp.Position);
+                dp.Add("Quantity", lp.Quantity);
                 if (lp.BasicComp != null)
                 {
                     dp.Add("@CompId", lp.BasicComp.Id);
-                }
-                else
-                {
-                    dp.Add("@CompId", null);
                 }
                 if (lp.BasicTool != null)
                 {
                     dp.Add("@ToolId", lp.BasicTool.Id);
                 }
-                else
-                {
-                    dp.Add("@ToolId", null);
-                }
-                cnxn.Execute("dbo.spListPostions_Insert", dp, commandType: CommandType.StoredProcedure);
+                cnxn.Execute("dbo.spListPositions_Insert", dp, commandType: CommandType.StoredProcedure);
             }
             // update changed
             List<ListPositionModel> modifiedPositions = model.ListPositions.Except(currentPositions,
@@ -656,19 +734,12 @@ namespace MTSLibrary.Connections
                 {
                     dp.Add("@CompId", lp.BasicComp.Id);
                 }
-                else
-                {
-                    dp.Add("@CompId", null);
-                }
                 if (lp.BasicTool != null)
                 {
                     dp.Add("@ToolId", lp.BasicTool.Id);
                 }
-                else
-                {
-                    dp.Add("@ToolId", null);
-                }
-                cnxn.Execute("dbo.spListPostions_Update", dp, commandType: CommandType.StoredProcedure);
+                dp.Add("@Quantity", lp.Quantity);
+                cnxn.Execute("dbo.spListPositions_Update", dp, commandType: CommandType.StoredProcedure);
             }
             // delete obsolete
             List<ListPositionModel> obsoletePositions = currentPositions.Except(model.ListPositions,
@@ -700,11 +771,20 @@ namespace MTSLibrary.Connections
             DynamicParameters dp = new();
             dp.Add("@Id", model.Id);
             dp.Add("@Description1", model.Description1);
-            dp.Add("@Description2", model.Description2);
+            if (!string.IsNullOrWhiteSpace(model.Description2))
+            {
+                dp.Add("@Description2", model.Description2); 
+            }
             dp.Add("@ToolClassId", model.ToolClassId);
             dp.Add("@ToolGroupId", model.ToolGroupId);
-            dp.Add("@MachineInterfaceId", model.MachineInterfaceId);
-            dp.Add("@DataStatus", model.DataStatus);
+            if (!string.IsNullOrWhiteSpace(model.MachineInterfaceId))
+            {
+                dp.Add("@MachineInterfaceId", model.MachineInterfaceId); 
+            }
+            if (!string.IsNullOrWhiteSpace(model.DataStatus))
+            {
+                dp.Add("@DataStatus", model.DataStatus);
+            }
             cnxn.Execute("dbo.spTools_Update", dp, commandType: CommandType.StoredProcedure);
             // update suitability
             if (model.Suitability != null)
@@ -734,6 +814,10 @@ namespace MTSLibrary.Connections
                 cnxn.Execute("dbo.spToolParameters_Update", dp, commandType: CommandType.StoredProcedure);
             }
             List<ToolComponentModel> currentComponents = GetToolComponentsByToolId(model.Id, cnxn);
+            foreach (ToolComponentModel tc in currentComponents)
+            {
+                tc.BasicComp = GetBasicCompModelById(GetCompIdByToolIdPosition(model.Id, cnxn, tc));
+            }
             // insert new components
             List<ToolComponentModel> newComponents = model.Components.Except(currentComponents,
                 new ToolComponentModelPositionComparer()).ToList();
@@ -939,11 +1023,14 @@ namespace MTSLibrary.Connections
 
         public string ValidateToolComponents(List<ToolComponentModel> components)
         {
-            string errorMessage = "";
+            string errorMessage = string.Empty;
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             foreach (ToolComponentModel c in components)
             {
-                errorMessage += ValidateCompId(c.BasicComp.Id);
+                if (!ValidateCompId(c.BasicComp.Id))
+                {
+                    errorMessage += $"Component {c.BasicComp.Id} doesn't exist!\n";
+                }
             }
             return errorMessage;
         }
@@ -973,10 +1060,10 @@ namespace MTSLibrary.Connections
             cnxn.Execute("dbo.spMainClasses_DeleteById", new { @Id = id }, commandType: CommandType.StoredProcedure);
         }
 
-        public ToolGroupModel GetToolGroupById(string id)
+        public ToolGroupModel GetToolGroupByIdToolClassId(string id, string toolClassId)
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
-            return cnxn.Query<ToolGroupModel>("dbo.spToolGroups_GetById", new { @Id = id }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            return cnxn.Query<ToolGroupModel>("dbo.spToolGroups_GetById", new { @Id = id, @ToolClassId = toolClassId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
         }
 
         public int GetToolClassParameterNextPositionByToolClassId(string toolClassId)
@@ -1044,6 +1131,27 @@ namespace MTSLibrary.Connections
         {
             using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
             cnxn.Execute("dbo.spToolGroups_DeleteById", new { @Id = id , @ToolClassId = toolClassId }, commandType: CommandType.StoredProcedure);
+        }
+
+        public List<ParameterModel> GetCompParametersById(string id)
+        {
+            using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            return cnxn.Query<ParameterModel>("dbo.spGetCompParametersById",
+                new { @CompId = id},
+                commandType: CommandType.StoredProcedure)
+                .ToList();
+        }
+
+        public List<ParameterModel> GetParametersByToolClassIdToolGroupId(string toolClassId, string toolGroupId)
+        {
+            using IDbConnection cnxn = new Microsoft.Data.SqlClient.SqlConnection(GetConnectionString());
+            DynamicParameters dp = new();
+            dp.Add("@ToolClassId", toolClassId);
+            dp.Add("@ToolGroupId", toolGroupId);
+            return cnxn.Query<ParameterModel>("dbo.spGetParametersByToolClassIdToolGroupId",
+                dp,
+                commandType: CommandType.StoredProcedure)
+                .ToList();
         }
     }
 }
