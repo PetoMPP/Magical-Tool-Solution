@@ -42,4 +42,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ManufacturerName" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="c6bcdf14-d32a-4219-bd1d-e49968fd82cd" ChangeDateTime="02/05/2022 19:19:31">
+    <Property Name="ElementName" Value="[dbo].[Comps].[MachineInterface]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Comps]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MachineInterfaceName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="20395e2b-29a6-4670-8030-0289d732f717" ChangeDateTime="02/05/2022 19:23:01">
+    <Property Name="ElementName" Value="[dbo].[Tools].[MachineInterfaceId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tools]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MachineInterfaceName" />
+  </Operation>
 </Operations>

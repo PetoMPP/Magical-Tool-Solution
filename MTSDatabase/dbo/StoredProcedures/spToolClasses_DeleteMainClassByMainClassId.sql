@@ -5,5 +5,5 @@ BEGIN
 	SET NOCOUNT ON
 	UPDATE ToolClasses
 	SET MainClassId = NULL
-	WHERE MainClassId = @MainClassId
+	WHERE ISNULL(MainClassId, 'UNDEFINED') = @MainClassId
 END

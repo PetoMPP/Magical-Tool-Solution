@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MTSLibrary
+﻿namespace MTSLibrary
 {
     public enum DatabaseType
     {
@@ -11,17 +7,18 @@ namespace MTSLibrary
     }
     public enum ItemType
     {
-        comp,
-        tool,
-        list,
-        toolClass,
-        toolGroup,
-        mainClass
+        Comp,
+        Tool,
+        List,
+        ToolClass,
+        ToolGroup,
+        MainClass,
+        User
     }
     public enum CreatingType
     {
-        updating,
-        creating
+        Updating,
+        Creating
     }
     public enum DataValueType
     {

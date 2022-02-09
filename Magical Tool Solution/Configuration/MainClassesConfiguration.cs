@@ -3,11 +3,6 @@ using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.Configuration
@@ -127,8 +122,8 @@ namespace Magical_Tool_Solution.Configuration
             {
                 // open what?? another new form? sigh.. lets to it by clgrEditor
                 Form form = new ClgrEntryEditor(
-                    ItemType.mainClass,
-                    CreatingType.creating,
+                    ItemType.MainClass,
+                    CreatingType.Creating,
                     new MainClassModel(),
                     this,
                     this);
@@ -139,8 +134,8 @@ namespace Magical_Tool_Solution.Configuration
                 //edit main class
                 MainClassModel model = (MainClassModel)mainClassesListBox.SelectedItem;
                 Form form = new ClgrEntryEditor(
-                    ItemType.mainClass,
-                    CreatingType.updating,
+                    ItemType.MainClass,
+                    CreatingType.Updating,
                     model,
                     this,
                     this);
@@ -151,15 +146,15 @@ namespace Magical_Tool_Solution.Configuration
 
         public bool ValidateMainClassId(string id) => GlobalConfig.Connection.ValidateMainClassId(id);
 
-        public void AddMainClass(MainClassModel model)
+        public void AddMainClass(BasicMainClassModel model)
         {
             GlobalConfig.Connection.CreateMainClass(model);
             WireUpLists();
         }
 
-        public void UpdateMainClass(MainClassModel model)
+        public void UpdateMainClass(BasicMainClassModel model)
         {
-            GlobalConfig.Connection.UpdateMainClass(model);
+            GlobalConfig.Connection.UpdateBasicMainClass(model);
             WireUpLists();
         }
 
@@ -185,12 +180,6 @@ namespace Magical_Tool_Solution.Configuration
 
         private void MainClassesListBox_MouseDown(object sender, MouseEventArgs e) => UserInterfaceLogic.HandleRightClick(mainClassesListBox, e, WireUpContextMenu);
 
-        private void MainClassesConfiguration_Resize(object sender, EventArgs e)
-        {
-            // set widths of bottom listboxes to fit nicely
-            int listBoxWidth = (int)Math.Round((decimal)(bottomPanel.Width - buttonsPanel.Width) / 2);
-            bottomLeftPanel.Width = listBoxWidth;
-            bottomRightPanel.Width = listBoxWidth;
-        }
+        private void MainClassesConfiguration_Resize(object sender, EventArgs e) => UserInterfaceLogic.ResizePanelsEvenly(this, bottomPanel, bottomLeftPanel, bottomRightPanel, widthOffset: buttonsPanel.Width);
     }
 }

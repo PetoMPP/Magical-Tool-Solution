@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Dapper.FluentMap.Mapping;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Dapper.FluentMap.Mapping;
 
 namespace MTSLibrary.Models
 {
@@ -18,7 +18,7 @@ namespace MTSLibrary.Models
             Map(tc => tc.BasicComp.Id).ToColumn("CompId");
         }
     }
-    internal class ToolComponentModelPositionComparer : IEqualityComparer<ToolComponentModel>
+    public class ToolComponentModelPositionComparer : IEqualityComparer<ToolComponentModel>
     {
         public bool Equals(ToolComponentModel x, ToolComponentModel y)
         {
@@ -34,7 +34,7 @@ namespace MTSLibrary.Models
         }
         public int GetHashCode([DisallowNull] ToolComponentModel obj) => obj.Position;
     }
-    internal class ToolComponentModelComparer : IEqualityComparer<ToolComponentModel>
+    public class ToolComponentModelComparer : IEqualityComparer<ToolComponentModel>
     {
         public bool Equals(ToolComponentModel x, ToolComponentModel y)
         {
@@ -51,7 +51,7 @@ namespace MTSLibrary.Models
                 && x.IsKey == y.IsKey
                 && x.BasicComp.Id == y.BasicComp.Id;
         }
-        public int GetHashCode([DisallowNull] ToolComponentModel obj) => 
+        public int GetHashCode([DisallowNull] ToolComponentModel obj) =>
             obj.Position.GetHashCode() ^ obj.Quantity.GetHashCode() ^ obj.IsKey.GetHashCode() ^ obj.BasicComp.Id.GetHashCode();
     }
 }

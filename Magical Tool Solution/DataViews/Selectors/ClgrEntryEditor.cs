@@ -2,12 +2,9 @@
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
@@ -55,7 +52,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void LoadModelToUI()
         {
-            if (_itemType == ItemType.toolClass)
+            if (_itemType == ItemType.ToolClass)
             {
                 idTextBox.Text = _toolClassModel.Id;
                 d1TextBox.Text = _toolClassModel.Name;
@@ -63,17 +60,17 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 mainD1TextBox.Text = null;
                 if (_toolClassModel.MainClassId != null)
                 {
-                    mainD1TextBox.Text = GlobalConfig.Connection.GetMainClassNameById(_toolClassModel.MainClassId); 
+                    mainD1TextBox.Text = GlobalConfig.Connection.GetMainClassNameById(_toolClassModel.MainClassId);
                 }
             }
-            else if (_itemType == ItemType.toolGroup)
+            else if (_itemType == ItemType.ToolGroup)
             {
                 idTextBox.Text = _toolGroupModel.Id;
                 d1TextBox.Text = _toolGroupModel.Name;
                 mainIdTextBox.Text = _toolGroupModel.ToolClassId;
                 if (_toolGroupModel.ToolClassId != null)
                 {
-                    mainD1TextBox.Text = GlobalConfig.Connection.GetClassNameById(_toolGroupModel.ToolClassId);
+                    mainD1TextBox.Text = GlobalConfig.Connection.GetToolClassNameById(_toolGroupModel.ToolClassId);
                 }
                 else
                 {
@@ -95,7 +92,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
                 enableToolsCheckBox.Checked = _toolGroupModel.EnabledInTools;
             }
-            else if (_itemType == ItemType.mainClass)
+            else if (_itemType == ItemType.MainClass)
             {
                 idTextBox.Text = _mainClassModel.Id;
                 d1TextBox.Text = _mainClassModel.Name;
@@ -104,7 +101,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void AdjustUI()
         {
-            if (_itemType == ItemType.toolClass)
+            if (_itemType == ItemType.ToolClass)
             {
                 mainClassLabel.Text = "Main Class Id and Description";
                 mainClassIdD1Panel.Enabled = false;
@@ -127,11 +124,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 classModeLabel.Visible = false;
                 classModeCheckBoxPanel.Visible = false;
 
-                if (_creatingType == CreatingType.creating)
+                if (_creatingType == CreatingType.Creating)
                 {
                     selectorLabel.Text = "Add a new Class";
                 }
-                else if (_creatingType == CreatingType.updating)
+                else if (_creatingType == CreatingType.Updating)
                 {
                     selectorLabel.Text = "Modify selected Class";
                     idTextBox.Enabled = false;
@@ -139,18 +136,18 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     applyButton.Enabled = false;
                 }
             }
-            else if (_itemType == ItemType.toolGroup)
+            else if (_itemType == ItemType.ToolGroup)
             {
                 mainClassLabel.Text = "Parent Class Id and Description";
                 mainClassIdD1Panel.Enabled = false;
 
                 basicDataLabel.Text = "Basic Group Data:";
                 idD1Label.Text = "Group Id and Description";
-                if (_creatingType == CreatingType.creating)
+                if (_creatingType == CreatingType.Creating)
                 {
                     selectorLabel.Text = "Add a new Group";
                 }
-                else if (_creatingType == CreatingType.updating)
+                else if (_creatingType == CreatingType.Updating)
                 {
                     selectorLabel.Text = "Modify selected Group";
                     idTextBox.Enabled = false;
@@ -158,7 +155,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     applyButton.Enabled = false;
                 }
             }
-            else if (_itemType == ItemType.mainClass)
+            else if (_itemType == ItemType.MainClass)
             {
                 basicDataLabel.Text = "Basic Main Class Data:";
                 idD1Label.Text = "Main Class Id and Description";
@@ -179,11 +176,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
                 classModeLabel.Visible = false;
                 classModeCheckBoxPanel.Visible = false;
-                if (_creatingType == CreatingType.creating)
+                if (_creatingType == CreatingType.Creating)
                 {
                     selectorLabel.Text = "Add a new Main Class";
                 }
-                else if (_creatingType == CreatingType.updating)
+                else if (_creatingType == CreatingType.Updating)
                 {
                     selectorLabel.Text = "Modify selected Main Class";
                     idTextBox.Enabled = false;
@@ -215,7 +212,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             //Determine which model
             switch (_itemType)
             {
-                case ItemType.toolClass:
+                case ItemType.ToolClass:
                     //create model
                     ToolClassModel tc = new()
                     {
@@ -225,7 +222,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     };
                     //updating doesnt affect allocated groups
                     //send to interface
-                    if (_creatingType == CreatingType.creating)
+                    if (_creatingType == CreatingType.Creating)
                     {
                         //validate if id is taken for all classes
                         if (_clGr.ValidateToolClassId(tc.Id))
@@ -235,12 +232,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         }
                         _clGr.AddToolClass(tc);
                     }
-                    else if (_creatingType == CreatingType.updating)
+                    else if (_creatingType == CreatingType.Updating)
                     {
                         _clGr.UpdateToolClass(tc);
                     }
                     break;
-                case ItemType.toolGroup:
+                case ItemType.ToolGroup:
                     //validate if is enabled to anything
                     if (!enableComponentsCheckBox.Checked && !enableToolsCheckBox.Checked)
                     {
@@ -261,7 +258,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         EnabledInTools = enableToolsCheckBox.Checked
                     };
                     //send to interface
-                    if (_creatingType == CreatingType.creating)
+                    if (_creatingType == CreatingType.Creating)
                     {
                         //validate if id is taken for groups in class
                         if (_clGr.ValidateToolGroup(tg))
@@ -271,18 +268,18 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         }
                         _clGr.AddToolGroup(tg);
                     }
-                    else if (_creatingType == CreatingType.updating)
+                    else if (_creatingType == CreatingType.Updating)
                     {
                         _clGr.UpdateToolGroup(tg);
                     }
                     break;
-                case ItemType.mainClass:
-                    MainClassModel mc = new()
+                case ItemType.MainClass:
+                    BasicMainClassModel mc = new()
                     {
                         Id = idTextBox.Text,
                         Name = d1TextBox.Text
                     };
-                    if (_creatingType == CreatingType.creating)
+                    if (_creatingType == CreatingType.Creating)
                     {
                         //validate if id is taken
                         if (_mainClass.ValidateMainClassId(mc.Id))
@@ -292,7 +289,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         }
                         _mainClass.AddMainClass(mc);
                     }
-                    else if (_creatingType == CreatingType.updating)
+                    else if (_creatingType == CreatingType.Updating)
                     {
                         _mainClass.UpdateMainClass(mc);
                     }
@@ -305,7 +302,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         {
             if (CreateAndSendModel())
             {
-                ClearFields(); 
+                ClearFields();
             }
         }
 

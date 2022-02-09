@@ -2,12 +2,6 @@
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
 using MTSLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews
@@ -80,7 +74,7 @@ namespace Magical_Tool_Solution.DataViews
                     }
                 }
                 ListPositionModel model = new() { Position = nextPositionPosition, Quantity = 1 };
-                Form form = new BasicItemSelector(ItemType.tool, CreatingType.creating, parentCallingForm, model, _selectPosition);
+                Form form = new BasicItemSelector(ItemType.Tool, CreatingType.Creating, parentCallingForm, model, _selectPosition);
                 form.Visible = true;
                 form.BringToFront();
                 form.Focus();
@@ -88,7 +82,7 @@ namespace Magical_Tool_Solution.DataViews
             }
             else if (positionsDataGridView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.Cell)
             {
-                ItemType itemType = ItemType.tool;
+                ItemType itemType = ItemType.Tool;
                 ListPositionModel model = new();
                 DataGridViewRow row = positionsDataGridView
                     .Rows[positionsDataGridView.HitTest(e.X, e.Y)
@@ -103,7 +97,7 @@ namespace Magical_Tool_Solution.DataViews
                         Description1 = row.Cells["desc1"].Value.ToString(),
                         Description2 = row.Cells["desc2"].Value.ToString()
                     };
-                    itemType = ItemType.comp;
+                    itemType = ItemType.Comp;
                 }
                 if (!string.IsNullOrWhiteSpace(row.Cells["toolId"].Value.ToString()))
                 {
@@ -113,10 +107,10 @@ namespace Magical_Tool_Solution.DataViews
                         Description1 = row.Cells["desc1"].Value.ToString(),
                         Description2 = row.Cells["desc2"].Value.ToString()
                     };
-                    itemType = ItemType.tool;
+                    itemType = ItemType.Tool;
                 }
                 Form form = new BasicItemSelector(itemType,
-                    CreatingType.updating,
+                    CreatingType.Updating,
                     parentCallingForm,
                     model,
                     _selectPosition);

@@ -3,7 +3,7 @@
 AS
 BEGIN
 	SET NOCOUNT ON
-	SELECT Id, Description1, Description2, ToolClassId, ToolGroupId, MachineInterfaceId, DataStatus 
+	SELECT Id, Description1, Description2, ToolClassId, ToolGroupId, MachineInterfaceName, DataStatus 
 	FROM Tools
 	WHERE Id = @Id
 END

@@ -216,6 +216,7 @@ namespace Magical_Tool_Solution.BasicToolData
             // 
             this.searchButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.searchButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchButton.Enabled = false;
             this.searchButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
             this.searchButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
             this.searchButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
@@ -414,7 +415,7 @@ namespace Magical_Tool_Solution.BasicToolData
             this.idTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.idTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.idTextBox.Location = new System.Drawing.Point(5, 5);
-            this.idTextBox.MaxLength = 10;
+            this.idTextBox.MaxLength = 20;
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(223, 23);
             this.idTextBox.TabIndex = 1;

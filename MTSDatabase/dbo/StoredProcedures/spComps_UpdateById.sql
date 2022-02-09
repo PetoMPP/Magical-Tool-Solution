@@ -5,6 +5,7 @@
 	@ToolClassId VARCHAR(20),
 	@ToolGroupId VARCHAR(20),
 	@ManufacturerName NVARCHAR(120) = NULL,
+	@MachineInterfaceName NVARCHAR(120) = NULL,
 	@DataStatus NVARCHAR(120) = NULL
 AS
 BEGIN
@@ -16,6 +17,7 @@ BEGIN
 	ToolClassId = @ToolClassId,
 	ToolGroupId = @ToolGroupId,
 	ManufacturerName = @ManufacturerName,
+	MachineInterfaceName = @MachineInterfaceName,
 	DataStatus = @DataStatus
 	WHERE Id = @Id
 END

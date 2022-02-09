@@ -1,13 +1,10 @@
 ﻿using MTSLibrary;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Minimal_Tool_Stock_Calculator.DataViews.Headers
+namespace Magical_Tool_Solution.DataViews.Headers
 {
     public partial class ComponentHeader : Form
     {
@@ -70,7 +67,7 @@ namespace Minimal_Tool_Stock_Calculator.DataViews.Headers
         {
             if (instance1 == null)
             {
-                instance1 = new Parameters(ItemType.comp);
+                instance1 = new Parameters(ItemType.Comp);
             }
             ActivateButton((Button)sender, instance1);
             viewSwitcherPanel.Focus();

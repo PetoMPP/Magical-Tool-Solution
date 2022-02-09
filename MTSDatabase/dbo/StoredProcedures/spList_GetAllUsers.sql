@@ -1,0 +1,11 @@
+﻿CREATE PROCEDURE [dbo].[spList_GetAllUsers]
+AS
+BEGIN
+	SET NOCOUNT ON
+	SELECT DISTINCT(LastModifiedName)
+	FROM Lists
+	SELECT DISTINCT(OwnerName)
+	FROM Lists
+	SELECT DISTINCT(CreatorName)
+	FROM Lists
+END

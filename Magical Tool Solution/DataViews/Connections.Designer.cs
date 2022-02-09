@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator.DataViews
+namespace Magical_Tool_Solution.DataViews
 {
     partial class Connections
     {

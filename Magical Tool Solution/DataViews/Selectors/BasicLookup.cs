@@ -3,11 +3,7 @@ using MTSLibrary;
 using MTSLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
@@ -59,31 +55,33 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             DataTable table = new();
             switch (itemType)
             {
-                case ItemType.comp:
+                case ItemType.Comp:
                     List<BasicCompModel> basicCompModels = GlobalConfig.Connection.GetBasicCompModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicCompModels);
                     break;
-                case ItemType.tool:
+                case ItemType.Tool:
                     List<BasicToolModel> basicToolModels = GlobalConfig.Connection.GetBasicToolModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicToolModels);
                     break;
-                case ItemType.list:
+                case ItemType.List:
                     List<BasicListModel> basicListModels = GlobalConfig.Connection.GetBasicListModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicListModels);
                     break;
-                case ItemType.toolClass:
+                case ItemType.ToolClass:
                     List<BasicToolClassModel> basicToolClassModels = GlobalConfig.Connection.GetBasicToolClassModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicToolClassModels);
                     break;
-                case ItemType.toolGroup:
+                case ItemType.ToolGroup:
                     List<BasicToolGroupModel> basicToolGroupModels = GlobalConfig.Connection.GetBasicToolGroupsModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicToolGroupModels);
                     break;
-                case ItemType.mainClass:
+                case ItemType.MainClass:
                     List<BasicMainClassModel> basicMainClassModels = GlobalConfig.Connection.GetBasicMainClassModels();
                     table = ProgramLogic.CreateDataTableFromListOfModels(basicMainClassModels);
                     break;
-                default:
+                case ItemType.User:
+                    List<string> userNames = GlobalConfig.Connection.GetUsers();
+                    table = ProgramLogic.CreateSimpleDataTable(userNames);
                     break;
             }
 
@@ -111,20 +109,16 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             int requiredTextBoxesCount = lookupDataGridView.ColumnCount;
             switch (requiredTextBoxesCount)
             {
-                case 3:
-                    break;
-
                 case 2:
                     searchTextBox3Panel.Visible = false;
                     Width -= 201;
                     break;
-
                 case 1:
                     searchTextBox3Panel.Visible = false;
                     searchTextBox2Panel.Visible = false;
                     Width -= 402;
-                    break;
-                default:
+                    okButtonPanel.Width = 100;
+                    cancelButtonPanel.Width = 100;
                     break;
             }
         }
@@ -170,21 +164,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             if (lookupDataGridView.HitTest(e.X, e.Y).Type == DataGridViewHitTestType.Cell)
             {
                 LoadSelectedItem();
+                Close();
             }
-            Close();
         }
 
-        private void LookupDataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            if (lookupDataGridView.SelectedRows != null)
-            {
-                okButton.Enabled = true;
-            }
-            else
-            {
-                okButton.Enabled = false;
-            }
-        }
+        private void LookupDataGridView_SelectionChanged(object sender, EventArgs e) => okButton.Enabled = lookupDataGridView.SelectedRows != null;
 
     }
 }

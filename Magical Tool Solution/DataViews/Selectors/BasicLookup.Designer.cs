@@ -205,6 +205,8 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.lookupDataGridView.AllowUserToAddRows = false;
             this.lookupDataGridView.AllowUserToDeleteRows = false;
             this.lookupDataGridView.AllowUserToOrderColumns = true;
+            this.lookupDataGridView.AllowUserToResizeColumns = false;
+            this.lookupDataGridView.AllowUserToResizeRows = false;
             this.lookupDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.lookupDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -221,6 +223,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.lookupDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.lookupDataGridView.EnableHeadersVisualStyles = false;
             this.lookupDataGridView.Location = new System.Drawing.Point(0, 33);
+            this.lookupDataGridView.MultiSelect = false;
             this.lookupDataGridView.Name = "lookupDataGridView";
             this.lookupDataGridView.ReadOnly = true;
             this.lookupDataGridView.RowHeadersVisible = false;

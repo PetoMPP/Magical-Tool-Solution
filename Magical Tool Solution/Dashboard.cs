@@ -1,15 +1,9 @@
 ﻿using Magical_Tool_Solution.BasicToolData;
 using Magical_Tool_Solution.Configuration;
-using Magical_Tool_Solution.ToolStockCalculations;
 using MTSLibrary;
-using MTSLibrary.Connections;
 using MTSLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution
@@ -64,45 +58,46 @@ namespace Magical_Tool_Solution
         private void LaunchModule()
         {
             ProgramModuleModel selectedModule = (ProgramModuleModel)availableModulesBox.SelectedItem;
-            if (selectedModule.Name == "Missing Stock Calculator")
+            switch (selectedModule.Name)
             {
-                CalculationWindow form = new("missing", this);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Minimal Stock Calculator")
-            {
-                CalculationWindow form = new("minimal", this);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Components Data")
-            {
-                BasicDataViewer form = new(this, ItemType.comp);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Tool Data")
-            {
-                BasicDataViewer form = new(this, ItemType.tool);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Tool List Data")
-            {
-                BasicDataViewer form = new(this, ItemType.list);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Tool Classes and Groups")
-            {
-                ClgrConfiguration form = new(this);
-                form.Visible = true;
-            }
-            else if (selectedModule.Name == "Main Classes Configuration")
-            {
-                MainClassesConfiguration form = new(this);
-                form.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Module launching instructions not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw new NotSupportedException();
+                case "Components Data":
+                    {
+                        BasicDataViewer form = new(this, ItemType.Comp);
+                        form.Visible = true;
+                        break;
+                    }
+
+                case "Tool Data":
+                    {
+                        BasicDataViewer form = new(this, ItemType.Tool);
+                        form.Visible = true;
+                        break;
+                    }
+
+                case "Tool List Data":
+                    {
+                        BasicDataViewer form = new(this, ItemType.List);
+                        form.Visible = true;
+                        break;
+                    }
+
+                case "Tool Classes and Groups":
+                    {
+                        ClgrConfiguration form = new(this);
+                        form.Visible = true;
+                        break;
+                    }
+
+                case "Main Classes Configuration":
+                    {
+                        MainClassesConfiguration form = new(this);
+                        form.Visible = true;
+                        break;
+                    }
+
+                default:
+                    MessageBox.Show("Module launching instructions not found", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw new NotSupportedException();
             }
         }
 
@@ -116,5 +111,7 @@ namespace Magical_Tool_Solution
                 Activate();
             }
         }
+
+        private void Dashboard_SizeChanged(object sender, EventArgs e) => UserInterfaceLogic.ResizePanelsEvenly(this, titleLabel, sectionsPanel, modulesPanel, minWidth2: launchButtonPanel.Width + launchInNewWindowButtonPanel.Width);
     }
 }

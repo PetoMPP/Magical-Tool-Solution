@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
+namespace Magical_Tool_Solution.BasicDataSidebars
 {
     partial class ItemSidebar
     {
@@ -62,14 +62,19 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.exStabLabel = new System.Windows.Forms.Label();
             this.isoGroupLabel = new System.Windows.Forms.Label();
             this.suitabilityLabel = new System.Windows.Forms.Label();
+            this.machineInterfacePanel = new System.Windows.Forms.Panel();
+            this.machineInterfaceTextboxPanel = new System.Windows.Forms.Panel();
+            this.machineInterfaceButton = new System.Windows.Forms.Button();
+            this.machineInterfaceBox = new System.Windows.Forms.TextBox();
+            this.machineInterfaceLabel = new System.Windows.Forms.Label();
+            this.toolManufacturerPanel = new System.Windows.Forms.Panel();
+            this.toolManufacturerButton = new System.Windows.Forms.Button();
+            this.toolManufacturerBox = new System.Windows.Forms.TextBox();
+            this.toolManufacturerLabel = new System.Windows.Forms.Label();
             this.statusPanel = new System.Windows.Forms.Panel();
             this.statusButton = new System.Windows.Forms.Button();
             this.statusBox = new System.Windows.Forms.TextBox();
             this.statusLabel = new System.Windows.Forms.Label();
-            this.toolManufacturerPanel = new System.Windows.Forms.Panel();
-            this.modeSpecificButton = new System.Windows.Forms.Button();
-            this.modeSpecificBox = new System.Windows.Forms.TextBox();
-            this.modeSpecificLabel = new System.Windows.Forms.Label();
             this.toolGroupPanel = new System.Windows.Forms.Panel();
             this.toolGroupIdBox = new System.Windows.Forms.TextBox();
             this.toolGroupD1Box = new System.Windows.Forms.TextBox();
@@ -86,8 +91,10 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.materialSuitabilityPanel.SuspendLayout();
             this.suitabliltyChartPanel.SuspendLayout();
             this.suitabilityLegendPanel.SuspendLayout();
-            this.statusPanel.SuspendLayout();
+            this.machineInterfacePanel.SuspendLayout();
+            this.machineInterfaceTextboxPanel.SuspendLayout();
             this.toolManufacturerPanel.SuspendLayout();
+            this.statusPanel.SuspendLayout();
             this.toolGroupPanel.SuspendLayout();
             this.toolClassPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -97,10 +104,11 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             // leftContentPanel
             // 
             this.leftContentPanel.Controls.Add(this.materialSuitabilityPanel);
+            this.leftContentPanel.Controls.Add(this.machineInterfacePanel);
+            this.leftContentPanel.Controls.Add(this.toolManufacturerPanel);
+            this.leftContentPanel.Controls.Add(this.toolManufacturerLabel);
             this.leftContentPanel.Controls.Add(this.statusPanel);
             this.leftContentPanel.Controls.Add(this.statusLabel);
-            this.leftContentPanel.Controls.Add(this.toolManufacturerPanel);
-            this.leftContentPanel.Controls.Add(this.modeSpecificLabel);
             this.leftContentPanel.Controls.Add(this.toolGroupPanel);
             this.leftContentPanel.Controls.Add(this.toolGroupLabel);
             this.leftContentPanel.Controls.Add(this.toolClassPanel);
@@ -109,7 +117,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.leftContentPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.leftContentPanel.Location = new System.Drawing.Point(0, 0);
             this.leftContentPanel.Name = "leftContentPanel";
-            this.leftContentPanel.Size = new System.Drawing.Size(362, 513);
+            this.leftContentPanel.Size = new System.Drawing.Size(362, 713);
             this.leftContentPanel.TabIndex = 1;
             // 
             // materialSuitabilityPanel
@@ -118,10 +126,10 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.materialSuitabilityPanel.Controls.Add(this.suitabilityLegendPanel);
             this.materialSuitabilityPanel.Controls.Add(this.suitabilityLabel);
             this.materialSuitabilityPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.materialSuitabilityPanel.Location = new System.Drawing.Point(0, 270);
+            this.materialSuitabilityPanel.Location = new System.Drawing.Point(0, 327);
             this.materialSuitabilityPanel.Name = "materialSuitabilityPanel";
             this.materialSuitabilityPanel.Size = new System.Drawing.Size(362, 190);
-            this.materialSuitabilityPanel.TabIndex = 18;
+            this.materialSuitabilityPanel.TabIndex = 25;
             this.materialSuitabilityPanel.Visible = false;
             // 
             // suitabliltyChartPanel
@@ -555,12 +563,141 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.suitabilityLabel.TabIndex = 21;
             this.suitabilityLabel.Text = "Material Suitablility:";
             // 
+            // machineInterfacePanel
+            // 
+            this.machineInterfacePanel.Controls.Add(this.machineInterfaceTextboxPanel);
+            this.machineInterfacePanel.Controls.Add(this.machineInterfaceLabel);
+            this.machineInterfacePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.machineInterfacePanel.Location = new System.Drawing.Point(0, 270);
+            this.machineInterfacePanel.Name = "machineInterfacePanel";
+            this.machineInterfacePanel.Size = new System.Drawing.Size(362, 57);
+            this.machineInterfacePanel.TabIndex = 24;
+            this.machineInterfacePanel.Visible = false;
+            // 
+            // machineInterfaceTextboxPanel
+            // 
+            this.machineInterfaceTextboxPanel.Controls.Add(this.machineInterfaceButton);
+            this.machineInterfaceTextboxPanel.Controls.Add(this.machineInterfaceBox);
+            this.machineInterfaceTextboxPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.machineInterfaceTextboxPanel.Location = new System.Drawing.Point(0, 24);
+            this.machineInterfaceTextboxPanel.Name = "machineInterfaceTextboxPanel";
+            this.machineInterfaceTextboxPanel.Padding = new System.Windows.Forms.Padding(5, 5, 90, 5);
+            this.machineInterfaceTextboxPanel.Size = new System.Drawing.Size(362, 33);
+            this.machineInterfaceTextboxPanel.TabIndex = 24;
+            // 
+            // machineInterfaceButton
+            // 
+            this.machineInterfaceButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.machineInterfaceButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.machineInterfaceButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.machineInterfaceButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.machineInterfaceButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.machineInterfaceButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.machineInterfaceButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.machineInterfaceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.machineInterfaceButton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
+            this.machineInterfaceButton.Location = new System.Drawing.Point(242, 5);
+            this.machineInterfaceButton.Margin = new System.Windows.Forms.Padding(8);
+            this.machineInterfaceButton.Name = "machineInterfaceButton";
+            this.machineInterfaceButton.Size = new System.Drawing.Size(30, 23);
+            this.machineInterfaceButton.TabIndex = 7;
+            this.machineInterfaceButton.UseVisualStyleBackColor = false;
+            // 
+            // machineInterfaceBox
+            // 
+            this.machineInterfaceBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.machineInterfaceBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.machineInterfaceBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.machineInterfaceBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.machineInterfaceBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.machineInterfaceBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.machineInterfaceBox.Location = new System.Drawing.Point(5, 5);
+            this.machineInterfaceBox.MaxLength = 120;
+            this.machineInterfaceBox.Name = "machineInterfaceBox";
+            this.machineInterfaceBox.Size = new System.Drawing.Size(223, 23);
+            this.machineInterfaceBox.TabIndex = 6;
+            this.machineInterfaceBox.Tag = "TextBox";
+            this.machineInterfaceBox.WordWrap = false;
+            // 
+            // machineInterfaceLabel
+            // 
+            this.machineInterfaceLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.machineInterfaceLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.machineInterfaceLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.machineInterfaceLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.machineInterfaceLabel.Location = new System.Drawing.Point(0, 0);
+            this.machineInterfaceLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.machineInterfaceLabel.Name = "machineInterfaceLabel";
+            this.machineInterfaceLabel.Padding = new System.Windows.Forms.Padding(2);
+            this.machineInterfaceLabel.Size = new System.Drawing.Size(362, 24);
+            this.machineInterfaceLabel.TabIndex = 23;
+            this.machineInterfaceLabel.Text = "Machine interface:";
+            // 
+            // toolManufacturerPanel
+            // 
+            this.toolManufacturerPanel.Controls.Add(this.toolManufacturerButton);
+            this.toolManufacturerPanel.Controls.Add(this.toolManufacturerBox);
+            this.toolManufacturerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.toolManufacturerPanel.Location = new System.Drawing.Point(0, 237);
+            this.toolManufacturerPanel.Name = "toolManufacturerPanel";
+            this.toolManufacturerPanel.Padding = new System.Windows.Forms.Padding(5, 5, 90, 5);
+            this.toolManufacturerPanel.Size = new System.Drawing.Size(362, 33);
+            this.toolManufacturerPanel.TabIndex = 20;
+            // 
+            // toolManufacturerButton
+            // 
+            this.toolManufacturerButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolManufacturerButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.toolManufacturerButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.toolManufacturerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
+            this.toolManufacturerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
+            this.toolManufacturerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.toolManufacturerButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolManufacturerButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.toolManufacturerButton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
+            this.toolManufacturerButton.Location = new System.Drawing.Point(242, 5);
+            this.toolManufacturerButton.Margin = new System.Windows.Forms.Padding(8);
+            this.toolManufacturerButton.Name = "toolManufacturerButton";
+            this.toolManufacturerButton.Size = new System.Drawing.Size(30, 23);
+            this.toolManufacturerButton.TabIndex = 7;
+            this.toolManufacturerButton.UseVisualStyleBackColor = false;
+            // 
+            // toolManufacturerBox
+            // 
+            this.toolManufacturerBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.toolManufacturerBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolManufacturerBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.toolManufacturerBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.toolManufacturerBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolManufacturerBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.toolManufacturerBox.Location = new System.Drawing.Point(5, 5);
+            this.toolManufacturerBox.MaxLength = 120;
+            this.toolManufacturerBox.Name = "toolManufacturerBox";
+            this.toolManufacturerBox.Size = new System.Drawing.Size(223, 23);
+            this.toolManufacturerBox.TabIndex = 6;
+            this.toolManufacturerBox.Tag = "TextBox";
+            this.toolManufacturerBox.WordWrap = false;
+            // 
+            // toolManufacturerLabel
+            // 
+            this.toolManufacturerLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.toolManufacturerLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.toolManufacturerLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.toolManufacturerLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.toolManufacturerLabel.Location = new System.Drawing.Point(0, 213);
+            this.toolManufacturerLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.toolManufacturerLabel.Name = "toolManufacturerLabel";
+            this.toolManufacturerLabel.Padding = new System.Windows.Forms.Padding(2);
+            this.toolManufacturerLabel.Size = new System.Drawing.Size(362, 24);
+            this.toolManufacturerLabel.TabIndex = 19;
+            this.toolManufacturerLabel.Text = "Tool Manufacturer:";
+            // 
             // statusPanel
             // 
             this.statusPanel.Controls.Add(this.statusButton);
             this.statusPanel.Controls.Add(this.statusBox);
             this.statusPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.statusPanel.Location = new System.Drawing.Point(0, 237);
+            this.statusPanel.Location = new System.Drawing.Point(0, 180);
             this.statusPanel.Name = "statusPanel";
             this.statusPanel.Padding = new System.Windows.Forms.Padding(5, 5, 25, 5);
             this.statusPanel.Size = new System.Drawing.Size(362, 33);
@@ -595,7 +732,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.statusBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusBox.ForeColor = System.Drawing.SystemColors.Window;
             this.statusBox.Location = new System.Drawing.Point(5, 5);
-            this.statusBox.MaxLength = 60;
+            this.statusBox.MaxLength = 120;
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(223, 23);
             this.statusBox.TabIndex = 8;
@@ -608,72 +745,13 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.statusLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.statusLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.statusLabel.Location = new System.Drawing.Point(0, 213);
+            this.statusLabel.Location = new System.Drawing.Point(0, 156);
             this.statusLabel.Margin = new System.Windows.Forms.Padding(0);
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Padding = new System.Windows.Forms.Padding(2);
             this.statusLabel.Size = new System.Drawing.Size(362, 24);
             this.statusLabel.TabIndex = 14;
             this.statusLabel.Text = "Data Entry Status:";
-            // 
-            // toolManufacturerPanel
-            // 
-            this.toolManufacturerPanel.Controls.Add(this.modeSpecificButton);
-            this.toolManufacturerPanel.Controls.Add(this.modeSpecificBox);
-            this.toolManufacturerPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.toolManufacturerPanel.Location = new System.Drawing.Point(0, 180);
-            this.toolManufacturerPanel.Name = "toolManufacturerPanel";
-            this.toolManufacturerPanel.Padding = new System.Windows.Forms.Padding(5, 5, 90, 5);
-            this.toolManufacturerPanel.Size = new System.Drawing.Size(362, 33);
-            this.toolManufacturerPanel.TabIndex = 11;
-            // 
-            // modeSpecificButton
-            // 
-            this.modeSpecificButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.modeSpecificButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.modeSpecificButton.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.modeSpecificButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(78)))), ((int)(((byte)(78)))));
-            this.modeSpecificButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.modeSpecificButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.modeSpecificButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.modeSpecificButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.modeSpecificButton.Image = global::Magical_Tool_Solution.Properties.Resources.arrow_down;
-            this.modeSpecificButton.Location = new System.Drawing.Point(242, 5);
-            this.modeSpecificButton.Margin = new System.Windows.Forms.Padding(8);
-            this.modeSpecificButton.Name = "modeSpecificButton";
-            this.modeSpecificButton.Size = new System.Drawing.Size(30, 23);
-            this.modeSpecificButton.TabIndex = 7;
-            this.modeSpecificButton.UseVisualStyleBackColor = false;
-            // 
-            // modeSpecificBox
-            // 
-            this.modeSpecificBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.modeSpecificBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.modeSpecificBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.modeSpecificBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.modeSpecificBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.modeSpecificBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.modeSpecificBox.Location = new System.Drawing.Point(5, 5);
-            this.modeSpecificBox.MaxLength = 60;
-            this.modeSpecificBox.Name = "modeSpecificBox";
-            this.modeSpecificBox.Size = new System.Drawing.Size(223, 23);
-            this.modeSpecificBox.TabIndex = 6;
-            this.modeSpecificBox.Tag = "TextBox";
-            this.modeSpecificBox.WordWrap = false;
-            // 
-            // modeSpecificLabel
-            // 
-            this.modeSpecificLabel.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.modeSpecificLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.modeSpecificLabel.Font = new System.Drawing.Font("Segoe UI Semilight", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.modeSpecificLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.modeSpecificLabel.Location = new System.Drawing.Point(0, 156);
-            this.modeSpecificLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.modeSpecificLabel.Name = "modeSpecificLabel";
-            this.modeSpecificLabel.Padding = new System.Windows.Forms.Padding(2);
-            this.modeSpecificLabel.Size = new System.Drawing.Size(362, 24);
-            this.modeSpecificLabel.TabIndex = 10;
-            this.modeSpecificLabel.Text = "<>:";
             // 
             // toolGroupPanel
             // 
@@ -695,7 +773,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.toolGroupIdBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.toolGroupIdBox.ForeColor = System.Drawing.SystemColors.Window;
             this.toolGroupIdBox.Location = new System.Drawing.Point(5, 5);
-            this.toolGroupIdBox.MaxLength = 10;
+            this.toolGroupIdBox.MaxLength = 20;
             this.toolGroupIdBox.Name = "toolGroupIdBox";
             this.toolGroupIdBox.Size = new System.Drawing.Size(58, 23);
             this.toolGroupIdBox.TabIndex = 4;
@@ -710,7 +788,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.toolGroupD1Box.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.toolGroupD1Box.ForeColor = System.Drawing.SystemColors.Window;
             this.toolGroupD1Box.Location = new System.Drawing.Point(69, 5);
-            this.toolGroupD1Box.MaxLength = 10;
+            this.toolGroupD1Box.MaxLength = 120;
             this.toolGroupD1Box.Name = "toolGroupD1Box";
             this.toolGroupD1Box.Size = new System.Drawing.Size(159, 23);
             this.toolGroupD1Box.TabIndex = 5;
@@ -789,7 +867,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.toolClassD1Box.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.toolClassD1Box.ForeColor = System.Drawing.SystemColors.Window;
             this.toolClassD1Box.Location = new System.Drawing.Point(69, 5);
-            this.toolClassD1Box.MaxLength = 10;
+            this.toolClassD1Box.MaxLength = 120;
             this.toolClassD1Box.Name = "toolClassD1Box";
             this.toolClassD1Box.Size = new System.Drawing.Size(159, 23);
             this.toolClassD1Box.TabIndex = 3;
@@ -805,7 +883,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.toolClassIdBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.toolClassIdBox.ForeColor = System.Drawing.SystemColors.Window;
             this.toolClassIdBox.Location = new System.Drawing.Point(5, 5);
-            this.toolClassIdBox.MaxLength = 10;
+            this.toolClassIdBox.MaxLength = 20;
             this.toolClassIdBox.Name = "toolClassIdBox";
             this.toolClassIdBox.Size = new System.Drawing.Size(58, 23);
             this.toolClassIdBox.TabIndex = 2;
@@ -844,7 +922,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(362, 513);
+            this.ClientSize = new System.Drawing.Size(362, 713);
             this.ControlBox = false;
             this.Controls.Add(this.leftContentPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -856,10 +934,13 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.materialSuitabilityPanel.ResumeLayout(false);
             this.suitabliltyChartPanel.ResumeLayout(false);
             this.suitabilityLegendPanel.ResumeLayout(false);
-            this.statusPanel.ResumeLayout(false);
-            this.statusPanel.PerformLayout();
+            this.machineInterfacePanel.ResumeLayout(false);
+            this.machineInterfaceTextboxPanel.ResumeLayout(false);
+            this.machineInterfaceTextboxPanel.PerformLayout();
             this.toolManufacturerPanel.ResumeLayout(false);
             this.toolManufacturerPanel.PerformLayout();
+            this.statusPanel.ResumeLayout(false);
+            this.statusPanel.PerformLayout();
             this.toolGroupPanel.ResumeLayout(false);
             this.toolGroupPanel.PerformLayout();
             this.toolClassPanel.ResumeLayout(false);
@@ -874,6 +955,26 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
         #endregion
 
         private System.Windows.Forms.Panel leftContentPanel;
+        private System.Windows.Forms.Panel statusPanel;
+        private System.Windows.Forms.TextBox statusBox;
+        private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Panel toolGroupPanel;
+        private System.Windows.Forms.TextBox toolGroupD1Box;
+        private System.Windows.Forms.Label toolGroupLabel;
+        private System.Windows.Forms.Panel toolClassPanel;
+        private System.Windows.Forms.Label toolClassLabel;
+        private System.Windows.Forms.Label basicDataLabel;
+        private System.Windows.Forms.Button statusButton;
+        private System.Windows.Forms.Button clgrSelectorButton;
+        private System.Windows.Forms.TextBox toolGroupIdBox;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox toolClassD1Box;
+        private System.Windows.Forms.TextBox toolClassIdBox;
+        private System.Windows.Forms.Panel toolManufacturerPanel;
+        private System.Windows.Forms.Button toolManufacturerButton;
+        private System.Windows.Forms.TextBox toolManufacturerBox;
+        private System.Windows.Forms.Label toolManufacturerLabel;
         private System.Windows.Forms.Panel materialSuitabilityPanel;
         private System.Windows.Forms.Panel suitabliltyChartPanel;
         private System.Windows.Forms.Label hPoorLabel;
@@ -906,25 +1007,10 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
         private System.Windows.Forms.Label exStabLabel;
         private System.Windows.Forms.Label isoGroupLabel;
         private System.Windows.Forms.Label suitabilityLabel;
-        private System.Windows.Forms.Panel statusPanel;
-        private System.Windows.Forms.TextBox statusBox;
-        private System.Windows.Forms.Label statusLabel;
-        private System.Windows.Forms.Panel toolManufacturerPanel;
-        private System.Windows.Forms.TextBox modeSpecificBox;
-        private System.Windows.Forms.Label modeSpecificLabel;
-        private System.Windows.Forms.Panel toolGroupPanel;
-        private System.Windows.Forms.TextBox toolGroupD1Box;
-        private System.Windows.Forms.Label toolGroupLabel;
-        private System.Windows.Forms.Panel toolClassPanel;
-        private System.Windows.Forms.Label toolClassLabel;
-        private System.Windows.Forms.Label basicDataLabel;
-        private System.Windows.Forms.Button statusButton;
-        private System.Windows.Forms.Button modeSpecificButton;
-        private System.Windows.Forms.Button clgrSelectorButton;
-        private System.Windows.Forms.TextBox toolGroupIdBox;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox toolClassD1Box;
-        private System.Windows.Forms.TextBox toolClassIdBox;
+        private System.Windows.Forms.Panel machineInterfacePanel;
+        private System.Windows.Forms.Panel machineInterfaceTextboxPanel;
+        private System.Windows.Forms.Button machineInterfaceButton;
+        private System.Windows.Forms.TextBox machineInterfaceBox;
+        private System.Windows.Forms.Label machineInterfaceLabel;
     }
 }

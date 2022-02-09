@@ -4,7 +4,7 @@
 AS
 	BEGIN
 	SET NOCOUNT ON
-	SELECT a.Position, a.Id AS ParameterId, a.Name, a.Description, a.DataValueType, b.NumericValue, b.TextValue
+	SELECT a.Position, a.Id, a.Name, a.Description, a.DataValueType, b.NumericValue, b.TextValue
 	FROM ToolClassParameters a
 	INNER JOIN CompParameters b ON a.Id = b.ParameterId
 	WHERE a.ToolClassId = @ToolClassId AND b.CompId = @CompId

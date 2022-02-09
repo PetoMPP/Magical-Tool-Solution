@@ -4,7 +4,7 @@
 	@Description2 NVARCHAR(120) = NULL,
 	@ToolClassId VARCHAR(20),
 	@ToolGroupId VARCHAR(20),
-	@MachineInterfaceId VARCHAR(20) = NULL,
+	@MachineInterfaceName VARCHAR(20) = NULL,
 	@DataStatus NVARCHAR(120) = NULL
 AS
 BEGIN
@@ -14,7 +14,7 @@ BEGIN
 	Description2 = @Description2,
 	ToolClassId = @ToolClassId,
 	ToolGroupId = @ToolGroupId,
-	MachineInterfaceId = @MachineInterfaceId,
+	MachineInterfaceName = @MachineInterfaceName,
 	DataStatus = @DataStatus
 	WHERE
 	Id = @Id

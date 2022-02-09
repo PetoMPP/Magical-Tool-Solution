@@ -2,12 +2,6 @@
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
 using MTSLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews
@@ -46,7 +40,7 @@ namespace Magical_Tool_Solution.DataViews
                     nextCompPosition++;
                 }
                 ToolComponentModel model = new() { Position = nextCompPosition, Quantity = 1 };
-                Form form = new BasicItemSelector(ItemType.comp, CreatingType.creating, parentCallingForm, model, _selectComponent);
+                Form form = new BasicItemSelector(ItemType.Comp, CreatingType.Creating, parentCallingForm, model, _selectComponent);
                 form.Visible = true;
                 form.BringToFront();
                 form.Focus();
@@ -70,7 +64,7 @@ namespace Magical_Tool_Solution.DataViews
                 model.BasicComp.Description1 = row.Cells["componentD1"].Value.ToString();
                 model.BasicComp.Description2 = row.Cells["componentD2"].Value.ToString();
                 model.Quantity = int.Parse(row.Cells["quantity"].Value.ToString());
-                Form form = new BasicItemSelector(ItemType.comp, CreatingType.updating, parentCallingForm, model, _selectComponent);
+                Form form = new BasicItemSelector(ItemType.Comp, CreatingType.Updating, parentCallingForm, model, _selectComponent);
                 form.Visible = true;
                 form.BringToFront();
                 form.Focus();
@@ -122,28 +116,6 @@ namespace Magical_Tool_Solution.DataViews
                 cell.Value = true;
             }
         }
-
-        //private void ComponentsDataGridView_MouseUp(object sender, MouseEventArgs e)
-        //{
-        //    DataGridView dataGrid = (DataGridView)sender;
-        //    dataGrid.CancelEdit();
-        //}
-
-        //private void ComponentsDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    // This method launches after changing the value
-        //    if (e.RowIndex < 0 || e.ColumnIndex < 0)
-        //    {
-        //        return;
-        //    }
-        //    DataGridView dataGrid = (DataGridView)sender;
-        //    if (!EnforceSingleKeyComponent(dataGrid))
-        //    {
-        //        DataGridViewCell cell = dataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-        //        cell.Value = false;
-        //    }
-        //}
-
         private void ComponentsDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dataGrid = (DataGridView)sender;
@@ -151,68 +123,8 @@ namespace Magical_Tool_Solution.DataViews
             {
                 dataGrid.EndEdit();
                 DataGridViewCell cell = dataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                EnforceSingleKeyComponent(dataGrid, cell); 
+                EnforceSingleKeyComponent(dataGrid, cell);
             }
         }
-
-        //private void ComponentsDataGridView_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
-        //{
-        //    DataGridView dataGrid = (DataGridView)sender;
-        //    dataGrid.EndEdit();
-        //}
-
-        //private void ComponentsDataGridView_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        //{
-        //    // todo - fix
-        //    // get index of IsKey column
-        //    int keyColumnIndex = componentsDataGridView.Columns["keyComp"].Index;
-        //    // check if event fired in IsKey column
-        //    if (e.ColumnIndex == keyColumnIndex)
-        //    {
-        //        // There can be only one Key Component in assembly
-        //        int trueRowIndex = -1;
-        //        foreach (DataGridViewRow row in componentsDataGridView.Rows)
-        //        {
-        //            if (row.Cells[keyColumnIndex].Value.ToString() == true.ToString())
-        //            {
-        //                trueRowIndex = row.Index;
-        //            }
-        //        }
-        //        if (trueRowIndex != e.RowIndex && trueRowIndex != -1)
-        //        {
-        //            e.Cancel = true;
-        //        }
-        //    }
-        //    componentsDataGridView.ClearSelection();
-        //}
-
-        //private void ComponentsDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.ColumnIndex == -1 || e.RowIndex == -1)
-        //    {
-        //        return;
-        //    }
-        //    DataGridView dataGrid = (DataGridView)sender;
-        //    // get index of IsKey column
-        //    int keyColumnIndex = dataGrid.Columns["keyComp"].Index;
-        //    // check if event fired in IsKey column
-        //    if (e.ColumnIndex == keyColumnIndex)
-        //    {
-        //        // There can be only one Key Component in assembly
-        //        int trueRowIndex = -1;
-        //        foreach (DataGridViewRow row in dataGrid.Rows)
-        //        {
-        //            if (row.Cells[keyColumnIndex].Value.ToString() == true.ToString())
-        //            {
-        //                trueRowIndex = row.Index;
-        //            }
-        //        }
-        //        if (trueRowIndex != e.RowIndex && trueRowIndex != -1)
-        //        {
-        //            DataGridViewCell cell = dataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-        //            cell.Value = false;
-        //        }
-        //    }
-        //}
     }
 }

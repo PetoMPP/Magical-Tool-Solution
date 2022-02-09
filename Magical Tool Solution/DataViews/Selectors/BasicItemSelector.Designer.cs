@@ -288,11 +288,12 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.quantityBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.quantityBox.ForeColor = System.Drawing.SystemColors.Window;
             this.quantityBox.Location = new System.Drawing.Point(5, 5);
-            this.quantityBox.MaxLength = 120;
+            this.quantityBox.MaxLength = 20;
             this.quantityBox.Name = "quantityBox";
             this.quantityBox.Size = new System.Drawing.Size(223, 23);
             this.quantityBox.TabIndex = 6;
             this.quantityBox.Text = "1";
+            this.quantityBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateKeyPressedIsNumber);
             // 
             // quantityLabel
             // 
@@ -461,7 +462,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.idTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.idTextBox.ForeColor = System.Drawing.SystemColors.Window;
             this.idTextBox.Location = new System.Drawing.Point(5, 5);
-            this.idTextBox.MaxLength = 10;
+            this.idTextBox.MaxLength = 20;
             this.idTextBox.Name = "idTextBox";
             this.idTextBox.Size = new System.Drawing.Size(223, 23);
             this.idTextBox.TabIndex = 1;
@@ -500,10 +501,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.positionBox.ForeColor = System.Drawing.SystemColors.Window;
             this.positionBox.Location = new System.Drawing.Point(5, 5);
-            this.positionBox.MaxLength = 120;
+            this.positionBox.MaxLength = 20;
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(223, 23);
             this.positionBox.TabIndex = 5;
+            this.positionBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidateKeyPressedIsNumber);
             // 
             // positionLabel
             // 

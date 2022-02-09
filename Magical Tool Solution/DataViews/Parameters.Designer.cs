@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator.DataViews
+namespace Magical_Tool_Solution.DataViews
 {
     partial class Parameters
     {
@@ -100,6 +100,8 @@ namespace Minimal_Tool_Stock_Calculator.DataViews
             this.parametersDataGridView.ShowEditingIcon = false;
             this.parametersDataGridView.Size = new System.Drawing.Size(784, 387);
             this.parametersDataGridView.TabIndex = 5;
+            this.parametersDataGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.ParametersDataGridView_CellEndEdit);
+            this.parametersDataGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ParametersDataGridView_CellValidating);
             // 
             // parametersLabelPanel
             // 

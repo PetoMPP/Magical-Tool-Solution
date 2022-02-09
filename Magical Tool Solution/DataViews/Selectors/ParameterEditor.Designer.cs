@@ -243,6 +243,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.valueTypesComboBox.Name = "valueTypesComboBox";
             this.valueTypesComboBox.Size = new System.Drawing.Size(223, 23);
             this.valueTypesComboBox.TabIndex = 0;
+            this.valueTypesComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValueTypesComboBox_KeyPress);
             // 
             // label4
             // 
@@ -391,6 +392,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             this.positionBox.Name = "positionBox";
             this.positionBox.Size = new System.Drawing.Size(223, 23);
             this.positionBox.TabIndex = 5;
+            this.positionBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PositionBox_KeyPress);
             // 
             // positionLabel
             // 

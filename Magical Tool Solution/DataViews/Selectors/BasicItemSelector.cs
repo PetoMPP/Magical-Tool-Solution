@@ -2,11 +2,6 @@
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
@@ -109,14 +104,14 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 selectorLabel.Text = "Select Tool or Component";
                 radioSwitchPanel.Visible = true;
                 radioSwitchPanel.Enabled = true;
-                if (_itemType == ItemType.comp)
+                if (_itemType == ItemType.Comp)
                 {
                     IdLabel.Text = "Component Id:";
                     D1Label.Text = "Component Description";
                     D2Label.Text = "Component Manufacturer's Id:";
                     compRadioButton.Checked = true;
                 }
-                else if (_itemType == ItemType.tool)
+                else if (_itemType == ItemType.Tool)
                 {
                     IdLabel.Text = "Tool Id:";
                     D1Label.Text = "Tool Description";
@@ -124,43 +119,25 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     toolRadioButton.Checked = true;
                 }
             }
-            if (_creatingType == CreatingType.updating)
+            if (_creatingType == CreatingType.Updating)
             {
                 positionBox.Enabled = false;
                 applyButton.Enabled = false;
             }
         }
 
-        private void ValidateKeyPressedNumber(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        private void ValidateKeyPressedIsNumber(object sender, KeyPressEventArgs e) => UserInterfaceLogic.ValidateKeyPressedIsNumber(sender, e);
 
         private void DecreaseButton_Click(object sender, EventArgs e)
         {
-            int quantityBoxValue = 1;
-            if (quantityBox.Text != null)
-            {
-                quantityBoxValue = int.Parse(quantityBox.Text);
-            }
-            int output = quantityBoxValue - 1;
-            if (output < 1)
-            {
-                output = 1;
-            }
+            int quantityBoxValue = (quantityBox.Text == null ? 1 : int.Parse(quantityBox.Text));
+            int output = (quantityBoxValue - 1 < 1 ? 1 : quantityBoxValue - 1);
             quantityBox.Text = Convert.ToString(output);
         }
 
         private void IncreaseButton_Click(object sender, EventArgs e)
         {
-            int quantityBoxValue = 0;
-            if (quantityBox.Text != null)
-            {
-                quantityBoxValue = int.Parse(quantityBox.Text);
-            }
+            int quantityBoxValue = (quantityBox.Text == null ? 0 : int.Parse(quantityBox.Text));
             int output = quantityBoxValue + 1;
             quantityBox.Text = Convert.ToString(output);
         }
@@ -173,10 +150,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         {
             switch (_creatingType)
             {
-                case CreatingType.updating:
+                case CreatingType.Updating:
                     UpdateSelectedItem();
                     break;
-                case CreatingType.creating:
+                case CreatingType.Creating:
                     AddSelectedItem();
                     break;
             }
@@ -243,7 +220,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 Position = int.Parse(positionBox.Text),
                 Quantity = int.Parse(quantityBox.Text)
             };
-            if (_itemType == ItemType.comp)
+            if (_itemType == ItemType.Comp)
             {
                 //create model with comp model
                 model.BasicComp = new BasicCompModel
@@ -253,7 +230,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     Description2 = d2TextBox.Text
                 };
             }
-            else if (_itemType == ItemType.tool)
+            else if (_itemType == ItemType.Tool)
             {
                 //create model with tool model
                 model.BasicTool = new BasicToolModel
@@ -298,7 +275,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private bool ValidateItemId()
         {
-            if (_itemType == ItemType.comp)
+            if (_itemType == ItemType.Comp)
             {
                 if (!GlobalConfig.Connection.ValidateCompId(idTextBox.Text))
                 {
@@ -306,7 +283,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     return false;
                 }
             }
-            else if (_itemType == ItemType.tool)
+            else if (_itemType == ItemType.Tool)
             {
                 if (!GlobalConfig.Connection.ValidateToolId(idTextBox.Text))
                 {
@@ -321,7 +298,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (_itemType == ItemType.comp)
+                if (_itemType == ItemType.Comp)
                 {
                     //Load basic comp data
                     if (GlobalConfig.Connection.ValidateCompId(idTextBox.Text))
@@ -339,7 +316,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                         return;
                     }
                 }
-                else if (_itemType == ItemType.tool)
+                else if (_itemType == ItemType.Tool)
                 {
                     if (GlobalConfig.Connection.ValidateToolId(idTextBox.Text))
                     {
@@ -363,11 +340,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         {
             if (compRadioButton.Checked == true)
             {
-                _itemType = ItemType.comp;
+                _itemType = ItemType.Comp;
             }
             else if (toolRadioButton.Checked == true)
             {
-                _itemType = ItemType.tool;
+                _itemType = ItemType.Tool;
             }
             AdjustUI();
         }
@@ -386,10 +363,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
         {
             switch (_itemType)
             {
-                case ItemType.comp:
+                case ItemType.Comp:
                     LoadSelectedModelToUI(GlobalConfig.Connection.GetBasicCompModelById(itemId));
                     break;
-                case ItemType.tool:
+                case ItemType.Tool:
                     LoadSelectedModelToUI(GlobalConfig.Connection.GetBasicToolModelById(itemId));
                     break;
             }

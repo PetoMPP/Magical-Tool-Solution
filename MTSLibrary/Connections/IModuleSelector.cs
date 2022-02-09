@@ -1,9 +1,4 @@
-﻿using MTSLibrary.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MTSLibrary.Connections
+﻿namespace MTSLibrary.Connections
 {
     public interface IModuleSelector
     {

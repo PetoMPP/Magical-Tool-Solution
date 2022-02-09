@@ -5,13 +5,14 @@
 	@ToolClassId VARCHAR(20),
 	@ToolGroupId VARCHAR(20),
 	@ManufacturerName NVARCHAR(120) = NULL,
+	@MachineInterfaceName NVARCHAR(120) = NULL,
 	@DataStatus NVARCHAR(120) = NULL
 AS
 BEGIN
 	SET NOCOUNT ON
 	INSERT INTO Comps
-	(Id, Description1, Description2, ToolClassId, ToolGroupId, ManufacturerName, DataStatus)
+	(Id, Description1, Description2, ToolClassId, ToolGroupId, ManufacturerName, MachineInterfaceName, DataStatus)
 	VALUES 
-	(@Id, @Description1, @Description2, @ToolClassId, @ToolGroupId, @ManufacturerName, @DataStatus)
+	(@Id, @Description1, @Description2, @ToolClassId, @ToolGroupId, @ManufacturerName, @MachineInterfaceName, @DataStatus)
 
 END

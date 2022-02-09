@@ -2,12 +2,8 @@
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
@@ -55,11 +51,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 _toolClassModel = (ToolClassModel)toolClassListBox.SelectedItem;
                 switch (_itemType)
                 {
-                    case ItemType.comp:
+                    case ItemType.Comp:
                         toolGroupListBox.DataSource = _toolClassModel.ToolGroups
                             .Where(tg => tg.EnabledInComps == true).ToList();
                         break;
-                    case ItemType.tool:
+                    case ItemType.Tool:
                         toolGroupListBox.DataSource = _toolClassModel.ToolGroups
                             .Where(tg => tg.EnabledInTools == true).ToList();
                         break;

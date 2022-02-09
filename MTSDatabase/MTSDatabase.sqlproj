@@ -125,7 +125,6 @@
     <Build Include="dbo\StoredProcedures\spToolClasses_GetNameById.sql" />
     <Build Include="dbo\StoredProcedures\spComps_GetById.sql" />
     <Build Include="dbo\StoredProcedures\spCompSuitability_GetByCompId.sql" />
-    <Build Include="dbo\StoredProcedures\spGetCompParameters_ByCompIdToolClassId.sql" />
     <Build Include="dbo\StoredProcedures\spToolGroups_GetNameById.sql" />
     <Build Include="dbo\StoredProcedures\spLists_GetById.sql" />
     <Build Include="dbo\StoredProcedures\spListPositions_GetByListId.sql" />
@@ -137,7 +136,7 @@
     <Build Include="dbo\StoredProcedures\spManufacturers_GetNameById.sql" />
     <Build Include="dbo\StoredProcedures\spTools_GetById.sql" />
     <Build Include="dbo\StoredProcedures\spToolSuitability_GetByToolId.sql" />
-    <Build Include="dbo\StoredProcedures\spGetToolParameters_ByCompIdToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spGetToolParameters_ByToolIdToolClassId.sql" />
     <Build Include="dbo\StoredProcedures\spToolComponents_GetByToolId.sql" />
     <Build Include="dbo\StoredProcedures\spToolComponents_GetCompIdByToolIdPosition.sql" />
     <Build Include="dbo\StoredProcedures\spDataValueTypes_GetAll.sql" />
@@ -153,7 +152,6 @@
     <Build Include="dbo\StoredProcedures\spMainClasses_Update.sql" />
     <Build Include="dbo\StoredProcedures\spTools_Update.sql" />
     <Build Include="dbo\StoredProcedures\spToolSuitability_Update.sql" />
-    <Build Include="dbo\StoredProcedures\spToolSuitability_Delete.sql" />
     <Build Include="dbo\StoredProcedures\spToolParameters_Update.sql" />
     <Build Include="dbo\StoredProcedures\spToolComponents_Update.sql" />
     <Build Include="dbo\StoredProcedures\spToolComponents_Delete.sql" />
@@ -186,6 +184,17 @@
     <Build Include="dbo\StoredProcedures\spToolGroups_DeleteById.sql" />
     <Build Include="dbo\StoredProcedures\spGetParametersByToolClassIdToolGroupId.sql" />
     <Build Include="dbo\StoredProcedures\spGetCompParametersById.sql" />
+    <Build Include="dbo\StoredProcedures\spGetCompParameters_ByCompIdToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spCompParameters_DeleteByToolClassIdParameterIdToolGroupId.sql" />
+    <Build Include="dbo\StoredProcedures\spCompParameters_DeleteByCompIdParameterId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolParameters_DeleteByToolIdParameterId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolParameters_DeleteByToolClassIdParameterIdToolGroupId.sql" />
+    <Build Include="dbo\StoredProcedures\spCompParameters_DeleteByToolClassIdParameterId.sql" />
+    <Build Include="dbo\StoredProcedures\spToolParameters_DeleteByToolClassIdParameterId.sql" />
+    <Build Include="dbo\StoredProcedures\ToolClassParameterGroups_DeleteByToolClassIdParameterId.sql" />
+    <Build Include="dbo\StoredProcedures\ToolClassParameters_DeleteByParameterIdToolClassId.sql" />
+    <Build Include="dbo\StoredProcedures\spMachineInterfaces_ValidateName.sql" />
+    <Build Include="dbo\StoredProcedures\spList_GetAllUsers.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="MTSDatabase.refactorlog" />

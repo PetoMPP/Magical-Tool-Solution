@@ -3,11 +3,8 @@ using MTSLibrary;
 using MTSLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Selectors
@@ -69,7 +66,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             //mark enabled groups
             foreach (DataRow row in table.Rows)
             {
-                if (_model.AssignedGroupsIds.Any(i => i == row.ItemArray[1].ToString()))
+                if (_model.AssignedToolGroupIds == null)
+                {
+                    break;
+                }
+                if (_model.AssignedToolGroupIds.Any(i => i == row.ItemArray[1].ToString()))
                 {
                     row[0] = true;
                 }
@@ -79,11 +80,11 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void AdjustUI()
         {
-            if (_creatingType == CreatingType.creating)
+            if (_creatingType == CreatingType.Creating)
             {
                 selectorLabel.Text = "Create Parameter:";
             }
-            else if (_creatingType == CreatingType.updating)
+            else if (_creatingType == CreatingType.Updating)
             {
                 selectorLabel.Text = "Edit Parameter:";
                 positionBox.Enabled = false;
@@ -109,7 +110,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
 
         private void SendModel()
         {
-            if (_creatingType == CreatingType.creating)
+            if (_creatingType == CreatingType.Creating)
             {
                 //validate position
                 if (_activeClass.ToolClassParameters.Any(p => p.Position == _model.Position))
@@ -124,8 +125,10 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     return;
                 }
                 _clGr.AddClGrParameter(_model);
+                _activeClass.ToolClassParameters.Add(_model);
+                positionBox.Text = (int.Parse(positionBox.Text) + 1).ToString();
             }
-            else if (_creatingType == CreatingType.updating)
+            else if (_creatingType == CreatingType.Updating)
             {
                 _clGr.UpdateClGrParameter(_model);
             }
@@ -156,7 +159,25 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     selectedGroupsIds.Add(row.Cells["groupId"].Value.ToString());
                 }
             }
-            model.AssignedGroupsIds = selectedGroupsIds;
+            model.AssignedToolGroupIds = selectedGroupsIds;
+            // Check if any group has been unselected
+            List<string> unselectedGroupIds = _model.AssignedToolGroupIds.Except(selectedGroupsIds).ToList();
+            if (unselectedGroupIds.Count > 0)
+            {
+                string unselectedGroupIdsString = string.Empty;
+                foreach (string id in unselectedGroupIds)
+                {
+                    unselectedGroupIdsString += id + ", ";
+                }
+                unselectedGroupIdsString = unselectedGroupIdsString.Substring(0, unselectedGroupIdsString.Length - 2);
+                if (MessageBox.Show($"You've unallocated groups with IDs of: {unselectedGroupIdsString}, continuing will result in deleting the values in tools and components related to this groups and parameter.\nContinue?",
+                    "Unallocation of groups",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation) == DialogResult.Cancel)
+                {
+                    return null;
+                }
+            }
             return model;
         }
 
@@ -193,5 +214,9 @@ namespace Magical_Tool_Solution.DataViews.Selectors
             }
             SendModel();
         }
+
+        private void PositionBox_KeyPress(object sender, KeyPressEventArgs e) => UserInterfaceLogic.ValidateKeyPressedIsNumber(sender, e);
+
+        private void ValueTypesComboBox_KeyPress(object sender, KeyPressEventArgs e) => UserInterfaceLogic.ValidateKeyPressedIsNumber(sender, e);
     }
 }

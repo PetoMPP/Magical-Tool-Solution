@@ -1,8 +1,4 @@
 ﻿using MTSLibrary.Connections;
-using MTSLibrary;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
 
 namespace MTSLibrary

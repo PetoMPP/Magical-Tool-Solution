@@ -1,6 +1,4 @@
 ﻿using Magical_Tool_Solution.Properties;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;

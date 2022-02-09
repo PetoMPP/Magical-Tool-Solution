@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
+namespace Magical_Tool_Solution.BasicDataSidebars
 {
     partial class ListSidebar
     {
@@ -131,7 +131,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.responsibleBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.responsibleBox.ForeColor = System.Drawing.SystemColors.Window;
             this.responsibleBox.Location = new System.Drawing.Point(5, 5);
-            this.responsibleBox.MaxLength = 60;
+            this.responsibleBox.MaxLength = 120;
             this.responsibleBox.Name = "responsibleBox";
             this.responsibleBox.Size = new System.Drawing.Size(223, 23);
             this.responsibleBox.TabIndex = 6;
@@ -168,10 +168,11 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.modifiedByBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.modifiedByBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.modifiedByBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.modifiedByBox.Enabled = false;
             this.modifiedByBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.modifiedByBox.ForeColor = System.Drawing.SystemColors.Window;
             this.modifiedByBox.Location = new System.Drawing.Point(5, 5);
-            this.modifiedByBox.MaxLength = 60;
+            this.modifiedByBox.MaxLength = 120;
             this.modifiedByBox.Name = "modifiedByBox";
             this.modifiedByBox.Size = new System.Drawing.Size(223, 23);
             this.modifiedByBox.TabIndex = 6;
@@ -211,7 +212,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.createdByBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.createdByBox.ForeColor = System.Drawing.SystemColors.Window;
             this.createdByBox.Location = new System.Drawing.Point(5, 5);
-            this.createdByBox.MaxLength = 60;
+            this.createdByBox.MaxLength = 120;
             this.createdByBox.Name = "createdByBox";
             this.createdByBox.Size = new System.Drawing.Size(223, 23);
             this.createdByBox.TabIndex = 6;
@@ -272,7 +273,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.statusBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.statusBox.ForeColor = System.Drawing.SystemColors.Window;
             this.statusBox.Location = new System.Drawing.Point(5, 5);
-            this.statusBox.MaxLength = 60;
+            this.statusBox.MaxLength = 120;
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(223, 23);
             this.statusBox.TabIndex = 8;
@@ -331,7 +332,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.materialBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.materialBox.ForeColor = System.Drawing.SystemColors.Window;
             this.materialBox.Location = new System.Drawing.Point(5, 5);
-            this.materialBox.MaxLength = 60;
+            this.materialBox.MaxLength = 120;
             this.materialBox.Name = "materialBox";
             this.materialBox.Size = new System.Drawing.Size(223, 23);
             this.materialBox.TabIndex = 6;
@@ -370,7 +371,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.machineGroupBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.machineGroupBox.ForeColor = System.Drawing.SystemColors.Window;
             this.machineGroupBox.Location = new System.Drawing.Point(5, 5);
-            this.machineGroupBox.MaxLength = 10;
+            this.machineGroupBox.MaxLength = 120;
             this.machineGroupBox.Name = "machineGroupBox";
             this.machineGroupBox.Size = new System.Drawing.Size(223, 23);
             this.machineGroupBox.TabIndex = 5;
@@ -447,7 +448,7 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             this.machineBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.machineBox.ForeColor = System.Drawing.SystemColors.Window;
             this.machineBox.Location = new System.Drawing.Point(5, 5);
-            this.machineBox.MaxLength = 10;
+            this.machineBox.MaxLength = 120;
             this.machineBox.Name = "machineBox";
             this.machineBox.Size = new System.Drawing.Size(223, 23);
             this.machineBox.TabIndex = 3;

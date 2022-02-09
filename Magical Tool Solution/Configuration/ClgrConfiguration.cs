@@ -4,11 +4,7 @@ using MTSLibrary;
 using MTSLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.Configuration
@@ -91,7 +87,8 @@ namespace Magical_Tool_Solution.Configuration
             clgrParametersDataGridView.Columns["Description"].HeaderText = "Parameter Description";
             clgrParametersDataGridView.Columns["DataValueType"].HeaderText = "Data Type";
             clgrParametersDataGridView.Columns["AssignedGroupsIdDisplayString"].HeaderText = "Assigned Tool Groups";
-            clgrParametersDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            clgrParametersDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            clgrParametersDataGridView.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             clgrParametersDataGridView.AutoResizeColumns();
         }
 
@@ -114,7 +111,7 @@ namespace Magical_Tool_Solution.Configuration
             if (classesListBox.IndexFromPoint(e.Location) == ListBox.NoMatches)
             {
                 //open new class editor 
-                Form form = new ClgrEntryEditor(ItemType.toolClass, CreatingType.creating, new ToolClassModel(), this, this);
+                Form form = new ClgrEntryEditor(ItemType.ToolClass, CreatingType.Creating, new ToolClassModel(), this, this);
                 form.Visible = true;
             }
             else
@@ -122,7 +119,7 @@ namespace Magical_Tool_Solution.Configuration
                 //create model from selected item
                 ToolClassModel model = (ToolClassModel)classesListBox.SelectedItem;
                 //open edit class editor
-                Form form = new ClgrEntryEditor(ItemType.toolClass, CreatingType.updating, model, this, this);
+                Form form = new ClgrEntryEditor(ItemType.ToolClass, CreatingType.Updating, model, this, this);
                 form.Visible = true;
             }
             Enabled = false;
@@ -138,7 +135,7 @@ namespace Magical_Tool_Solution.Configuration
             {
                 //open new group editor
                 ToolClassModel selectedClassModel = (ToolClassModel)classesListBox.SelectedItem;
-                Form form = new ClgrEntryEditor(ItemType.toolGroup, CreatingType.creating, new ToolGroupModel { ToolClassId = selectedClassModel.Id}, this, this);
+                Form form = new ClgrEntryEditor(ItemType.ToolGroup, CreatingType.Creating, new ToolGroupModel { ToolClassId = selectedClassModel.Id }, this, this);
                 form.Visible = true;
             }
             else
@@ -146,7 +143,7 @@ namespace Magical_Tool_Solution.Configuration
                 //create model for selected item
                 ToolGroupModel model = (ToolGroupModel)groupsListBox.SelectedItem;
                 //open edit group editor
-                Form form = new ClgrEntryEditor(ItemType.toolGroup, CreatingType.updating, model, this, this);
+                Form form = new ClgrEntryEditor(ItemType.ToolGroup, CreatingType.Updating, model, this, this);
                 form.Visible = true;
             }
             Enabled = false;
@@ -161,10 +158,10 @@ namespace Magical_Tool_Solution.Configuration
             if (clgrParametersDataGridView.HitTest(e.X, e.Y) == DataGridView.HitTestInfo.Nowhere)
             {
                 //new parameter editor
-                Form form = new ParameterEditor(CreatingType.creating,
-                                                new ToolClassParameterModel() 
-                                                { 
-                                                    Position = GlobalConfig.Connection.GetToolClassParameterNextPositionByToolClassId(toolClass.Id) 
+                Form form = new ParameterEditor(CreatingType.Creating,
+                                                new ToolClassParameterModel()
+                                                {
+                                                    Position = GlobalConfig.Connection.GetToolClassParameterNextPositionByToolClassId(toolClass.Id)
                                                 },
                                                 (ToolClassModel)classesListBox.SelectedItem,
                                                 this,
@@ -177,7 +174,7 @@ namespace Magical_Tool_Solution.Configuration
                 //create model for selected item
                 ToolClassParameterModel model = GenerateClgrParameterModelFromLocation(e);
                 //update parameter
-                Form form = new ParameterEditor(CreatingType.updating, model, (ToolClassModel)classesListBox.SelectedItem, this, this);
+                Form form = new ParameterEditor(CreatingType.Updating, model, (ToolClassModel)classesListBox.SelectedItem, this, this);
                 form.Visible = true;
                 Enabled = false;
             }
@@ -193,9 +190,8 @@ namespace Magical_Tool_Solution.Configuration
             model.Name = row.Cells["Name"].Value.ToString();
             model.Description = row.Cells["Description"].Value.ToString();
             model.DataValueType = row.Cells["DataValueType"].Value.ToString();
-            // TODO - create assigned groups model property
             string idsString = row.Cells["AssignedGroupsIdDisplayString"].Value.ToString();
-            model.AssignedGroupsIds = new();
+            model.AssignedToolGroupIds = new();
             switch (idsString)
             {
                 case "No Groups Assigned":
@@ -203,7 +199,7 @@ namespace Magical_Tool_Solution.Configuration
                 default:
                     foreach (string id in idsString.Split(", "))
                     {
-                        model.AssignedGroupsIds.Add(id);
+                        model.AssignedToolGroupIds.Add(id);
                     }
                     break;
             }
@@ -240,7 +236,7 @@ namespace Magical_Tool_Solution.Configuration
 
         public void AddClGrParameter(ToolClassParameterModel model)
         {
-            GlobalConfig.Connection.CreateClGrParameter(model);
+            GlobalConfig.Connection.CreateToolClassParameter(model);
             LoadClassesData();
             WireUpListsAndParameters(classesListBox.SelectedIndex);
         }
@@ -313,6 +309,14 @@ namespace Magical_Tool_Solution.Configuration
                 deleteToolGroupToolStripMenuItem.Enabled = true;
             }
         }
+        private void WireUpDataGridContextMenu()
+        {
+            deleteParameterToolStripMenuItem.Enabled = false;
+            if (clgrParametersDataGridView.SelectedCells.Count > 0)
+            {
+                deleteParameterToolStripMenuItem.Enabled = true;
+            }
+        }
 
         private void ClassesListBox_MouseDown(object sender, MouseEventArgs e) => UserInterfaceLogic.HandleRightClick(classesListBox, e, WireUpContextMenus);
 
@@ -320,9 +324,27 @@ namespace Magical_Tool_Solution.Configuration
 
         private void ClgrConfiguration_Resize(object sender, EventArgs e)
         {
-            int listBoxWidth = (int)Math.Round((decimal)topPanel.Width / 2);
-            topLeftPanel.Width = listBoxWidth;
-            topRightPanel.Width = listBoxWidth;
+            //int listBoxWidth = (int)Math.Round((decimal)topPanel.Width / 2);
+            //topLeftPanel.Width = listBoxWidth;
+            //topRightPanel.Width = listBoxWidth;
+            UserInterfaceLogic.ResizePanelsEvenly(this, topPanel, topLeftPanel, topRightPanel);
         }
+
+        private void DeleteParameterToolStripMenuItem_Click(object sender, EventArgs e) => DeleteSelectedToolClassParameter();
+        private void DeleteSelectedToolClassParameter()
+        {
+            if (MessageBox.Show("Deleting the parameter will delete related values in tools and comps and remove all group allocation!\nContinue?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+            {
+                string parameterId = clgrParametersDataGridView.Rows[clgrParametersDataGridView.SelectedCells[0].RowIndex].Cells["Id"].Value.ToString();
+                GlobalConfig.Connection.DeleteToolClassParameterByParameterIdToolClassId(parameterId, _selectedClass.Id);
+                int index = classesListBox.SelectedIndex;
+                LoadClassesData();
+                WireUpListsAndParameters(index);
+            }
+        }
+
+        private void ClgrParametersDataGridView_MouseClick(object sender, MouseEventArgs e) => UserInterfaceLogic.HandleRightClick(clgrParametersDataGridView, e, WireUpDataGridContextMenu);
+
+        private void ClgrParametersDataGridView_MouseDown(object sender, MouseEventArgs e) => UserInterfaceLogic.HandleRightClick(clgrParametersDataGridView, e, WireUpDataGridContextMenu);
     }
 }

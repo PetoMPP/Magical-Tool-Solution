@@ -30,13 +30,15 @@ namespace Magical_Tool_Solution.Configuration
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.moduleNameLabel = new System.Windows.Forms.Label();
             this.bottomPanel = new System.Windows.Forms.Panel();
             this.clgrPanel = new System.Windows.Forms.Panel();
             this.componentsPanel = new System.Windows.Forms.Panel();
             this.clgrParametersDataGridView = new System.Windows.Forms.DataGridView();
+            this.clgrParametersContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteParameterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configureClgrParametersLabel = new System.Windows.Forms.Label();
             this.topPanel = new System.Windows.Forms.Panel();
             this.topRightPanel = new System.Windows.Forms.Panel();
@@ -53,6 +55,7 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrPanel.SuspendLayout();
             this.componentsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).BeginInit();
+            this.clgrParametersContextMenuStrip.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.topRightPanel.SuspendLayout();
             this.groupsContextMenuStrip.SuspendLayout();
@@ -109,32 +112,34 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrParametersDataGridView.AllowUserToOrderColumns = true;
             this.clgrParametersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.clgrParametersDataGridView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.clgrParametersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.clgrParametersDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.clgrParametersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.clgrParametersDataGridView.ContextMenuStrip = this.clgrParametersContextMenuStrip;
             this.clgrParametersDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.clgrParametersDataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.clgrParametersDataGridView.EnableHeadersVisualStyles = false;
             this.clgrParametersDataGridView.Location = new System.Drawing.Point(8, 8);
+            this.clgrParametersDataGridView.MultiSelect = false;
             this.clgrParametersDataGridView.Name = "clgrParametersDataGridView";
             this.clgrParametersDataGridView.ReadOnly = true;
             this.clgrParametersDataGridView.RowHeadersVisible = false;
             this.clgrParametersDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.clgrParametersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.clgrParametersDataGridView.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.clgrParametersDataGridView.RowTemplate.Height = 25;
             this.clgrParametersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.clgrParametersDataGridView.ShowCellToolTips = false;
@@ -142,6 +147,21 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrParametersDataGridView.Size = new System.Drawing.Size(1068, 375);
             this.clgrParametersDataGridView.TabIndex = 8;
             this.clgrParametersDataGridView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PositionsDataGridView_MouseDoubleClick);
+            this.clgrParametersDataGridView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ClgrParametersDataGridView_MouseDown);
+            // 
+            // clgrParametersContextMenuStrip
+            // 
+            this.clgrParametersContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteParameterToolStripMenuItem});
+            this.clgrParametersContextMenuStrip.Name = "clgrParametersContextMenuStrip";
+            this.clgrParametersContextMenuStrip.Size = new System.Drawing.Size(165, 26);
+            // 
+            // deleteParameterToolStripMenuItem
+            // 
+            this.deleteParameterToolStripMenuItem.Name = "deleteParameterToolStripMenuItem";
+            this.deleteParameterToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.deleteParameterToolStripMenuItem.Text = "Delete Parameter";
+            this.deleteParameterToolStripMenuItem.Click += new System.EventHandler(this.DeleteParameterToolStripMenuItem_Click);
             // 
             // configureClgrParametersLabel
             // 
@@ -296,6 +316,7 @@ namespace Magical_Tool_Solution.Configuration
             this.clgrPanel.ResumeLayout(false);
             this.componentsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.clgrParametersDataGridView)).EndInit();
+            this.clgrParametersContextMenuStrip.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.topRightPanel.ResumeLayout(false);
             this.groupsContextMenuStrip.ResumeLayout(false);
@@ -324,5 +345,7 @@ namespace Magical_Tool_Solution.Configuration
         private System.Windows.Forms.ToolStripMenuItem deleteToolClassToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip groupsContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem deleteToolGroupToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip clgrParametersContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteParameterToolStripMenuItem;
     }
 }

@@ -1,11 +1,7 @@
 ﻿using Magical_Tool_Solution.Interfaces;
-using Minimal_Tool_Stock_Calculator.DataViews;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews.Headers

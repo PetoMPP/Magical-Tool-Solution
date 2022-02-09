@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace MTSLibrary.Models
@@ -11,7 +10,7 @@ namespace MTSLibrary.Models
         public BasicToolModel BasicTool { get; set; }
         public int Quantity { get; set; }
     }
-    internal class ListPositionModelPositionComparer : IEqualityComparer<ListPositionModel>
+    public class ListPositionModelPositionComparer : IEqualityComparer<ListPositionModel>
     {
         public bool Equals(ListPositionModel x, ListPositionModel y)
         {
@@ -27,7 +26,7 @@ namespace MTSLibrary.Models
         }
         public int GetHashCode([DisallowNull] ListPositionModel obj) => obj.Position;
     }
-    internal class ListPositionModelComparer : IEqualityComparer<ListPositionModel>
+    public class ListPositionModelComparer : IEqualityComparer<ListPositionModel>
     {
         public bool Equals(ListPositionModel x, ListPositionModel y)
         {
@@ -42,6 +41,6 @@ namespace MTSLibrary.Models
             return x.Position == y.Position && x.BasicComp == y.BasicComp && x.BasicTool == y.BasicTool && x.Quantity == y.Quantity;
         }
         public int GetHashCode([DisallowNull] ListPositionModel obj) =>
-            obj.Position.GetHashCode() ^ obj.BasicComp.GetHashCode() ^ obj.BasicTool.GetHashCode() ^ obj.Quantity.GetHashCode();
+            obj.Position.GetHashCode() ^ (obj.BasicComp == null ? 0 : obj.BasicComp.GetHashCode()) ^ (obj.BasicTool == null ? 0 : obj.GetHashCode()) ^ obj.Quantity.GetHashCode();
     }
 }

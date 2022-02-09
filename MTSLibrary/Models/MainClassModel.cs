@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MTSLibrary.Models
 {
@@ -8,8 +7,7 @@ namespace MTSLibrary.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string DisplayName {
-            get 
-            {
+            get {
                 return $"{Id}, {Name}";
             }
         }

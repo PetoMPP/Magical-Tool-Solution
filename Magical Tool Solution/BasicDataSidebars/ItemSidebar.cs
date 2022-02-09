@@ -3,14 +3,10 @@ using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
 using MTSLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
+namespace Magical_Tool_Solution.BasicDataSidebars
 {
     public partial class ItemSidebar : Form
     {
@@ -29,9 +25,22 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             callingForm = caller;
             _selectClGr = selectClGr;
             InitializeComponent();
-            AdjustUI();
             LoadSuitability(suitability);
             WireUpSuitability();
+            AdjustUI();
+        }
+
+        private void AdjustUI()
+        {
+            switch (_itemType)
+            {
+                case ItemType.Comp:
+                    basicDataLabel.Text = "Basic Component Data";
+                    break;
+                case ItemType.Tool:
+                    basicDataLabel.Text = "Basic Tool Data";
+                    break;
+            }
         }
 
         private void LoadSuitability(SuitabilityModel suitability)
@@ -39,30 +48,14 @@ namespace Minimal_Tool_Stock_Calculator.BasicDataSidebars
             if (suitability == null)
             {
                 materialSuitabilityPanel.Visible = false;
+                return;
             }
-            else
-            {
-                pSuitability = suitability.PSuitability;
-                mSuitability = suitability.MSuitability;
-                kSuitability = suitability.KSuitability;
-                nSuitability = suitability.NSuitability;
-                sSuitability = suitability.SSuitability;
-                hSuitability = suitability.HSuitability;
-            }
-        }
-
-        private void AdjustUI()
-        {
-            if (_itemType == ItemType.comp)
-            {
-                basicDataLabel.Text = "Basic Component Data";
-                modeSpecificLabel.Text = "Component Manufacturer:";
-            }
-            else if (_itemType == ItemType.tool)
-            {
-                basicDataLabel.Text = "Basic Tool Data";
-                modeSpecificLabel.Text = "Machine interface:";
-            }
+            pSuitability = suitability.PSuitability;
+            mSuitability = suitability.MSuitability;
+            kSuitability = suitability.KSuitability;
+            nSuitability = suitability.NSuitability;
+            sSuitability = suitability.SSuitability;
+            hSuitability = suitability.HSuitability;
         }
 
         public void WireUpSuitability()

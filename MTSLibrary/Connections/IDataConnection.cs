@@ -1,7 +1,5 @@
 ﻿using MTSLibrary.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MTSLibrary.Connections
 {
@@ -12,8 +10,8 @@ namespace MTSLibrary.Connections
         string ValidateMachine(string machineId, string machineGroupId);
         string ValidateMaterial(string materialId);
         bool ValidateToolId(string id);
-        string ValidateClassGroupId(string toolGroup, string toolGroupId);
-        string ValidateMachineInterfaceId(string machineInterface);
+        string ValidateToolClassIdToolGroupId(string toolGroup, string toolGroupId);
+        string ValidateMachineInterfaceName(string machineInterface);
         string ValidateToolComponents(List<ToolComponentModel> components);
         bool ValidateCompId(string id);
         List<ToolClassModel> GetToolClassesList();
@@ -40,18 +38,18 @@ namespace MTSLibrary.Connections
         List<string> GetDataValueTypes();
         string GetMainClassNameById(string mainClassId);
         void UpdateToolGroup(ToolGroupModel model);
-        void CreateClGrParameter(ToolClassParameterModel model);
+        void CreateToolClassParameter(ToolClassParameterModel model);
         void UpdateToolClassParameter(ToolClassParameterModel model);
         bool ValidateToolClassId(string id);
         void SetMainClassIdById(string mainClassId, string toolClassId);
         List<BasicCompModel> GetBasicCompModels();
         bool ValidateToolGroupIdInClass(string id, string parentClassId);
-        string GetClassNameById(string parentClassId);
-        List<string> GetEnabledGroupsIdsByClassIdAndParameterId(string classId, string parameterId);
+        string GetToolClassNameById(string parentClassId);
+        List<string> GetAssignedGroupsIdsByClassIdAndParameterId(string classId, string parameterId);
         List<BasicToolModel> GetBasicToolModels();
         bool ValidateMainClassId(string id);
-        void CreateMainClass(MainClassModel model);
-        void UpdateMainClass(MainClassModel model);
+        void CreateMainClass(BasicMainClassModel model);
+        void UpdateBasicMainClass(BasicMainClassModel model);
         string GetToolGroupNameByIdToolClassId(string toolGroupId, string toolClassId);
         List<BasicListModel> GetBasicListModels();
         string GetManufacturerIdByName(string name);
@@ -69,5 +67,7 @@ namespace MTSLibrary.Connections
         void DeleteToolGroupByIdToolClassId(string id, string toolClassId);
         List<ParameterModel> GetParametersByToolClassIdToolGroupId(string toolClassId, string toolGroupId);
         List<ParameterModel> GetCompParametersById(string id);
+        void DeleteToolClassParameterByParameterIdToolClassId(string parameterId, string toolClassId);
+        List<string> GetUsers();
     }
 }

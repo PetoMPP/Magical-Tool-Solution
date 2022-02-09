@@ -12,26 +12,26 @@ namespace MTSLibrary.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string DataValueType { get; set; }
-        public List<string> AssignedGroupsIds { get; set; }
-        public string AssignedGroupsIdDisplayString { get 
-            {
+        public List<string> AssignedToolGroupIds { get; set; }
+        public string AssignedGroupsIdDisplayString {
+            get {
                 StringBuilder stringBuilder = new();
-                if (AssignedGroupsIds.Count == 0)
+                if (AssignedToolGroupIds.Count == 0)
                 {
                     return "No Groups Assigned";
                 }
-                foreach (string id in AssignedGroupsIds)
+                foreach (string id in AssignedToolGroupIds)
                 {
                     stringBuilder.Append(id + ", ");
                 }
                 stringBuilder.Remove(stringBuilder.Length - 2, 2);
                 return stringBuilder.ToString();
-            } 
+            }
         }
-        public static explicit operator ParameterModel(ToolClassParameterModel model) => new() 
-        { 
+        public static explicit operator ParameterModel(ToolClassParameterModel model) => new()
+        {
             Position = model.Position,
-            ParameterId = model.Id,
+            Id = model.Id,
             Name = model.Name,
             Description = model.Description,
             DataValueType = Enum.Parse<DataValueType>(model.DataValueType)

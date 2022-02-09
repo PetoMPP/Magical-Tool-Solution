@@ -29,44 +29,44 @@ namespace Magical_Tool_Solution
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.sectionsPanel = new System.Windows.Forms.Panel();
             this.availableSectionsBox = new System.Windows.Forms.ListBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.modulesPanel = new System.Windows.Forms.Panel();
             this.availableModulesBox = new System.Windows.Forms.ListBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.buttonsPanel = new System.Windows.Forms.Panel();
+            this.launchInNewWindowButtonPanel = new System.Windows.Forms.Panel();
             this.launchInNewWindowButton = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.launchButtonPanel = new System.Windows.Forms.Panel();
             this.launchButton = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.sectionsPanel.SuspendLayout();
+            this.modulesPanel.SuspendLayout();
+            this.buttonsPanel.SuspendLayout();
+            this.launchInNewWindowButtonPanel.SuspendLayout();
+            this.launchButtonPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // titleLabel
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(624, 62);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "MTS Dashboard";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.titleLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.titleLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.titleLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.titleLabel.Location = new System.Drawing.Point(0, 0);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(688, 62);
+            this.titleLabel.TabIndex = 2;
+            this.titleLabel.Text = "MTS Dashboard";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // panel1
+            // sectionsPanel
             // 
-            this.panel1.Controls.Add(this.availableSectionsBox);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 62);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 379);
-            this.panel1.TabIndex = 10;
+            this.sectionsPanel.Controls.Add(this.availableSectionsBox);
+            this.sectionsPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.sectionsPanel.Location = new System.Drawing.Point(0, 62);
+            this.sectionsPanel.Name = "sectionsPanel";
+            this.sectionsPanel.Size = new System.Drawing.Size(344, 379);
+            this.sectionsPanel.TabIndex = 10;
             // 
             // availableSectionsBox
             // 
@@ -80,18 +80,18 @@ namespace Magical_Tool_Solution
             this.availableSectionsBox.ItemHeight = 32;
             this.availableSectionsBox.Location = new System.Drawing.Point(0, 0);
             this.availableSectionsBox.Name = "availableSectionsBox";
-            this.availableSectionsBox.Size = new System.Drawing.Size(280, 379);
+            this.availableSectionsBox.Size = new System.Drawing.Size(344, 379);
             this.availableSectionsBox.TabIndex = 8;
             this.availableSectionsBox.SelectedIndexChanged += new System.EventHandler(this.AvailableSectionsBox_SelectedIndexChanged);
             // 
-            // panel2
+            // modulesPanel
             // 
-            this.panel2.Controls.Add(this.availableModulesBox);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(280, 62);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(344, 304);
-            this.panel2.TabIndex = 12;
+            this.modulesPanel.Controls.Add(this.availableModulesBox);
+            this.modulesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modulesPanel.Location = new System.Drawing.Point(344, 62);
+            this.modulesPanel.Name = "modulesPanel";
+            this.modulesPanel.Size = new System.Drawing.Size(344, 304);
+            this.modulesPanel.TabIndex = 12;
             // 
             // availableModulesBox
             // 
@@ -109,26 +109,25 @@ namespace Magical_Tool_Solution
             this.availableModulesBox.TabIndex = 7;
             this.availableModulesBox.DoubleClick += new System.EventHandler(this.LaunchButton_Click);
             // 
-            // panel3
+            // buttonsPanel
             // 
-            this.panel3.AutoScroll = true;
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(280, 366);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(344, 75);
-            this.panel3.TabIndex = 10;
+            this.buttonsPanel.Controls.Add(this.launchInNewWindowButtonPanel);
+            this.buttonsPanel.Controls.Add(this.launchButtonPanel);
+            this.buttonsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonsPanel.Location = new System.Drawing.Point(344, 366);
+            this.buttonsPanel.Name = "buttonsPanel";
+            this.buttonsPanel.Size = new System.Drawing.Size(344, 75);
+            this.buttonsPanel.TabIndex = 10;
             // 
-            // panel5
+            // launchInNewWindowButtonPanel
             // 
-            this.panel5.Controls.Add(this.launchInNewWindowButton);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel5.Location = new System.Drawing.Point(148, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Padding = new System.Windows.Forms.Padding(6);
-            this.panel5.Size = new System.Drawing.Size(148, 75);
-            this.panel5.TabIndex = 11;
+            this.launchInNewWindowButtonPanel.Controls.Add(this.launchInNewWindowButton);
+            this.launchInNewWindowButtonPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.launchInNewWindowButtonPanel.Location = new System.Drawing.Point(148, 0);
+            this.launchInNewWindowButtonPanel.Name = "launchInNewWindowButtonPanel";
+            this.launchInNewWindowButtonPanel.Padding = new System.Windows.Forms.Padding(6);
+            this.launchInNewWindowButtonPanel.Size = new System.Drawing.Size(148, 75);
+            this.launchInNewWindowButtonPanel.TabIndex = 11;
             // 
             // launchInNewWindowButton
             // 
@@ -149,15 +148,15 @@ namespace Magical_Tool_Solution
             this.launchInNewWindowButton.UseVisualStyleBackColor = false;
             this.launchInNewWindowButton.Click += new System.EventHandler(this.LaunchInNewWindowButton_Click);
             // 
-            // panel4
+            // launchButtonPanel
             // 
-            this.panel4.Controls.Add(this.launchButton);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(6);
-            this.panel4.Size = new System.Drawing.Size(148, 75);
-            this.panel4.TabIndex = 10;
+            this.launchButtonPanel.Controls.Add(this.launchButton);
+            this.launchButtonPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.launchButtonPanel.Location = new System.Drawing.Point(0, 0);
+            this.launchButtonPanel.Name = "launchButtonPanel";
+            this.launchButtonPanel.Padding = new System.Windows.Forms.Padding(6);
+            this.launchButtonPanel.Size = new System.Drawing.Size(148, 75);
+            this.launchButtonPanel.TabIndex = 10;
             // 
             // launchButton
             // 
@@ -183,34 +182,35 @@ namespace Magical_Tool_Solution
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(688, 441);
+            this.Controls.Add(this.modulesPanel);
+            this.Controls.Add(this.buttonsPanel);
+            this.Controls.Add(this.sectionsPanel);
+            this.Controls.Add(this.titleLabel);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dashboard_FormClosing);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
+            this.SizeChanged += new System.EventHandler(this.Dashboard_SizeChanged);
+            this.sectionsPanel.ResumeLayout(false);
+            this.modulesPanel.ResumeLayout(false);
+            this.buttonsPanel.ResumeLayout(false);
+            this.launchInNewWindowButtonPanel.ResumeLayout(false);
+            this.launchButtonPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Panel sectionsPanel;
+        private System.Windows.Forms.Panel modulesPanel;
         private System.Windows.Forms.ListBox availableModulesBox;
         private System.Windows.Forms.Button launchInNewWindowButton;
         private System.Windows.Forms.Button launchButton;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel buttonsPanel;
+        private System.Windows.Forms.Panel launchInNewWindowButtonPanel;
+        private System.Windows.Forms.Panel launchButtonPanel;
         private System.Windows.Forms.ListBox availableSectionsBox;
     }
 }

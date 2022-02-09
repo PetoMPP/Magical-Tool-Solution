@@ -1,5 +1,5 @@
 ﻿
-namespace Minimal_Tool_Stock_Calculator.DataViews.Headers
+namespace Magical_Tool_Solution.DataViews.Headers
 {
     partial class ComponentHeader
     {
