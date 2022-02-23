@@ -1,6 +1,8 @@
 ﻿using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolClassParameters;
+using MTSLibrary.Models.ToolGroups;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -125,7 +127,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                     return;
                 }
                 _clGr.AddClGrParameter(_model);
-                _activeClass.ToolClassParameters.Add(_model);
+                _activeClass.ToolClassParameters.ToList().Add(_model);
                 positionBox.Text = (int.Parse(positionBox.Text) + 1).ToString();
             }
             else if (_creatingType == CreatingType.Updating)
@@ -169,7 +171,7 @@ namespace Magical_Tool_Solution.DataViews.Selectors
                 {
                     unselectedGroupIdsString += id + ", ";
                 }
-                unselectedGroupIdsString = unselectedGroupIdsString.Substring(0, unselectedGroupIdsString.Length - 2);
+                unselectedGroupIdsString = unselectedGroupIdsString[0..^2];
                 if (MessageBox.Show($"You've unallocated groups with IDs of: {unselectedGroupIdsString}, continuing will result in deleting the values in tools and components related to this groups and parameter.\nContinue?",
                     "Unallocation of groups",
                     MessageBoxButtons.OKCancel,

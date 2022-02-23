@@ -1,4 +1,5 @@
 ﻿using MTSLibrary.Models;
+using MTSLibrary.Models.Comps;
 
 namespace MTSLibrary.Validation
 {

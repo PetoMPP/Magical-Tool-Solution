@@ -1,4 +1,6 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolClassParameters;
+using MTSLibrary.Models.ToolGroups;
 
 namespace Magical_Tool_Solution.Interfaces
 {

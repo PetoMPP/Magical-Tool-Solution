@@ -1,7 +1,7 @@
 ﻿using Magical_Tool_Solution.BasicToolData;
 using Magical_Tool_Solution.Configuration;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.ProgramDataModels;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;

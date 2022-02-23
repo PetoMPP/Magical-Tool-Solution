@@ -1,12 +1,12 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.Tools;
 
 namespace Magical_Tool_Solution.Interfaces
 {
     public interface ISelectComponent
     {
-        public void AddToolComponent(ToolComponentModel model);
+        public void AddToolComponent(IToolComponentModel model);
         public bool IsToolComponentPositionNumberInUse(int position);
         public void DeleteToolComponent(int position);
-        public void UpdateToolComponent(ToolComponentModel model);
+        public void UpdateToolComponent(IToolComponentModel model);
     }
 }

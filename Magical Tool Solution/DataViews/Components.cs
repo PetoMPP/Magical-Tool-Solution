@@ -1,7 +1,8 @@
 ﻿using Magical_Tool_Solution.DataViews.Selectors;
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.Comps;
+using MTSLibrary.Models.Tools;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.DataViews

@@ -1,4 +1,5 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.Lists;
+using System.Linq;
 
 namespace MTSLibrary.Validation
 {
@@ -40,7 +41,7 @@ namespace MTSLibrary.Validation
                 errorMessage += GlobalConfig.Connection.ValidateMaterial(list.MaterialId);
             }
             // Validate Tools
-            if (list.ListPositions.Count != 0)
+            if (list.ListPositions.ToList().Count != 0)
             {
                 errorMessage += GlobalConfig.Connection.ValidateListPositions(list.ListPositions);
             }

@@ -1,5 +1,8 @@
 ﻿using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.Comps;
+using MTSLibrary.Models.Lists;
+using MTSLibrary.Models.SharedClasses;
+using MTSLibrary.Models.Tools;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,23 +13,23 @@ namespace Magical_Tool_Solution
 {
     public static class DataGridViewsLogic
     {
-        public static List<ListPositionModel> GetListPositionsFromUI(DataGridView dataGrid)
+        public static IEnumerable<IListPositionModel> GetListPositionsFromUI(DataGridView dataGrid)
         {
             if (dataGrid.Rows.Count == 0)
             {
-                return new();
+                return new List<IListPositionModel>();
             }
-            List<ListPositionModel> output = new();
+            List<IListPositionModel> output = new();
             foreach (DataGridViewRow row in dataGrid.Rows)
             {
-                ListPositionModel model = new()
+                IListPositionModel model = new ListPositionModel()
                 {
                     Position = int.Parse(row.Cells["position"].Value.ToString()),
                     Quantity = int.Parse(row.Cells["quantity"].Value.ToString())
                 };
                 if (!string.IsNullOrEmpty(row.Cells["componentId"].Value.ToString()))
                 {
-                    model.BasicComp = new()
+                    model.BasicComp = new BasicCompModel()
                     {
                         Id = row.Cells["componentId"].Value.ToString(),
                         Description1 = row.Cells["desc1"].Value.ToString(),
@@ -35,7 +38,7 @@ namespace Magical_Tool_Solution
                 }
                 else
                 {
-                    model.BasicTool = new()
+                    model.BasicTool = new BasicToolModel()
                     {
                         Id = row.Cells["toolId"].Value.ToString(),
                         Description1 = row.Cells["desc1"].Value.ToString(),
@@ -46,20 +49,20 @@ namespace Magical_Tool_Solution
             }
             return output;
         }
-        public static List<ToolComponentModel> GetComponentsFromUI(DataGridView dataGrid)
+        public static IEnumerable<IToolComponentModel> GetComponentsFromUI(DataGridView dataGrid)
         {
             if (dataGrid.Rows.Count == 0)
             {
-                return new();
+                return new List<IToolComponentModel>();
             }
-            List<ToolComponentModel> output = new();
+            List<IToolComponentModel> output = new();
             foreach (DataGridViewRow row in dataGrid.Rows)
             {
                 ToolComponentModel model = new()
                 {
                     IsKey = bool.Parse(row.Cells["keyComp"].Value.ToString()),
                     Position = int.Parse(row.Cells["position"].Value.ToString()),
-                    BasicComp = new()
+                    BasicComp = new BasicCompModel()
                     {
                         Id = row.Cells["componentId"].Value.ToString(),
                         Description1 = row.Cells["componentD1"].Value.ToString(),
@@ -113,7 +116,7 @@ namespace Magical_Tool_Solution
             }
             return output;
         }
-        public static DataTable CreateListPositionsDataTable(List<ListPositionModel> tools = null)
+        public static DataTable CreateListPositionsDataTable(IEnumerable<IListPositionModel> tools = null)
         {
             DataTable table = new();
             // Create Columns
@@ -187,7 +190,7 @@ namespace Magical_Tool_Solution
             dataGrid.Columns["componentId"].Visible = false;
             dataGrid.Columns["toolId"].Visible = false;
         }
-        public static DataTable CreateComponentsDataTable(List<ToolComponentModel> components = null)
+        public static DataTable CreateComponentsDataTable(IEnumerable<IToolComponentModel> components = null)
         {
             DataTable table = new();
             // Create Columns
@@ -203,7 +206,7 @@ namespace Magical_Tool_Solution
             table.Columns.AddRange(dataColumns);
             if (components != null)
             {
-                foreach (ToolComponentModel tc in components)
+                foreach (IToolComponentModel tc in components)
                 {
                     DataRow row;
                     row = table.NewRow();

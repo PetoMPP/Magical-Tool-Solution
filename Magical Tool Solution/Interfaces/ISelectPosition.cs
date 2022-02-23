@@ -1,12 +1,12 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.Lists;
 
 namespace Magical_Tool_Solution.Interfaces
 {
     public interface ISelectPosition
     {
-        public void AddListPosition(ListPositionModel model);
+        public void AddListPosition(IListPositionModel model);
         public bool IsListPositionPositionNumberInUse(int position);
-        public void DeleteListPosition(ListPositionModel model);
-        public void UpdateListPosition(ListPositionModel model);
+        public void DeleteListPosition(IListPositionModel model);
+        public void UpdateListPosition(IListPositionModel model);
     }
 }

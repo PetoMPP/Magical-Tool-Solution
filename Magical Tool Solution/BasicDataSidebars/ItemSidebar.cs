@@ -1,7 +1,7 @@
 ﻿using Magical_Tool_Solution.DataViews.Selectors;
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.SharedClasses;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -19,7 +19,7 @@ namespace Magical_Tool_Solution.BasicDataSidebars
         private int nSuitability = 0;
         private int sSuitability = 0;
         private int hSuitability = 0;
-        public ItemSidebar(ItemType itemType, SuitabilityModel suitability, Form caller, ISelectClGr selectClGr)
+        public ItemSidebar(ItemType itemType, ISuitabilityModel suitability, Form caller, ISelectClGr selectClGr)
         {
             _itemType = itemType;
             callingForm = caller;
@@ -43,7 +43,7 @@ namespace Magical_Tool_Solution.BasicDataSidebars
             }
         }
 
-        private void LoadSuitability(SuitabilityModel suitability)
+        private void LoadSuitability(ISuitabilityModel suitability)
         {
             if (suitability == null)
             {

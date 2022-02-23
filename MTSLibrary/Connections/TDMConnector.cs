@@ -1,4 +1,11 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.Comps;
+using MTSLibrary.Models.Lists;
+using MTSLibrary.Models.MainClasses;
+using MTSLibrary.Models.SharedClasses;
+using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolClassParameters;
+using MTSLibrary.Models.ToolGroups;
+using MTSLibrary.Models.Tools;
 using System;
 using System.Collections.Generic;
 
@@ -48,11 +55,11 @@ namespace MTSLibrary.Connections
         public ToolModel GetToolModelById(string toolId) => throw new NotImplementedException();
         public List<ToolClassModel> GetUnallocatedToolClasses() => throw new NotImplementedException();
         public List<string> GetUsers() => throw new NotImplementedException();
-        public void SetMainClassIdById(string mainClassId, string toolClassId) => throw new NotImplementedException();
+        public void SetMainClassIdByToolClassId(string mainClassId, string toolClassId) => throw new NotImplementedException();
         public void UnallocateToolClasses(string id) => throw new NotImplementedException();
         public void UpdateComp(CompModel comp) => throw new NotImplementedException();
         public void UpdateList(ListModel list) => throw new NotImplementedException();
-        public void UpdateBasicMainClass(BasicMainClassModel model) => throw new NotImplementedException();
+        public void UpdateMainClass(BasicMainClassModel model) => throw new NotImplementedException();
         public void UpdateTool(ToolModel tool) => throw new NotImplementedException();
         public void UpdateToolClass(ToolClassModel model) => throw new NotImplementedException();
         public void UpdateToolClassParameter(ToolClassParameterModel model) => throw new NotImplementedException();
@@ -70,5 +77,7 @@ namespace MTSLibrary.Connections
         public string ValidateToolComponents(List<ToolComponentModel> components) => throw new NotImplementedException();
         public bool ValidateToolGroupIdInClass(string id, string parentClassId) => throw new NotImplementedException();
         public bool ValidateToolId(string id) => throw new NotImplementedException();
+        public string ValidateListPositions(IEnumerable<IListPositionModel> tools) => throw new NotImplementedException();
+        public string ValidateToolComponents(IEnumerable<IToolComponentModel> components) => throw new NotImplementedException();
     }
 }

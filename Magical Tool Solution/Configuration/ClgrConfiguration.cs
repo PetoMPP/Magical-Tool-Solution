@@ -1,10 +1,13 @@
 ﻿using Magical_Tool_Solution.DataViews.Selectors;
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolClassParameters;
+using MTSLibrary.Models.ToolGroups;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.Configuration
@@ -191,7 +194,7 @@ namespace Magical_Tool_Solution.Configuration
             model.Description = row.Cells["Description"].Value.ToString();
             model.DataValueType = row.Cells["DataValueType"].Value.ToString();
             string idsString = row.Cells["AssignedGroupsIdDisplayString"].Value.ToString();
-            model.AssignedToolGroupIds = new();
+            model.AssignedToolGroupIds = new List<string>();
             switch (idsString)
             {
                 case "No Groups Assigned":
@@ -199,7 +202,7 @@ namespace Magical_Tool_Solution.Configuration
                 default:
                     foreach (string id in idsString.Split(", "))
                     {
-                        model.AssignedToolGroupIds.Add(id);
+                        model.AssignedToolGroupIds.ToList().Add(id);
                     }
                     break;
             }
@@ -267,12 +270,12 @@ namespace Magical_Tool_Solution.Configuration
             if (MessageBox.Show($"Are you sure you want to delete {_selectedClass.DisplayName}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
                 // delete related groups
-                if (_selectedClass.ToolGroups.Count > 0)
+                if (_selectedClass.ToolGroups.ToList().Count > 0)
                 {
                     GlobalConfig.Connection.DeleteToolGroupsByToolClassId(_selectedClass.Id);
                 }
                 // delete parameters
-                if (_selectedClass.ToolClassParameters.Count > 0)
+                if (_selectedClass.ToolClassParameters.ToList().Count > 0)
                 {
                     GlobalConfig.Connection.DeleteToolClassParametersByToolClassId(_selectedClass.Id);
                 }

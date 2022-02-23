@@ -1,6 +1,13 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using MTSLibrary.Models;
+using MTSLibrary.Models.Comps;
+using MTSLibrary.Models.Lists;
+using MTSLibrary.Models.MainClasses;
+using MTSLibrary.Models.SharedClasses;
+using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolClassParameters;
+using MTSLibrary.Models.ToolGroups;
+using MTSLibrary.Models.Tools;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -37,7 +44,7 @@ namespace MTSLibrary.Connections
             cnxn.Execute("dbo.spToolClassParameters_Insert", dp, commandType: CommandType.StoredProcedure);
         }
 
-        private static void AssignToolGroupsToParameter(IDbConnection cnxn, List<string> assignedToolGroupIds, string toolClassId, string parameterId)
+        private static void AssignToolGroupsToParameter(IDbConnection cnxn, IEnumerable<string> assignedToolGroupIds, string toolClassId, string parameterId)
         {
             foreach (string toolGroupId in assignedToolGroupIds)
             {
@@ -89,7 +96,7 @@ namespace MTSLibrary.Connections
             cnxn.Execute("dbo.spComps_Insert", dp, commandType: CommandType.StoredProcedure);
         }
 
-        private static void InsertCompParameters(IDbConnection cnxn, List<ParameterModel> parameters, string compId)
+        private static void InsertCompParameters(IDbConnection cnxn, IEnumerable<IParameterModel> parameters, string compId)
         {
             foreach (ParameterModel pm in parameters)
             {
@@ -112,9 +119,9 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void InsertListPositions(string listId, List<ListPositionModel> listPositions, IDbConnection cnxn)
+        private static void InsertListPositions(string listId, IEnumerable<IListPositionModel> listPositions, IDbConnection cnxn)
         {
-            foreach (ListPositionModel lp in listPositions)
+            foreach (IListPositionModel lp in listPositions)
             {
                 DynamicParameters dp = new();
                 dp.Add("@ListId", listId);
@@ -174,9 +181,9 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void InsertToolComponents(string toolId, List<ToolComponentModel> components, IDbConnection cnxn)
+        private static void InsertToolComponents(string toolId, IEnumerable<IToolComponentModel> components, IDbConnection cnxn)
         {
-            foreach (ToolComponentModel tc in components)
+            foreach (IToolComponentModel tc in components)
             {
                 DynamicParameters dp = new();
                 dp.Add("@ToolId", toolId);
@@ -188,7 +195,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void InsertToolParameters(string toolId, List<ParameterModel> parameters, IDbConnection cnxn)
+        private static void InsertToolParameters(string toolId, IEnumerable<IParameterModel> parameters, IDbConnection cnxn)
         {
             foreach (ParameterModel pm in parameters)
             {
@@ -587,7 +594,7 @@ namespace MTSLibrary.Connections
         private static List<string> GetDataValueTypes(IDbConnection cnxn)
             => cnxn.Query<string>("dbo.spDataValueTypes_GetAll", commandType: CommandType.StoredProcedure).ToList();
 
-        public void SetMainClassIdById(string mainClassId, string id)
+        public void SetMainClassIdByToolClassId(string mainClassId, string id)
         {
             using IDbConnection cnxn = new SqlConnection(GetConnectionString());
             UpdateToolClassMainClassId(mainClassId, id, cnxn);
@@ -675,20 +682,19 @@ namespace MTSLibrary.Connections
             UpdateCompParameters(model.Id, model.ToolClassId, model.Parameters, cnxn);
         }
 
-        private static void UpdateCompParameters(string compId, string toolClassId, List<ParameterModel> parameters, IDbConnection cnxn)
+        private static void UpdateCompParameters(string compId, string toolClassId, IEnumerable<IParameterModel> parameters, IDbConnection cnxn)
         {
             if (parameters != null)
             {
-                List<ParameterModel> existingParameters = GetCompParametersByCompIdToolClassId(compId, cnxn, toolClassId);
-                List<ParameterModel> missingParameters = parameters.Except(existingParameters, new ParameterModelIdComparer()).ToList();
+                IEnumerable<IParameterModel> existingParameters = GetCompParametersByCompIdToolClassId(compId, cnxn, toolClassId);
+                IEnumerable<IParameterModel> missingParameters = parameters.Except(existingParameters, new ParameterIdComparer());
                 InsertCompParameters(cnxn, missingParameters, compId);
                 // Delete unassigned parameters and parameters no longer available to comp
-                List<ParameterModel> obsoleteParameters = parameters
+                IEnumerable<IParameterModel> obsoleteParameters = parameters
                     .Where(p => p.NumericValue == null && p.TextValue == null)
-                    .Concat(existingParameters.Except(parameters, new ParameterModelIdComparer()))
-                    .ToList();
+                    .Concat(existingParameters.Except(parameters, new ParameterIdComparer()));
                 DeleteCompParameters(compId, cnxn, obsoleteParameters);
-                List<ParameterModel> updatedParameters = parameters.Except(obsoleteParameters).Except(missingParameters).ToList();
+                IEnumerable<IParameterModel> updatedParameters = parameters.Except(obsoleteParameters).Except(missingParameters);
                 UpdateModifiedCompParameters(compId, cnxn, updatedParameters);
             }
             else
@@ -697,7 +703,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateModifiedCompParameters(string compId, IDbConnection cnxn, List<ParameterModel> updatedParameters)
+        private static void UpdateModifiedCompParameters(string compId, IDbConnection cnxn, IEnumerable<IParameterModel> updatedParameters)
         {
             foreach (ParameterModel p in updatedParameters)
             {
@@ -710,7 +716,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void DeleteCompParameters(string compId, IDbConnection cnxn, List<ParameterModel> obsoleteParameters)
+        private static void DeleteCompParameters(string compId, IDbConnection cnxn, IEnumerable<IParameterModel> obsoleteParameters)
         {
             foreach (ParameterModel p in obsoleteParameters)
             {
@@ -721,7 +727,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateCompSuitability(string compId, SuitabilityModel suitability, IDbConnection cnxn)
+        private static void UpdateCompSuitability(string compId, ISuitabilityModel suitability, IDbConnection cnxn)
         {
             if (suitability != null)
             {
@@ -763,20 +769,19 @@ namespace MTSLibrary.Connections
 
         }
 
-        private static void UpdateListPositions(string listId, List<ListPositionModel> listPositions, IDbConnection cnxn)
+        private static void UpdateListPositions(string listId, IEnumerable<IListPositionModel> listPositions, IDbConnection cnxn)
         {
-            List<ListPositionModel> currentPositions = GetListPositionsById(listId, cnxn);
-            List<ListPositionModel> newPositions = listPositions.Except(currentPositions, new ListPositionModelPositionComparer()).ToList();
+            IEnumerable<IListPositionModel> currentPositions = GetListPositionsById(listId, cnxn);
+            IEnumerable<IListPositionModel> newPositions = listPositions.Except(currentPositions, new ListPositionPositionComparer());
             InsertListPositions(listId, newPositions, cnxn);
-            List<ListPositionModel> modifiedPositions = listPositions.Except(currentPositions, new ListPositionModelComparer())
-                .Except(newPositions)
-                .ToList();
+            IEnumerable<IListPositionModel> modifiedPositions = listPositions.Except(currentPositions, new ListPositionModelComparer())
+                .Except(newPositions);
             UpdateModifiedListPositions(listId, modifiedPositions, cnxn);
-            List<ListPositionModel> obsoletePositions = currentPositions.Except(listPositions, new ListPositionModelPositionComparer()).ToList();
+            IEnumerable<IListPositionModel> obsoletePositions = currentPositions.Except(listPositions, new ListPositionPositionComparer());
             DeleteListPositionsByIdPositions(listId, obsoletePositions, cnxn);
         }
 
-        private static void DeleteListPositionsByIdPositions(string listId, List<ListPositionModel> obsoletePositions, IDbConnection cnxn)
+        private static void DeleteListPositionsByIdPositions(string listId, IEnumerable<IListPositionModel> obsoletePositions, IDbConnection cnxn)
         {
             foreach (ListPositionModel lp in obsoletePositions)
             {
@@ -787,7 +792,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateModifiedListPositions(string listId, List<ListPositionModel> modifiedPositions, IDbConnection cnxn)
+        private static void UpdateModifiedListPositions(string listId, IEnumerable<IListPositionModel> modifiedPositions, IDbConnection cnxn)
         {
             foreach (ListPositionModel lp in modifiedPositions)
             {
@@ -817,7 +822,7 @@ namespace MTSLibrary.Connections
             cnxn.Execute("dbo.spLists_UpdateById", dp, commandType: CommandType.StoredProcedure);
         }
 
-        public void UpdateBasicMainClass(BasicMainClassModel model)
+        public void UpdateMainClass(BasicMainClassModel model)
         {
             using IDbConnection cnxn = new SqlConnection(GetConnectionString());
             UpdateBasicMainClassModel(model, cnxn);
@@ -840,24 +845,24 @@ namespace MTSLibrary.Connections
             UpdateToolComponents(model.Id, model.Components, cnxn);
         }
 
-        private static void UpdateToolComponents(string toolId, List<ToolComponentModel> components, IDbConnection cnxn)
+        private static void UpdateToolComponents(string toolId, IEnumerable<IToolComponentModel> components, IDbConnection cnxn)
         {
-            List<ToolComponentModel> currentComponents = GetToolComponentsByToolId(toolId, cnxn);
-            foreach (ToolComponentModel tc in currentComponents)
+            IEnumerable<IToolComponentModel> currentComponents = GetToolComponentsByToolId(toolId, cnxn);
+            foreach (IToolComponentModel tc in currentComponents)
             {
                 tc.BasicComp = GetBasicCompModelById(GetCompIdByToolIdPosition(toolId, cnxn, tc.Position), cnxn);
             }
-            List<ToolComponentModel> newComponents = components.Except(currentComponents, new ToolComponentModelPositionComparer()).ToList();
+            IEnumerable<IToolComponentModel> newComponents = components.Except(currentComponents, new ToolComponentPositionComparer());
             InsertToolComponents(toolId, newComponents, cnxn);
-            List<ToolComponentModel> modifiedComponents = components.Except(currentComponents, new ToolComponentModelComparer()).Except(newComponents).ToList();
+            IEnumerable<IToolComponentModel> modifiedComponents = components.Except(currentComponents, new ToolComponentModelComparer()).Except(newComponents);
             UpdateModifiedToolComponents(toolId, modifiedComponents, cnxn);
-            List<ToolComponentModel> obsoleteComponents = currentComponents.Except(components, new ToolComponentModelPositionComparer()).ToList();
+            IEnumerable<IToolComponentModel> obsoleteComponents = currentComponents.Except(components, new ToolComponentPositionComparer());
             DeleteToolComponents(toolId, obsoleteComponents, cnxn);
         }
 
-        private static void DeleteToolComponents(string toolId, List<ToolComponentModel> obsoleteComponents, IDbConnection cnxn)
+        private static void DeleteToolComponents(string toolId, IEnumerable<IToolComponentModel> obsoleteComponents, IDbConnection cnxn)
         {
-            foreach (ToolComponentModel tc in obsoleteComponents)
+            foreach (IToolComponentModel tc in obsoleteComponents)
             {
                 DynamicParameters dp = new();
                 dp.Add("@ToolId", toolId);
@@ -866,9 +871,9 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateModifiedToolComponents(string toolId, List<ToolComponentModel> modifiedComponents, IDbConnection cnxn)
+        private static void UpdateModifiedToolComponents(string toolId, IEnumerable<IToolComponentModel> modifiedComponents, IDbConnection cnxn)
         {
-            foreach (ToolComponentModel tc in modifiedComponents)
+            foreach (IToolComponentModel tc in modifiedComponents)
             {
                 DynamicParameters dp = new();
                 dp.Add("@ToolId", toolId);
@@ -880,19 +885,18 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateToolParameters(string toolId, string toolClassId, List<ParameterModel> parameters, IDbConnection cnxn)
+        private static void UpdateToolParameters(string toolId, string toolClassId, IEnumerable<IParameterModel> parameters, IDbConnection cnxn)
         {
 
             if (parameters != null)
             {
-                List<ParameterModel> existingParameters = cnxn.Query<ParameterModel>("dbo.spGetToolParameters_ByToolIdToolClassId", new { @ToolId = toolId, @ToolClassId = toolClassId }, commandType: CommandType.StoredProcedure).ToList();
-                List<ParameterModel> missingParameters = parameters.Except(existingParameters, new ParameterModelIdComparer()).ToList();
+                IEnumerable<IParameterModel> existingParameters = cnxn.Query<ParameterModel>("dbo.spGetToolParameters_ByToolIdToolClassId", new { @ToolId = toolId, @ToolClassId = toolClassId }, commandType: CommandType.StoredProcedure).AsEnumerable();
+                IEnumerable<IParameterModel> missingParameters = parameters.Except(existingParameters, new ParameterIdComparer());
                 InsertToolParameters(toolId, missingParameters, cnxn);
-                List<ParameterModel> obsoleteParameters = parameters.Where(p => p.NumericValue == null && p.TextValue == null)
-                    .Concat(existingParameters.Except(parameters, new ParameterModelIdComparer()))
-                    .ToList();
+                IEnumerable<IParameterModel> obsoleteParameters = parameters.Where(p => p.NumericValue == null && p.TextValue == null)
+                    .Concat(existingParameters.Except(parameters, new ParameterIdComparer()));
                 DeleteToolParameters(toolId, obsoleteParameters, cnxn);
-                List<ParameterModel> modifiedParameters = parameters.Except(obsoleteParameters).Except(missingParameters).ToList();
+                IEnumerable<IParameterModel> modifiedParameters = parameters.Except(obsoleteParameters).Except(missingParameters).ToList();
                 UpdateModifiedToolParameters(toolId, modifiedParameters, cnxn);
             }
             else
@@ -901,7 +905,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateModifiedToolParameters(string toolId, List<ParameterModel> modifiedParameters, IDbConnection cnxn)
+        private static void UpdateModifiedToolParameters(string toolId, IEnumerable<IParameterModel> modifiedParameters, IDbConnection cnxn)
         {
             foreach (ParameterModel p in modifiedParameters)
             {
@@ -914,7 +918,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void DeleteToolParameters(string toolId, List<ParameterModel> obsoleteParameters, IDbConnection cnxn)
+        private static void DeleteToolParameters(string toolId, IEnumerable<IParameterModel> obsoleteParameters, IDbConnection cnxn)
         {
             foreach (ParameterModel p in obsoleteParameters)
             {
@@ -925,7 +929,7 @@ namespace MTSLibrary.Connections
             }
         }
 
-        private static void UpdateToolSuitability(string toolId, SuitabilityModel suitability, IDbConnection cnxn)
+        private static void UpdateToolSuitability(string toolId, ISuitabilityModel suitability, IDbConnection cnxn)
         {
             if (suitability != null)
             {
@@ -1025,10 +1029,10 @@ namespace MTSLibrary.Connections
                 new { @Id = id },
                 commandType: CommandType.StoredProcedure);
         }
-        public string ValidateListPositions(List<ListPositionModel> tools)
+        public string ValidateListPositions(IEnumerable<IListPositionModel> tools)
         {
             string errorMessage = "";
-            foreach (ListPositionModel lp in tools)
+            foreach (IListPositionModel lp in tools)
             {
                 if (lp.BasicComp != null)
                 {
@@ -1129,11 +1133,11 @@ namespace MTSLibrary.Connections
                 commandType: CommandType.StoredProcedure);
         }
 
-        public string ValidateToolComponents(List<ToolComponentModel> components)
+        public string ValidateToolComponents(IEnumerable<IToolComponentModel> components)
         {
             string errorMessage = string.Empty;
             using IDbConnection cnxn = new SqlConnection(GetConnectionString());
-            foreach (ToolComponentModel c in components)
+            foreach (IToolComponentModel c in components)
             {
                 if (!ValidateCompId(c.BasicComp.Id))
                 {

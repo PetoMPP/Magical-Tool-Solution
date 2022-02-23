@@ -1,6 +1,8 @@
 ﻿using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.MainClasses;
+using MTSLibrary.Models.ToolClasses;
+using MTSLibrary.Models.ToolGroups;
 using System;
 using System.Collections.Generic;
 using System.Data;

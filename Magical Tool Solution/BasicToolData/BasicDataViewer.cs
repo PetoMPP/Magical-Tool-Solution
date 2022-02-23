@@ -3,7 +3,11 @@ using Magical_Tool_Solution.DataViews.Headers;
 using Magical_Tool_Solution.DataViews.Selectors;
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.Comps;
+using MTSLibrary.Models.Lists;
+using MTSLibrary.Models.SharedClasses;
+using MTSLibrary.Models.ToolGroups;
+using MTSLibrary.Models.Tools;
 using MTSLibrary.Validation;
 using System;
 using System.Collections.Generic;
@@ -567,7 +571,7 @@ namespace Magical_Tool_Solution.BasicToolData
 
         }
 
-        private void LoadListPositions(List<ListPositionModel> tools = null)
+        private void LoadListPositions(IEnumerable<IListPositionModel> tools = null)
         {
             _positionsDataGridView.DataSource = null;
             _positionsDataGridView.DataSource = DataGridViewsLogic.CreateListPositionsDataTable(tools);
@@ -592,7 +596,7 @@ namespace Magical_Tool_Solution.BasicToolData
             LoadToolGroupConfiguration();
         }
 
-        private void LoadComponents(List<ToolComponentModel> components = null)
+        private void LoadComponents(IEnumerable<IToolComponentModel> components = null)
         {
             _componentsDataGridView.DataSource = null;
             _componentsDataGridView.DataSource = DataGridViewsLogic.CreateComponentsDataTable(components);
@@ -619,14 +623,14 @@ namespace Magical_Tool_Solution.BasicToolData
             LoadToolGroupConfiguration();
         }
 
-        private void LoadParameters(List<ParameterModel> parameters)
+        private void LoadParameters(IEnumerable<IParameterModel> parameters)
         {
             _parametersDataGridView.DataSource = null;
             _parametersDataGridView.DataSource = ProgramLogic.CreateDataTableFromListOfModels(parameters);
             DataGridViewsLogic.ConfigureParametersDataGrid(_parametersDataGridView);
         }
 
-        private void LoadSuitability(SuitabilityModel suitability)
+        private void LoadSuitability(ISuitabilityModel suitability)
         {
             if (sideForm != null)
             {
@@ -672,10 +676,10 @@ namespace Magical_Tool_Solution.BasicToolData
         }
         #endregion
         #region Interfaces Methods
-        public void AddToolComponent(ToolComponentModel model)
+        public void AddToolComponent(IToolComponentModel model)
         {
             // This method has to get existing tool components, add provided to those and load them back to datagrid
-            List<ToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView);
+            List<IToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView).ToList();
             toolComponents.Add(model);
             LoadComponents(toolComponents);
         }
@@ -683,23 +687,23 @@ namespace Magical_Tool_Solution.BasicToolData
 
         public void DeleteToolComponent(int position)
         {
-            List<ToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView);
+            List<IToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView).ToList();
             toolComponents.Remove(toolComponents.Where(tc => tc.Position == position).First());
             LoadComponents(toolComponents);
         }
 
-        public void AddPosition(ListPositionModel model)
+        public void AddPosition(IListPositionModel model)
         {
             // This method has to get existing position, add provided to those and load them back to datagrid
-            List<ListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView);
+            List<IListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView).ToList();
             listPositions.Add(model);
             LoadListPositions(listPositions);
         }
 
-        public void UpdateToolComponent(ToolComponentModel model)
+        public void UpdateToolComponent(IToolComponentModel model)
         {
             // This method has to get existing components, replace edited by model provided and load them back to datagrid
-            List<ToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView);
+            List<IToolComponentModel> toolComponents = DataGridViewsLogic.GetComponentsFromUI(_componentsDataGridView).ToList();
             // get index of updated component
             int index = toolComponents.FindIndex(tc => tc.Position == model.Position);
             // IsKey is not provided by model and should be taken from replaced component
@@ -711,10 +715,10 @@ namespace Magical_Tool_Solution.BasicToolData
             LoadComponents(toolComponents);
         }
 
-        public void AddListPosition(ListPositionModel model)
+        public void AddListPosition(IListPositionModel model)
         {
             // This method has to get existing positions, add provided to those and load them back to datagrid
-            List<ListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView);
+            List<IListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView).ToList();
             listPositions.Add(model);
             LoadListPositions(listPositions);
         }
@@ -730,17 +734,17 @@ namespace Magical_Tool_Solution.BasicToolData
             return result;
         }
 
-        public void DeleteListPosition(ListPositionModel model)
+        public void DeleteListPosition(IListPositionModel model)
         {
-            List<ListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView);
+            List<IListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView).ToList();
             listPositions.Remove(listPositions.Where(lp => lp.Position == model.Position).First());
             LoadListPositions();
         }
 
-        public void UpdateListPosition(ListPositionModel model)
+        public void UpdateListPosition(IListPositionModel model)
         {
             // This method has to get existing list positions, replace edited by model provided and load them back to datagrid
-            List<ListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView);
+            List<IListPositionModel> listPositions = DataGridViewsLogic.GetListPositionsFromUI(_positionsDataGridView).ToList();
             // get index of updated position
             int index = listPositions.FindIndex(lp => lp.Position == model.Position);
             // remove position

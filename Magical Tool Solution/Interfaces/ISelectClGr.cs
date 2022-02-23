@@ -1,4 +1,4 @@
-﻿using MTSLibrary.Models;
+﻿using MTSLibrary.Models.ToolGroups;
 
 namespace Magical_Tool_Solution.Interfaces
 {

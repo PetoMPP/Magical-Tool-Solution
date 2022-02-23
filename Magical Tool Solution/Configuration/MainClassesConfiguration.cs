@@ -1,8 +1,10 @@
 ﻿using Magical_Tool_Solution.DataViews.Selectors;
 using Magical_Tool_Solution.Interfaces;
 using MTSLibrary;
-using MTSLibrary.Models;
+using MTSLibrary.Models.MainClasses;
+using MTSLibrary.Models.ToolClasses;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Magical_Tool_Solution.Configuration
@@ -79,7 +81,7 @@ namespace Magical_Tool_Solution.Configuration
         private void AllocateClass()
         {
             ToolClassModel toolClass = (ToolClassModel)unallocatedClassesListBox.SelectedItem;
-            GlobalConfig.Connection.SetMainClassIdById(_mainClassModel.Id, toolClass.Id);
+            GlobalConfig.Connection.SetMainClassIdByToolClassId(_mainClassModel.Id, toolClass.Id);
             WireUpLists(mainClassesListBox.SelectedIndex);
         }
 
@@ -112,7 +114,7 @@ namespace Magical_Tool_Solution.Configuration
         private void UnallocateClass()
         {
             ToolClassModel toolClass = (ToolClassModel)allocatedClassesListBox.SelectedItem;
-            GlobalConfig.Connection.SetMainClassIdById(null, toolClass.Id);
+            GlobalConfig.Connection.SetMainClassIdByToolClassId(null, toolClass.Id);
             WireUpLists(mainClassesListBox.SelectedIndex);
         }
 
@@ -154,7 +156,7 @@ namespace Magical_Tool_Solution.Configuration
 
         public void UpdateMainClass(BasicMainClassModel model)
         {
-            GlobalConfig.Connection.UpdateBasicMainClass(model);
+            GlobalConfig.Connection.UpdateMainClass(model);
             WireUpLists();
         }
 
@@ -163,7 +165,7 @@ namespace Magical_Tool_Solution.Configuration
         {
             if (MessageBox.Show($"Are you sure you want to delete {_mainClassModel.DisplayName}?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
-                if (_mainClassModel.ToolClasses.Count > 0)
+                if (_mainClassModel.ToolClasses.ToList().Count > 0)
                 {
                     GlobalConfig.Connection.UnallocateToolClasses(_mainClassModel.Id);
                 }
